@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="23">
+        <file>
+            <url>web/sysCOSCA/CommunitySurvey.jsp</url>
+            <bookmark id="6">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+            <bookmark id="5">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+            <bookmark id="1">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+            <bookmark id="2">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+            <bookmark id="3">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+            <bookmark id="4">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+            <bookmark id="7">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+            <bookmark id="8">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+            <bookmark id="11">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+            <bookmark id="12">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+            <bookmark id="13">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+            <bookmark id="14">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>web/sysCOSCA/EncodeCommunitySurvey.jsp</url>
+            <bookmark id="16">
+                <name/>
+                <line>136</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>src/java/servlets/cosca/EncodeCommunitySurvey.java</url>
+            <bookmark id="19">
+                <name/>
+                <line>117</line>
+                <key/>
+            </bookmark>
+            <bookmark id="18">
+                <name/>
+                <line>139</line>
+                <key/>
+            </bookmark>
+            <bookmark id="17">
+                <name/>
+                <line>156</line>
+                <key/>
+            </bookmark>
+            <bookmark id="20">
+                <name/>
+                <line>226</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>src/java/servlets/sorg/SurveyOrg.java</url>
+            <bookmark id="15">
+                <name/>
+                <line>75</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Renliw/Dropbox/Sysdeve/THSIS01/Cobblr2.0/web/sysOrg/SOrgHome.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/Sysdeve/THSIS01/Cobblr2.0/src/java/servlets/sorg/Medicine.java</file>
+            <file>file:/C:/Users/Renliw/Dropbox/Sysdeve/THSIS01/Cobblr2.0/src/java/servlets/sorg/CloseProjects.java</file>
+            <file>file:/C:/Users/Renliw/Dropbox/Sysdeve/THSIS01/Cobblr2.0/src/java/PreactImageUpload/PreactEntity.java</file>
+            <file>file:/C:/Users/Renliw/Dropbox/Sysdeve/THSIS01/Cobblr2.0/src/java/servlets/cosca/WorkStructure_HealthCosca.java</file>
+        </group>
+    </open-files>
+</project-private>
