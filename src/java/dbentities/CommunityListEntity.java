@@ -17,6 +17,8 @@ public class CommunityListEntity {
     private String phone;
     private String mobile;
     private String email;
+    private double latitude;
+    private double longitude;
 
     public CommunityListEntity() {
         this.id = 0;
@@ -25,15 +27,19 @@ public class CommunityListEntity {
         this.phone = null;
         this.mobile = null;
         this.email = null;
+        this.latitude = 0;
+        this.longitude = 0;
     }
 
-    public CommunityListEntity(Integer id, String name, String address, String phone, String mobile, String email) {
+    public CommunityListEntity(Integer id, String name, String address, String phone, String mobile, String email, double latitude, double longitude) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.mobile = mobile;
         this.email = email;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     /**
@@ -118,6 +124,34 @@ public class CommunityListEntity {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * @return the latitude
+     */
+    public double getLatitude() {
+        return latitude;
+    }
+
+    /**
+     * @param latitude the latitude to set
+     */
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    /**
+     * @return the longitude
+     */
+    public double getLongitude() {
+        return longitude;
+    }
+
+    /**
+     * @param longitude the longitude to set
+     */
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
 }

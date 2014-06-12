@@ -25,11 +25,6 @@
         <!--[if lt IE 9]>
           <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        <style>
-                    body{
-                        min-width:1300px;
-                    }
-        </style>
 
         <!-- Le fav and touch icons -->
         <link rel="shortcut icon" href="../images/ico/favicon.ico" />

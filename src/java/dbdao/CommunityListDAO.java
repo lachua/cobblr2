@@ -65,6 +65,16 @@ public class CommunityListDAO extends QueryTemplate{
         } catch (SQLException ex) {
             Logger.getLogger(UserEntityDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        try {
+            entity.setLatitude(rs.getDouble("latitude"));
+        } catch (SQLException ex) {
+            Logger.getLogger(UserEntityDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            entity.setLongitude(rs.getDouble("longitude"));
+        } catch (SQLException ex) {
+            Logger.getLogger(UserEntityDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         return entity;
     }

@@ -25,11 +25,6 @@
         <!-- Renliw -->
         <link href="../css/renliw.css" rel="stylesheet" />
 
-        <style>
-                    body{
-                        min-width:1300px;
-                    }
-        </style>
         <!-- Le fav and touch icons -->
         <link rel="shortcut icon" href="../images/ico/favicon.ico" />
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../images/ico/apple-touch-icon-144-precomposed.png" />

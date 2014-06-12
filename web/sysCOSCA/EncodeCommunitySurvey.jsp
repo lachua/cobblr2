@@ -34,7 +34,7 @@
         <![endif]-->
         <style>
                     body{
-                        min-width:1300px;
+                        min-width:1400px;
                     }
         </style>
 

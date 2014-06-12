@@ -20,11 +20,6 @@
         <!-- Simplenso -->
         <link href="../css/simplenso.css" rel="stylesheet" />
 
-        <style>
-            body{
-                min-width:1300px;
-            }
-        </style>
         <!-- Renliw -->
         <link href="../css/renliw.css" rel="stylesheet" />
 

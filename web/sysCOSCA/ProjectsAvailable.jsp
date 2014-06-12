@@ -28,12 +28,6 @@
           <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <style>
-                    body{
-                        min-width:1300px;
-                    }
-        </style>
-
-        <style>
             .pagination ul {
                 background-color: white;
             }

@@ -19,11 +19,6 @@
         <!-- Bootstrap Date Picker --> 
         <link href="../scripts/datepicker/css/datepicker.css" rel="stylesheet" />
 
-        <style>
-                    body{
-                        min-width:1300px;
-                    }
-        </style>
         <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
         <link rel="stylesheet" href="../scripts/blueimp-jQuery-File-Upload/css/jquery.fileupload-ui.css" />
 

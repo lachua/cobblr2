@@ -20,12 +20,6 @@
         <!-- Bootstrap Date Picker --> 
         <link href="../scripts/datepicker/css/datepicker.css" rel="stylesheet" />
 
-
-        <style>
-                    body{
-                        min-width:1300px;
-                    }
-        </style>
         <!-- Simplenso -->
         <link href="../css/simplenso.css" rel="stylesheet" />
 

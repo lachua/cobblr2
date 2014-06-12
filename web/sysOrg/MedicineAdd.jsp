@@ -16,11 +16,6 @@
         <link href="../css/themes/default.css" rel="stylesheet" id="theme-specific-script" />
         <link href="../bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
 
-        <style>
-                    body{
-                        min-width:1300px;
-                    }
-        </style>
         <!-- Simplenso -->
         <link href="../css/simplenso.css" rel="stylesheet" />
 

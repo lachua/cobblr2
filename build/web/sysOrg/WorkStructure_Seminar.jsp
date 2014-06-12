@@ -14,11 +14,6 @@
         <meta name="description" content="HTML5 Admin Simplenso Template" />
         <meta name="author" content="ahoekie" />
 
-        <style>
-                    body{
-                        min-width:1300px;
-                    }
-        </style>
         <!-- Bootstrap -->
         <link href="../bootstrap/css/bootstrap.css" rel="stylesheet" id="main-theme-script" />
         <link href="../css/themes/default.css" rel="stylesheet" id="theme-specific-script" />
