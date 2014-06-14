@@ -12,4 +12,4 @@
 hs_err_pid*
 
 # glassfish_resources
-setup/glassfish-resources.xml
+*/glassfish-resources.xml
