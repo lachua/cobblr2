@@ -19,9 +19,6 @@
         <link href="../css/themes/default.css" rel="stylesheet" id="theme-specific-script" />
         <link href="../bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
 
-        <!-- Chosen multiselect -->
-        <link type="text/css" href="../scripts/chosen/chosen/chosen.intenso.css" rel="stylesheet" />   
-
         <!-- Simplenso -->
         <link href="../css/simplenso.css" rel="stylesheet" />
 
@@ -72,18 +69,54 @@
                                                     <a href="MapFilters" class="btn btn-primary">Set Map Filters</a>
                                                     <a href="COSCAHome" class="btn">Back</a>
                                                 </div>
-                                                <br>
-                                                <div id="map_canvas"
-                                                     style="
-                                                     height: 550px;
-                                                     margin: 0px;
-                                                     padding: 0px
-                                                     ">
-
-                                                </div>
-
-                                                
                                             </form>
+                                            <br/>
+                                            <div id="map_canvas"
+                                                 style="
+                                                 height: 550px;
+                                                 margin: 0px;
+                                                 padding: 0px">
+                                            </div>
+                                            <br/>
+                                            </div>
+                                           <div class="box-content">
+                                            <table class="table table-striped table-bordered table-condensed bootstrap-datatable" id="datatable">
+                                                <thead>
+                                                    <tr>
+                                                        <th colspan="5">Filter for: Pneumonia</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Community Name</th>
+                                                        <th>Total Community Members</th>
+                                                        <th>Total Affected</th>
+                                                        <th>Percent Affected</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Amihan</td>
+                                                        <td>50</td>
+                                                        <td>30</td>
+                                                        <td>60%</td>
+                                                        <td><span class="badge badge-important">High</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Buklod Tao, Inc</td>
+                                                        <td>60</td>
+                                                        <td>25</td>
+                                                        <td>42%</td>
+                                                        <td><span class="badge badge-warning">Warning</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Bantay Dagat</td>
+                                                        <td>30</td>
+                                                        <td>3</td>
+                                                        <td>10%</td>
+                                                        <td><span class="badge badge-success">Low</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -99,35 +132,12 @@
             <!-- jQuery -->
             <script src="../jquery/1.8.3/jquery.min.js"></script>
 
-            <!-- jQuery UI Sortable -->
-            <script src="../scripts/jquery-ui/ui/minified/jquery.ui.core.min.js"></script>
-            <script src="../scripts/jquery-ui/ui/minified/jquery.ui.widget.min.js"></script>
-            <script src="../scripts/jquery-ui/ui/minified/jquery.ui.mouse.min.js"></script>
-            <script src="../scripts/jquery-ui/ui/minified/jquery.ui.sortable.min.js"></script>
-            <script src="../scripts/jquery-ui/ui/minified/jquery.ui.widget.min.js"></script>
-
             <!-- Bootstrap -->
             <script src="../bootstrap/js/bootstrap.min.js"></script>
             <script src="../scripts/bootbox/bootbox.min.js"></script>
 
-            <!-- Bootstrap Date Picker -->
-            <script src="../scripts/datepicker/js/bootstrap-datepicker.js"></script>
-
-
-            <!-- jQuery Cookie -->
-            <script src="../scripts/jquery.cookie/jquery.cookie.js"></script>
-
-            <!-- Full Calender -->
-            <script type='text/javascript' src="../scripts/fullcalendar/fullcalendar/fullcalendar.min.js"></script>
-
-            <!-- CK Editor -->
-            <script type="text/javascript" src="../scripts/ckeditor/ckeditor.js"></script>
-
-            <!-- Chosen multiselect -->
-            <script type="text/javascript" language="javascript" src="../scripts/chosen/chosen/chosen.jquery.min.js"></script>
-
-            <!-- Uniform -->
-            <script type="text/javascript" language="javascript" src="../scripts/uniform/jquery.uniform.min.js"></script>
+            <!-- Data Tables -->
+            <script src="../scripts/DataTables/media/js/jquery.dataTables.js"></script>
 
             <!-- Simplenso Scripts -->
             <script src="../scripts/simplenso/simplenso.js"></script>

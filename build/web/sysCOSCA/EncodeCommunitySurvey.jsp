@@ -594,6 +594,7 @@
                                             <div class="form-actions">
                                                 <button name="action" value="SurveySubmitted" type="submit" class="btn btn-primary">Submit</button>
                                                 <a href="CommunitySurvey" class="btn">Cancel</a>
+                                                <a href="ChildSurvey.jsp" class="btn">Child Survey</a>
                                             </div>
                                         </fieldset>
                                     </form>

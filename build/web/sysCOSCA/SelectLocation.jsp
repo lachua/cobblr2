@@ -15,9 +15,6 @@
         <link href="../css/themes/default.css" rel="stylesheet" id="theme-specific-script" />
         <link href="../bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
 
-        <!-- Data Tables -->
-        <script src="../scripts/DataTables/media/js/jquery.dataTables.js"></script>
-
         <!-- Chosen multiselect -->
         <link type="text/css" href="../scripts/chosen/chosen/chosen.intenso.css" rel="stylesheet" />   
 
@@ -118,7 +115,9 @@
 
         <!-- Bootstrap Date Picker -->
         <script src="../scripts/datepicker/js/bootstrap-datepicker.js"></script>
-
+        
+        <!-- Data Tables -->
+        <script src="../scripts/DataTables/media/js/jquery.dataTables.js"></script>
 
         <!-- jQuery Cookie -->
         <script src="../scripts/jquery.cookie/jquery.cookie.js"></script>
