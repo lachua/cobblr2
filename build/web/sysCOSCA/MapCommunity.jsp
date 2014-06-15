@@ -29,7 +29,7 @@
         <!--[if lt IE 9]>
           <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-
+        
         <!-- Le fav and touch icons -->
         <link rel="shortcut icon" href="../images/ico/favicon.ico" />
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../images/ico/apple-touch-icon-144-precomposed.png" />
@@ -64,59 +64,100 @@
                                     <h4 class="box-header round-top">Community Map</h4>
                                     <div class="box-container-toggle">
                                         <div class="box-content">
-                                            <form method="POST" action="CommunityMap">
+                                            <div>
+                                                <form method="POST" action="CommunityMap">
+                                                    <div>
+                                                        <a href="MapFilters" class="btn btn-primary">Set Map Filters</a>
+                                                        <a href="COSCAHome" class="btn">Back</a>
+                                                    </div>
+                                                </form>
+                                                <br/>
+                                            </div>
+                                            <div>
                                                 <div>
-                                                    <a href="MapFilters" class="btn btn-primary">Set Map Filters</a>
-                                                    <a href="COSCAHome" class="btn">Back</a>
+                                                    <button id="mapBtn" style="color: black;" class="btn btn-link">View Map</button>
+                                                    <button id="dataBtn" style="color: blue;" class="btn btn-link">View Data</button>
                                                 </div>
-                                            </form>
-                                            <br/>
-                                            <div id="map_canvas"
-                                                 style="
-                                                 height: 550px;
-                                                 margin: 0px;
-                                                 padding: 0px">
                                             </div>
-                                            <br/>
+
+                                            <div id="map">
+                                                <div id="map_canvas"
+                                                     style="
+                                                     height: 550px;
+                                                     width: 100%;
+                                                     margin: 0px;
+                                                     padding: 0px">
+                                                </div>
+                                                <br/>
                                             </div>
-                                           <div class="box-content">
-                                            <table class="table table-striped table-bordered table-condensed bootstrap-datatable" id="datatable">
-                                                <thead>
-                                                    <tr>
-                                                        <th colspan="5">Filter for: Pneumonia</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Community Name</th>
-                                                        <th>Total Community Members</th>
-                                                        <th>Total Affected</th>
-                                                        <th>Percent Affected</th>
-                                                        <th>Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Amihan</td>
-                                                        <td>50</td>
-                                                        <td>30</td>
-                                                        <td>60%</td>
-                                                        <td><span class="badge badge-important">High</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Buklod Tao, Inc</td>
-                                                        <td>60</td>
-                                                        <td>25</td>
-                                                        <td>42%</td>
-                                                        <td><span class="badge badge-warning">Warning</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Bantay Dagat</td>
-                                                        <td>30</td>
-                                                        <td>3</td>
-                                                        <td>10%</td>
-                                                        <td><span class="badge badge-success">Low</span></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                            <div id="tabledata" style="display: none;">
+                                                <%
+                                                     List<CommunityListEntity> comList = (List<CommunityListEntity>) request.getAttribute("LIST");
+                                                     List list = null;
+                                                     
+                                                     if(list == null){
+                                                %>
+                                                <table class="table table-condensed bootstrap-datatable" id="datatable">
+                                                     <thead>
+                                                        <tr>
+                                                            <th>Community Name</th>
+                                                            <th>Community Address</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <%
+                                                            for(int y = 1; y < comList.size(); y++){
+                                                        %>
+                                                        <tr>
+                                                            <td><button style="text-align: left;" id="com-<%=y%>" class="btn btn-link"><%=comList.get(y).getName() %></button></td>
+                                                            <td><%=comList.get(y).getAddress()%></td>
+                                                        </tr>
+                                                        <%
+                                                            }
+                                                        %>
+                                                    </tbody>
+                                                </table>
+                                                <%  }else{%>
+                                                <table class="table table-condensed bootstrap-datatable" id="datatable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th colspan="5">Filter for: Pneumonia</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Community Name</th>
+                                                            <th>Total Community Members</th>
+                                                            <th>Total Affected</th>
+                                                            <th>Percent Affected</th>
+                                                            <th>Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><button>Amihan</button></td>
+                                                            <td>50</td>
+                                                            <td>30</td>
+                                                            <td>60%</td>
+                                                            <td><span class="badge badge-important">High</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Buklod Tao, Inc</td>
+                                                            <td>60</td>
+                                                            <td>25</td>
+                                                            <td>42%</td>
+                                                            <td><span class="badge badge-warning">Warning</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Bantay Dagat</td>
+                                                            <td>30</td>
+                                                            <td>3</td>
+                                                            <td>10%</td>
+                                                            <td><span class="badge badge-success">Low</span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <%  }%>
+                                                
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -144,9 +185,23 @@
 
             <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
             <script>
-                <%
-                    List<CommunityListEntity> comList = (List<CommunityListEntity>) request.getAttribute("LIST");
-                %>
+                    $("#mapBtn").click(function() {
+                        $("#mapBtn").css( "color", "black" );
+                        $("#dataBtn").css( "color", "blue" );
+                        $('#tabledata').hide("slow", function(){
+                            $('#map').show("slow");
+                        });
+                    });
+                    
+                    $("#dataBtn").click(function() {
+                        $("#mapBtn").css( "color", "blue" );
+                        $("#dataBtn").css( "color", "black" );
+                        $('#map').hide("slow", function(){
+                            $('#tabledata').show("slow");
+                        });
+                    });
+                    
+                  
                     var LocationData = [
                 <%                        
                         for (int x = 1; x < comList.size(); x++) {
@@ -161,7 +216,10 @@
                 {
                     var map = new google.maps.Map(document.getElementById('map_canvas'));
                     var bounds = new google.maps.LatLngBounds();
-                    var infowindow = new google.maps.InfoWindow();
+                    var infowindow = new google.maps.InfoWindow({
+                         disableAutoPan: true
+                            });
+
 
                     for (var i in LocationData)
                     {
@@ -171,7 +229,6 @@
 
                         var image; 
                         
-
                         var marker = new google.maps.Marker({
                             position: latlng,
                             map: map,
@@ -184,12 +241,31 @@
                             infowindow.open(map, this);
                         });
                     }
+                    
+                    <%
+                    for(int q = 1; q < comList.size(); q++){
+                    %>
+                        var id = 'com-<%=q%>';
+                        
+                        var myButton = document.getElementById(id);
+                        google.maps.event.addDomListener(myButton, 'click', function() {
+                             $("#mapBtn").css( "color", "black" );
+                        $("#dataBtn").css( "color", "blue" );
+                        $('#tabledata').hide("slow", function(){
+                            $('#map').show("slow");
+                        });
+                            map.setZoom(16);
+                            map.setCenter(new google.maps.LatLng(<%=comList.get(q).getLatitude()%>, <%=comList.get(q).getLongitude()%>));
+                        });
+                    <%
+                    }
+                    %>
+
 
                     map.fitBounds(bounds);
                 }
 
                 google.maps.event.addDomListener(window, 'load', initialize);
-
         </script>
     </body>
 </html>

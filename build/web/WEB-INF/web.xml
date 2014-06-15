@@ -280,6 +280,10 @@
         <servlet-name>MapFilters</servlet-name>
         <servlet-class>servlets.cosca.MapFilters</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChildSurvey</servlet-name>
+        <servlet-class>servlets.cosca.ChildSurvey</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -560,6 +564,10 @@
     <servlet-mapping>
         <servlet-name>MapCommunity</servlet-name>
         <url-pattern>/sysCOSCA/MapCommunity</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChildSurvey</servlet-name>
+        <url-pattern>/sysCOSCA/ChildSurvey</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -82,10 +82,10 @@
                                                         <option value="">7-9 months old</option>
                                                         <option value="">10-11 months old</option>
                                                         <option value="">1 year old</option>
-                                                        <option value="">2 year old</option>
-                                                        <option value="">3 year old</option>
-                                                        <option value="">4 year old</option>
-                                                        <option value="">5 year old</option>
+                                                        <option value="">2 years old</option>
+                                                        <option value="">3 years old</option>
+                                                        <option value="">4 years old</option>
+                                                        <option value="">5 years old</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -93,25 +93,14 @@
                                             <div class="control-group">
                                                 <label class="control-label" for="height">Height:</label>
                                                 <div class="controls">
-                                                    <input class="input-medium" id="height" name="height" type="number" required/>in
+                                                    <input class="input-small" id="height" name="height" type="number" required/>in
                                                 </div>
                                             </div>
 
                                             <div class="control-group">
                                                 <label class="control-label" for="weight">Weight:</label>
                                                 <div class="controls">
-                                                    <input class="input-medium" id="weight" name="weight" type="number" required/>lbs
-                                                </div>
-                                            </div>
-
-                                            <div class="control-group">
-                                                <label class="control-label" for="meals">Meals per day:</label>
-                                                <div class="controls">
-                                                    <select name="meals" id="meals" class="chzn-select">
-                                                        <option value="">1-2</option>
-                                                        <option value="">3-4</option>
-                                                        <option value="">6 and above</option>
-                                                    </select>
+                                                    <input class="input-small" id="weight" name="weight" type="number" required/>lbs
                                                 </div>
                                             </div>
 
@@ -130,7 +119,7 @@
                                             <div class="control-group">
                                                 <label class="control-label" for="screening">With New Born Screening:</label>
                                                 <div class="controls">
-                                                    <input class="radio" type="radio" name="screening" value="">Yes<br>
+                                                    <input class="radio" type="radio" name="screening" value="" required>Yes<br>
                                                     <input class="radio" type="radio" name="screening" value="">No<br>
                                                 </div>
                                             </div>
@@ -207,69 +196,14 @@
     <!-- JQuery Valdation -->
     <script src="../jquery/jquery-validate/jquery.validate.js"></script>
     <script>
-        $.validator.addMethod("familyMemberDetails", function(value, element) {
-            return !this.optional(element) && !this.optional($(element).parent().prev().children("select")[0]);
-        }, "Please select both the item and its amount.");
-
         $().ready(function() {
-            //dynamic family member fields
-            var familyMemberTemplate = jQuery.validator.format($.trim($("#familyMemberTemplate").val()));
-            function addFamilyMemberRow() {
-                $(familyMemberTemplate(familyMemberCount++)).appendTo("#familyMember");
-            }
-            var familyMemberCount = 1;
-            addFamilyMemberRow();
-            $("#addFamilyMember").click(addFamilyMemberRow);
-
-            //dynamic family needs fields
-            var familyNeedsTemplate = jQuery.validator.format($.trim($("#familyNeedsTemplate").val()));
-            function addFamilyNeedsRow() {
-                $(familyNeedsTemplate(familyNeedsCount++)).appendTo("#familyNeeds");
-            }
-            var familyNeedsCount = 1;
-            addFamilyNeedsRow();
-            $("#addFamilyNeeds").click(addFamilyNeedsRow);
-
-            //dynamic family health history fields
-            var familyHealthHistoryTemplate = jQuery.validator.format($.trim($("#familyHealthHistoryTemplate").val()));
-            function addFamilyHealthHistoryRow() {
-                $(familyHealthHistoryTemplate(familyHealthHistoryCount++)).appendTo("#familyHealthHistory");
-            }
-            var familyHealthHistoryCount = 1;
-            addFamilyHealthHistoryRow();
-            $("#addFamilyHealthHistory").click(addFamilyHealthHistoryRow);
-
-            //dynamic family illnessses fields
-            var familyIllnessesTemplate = jQuery.validator.format($.trim($("#familyIllnessesTemplate").val()));
-            function addFamilyIllnessesRow() {
-                $(familyIllnessesTemplate(familyIllnessesCount++)).appendTo("#familyIllnesses");
-            }
-            var familyIllnessesCount = 1;
-            addFamilyIllnessesRow();
-            $("#addFamilyIllnesses").click(addFamilyIllnessesRow);
-
-            //dynamic family illnessses fields
-            var familyImmunizationTemplate = jQuery.validator.format($.trim($("#familyImmunizationTemplate").val()));
-            function addFamilyImmunizationRow() {
-                $(familyImmunizationTemplate(familyImmunizationCount++)).appendTo("#familyImmunization");
-            }
-            var familyImmunizationCount = 1;
-            addFamilyImmunizationRow();
-            $("#addFamilyImmunization").click(addFamilyImmunizationRow);
-
             // validate signup form on keyup and submit
             $("#surveyForm").validate({
                 rules: {
-                    yearsInCommunity: {
+                    height: {
                         min: 0
                     },
-                    noOfFamilyMembers: {
-                        min: 0
-                    },
-                    age: {
-                        min: 0
-                    },
-                    mealsPerDay: {
+                    width: {
                         min: 0
                     }
                 },

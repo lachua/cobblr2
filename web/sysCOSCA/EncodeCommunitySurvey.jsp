@@ -201,7 +201,7 @@
                                                 </div>
                                             </div>
 
-                                            <br/><legend>Family Structure</legend>
+                                            <br/><h2>Family Structure</h2>
 
                                             <div class="control-group">
                                                 <label class="control-label" for="familyName">Family Name:</label>
@@ -296,7 +296,7 @@
                                             </div>
 
                                             <br/>
-                                            <legend>Members of the Family</legend>
+                                            <h2>Members of the Family</h2>
                                             <table class="table">
                                                 <thead>
                                                     <tr>
@@ -322,7 +322,7 @@
                                                 </tfoot>
                                             </table>
 
-                                            <br/><legend>Family Status</legend>
+                                            <br/><h2>Family Status</h2>
                                             <label><strong>Misunderstanding in the Family</strong></label>
                                             <div class="control-group">
                                                 <label class="control-label" for="battered">a. Battered husband/wife</label>
@@ -395,12 +395,12 @@
                                                 </div>
                                             </div>
 
-                                            <br/><legend>Home and Environmental Factors</legend>
+                                            <br/><h2>Home and Environmental Factors</h2>
                                             <div class="control-group">
                                                 <label class="control-label" for="hasLot">Lot Owned</label>
                                                 <div class="controls">
                                                     <label><input type="radio" id="hasLot" name="hasLot"  value="49" required/>Yes</label>
-                                                    <label><input type="radio" id="hasLot" name="hasLot"value="50"/>No</label>
+                                                    <label><input type="radio" id="hasLot" name="hasLot" value="50"/>No</label>
                                                 </div>
                                             </div>
                                             <div class="control-group">
@@ -492,7 +492,7 @@
                                             <div class="control-group">
                                                 <label class="control-label" for="typeOfPests">Type of Pests</label>
                                                 <div class="controls">
-                                                    <select id="typeOfPests" id="typeOfPests" name="typeOfPests" multiple class="chzn-select">
+                                                    <select id="typeOfPests" name="typeOfPests" multiple class="chzn-select">
                                                         <option value="86">Rat</option>
                                                         <option value="87">Cockroach</option>
                                                         <option value="88">Bed Bug</option>
@@ -504,7 +504,7 @@
                                             <div class="control-group">
                                                 <label class="control-label" for="typeOfPets">Pets/Animals Kept</label>
                                                 <div class="controls">
-                                                    <select id="typeOfPets" id="typeOfPets" name="typeOfPets" multiple class="chzn-select">
+                                                    <select id="typeOfPets" name="typeOfPets" multiple class="chzn-select">
                                                         <option value="90">Dog</option>
                                                         <option value="91">Cat</option>
                                                         <option value="92">Chicken/Rooster</option>
@@ -525,7 +525,7 @@
                                                 </div>
                                             </div>
 
-                                            <br/><legend>Health Assessments</legend>
+                                            <br/><h2>Health Assessments</h2>
                                             <div class="control-group">
                                                 <label class="control-label" for="mealsPerDay">Meals per Day</label>
                                                 <div class="controls">
