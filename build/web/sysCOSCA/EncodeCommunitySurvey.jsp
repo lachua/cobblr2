@@ -450,11 +450,11 @@
                                                 </div>
                                             </div>
                                             <div class="control-group">
-                                                <label class="control-label" for="sourceOfDrnkingWater">Source of Drinking Water</label>
+                                                <label class="control-label" for="sourceOfDrinkingWater">Source of Drinking Water</label>
                                                 <div class="controls">
-                                                    <label><input type="radio" id="sourceOfDrnkingWater" name="sourceOfDrnkingWater" value="77" required/>Refrigerated</label>
-                                                    <label><input type="radio" id="sourceOfDrnkingWater" name="sourceOfDrnkingWater" value="78"/>Covered</label>
-                                                    <label><input type="radio" id="sourceOfDrnkingWater" name="sourceOfDrnkingWater" value="82"/>Others</label>
+                                                    <label><input type="radio" id="sourceOfDrinkingWater" name="sourceOfDrinkingWater" value="77" required/>Refrigerated</label>
+                                                    <label><input type="radio" id="sourceOfDrinkingWater" name="sourceOfDrinkingWater" value="78"/>Covered</label>
+                                                    <label><input type="radio" id="sourceOfDrinkingWater" name="sourceOfDrinkingWater" value="82"/>Others</label>
                                                 </div>
                                             </div>
                                             <div class="control-group">
@@ -592,9 +592,9 @@
                                             </div>
 
                                             <div class="form-actions">
-                                                <button name="action" value="SurveySubmitted" type="submit" class="btn btn-primary">Submit</button>
+                                                <button id="submitbtn" name="action" value="SurveySubmitted" type="submit" class="btn btn-primary">Submit</button>
                                                 <a href="CommunitySurvey" class="btn">Cancel</a>
-                                                <a href="ChildSurvey.jsp" class="btn">Child Survey</a>
+                                                <!--<a href="ChildSurvey.jsp" class="btn">Child Survey</a>-->
                                             </div>
                                         </fieldset>
                                     </form>
@@ -700,6 +700,8 @@
 
             // validate signup form on keyup and submit
             $("#surveyForm").validate({
+                onkeyup: false,
+                onclick: false,
                 rules: {
                     yearsInCommunity: {
                         min: 0
@@ -722,7 +724,7 @@
                 },
                 errorPlacement: function(error, element) {
                     var id = element[0]['id'];
-                    $(element).before("<label for='" + id + "' class='error'>" + error.text() + "</label>");
+                    $(element).before("<label for='" + id + "' id="+ "error-container" +" class='error'>" + error.text() + "</label>");
                 }
             });
         });

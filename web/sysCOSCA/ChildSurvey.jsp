@@ -4,6 +4,7 @@
     Author     : Renliw
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,22 +71,30 @@
                                 <h4 class="box-header round-top">Community Child Survey</h4>         
                                 <div class="box-container-toggle">
                                     <div class="box-content">
-                                        <form method="POST" action="EncodeCommunitySurvey" id="surveyForm" class="form-horizontal">
+                                        <form method="POST" action="ChildSurvey" id="surveyForm" class="form-horizontal">
+                                            <%
+                                                ArrayList<String> childname = (ArrayList<String>) request.getAttribute("childname");
+                                                ArrayList<Integer> childpersonId = (ArrayList<Integer>) request.getAttribute("childpersonId");
+                                            
+                                                if(childname.size()>0){
+                                                    for(int x = 0; x < childname.size(); x++){
+                                            %>                        
+                                            
                                             <fieldset>
-                                                <legend>Encode Survey for *Child 1*</legend>
+                                                <legend>Encode Survey for <%=childname.get(x)%></legend>
                                             <div class="control-group">
                                                 <label class="control-label" for="childage">Specific Age:</label>
                                                 <div class="controls">
-                                                    <select name="childage" id="childage" class="chzn-select">
-                                                        <option value="">0-3 months old</option>
-                                                        <option value="">4-6 months old</option>
-                                                        <option value="">7-9 months old</option>
-                                                        <option value="">10-11 months old</option>
-                                                        <option value="">1 year old</option>
-                                                        <option value="">2 years old</option>
-                                                        <option value="">3 years old</option>
-                                                        <option value="">4 years old</option>
-                                                        <option value="">5 years old</option>
+                                                    <select name="childage-<%=childpersonId.get(x)%>" id="childage" class="chzn-select">
+                                                        <option value="207">0-3 months old</option>
+                                                        <option value="208">4-6 months old</option>
+                                                        <option value="209">7-9 months old</option>
+                                                        <option value="210">10-11 months old</option>
+                                                        <option value="211">1 year old</option>
+                                                        <option value="212">2 years old</option>
+                                                        <option value="213">3 years old</option>
+                                                        <option value="214">4 years old</option>
+                                                        <option value="215">5 years old</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -93,58 +102,71 @@
                                             <div class="control-group">
                                                 <label class="control-label" for="height">Height:</label>
                                                 <div class="controls">
-                                                    <input class="input-small" id="height" name="height" type="number" required/>in
+                                                    <input class="input-small" id="height" name="height-<%=childpersonId.get(x)%>" type="number" required/>in
                                                 </div>
                                             </div>
 
                                             <div class="control-group">
                                                 <label class="control-label" for="weight">Weight:</label>
                                                 <div class="controls">
-                                                    <input class="input-small" id="weight" name="weight" type="number" required/>lbs
+                                                    <input class="input-small" id="weight" name="weight-<%=childpersonId.get(x)%>" type="number" required/>lbs
                                                 </div>
                                             </div>
 
                                             <div class="control-group">
-                                                <label class="control-label" for="vitamins">Vitamin Deficiencies</label>
+                                                <label class="control-label" for="vitamins">Vitamin Taken</label>
                                                 <div class="controls">
-                                                   <label class="checkbox"><input type="checkbox" id="vitA" name="healthHistory-{0}" value="" />Vitamin A</label>
-                                                    <label class="checkbox"><input type="checkbox" id="vitB12" name="healthHistory-{0}" value="" />Vitamin B12</label>
-                                                    <label class="checkbox"><input type="checkbox" id="vitC" name="healthHistory-{0}" value="" />Vitamin C</label>
-                                                    <label class="checkbox"><input type="checkbox" id="vitD" name="healthHistory-{0}" value="" />Vitamin D</label>
-                                                    <label class="checkbox"><input type="checkbox" id="vitIron" name="healthHistory-{0}" value="" />Iron</label>
-                                                    <label class="checkbox"><input type="checkbox" id="vitOthers" name="healthHistory-{0}" value="" />Others</label>
+                                                   <label class="checkbox"><input type="checkbox" id="vitA" name="vitamins-<%=childpersonId.get(x)%>" value="216" />Vitamin A</label>
+                                                    <label class="checkbox"><input type="checkbox" id="vitB12" name="vitamins-<%=childpersonId.get(x)%>" value="217" />Vitamin B12</label>
+                                                    <label class="checkbox"><input type="checkbox" id="vitC" name="vitamins-<%=childpersonId.get(x)%>" value="218" />Vitamin C</label>
+                                                    <label class="checkbox"><input type="checkbox" id="vitD" name="vitamins-<%=childpersonId.get(x)%>" value="219" />Vitamin D</label>
+                                                    <label class="checkbox"><input type="checkbox" id="vitIron" name="vitamins-<%=childpersonId.get(x)%>" value="220" />Iron</label>
+                                                    <label class="checkbox"><input type="checkbox" id="vitZinc" name="vitamins-<%=childpersonId.get(x)%>" value="221" />Zinc</label>
+                                                    <label class="checkbox"><input type="checkbox" id="vitMulti" name="vitamins-<%=childpersonId.get(x)%>" value="222" />Multi-Vitamins</label>
+                                                    <label class="checkbox"><input type="checkbox" id="vitOthers" name="vitamins-<%=childpersonId.get(x)%>" value="82" />Others</label>
                                                 </div>
                                             </div>
                                                 
                                             <div class="control-group">
                                                 <label class="control-label" for="screening">With New Born Screening:</label>
                                                 <div class="controls">
-                                                    <input class="radio" type="radio" name="screening" value="" required>Yes<br>
-                                                    <input class="radio" type="radio" name="screening" value="">No<br>
+                                                    <input class="radio" type="radio" name="screening-<%=childpersonId.get(x)%>" value="49" required>Yes<br>
+                                                    <input class="radio" type="radio" name="screening-<%=childpersonId.get(x)%>" value="50">No<br>
                                                 </div>
                                             </div>
                                                 
                                             <div class="control-group">
                                                 <label class="control-label" for="vaccine">Vaccinations</label>
                                                 <div class="controls">
-                                                    <label class="checkbox"><input type="checkbox" name="vaccine" value="" checked/>BCG</label>
-                                                    <label class="checkbox"><input type="checkbox" name="vaccine" value="" checked/>DTP1</label>
-                                                    <label class="checkbox"><input type="checkbox" name="vaccine" value="" checked/>DTP2</label>
-                                                    <label class="checkbox"><input type="checkbox" name="vaccine" value="" checked/>DTP3</label>
-                                                    <label class="checkbox"><input type="checkbox" name="vaccine" value="" checked/>OVP1</label>
-                                                    <label class="checkbox"><input type="checkbox" name="vaccine" value="" checked/>OVP2</label>
-                                                    <label class="checkbox"><input type="checkbox" name="vaccine" value="" checked/>OVP3</label>
-                                                    <label class="checkbox"><input type="checkbox" name="vaccine" value="" checked/>Measles</label>
-                                                    <label class="checkbox"><input type="checkbox" name="vaccine" value="" checked/>Flu</label>
-                                                    <label class="checkbox"><input type="checkbox" name="vaccine" value="" checked/>Hepatitis</label>
+                                                    <label class="checkbox"><input type="checkbox" name="vaccine-<%=childpersonId.get(x)%>" value="223" checked/>Flu</label>
+                                                    <label class="checkbox"><input type="checkbox" name="vaccine-<%=childpersonId.get(x)%>" value="224" checked/>Hepatitis B</label>
+                                                    <label class="checkbox"><input type="checkbox" name="vaccine-<%=childpersonId.get(x)%>" value="225" checked/>MVC1</label>
+                                                    <label class="checkbox"><input type="checkbox" name="vaccine-<%=childpersonId.get(x)%>" value="226" checked/>MVC2</label>
+                                                    <label class="checkbox"><input type="checkbox" name="vaccine-<%=childpersonId.get(x)%>" value="227" checked/>TT 2+</label>
+                                                    <label class="checkbox"><input type="checkbox" name="vaccine-<%=childpersonId.get(x)%>" value="228" checked/>BCG</label>
+                                                    <label class="checkbox"><input type="checkbox" name="vaccine-<%=childpersonId.get(x)%>" value="229" checked/>DTP</label>
+                                                    <label class="checkbox"><input type="checkbox" name="vaccine-<%=childpersonId.get(x)%>" value="230" checked/>Rotavirus</label>
+                                                    <label class="checkbox"><input type="checkbox" name="vaccine-<%=childpersonId.get(x)%>" value="231" checked/>Pneumococcal</label>
+                                                    <label class="checkbox"><input type="checkbox" name="vaccine-<%=childpersonId.get(x)%>" value="232" checked/>OPV1</label>
+                                                    <label class="checkbox"><input type="checkbox" name="vaccine-<%=childpersonId.get(x)%>" value="233" checked/>OPV3</label>
                                                  </div>
                                             </div>
-
-                                            <div class="form-actions">
-                                                <a href="COSCAHome" class="btn btn-primary">Submit</a>
-                                                <a href="CommunitySurvey" class="btn">Cancel</a>
-                                            </div>
                                         </fieldset>
+                                            <%
+                                                    }}else{
+                                            %>
+                                            <span class="badge badge-info">
+                                                No Children Ages 0-5 in the family.
+                                                <br/>
+                                                Please Click <strong>Submit</strong>
+                                            </span>
+                                            <%
+                                                }
+                                            %>
+                                        <div class="form-actions">
+                                            <button type="submit" name="action" value="ChildSurveySubmitted" class="btn btn-primary">Submit</button>
+                                            <a href="CommunitySurvey" class="btn">Cancel</a>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -199,6 +221,8 @@
         $().ready(function() {
             // validate signup form on keyup and submit
             $("#surveyForm").validate({
+                onkeyup: false,
+                onclick: false,
                 rules: {
                     height: {
                         min: 0

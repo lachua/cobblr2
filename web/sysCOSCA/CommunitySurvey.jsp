@@ -847,7 +847,7 @@
                                 <h4 class="box-header round-top">Actions</h4>         
                                 <div class="box-container-toggle">
                                     <div class="box-content">
-                                        <form method="POST" acton="CommunitySurvey">
+                                        <form method="POST" action="CommunitySurvey">
                                             <h3>Survey Details:</h3>
                                             <ul class="dashboard-member-activity">
                                                 <li>
@@ -868,7 +868,7 @@
                                                     <strong>No. of Males Surveyed:</strong> <%=pastResult.getNumMales()%> Males <br/>
                                                     <strong>No. of Females Surveyed:</strong> <%=pastResult.getNumFemales()%> Females <br/>
                                                     <br/>
-                                                    <button type="submit" name="action" value="EncodeCommunitySurvey" class="btn btn-primary"> Add Surveys</a><br />
+                                                    <button type="submit" name="action" value="EncodeCommunitySurvey" class="btn btn-primary"> Add Surveys</button><br />
                                                 </li>
                                             </ul>
 
