@@ -76,22 +76,22 @@
             <url>src/java/servlets/cosca/EncodeCommunitySurvey.java</url>
             <bookmark id="19">
                 <name/>
-                <line>109</line>
+                <line>110</line>
                 <key/>
             </bookmark>
             <bookmark id="18">
                 <name/>
-                <line>109</line>
+                <line>110</line>
                 <key/>
             </bookmark>
             <bookmark id="17">
                 <name/>
-                <line>109</line>
+                <line>110</line>
                 <key/>
             </bookmark>
             <bookmark id="20">
                 <name/>
-                <line>109</line>
+                <line>110</line>
                 <key/>
             </bookmark>
         </file>
@@ -106,13 +106,13 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/EncodeCommunitySurvey.jsp</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/CreateInitialProjectCharter.jsp</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/servlets/cosca/CommunitySurvey.java</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ChildSurvey.jsp</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/servlets/cosca/EncodeCommunitySurvey.java</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/servlets/cosca/ChildSurvey.java</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/CommunitySurvey.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/MapCommunity.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/servlets/cosca/ReportYearEnd.java</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ReportYear.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ReportMagnitude.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ReportAnnual.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/MapFilters.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ReportYearEnd.jsp</file>
         </group>
     </open-files>
 </project-private>

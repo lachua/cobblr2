@@ -81,7 +81,7 @@
                                                         <select id="reportType" name="reportType" class="chzn-select input-xxlarge">
                                                             <option value="0"></option>
                                                             <option value="1">Top Diseases Reports</option>
-                                                            <option value="2">Year End Activity Report</option>
+                                                            <option value="2">Annual Report</option>
                                                             <option value="3">Project Evaluation Report</option>
                                                             <option value="4">Community Health Review</option>
                                                         </select>
@@ -153,7 +153,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-actions">
-                                                    <button id="yrend" type="button" name="yearEnd" class="btn btn-primary">See Year End Report</button>
+                                                    <button id="yrend" type="button" name="yearEnd" class="btn btn-primary">See Annual Report</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -218,6 +218,10 @@
                                                     <button type="submit" name="coomunityHealth" class="btn btn-primary">See Community Health Review</button>
                                                 </div>
                                             </form>
+                                        </div>
+                                        <div>
+                                            <a href="ReportAnnual.jsp" class="btn btn-small btn-inverse">Annual Report</a>
+                                            <a href="ReportMagnitude.jsp" class="btn btn-small btn-inverse">Comparative Analysis of Magnitude of Disease Report</a>
                                         </div>
                                     </div>
                                 </div>
