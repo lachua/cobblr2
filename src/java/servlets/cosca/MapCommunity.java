@@ -39,9 +39,9 @@ public class MapCommunity extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
                 CommunityListDAO clDAO = new CommunityListDAO();
-                List<CommunityListEntity> comlist = clDAO.getAllCommunity();
+                List<CommunityListEntity> comlist = clDAO.getAllRealCommunity();
 
-                request.setAttribute("LIST", comlist);
+                request.setAttribute("comlist", comlist);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/sysCOSCA/MapCommunity.jsp");
                 dispatcher.forward(request, response);
             

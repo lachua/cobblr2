@@ -69,7 +69,7 @@
                                 <h4 class="box-header round-top">Select Filter</h4>
                                 <div class="box-container-toggle">
                                     <div class="box-content">
-                                        <form class="form-horizontal" method="POST" action="SelectLocation">
+                                        <form class="form-horizontal" method="POST" action="MapFilters">
                                             <fieldset>
                                                 <legend>Select Filter</legend>
                                                 <div class="alert alert-info">
@@ -79,51 +79,53 @@
                                                 <div class="control-group">
                                                     <label class="control-label"><strong>Sicknesses:</strong></label>
                                                     <div class="controls">
-                                                        <input class="radio" type="radio" name="filter" value="98">Allergy<br>
-                                                        <input class="radio" type="radio" name="filter" value="99">Altherosclerosis<br>
-                                                        <input class="radio" type="radio" name="filter" value="100">Asthma<br>
-                                                        <input class="radio" type="radio" name="filter" value="101">Coughs & Colds<br>
-                                                        <input class="radio" type="radio" name="filter" value="102">Dengue<br>
-                                                        <input class="radio" type="radio" name="filter" value="103">Diabetes<br>
-                                                        <input class="radio" type="radio" name="filter" value="104">Gl Obstruction<br>
-                                                        <input class="radio" type="radio" name="filter" value="105">Hemmorhage<br>
-                                                        <input class="radio" type="radio" name="filter" value="106">KidneyStones<br>
-                                                        <input class="radio" type="radio" name="filter" value="107">Overfatigue<br>
-                                                        <input class="radio" type="radio" name="filter" value="108">Pneumonia<br>
-                                                        <input class="radio" type="radio" name="filter" value="109">Renal Failure<br>
-                                                        <input class="radio" type="radio" name="filter" value="110">Fever
+                                                        <input class="radio" type="radio" name="filter" value="35-98">Allergy<br>
+                                                        <input class="radio" type="radio" name="filter" value="35-99">Altherosclerosis<br>
+                                                        <input class="radio" type="radio" name="filter" value="35-100">Asthma<br>
+                                                        <input class="radio" type="radio" name="filter" value="35-101">Coughs & Colds<br>
+                                                        <input class="radio" type="radio" name="filter" value="35-102">Dengue<br>
+                                                        <input class="radio" type="radio" name="filter" value="35-103">Diabetes<br>
+                                                        <input class="radio" type="radio" name="filter" value="35-104">Gl Obstruction<br>
+                                                        <input class="radio" type="radio" name="filter" value="35-105">Hemmorhage<br>
+                                                        <input class="radio" type="radio" name="filter" value="35-106">KidneyStones<br>
+                                                        <input class="radio" type="radio" name="filter" value="35-107">Overfatigue<br>
+                                                        <input class="radio" type="radio" name="filter" value="35-108">Pneumonia<br>
+                                                        <input class="radio" type="radio" name="filter" value="35-109">Renal Failure<br>
+                                                        <input class="radio" type="radio" name="filter" value="35-110">Fever
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label" ><strong>Child Immunizations:</strong></label>
+                                                    <label class="control-label" ><strong>Child Vaccinations:</strong></label>
                                                     <div class="controls">
-                                                        <input class="radio" type="radio" name="filter" value="130">BCG<br>
-                                                        <input class="radio" type="radio" name="filter" value="131">DTP1<br>
-                                                        <input class="radio" type="radio" name="filter" value="132">DTP2<br>
-                                                        <input class="radio" type="radio" name="filter" value="133">DTP3<br>
-                                                        <input class="radio" type="radio" name="filter" value="134">OVP1<br>
-                                                        <input class="radio" type="radio" name="filter" value="135">OVP2<br>
-                                                        <input class="radio" type="radio" name="filter" value="136">OVP3<br>
-                                                        <input class="radio" type="radio" name="filter" value="137">Measles<br>
-                                                        <input class="radio" type="radio" name="filter" value="138">Flu<br>
-                                                        <input class="radio" type="radio" name="filter" value="139">Hepatitis
+                                                        <input class="radio" type="radio" name="filter" value="76-223">Flu<br>
+                                                        <input class="radio" type="radio" name="filter" value="76-224">Hepatitis B<br>
+                                                        <input class="radio" type="radio" name="filter" value="76-225">MVC1<br>
+                                                        <input class="radio" type="radio" name="filter" value="76-226">MVC2<br>
+                                                        <input class="radio" type="radio" name="filter" value="76-227">TT 2+<br>
+                                                        <input class="radio" type="radio" name="filter" value="76-228">BGC<br>
+                                                        <input class="radio" type="radio" name="filter" value="76-229">DTP<br>
+                                                        <input class="radio" type="radio" name="filter" value="76-230">Rotavirus<br>
+                                                        <input class="radio" type="radio" name="filter" value="76-231">Pneumococcal<br>
+                                                        <input class="radio" type="radio" name="filter" value="76-232">OPV1<br>
+                                                        <input class="radio" type="radio" name="filter" value="76-233">OPV3
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
                                                     <label class="control-label"><strong>Child Vitamin Deficiency:</strong></label>
                                                     <div class="controls">
-                                                        <input class="radio" type="radio" name="filter" value="">A<br>
-                                                        <input class="radio" type="radio" name="filter" value="">B12<br>
-                                                        <input class="radio" type="radio" name="filter" value="">C<br>
-                                                        <input class="radio" type="radio" name="filter" value="">D<br>
-                                                        <input class="radio" type="radio" name="filter" value="">Iron<br>
-                                                        <input class="radio" type="radio" name="filter" value="">Others<br>
+                                                        <input class="radio" type="radio" name="filter" value="74-216">A<br>
+                                                        <input class="radio" type="radio" name="filter" value="74-217">B12<br>
+                                                        <input class="radio" type="radio" name="filter" value="74-218">C<br>
+                                                        <input class="radio" type="radio" name="filter" value="74-219">D<br>
+                                                        <input class="radio" type="radio" name="filter" value="74-220">Iron<br>
+                                                        <input class="radio" type="radio" name="filter" value="74-221">Zinc<br>
+                                                        <input class="radio" type="radio" name="filter" value="74-222">Multi-Vitamins<br>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
                                                     <label class="control-label"><strong>Others:</strong></label>
                                                     <div class="controls">
-                                                        <input class="radio" type="radio" name="filter" value="">Child Malnutrition<br>
+                                                        <input class="radio" type="radio" name="filter" value="0-0">Child Malnutrition<br>
                                                     </div>
                                                 </div>
                                                 <div class="form-actions">

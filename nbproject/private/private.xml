@@ -106,13 +106,12 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/dbdao/CommunityListDAO.java</file>
             <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/MapCommunity.jsp</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/servlets/cosca/ReportYearEnd.java</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ReportYear.jsp</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ReportMagnitude.jsp</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ReportAnnual.jsp</file>
             <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/MapFilters.jsp</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ReportYearEnd.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/CommunitySurvey.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/servlets/cosca/MapFilters.java</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/servlets/cosca/MapCommunity.java</file>
         </group>
     </open-files>
 </project-private>

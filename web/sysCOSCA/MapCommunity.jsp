@@ -3,6 +3,11 @@
     Created on : Jun 10, 2014, 9:37:10 PM
     Author     : Renliw
 --%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dbdao.CommunityListDAO"%>
+<%@page import="dbentities.QuestionEntity"%>
+<%@page import="dbdao.QuestionDAO"%>
+<%@page import="dbentities.FilterEntity"%>
 <%@page import="dbentities.CommunityListEntity"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
@@ -92,10 +97,11 @@
                                             </div>
                                             <div id="tabledata" style="display: none;">
                                                 <%
-                                                     List<CommunityListEntity> comList = (List<CommunityListEntity>) request.getAttribute("LIST");
-                                                     List list = null;
+                                                     List<CommunityListEntity> comList = (List<CommunityListEntity>) request.getAttribute("comlist");
+                                                     List<FilterEntity> filterList = (List<FilterEntity>) request.getAttribute("filterList");
+                                                     String[] imagetype = new String[comList.size()];
                                                      
-                                                     if(list == null){
+                                                     if(filterList == null){
                                                 %>
                                                 <table class="table table-condensed bootstrap-datatable" id="datatable">
                                                      <thead>
@@ -106,22 +112,27 @@
                                                     </thead>
                                                     <tbody>
                                                         <%
-                                                            for(int y = 1; y < comList.size(); y++){
+                                                            for(int x = 0; x < comList.size(); x++){
                                                         %>
                                                         <tr>
-                                                            <td><button style="text-align: left;" id="com-<%=y%>" class="btn btn-link"><%=comList.get(y).getName() %></button></td>
-                                                            <td><%=comList.get(y).getAddress()%></td>
+                                                            <td><button style="text-align: left;" id="com-<%=x%>" class="btn btn-link"><%=comList.get(x).getName() %></button></td>
+                                                            <td><%=comList.get(x).getAddress()%></td>
                                                         </tr>
                                                         <%
                                                             }
                                                         %>
                                                     </tbody>
                                                 </table>
-                                                <%  }else{%>
+                                                <%  }else{  
+                                                         int question_id = (Integer)request.getAttribute("question_id");
+                                                         QuestionDAO questionDAO = new QuestionDAO();
+                                                         QuestionEntity questionEntity = questionDAO.getQuestion(question_id);
+                                                %>
+                                                
                                                 <table class="table table-condensed bootstrap-datatable" id="datatable">
                                                     <thead>
                                                         <tr>
-                                                            <th colspan="5">Filter for: Pneumonia</th>
+                                                            <th colspan="5">Filter for: <%=questionEntity.getQuestiontext()%></th>
                                                         </tr>
                                                         <tr>
                                                             <th>Community Name</th>
@@ -131,28 +142,33 @@
                                                             <th>Status</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td><button>Amihan</button></td>
-                                                            <td>50</td>
-                                                            <td>30</td>
-                                                            <td>60%</td>
-                                                            <td><span class="badge badge-important">High</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Buklod Tao, Inc</td>
-                                                            <td>60</td>
-                                                            <td>25</td>
-                                                            <td>42%</td>
-                                                            <td><span class="badge badge-warning">Warning</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Bantay Dagat</td>
-                                                            <td>30</td>
-                                                            <td>3</td>
-                                                            <td>10%</td>
-                                                            <td><span class="badge badge-success">Low</span></td>
-                                                        </tr>
+                                                    <tbody>                                                        
+                                                        <%
+                                                        String badgetype, badgeword;
+                                                        for(int x = 0; x < filterList.size(); x++){
+                                                           double percent_affected = filterList.get(x).getPercent_affected();
+                                                           if(percent_affected >= 20.0){
+                                                               badgetype = "badge-important";
+                                                               badgeword = "High";
+                                                               imagetype[x] = "../images/markers/red_cross.png";
+                                                           }else if(percent_affected >= 10.0){
+                                                               badgetype = "badge-warning";
+                                                               badgeword = "Medium";
+                                                               imagetype[x] = "../images/markers/yellow_exclamation.png";
+                                                           }else{
+                                                               badgetype = "badge-success";
+                                                               badgeword = "Low";
+                                                               imagetype[x] = "../images/markers/green_star.png";
+                                                           }
+                                                        %>
+                                                            <tr>
+                                                                <td><button style="text-align: left;" id="com-<%=x%>" class="btn btn-link"><%=comList.get(x).getName() %></button></td>
+                                                                <td><%=filterList.get(x).getTotal_community_members() %></td>
+                                                                <td><%=filterList.get(x).getTotal_affected() %></td>
+                                                                <td><%=String.format("%.2f",filterList.get(x).getPercent_affected()) %>%</td>
+                                                                <td><span class="badge <%=badgetype%>"><%=badgeword%></span></td>
+                                                            </tr>
+                                                        <%}%>
                                                     </tbody>
                                                 </table>
                                                 <%  }%>
@@ -201,17 +217,6 @@
                         });
                     });
                     
-                  
-                    var LocationData = [
-                <%                        
-                        for (int x = 1; x < comList.size(); x++) {
-                %>
-                        ['<%=comList.get(x).getName()%>',<%=comList.get(x).getLatitude()%>,<%=comList.get(x).getLongitude()%> ]<%if (x + 1 != comList.size()) {%>,<%}%>
-                <%
-                        }
-                %>
-                    ];
-                    
                 function initialize()
                 {
                     var map = new google.maps.Map(document.getElementById('map_canvas'));
@@ -219,20 +224,28 @@
                     var infowindow = new google.maps.InfoWindow({
                          disableAutoPan: true
                             });
-
-
-                    for (var i in LocationData)
-                    {
-                        var p = LocationData[i];
-                        var latlng = new google.maps.LatLng(p[1], p[2]);
+                    
+                    <%
+                    for(int q = 0; q < comList.size(); q++){
+                    %>
+                        var latlng = new google.maps.LatLng(<%=comList.get(q).getLatitude()%>, <%=comList.get(q).getLongitude()%>);
                         bounds.extend(latlng);
 
-                        var image; 
-                        
+                        var image;
+                        <%if(filterList != null){%>
+                        image = {
+                            url: '<%=imagetype[q]%>',
+                            size: new google.maps.Size(50, 50),
+                            origin: new google.maps.Point(0, 0),
+                            anchor: new google.maps.Point(17, 34),
+                            scaledSize: new google.maps.Size(50, 50)
+                          };
+                        <%}%>
+                            
                         var marker = new google.maps.Marker({
                             position: latlng,
                             map: map,
-                            title: p[0],
+                            title: '<%=comList.get(q).getName()%>',
                             icon: image
                         });
 
@@ -240,11 +253,7 @@
                             infowindow.setContent(this.title);
                             infowindow.open(map, this);
                         });
-                    }
-                    
-                    <%
-                    for(int q = 1; q < comList.size(); q++){
-                    %>
+                            
                         var id = 'com-<%=q%>';
                         
                         var myButton = document.getElementById(id);

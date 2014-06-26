@@ -6,10 +6,14 @@
 
 package servlets.cosca;
 
+import Utilities.Year;
 import dbdao.CommunityListDAO;
+import dbdao.FilterDAO;
 import dbentities.CommunityListEntity;
+import dbentities.FilterEntity;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,12 +45,37 @@ public class MapFilters extends HttpServlet {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/sysCOSCA/MapFilters.jsp");
                 dispatcher.forward(request, response);
             } else if (request.getMethod().equals("POST")) {
-                CommunityListDAO clDAO = new CommunityListDAO();
-                List<CommunityListEntity> comlist = clDAO.getAllCommunity();
+                String filterValue = request.getParameter("filter");
+                if(filterValue.equals("0-0")){
+                    CommunityListDAO clDAO = new CommunityListDAO();
+                    List<CommunityListEntity> comlist = clDAO.getAllRealCommunity();
 
-                request.setAttribute("LIST", comlist);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/sysCOSCA/MapCommunity.jsp");
-                dispatcher.forward(request, response);
+                    request.setAttribute("comlist", comlist);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/sysCOSCA/MapCommunity.jsp");
+                    dispatcher.forward(request, response);
+                }else{
+                    int question_id = Integer.parseInt(filterValue.split("-")[0]);
+                    int offeredanswer_id = Integer.parseInt(filterValue.split("-")[1]);
+                    
+                    FilterDAO filterDAO = new FilterDAO();
+                    List<FilterEntity> filterList = filterDAO.getFilterData(question_id, offeredanswer_id, Year.getCurrentYear());
+                                        
+                    CommunityListDAO clDAO;
+                    CommunityListEntity clEntity;
+                    List<CommunityListEntity> comlist = new ArrayList();
+                    for(int x = 0; x < filterList.size(); x++){
+                        clDAO = new CommunityListDAO();
+                        clEntity = clDAO.getCommunity(filterList.get(x).getCommunity_id());
+                        comlist.add(clEntity);
+                    }
+                    
+                    
+                    request.setAttribute("comlist", comlist);                    
+                    request.setAttribute("filterList", filterList);
+                    request.setAttribute("question_id", question_id);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/sysCOSCA/MapCommunity.jsp");
+                    dispatcher.forward(request, response);
+                }
             }
         } finally {
             out.close();

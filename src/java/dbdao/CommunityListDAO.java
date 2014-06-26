@@ -6,6 +6,7 @@
 
 package dbdao;
 
+import dbdao.templates.KeyValuePair;
 import dbdao.templates.QueryTemplate;
 import dbentities.CommunityListEntity;
 import java.sql.ResultSet;
@@ -19,7 +20,7 @@ import java.util.logging.Logger;
  * @author Renliw
  */
 public class CommunityListDAO extends QueryTemplate{
-    //Get User from username
+    //Get All Communities
     public List<CommunityListEntity> getAllCommunity() {
         setQuery("SELECT * FROM community;");
 
@@ -27,6 +28,39 @@ public class CommunityListDAO extends QueryTemplate{
 
         if (results != null) {
             return results;
+        } else {
+            return null;
+        }
+    }
+    
+    //Get All Communities
+    public List<CommunityListEntity> getAllRealCommunity() {
+        setQuery("SELECT * FROM community WHERE id > 0;");
+
+        List<CommunityListEntity> results = executeQuery();
+
+        if (results != null) {
+            return results;
+        } else {
+            return null;
+        }
+    }
+    
+    //Get Community
+    public CommunityListEntity getCommunity(int community_id) {
+        setQuery("SELECT * FROM community WHERE id = ?;");
+
+        KeyValuePair onePair;
+        
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.INT);
+        onePair.setValue("" + community_id);
+        getParameters().add(onePair);
+        
+        List<CommunityListEntity> results = executeQuery();
+
+        if (results != null) {
+            return results.get(0);
         } else {
             return null;
         }
