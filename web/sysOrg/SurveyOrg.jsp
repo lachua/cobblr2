@@ -58,14 +58,8 @@
             <div class="container-fluid">
                 <div class="row-fluid">
                     <div class="span2">
-                        <div class="member-box round-all"> 
-                            <a><img src="../images/member_ph.png" class="member-box-avatar" /></a>
-                            <span>
-                                <strong>USG</strong><br />
-                                <a>CATCH 2T14</a><br />
-                                <span class="member-box-links"><a>Logout</a></span>
-                            </span>
-                        </div>          
+                        
+                    <jsp:include page="Navuserbar.jsp"></jsp:include>     
                     <jsp:include page="Navsidebar.jsp"></jsp:include>
                     </div><!--/span-->
 

@@ -3,10 +3,10 @@
     Created on : Jun 10, 2014, 9:37:10 PM
     Author     : Renliw
 --%>
+<%@page import="dbentities.OfferedAnswerEntity"%>
+<%@page import="dbdao.OfferedAnswerDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dbdao.CommunityListDAO"%>
-<%@page import="dbentities.QuestionEntity"%>
-<%@page import="dbdao.QuestionDAO"%>
 <%@page import="dbentities.FilterEntity"%>
 <%@page import="dbentities.CommunityListEntity"%>
 <%@page import="java.util.List"%>
@@ -50,14 +50,8 @@
                 <div class="row-fluid">
                     <!-- Side Navigation -->
                     <div class="span2">
-                        <div class="member-box round-all">
-                            <a><img src="../images/member_ph.png" class="member-box-avatar" /></a>
-                            <span>
-                                <strong>DLSU</strong><br />
-                                <a>COSCA</a><br />
-                                <span class="member-box-links"><a>Logout</a></span>
-                            </span>
-                        </div>
+                        
+                    <jsp:include page="Navuserbar.jsp"></jsp:include>
                     <jsp:include page="Navsidebar.jsp"></jsp:include>
                     </div><!--/span-->
 
@@ -69,6 +63,11 @@
                                     <h4 class="box-header round-top">Community Map</h4>
                                     <div class="box-container-toggle">
                                         <div class="box-content">
+                                            <%
+                                                     List<CommunityListEntity> comList = (List<CommunityListEntity>) request.getAttribute("comlist");
+                                                     List<FilterEntity> filterList = (List<FilterEntity>) request.getAttribute("filterList");
+                                                     String[] imagetype = new String[comList.size()];
+                                            %>
                                             <div>
                                                 <form method="POST" action="CommunityMap">
                                                     <div>
@@ -84,8 +83,15 @@
                                                     <button id="dataBtn" style="color: blue;" class="btn btn-link">View Data</button>
                                                 </div>
                                             </div>
-
                                             <div id="map">
+                                                <%
+                                                if(filterList != null){
+                                                    int offeredanswer_id = (Integer)request.getAttribute("offeredanswer_id");
+                                                    OfferedAnswerDAO answerDAO = new OfferedAnswerDAO();
+                                                    OfferedAnswerEntity answerEntity = answerDAO.getOfferedAnswer(offeredanswer_id);
+                                                %>
+                                                <h4>Filter for: <strong><%=answerEntity.getAnswertext()%></strong></h4>
+                                                <%}%>
                                                 <div id="map_canvas"
                                                      style="
                                                      height: 550px;
@@ -97,10 +103,6 @@
                                             </div>
                                             <div id="tabledata" style="display: none;">
                                                 <%
-                                                     List<CommunityListEntity> comList = (List<CommunityListEntity>) request.getAttribute("comlist");
-                                                     List<FilterEntity> filterList = (List<FilterEntity>) request.getAttribute("filterList");
-                                                     String[] imagetype = new String[comList.size()];
-                                                     
                                                      if(filterList == null){
                                                 %>
                                                 <table class="table table-condensed bootstrap-datatable" id="datatable">
@@ -123,16 +125,16 @@
                                                         %>
                                                     </tbody>
                                                 </table>
-                                                <%  }else{  
-                                                         int question_id = (Integer)request.getAttribute("question_id");
-                                                         QuestionDAO questionDAO = new QuestionDAO();
-                                                         QuestionEntity questionEntity = questionDAO.getQuestion(question_id);
+                                                <%  
+                                                    }else{  
+                                                    int offeredanswer_id = (Integer)request.getAttribute("offeredanswer_id");
+                                                    OfferedAnswerDAO answerDAO = new OfferedAnswerDAO();
+                                                    OfferedAnswerEntity answerEntity = answerDAO.getOfferedAnswer(offeredanswer_id);
                                                 %>
-                                                
                                                 <table class="table table-condensed bootstrap-datatable" id="datatable">
                                                     <thead>
                                                         <tr>
-                                                            <th colspan="5">Filter for: <%=questionEntity.getQuestiontext()%></th>
+                                                            <th colspan="5">Filter for: <%=answerEntity.getAnswertext()%></th>
                                                         </tr>
                                                         <tr>
                                                             <th>Community Name</th>
@@ -245,7 +247,11 @@
                         var marker = new google.maps.Marker({
                             position: latlng,
                             map: map,
-                            title: '<%=comList.get(q).getName()%>',
+                            <%if(filterList != null){%>
+                                title: '<%=comList.get(q).getName()%>,  <%=String.format("%.2f",filterList.get(q).getPercent_affected()) %>% affected',
+                            <%}else{%>
+                                title: '<%=comList.get(q).getName()%>',
+                            <%}%>
                             icon: image
                         });
 

@@ -53,14 +53,8 @@
                 <div class="row-fluid">
                     <!-- Side Navigation -->
                     <div class="span2">
-                        <div class="member-box round-all">
-                            <a><img src="../images/member_ph.png" class="member-box-avatar" /></a>
-                            <span>
-                                <strong>DLSU</strong><br />
-                                <a>COSCA</a><br />
-                                <span class="member-box-links"><a>Logout</a></span>
-                            </span>
-                        </div>
+                        
+                    <jsp:include page="Navuserbar.jsp"></jsp:include>
                     <jsp:include page="Navsidebar.jsp"></jsp:include>
                     </div><!--/span-->
 
@@ -139,7 +133,7 @@
                     <div class="row-fluid">
                         <div class="span12" id="col0">
                             <div class="box" id="box-0">
-                                <h4 class="box-header round-top">Projects Pending</h4>
+                                <h4 class="box-header round-top">Projects Confirmed</h4>
                                 <div class="box-container-toggle">
                                     <div class="box-content">
                                         <form method="GET" action="ViewInitialProjectCharterConfirmed">

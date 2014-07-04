@@ -106,12 +106,82 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/dbdao/CommunityListDAO.java</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/MapCommunity.jsp</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/MapFilters.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ProjectsAccomplished.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/ConfirmProjects.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/FinalizeFullProjectCharter.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/WorkStructure_Health.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/ViewAvailableProjects.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/DoctorsDecrease.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/SOrgHome.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/CancelProject.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ProjectsPending.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/DoctorsIncrease.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/SelectLocation.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/DoctorsAdd.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/WorkStructure_Health.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/MedicineAdd.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ChangeDate.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/Navsidebar.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/COSCAHome.jsp</file>
             <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/CommunitySurvey.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/CloseProjects.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/SpeakersEdit.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ViewFullProjectCharter.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/EquipmentAdd.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ErrorInDB.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ResourcesShortcut.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/DoctorsEdit.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/EquipmentEdit.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/CurrentProjects.jsp</file>
             <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/servlets/cosca/MapFilters.java</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/ProjectsShortcut.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/ViewClosedProjectCharter.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/ProjectReserved.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ReportCommunityHealthReview.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/Navsidebar.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/MedicalProfessionals.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/SurveySubmitted.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ApprovedPending.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/SurveyOrg.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ProjectImplemented.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/ContactDetails.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ReportAnnual.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/SpeakersDecrease.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/EncodeCommunitySurvey.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/MedicalSuppliers.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/MedicalProfessionals.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ProjectsAvailable.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/OnGoingProjects.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ViewInitialProjectCharterConfirmed.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/WorkStructure_Seminar.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/SurveyClosed.jsp</file>
             <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/servlets/cosca/MapCommunity.java</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/PrintCharter.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/MedicineEdit.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/ResourcesShortcut.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/ChangeDate.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/ViewFullProjectCharter.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/dbdao/CommunityListDAO.java</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ProjectsShortcut.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/CreateInitialProjectCharter.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/DisapprovedPending.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/FinalizeInitialProjectCharter.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/MedicalSuppliers.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/AccomplishedProjects.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/CreateFullProjectCharter.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/MapFilters.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ConfirmOrgProject.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/ViewInitialProjectCharter.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/MapCommunity.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ProjectsCanceled.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/ProjectPendingDetails.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ViewInitialProjectCharter.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ChildSurvey.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/SpeakersAdd.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/WorkStructure_Seminar.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/Navuserbar.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/Navtopbar.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysOrg/SpeakersIncrease.jsp</file>
         </group>
     </open-files>
 </project-private>

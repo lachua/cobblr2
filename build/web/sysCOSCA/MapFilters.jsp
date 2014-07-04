@@ -51,14 +51,8 @@
                 <div class="row-fluid">
                     <!-- Side Navigation -->
                     <div class="span2">
-                        <div class="member-box round-all">
-                            <a><img src="../images/member_ph.png" class="member-box-avatar" /></a>
-                            <span>
-                                <strong>DLSU</strong><br />
-                                <a>COSCA</a><br />
-                                <span class="member-box-links"><a>Logout</a></span>
-                            </span>
-                        </div>
+                        
+                    <jsp:include page="Navuserbar.jsp"></jsp:include>
                     <jsp:include page="Navsidebar.jsp"></jsp:include>
                 </div>
 
@@ -123,9 +117,11 @@
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label"><strong>Others:</strong></label>
+                                                    <label class="control-label"><strong>Child Malnutrition:</strong></label>
                                                     <div class="controls">
-                                                        <input class="radio" type="radio" name="filter" value="0-0">Child Malnutrition<br>
+                                                        <input class="radio" type="radio" name="filter" value="77-234">Under weight<br>
+                                                        <input class="radio" type="radio" name="filter" value="77-236">Over weight<br>
+                                                        <input class="radio" type="radio" name="filter" value="77-237">Obese<br>
                                                     </div>
                                                 </div>
                                                 <div class="form-actions">

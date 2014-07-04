@@ -498,21 +498,36 @@ public class ChildSurvey extends HttpServlet {
                                 answer.setOtheranswer(" ");
                                 personAns = new PersonAnswerDAO();
                                 upDB = personAns.insertAnswer(answer);
+                                
+                                String heightS = request.getParameter("height-" + childpersonId.get(x));
+                                String weightS = request.getParameter("weight-" + childpersonId.get(x));
 
                                 //Height
                                 answer.setQuestion_id(72);
                                 answer.setOfferedanswer_id(82);
-                                answer.setOtheranswer(request.getParameter("height-" + childpersonId.get(x)));
+                                answer.setOtheranswer(heightS);
                                 personAns = new PersonAnswerDAO();
                                 upDB = personAns.insertAnswer(answer);
 
                                 //Weight
                                 answer.setQuestion_id(73);
                                 answer.setOfferedanswer_id(82);
-                                answer.setOtheranswer(request.getParameter("weight-" + childpersonId.get(x)));
+                                answer.setOtheranswer(weightS);
                                 personAns = new PersonAnswerDAO();
                                 upDB = personAns.insertAnswer(answer);
 
+                                double height = Double.parseDouble(heightS);
+                                double weight = Double.parseDouble(weightS);
+                                double bmi = (weight / (height * height)) * 703;
+                                int bmi_category = bmi_category(bmi);
+                                
+                                //BMI
+                                answer.setQuestion_id(77);
+                                answer.setOfferedanswer_id(bmi_category);
+                                answer.setOtheranswer(""+bmi);
+                                personAns = new PersonAnswerDAO();
+                                upDB = personAns.insertAnswer(answer);
+                                
                                 //Vitamins
                                 String[] vitamins = request.getParameterValues("vitamins-" + childpersonId.get(x));
                                 if (vitamins != null) {
@@ -622,6 +637,21 @@ public class ChildSurvey extends HttpServlet {
             ans = 165;
         } else {
             ans = 166;
+        }
+
+        return ans;
+    }
+    
+     private int bmi_category(double bmi) {
+        int ans;
+        if (bmi < 18.5) {
+            ans = 234;
+        } else if (bmi >= 18.5 && bmi <=24.9) {
+            ans = 235;
+        } else if (bmi >= 25 && bmi <= 29.9) {
+            ans = 236;
+        } else {
+            ans = 237;
         }
 
         return ans;

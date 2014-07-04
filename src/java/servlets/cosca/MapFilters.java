@@ -72,7 +72,7 @@ public class MapFilters extends HttpServlet {
                     
                     request.setAttribute("comlist", comlist);                    
                     request.setAttribute("filterList", filterList);
-                    request.setAttribute("question_id", question_id);
+                    request.setAttribute("offeredanswer_id", offeredanswer_id);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/sysCOSCA/MapCommunity.jsp");
                     dispatcher.forward(request, response);
                 }

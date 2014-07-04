@@ -42,14 +42,8 @@
                 <div class="row-fluid">
                     <!-- Side Navigation -->
                     <div class="span2">
-                        <div class="member-box round-all">
-                            <a><img src="../images/member_ph.png" class="member-box-avatar" /></a>
-                            <span>
-                                <strong>USG</strong><br />
-                                <a>CATCH2T14</a><br />
-                                <span class="member-box-links"><a>Logout</a></span>
-                            </span>
-                        </div>
+                        
+                    <jsp:include page="Navuserbar.jsp"></jsp:include>
                     <jsp:include page="Navsidebar.jsp"></jsp:include>
                     </div><!--/span-->
 

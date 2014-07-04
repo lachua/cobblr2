@@ -53,14 +53,8 @@
             <div class="row-fluid">
                 <!-- Side Navigation -->
                 <div class="span2">
-                    <div class="member-box round-all">
-                        <a><img src="../images/member_ph.png" class="member-box-avatar" /></a>
-                        <span>
-                            <strong>DLSU</strong><br />
-                            <a>COSCA</a><br />
-                            <span class="member-box-links"><a>Logout</a></span>
-                        </span>
-                    </div>
+                    
+                    <jsp:include page="Navuserbar.jsp"></jsp:include>
                 <jsp:include page="Navsidebar.jsp"></jsp:include>
                 </div><!--/span-->
 
@@ -85,7 +79,7 @@
                                             <div class="control-group">
                                                 <label class="control-label" for="childage">Specific Age:</label>
                                                 <div class="controls">
-                                                    <select name="childage-<%=childpersonId.get(x)%>" id="childage" class="chzn-select">
+                                                    <select name="childage-<%=childpersonId.get(x)%>" class="chzn-select">
                                                         <option value="207">0-3 months old</option>
                                                         <option value="208">4-6 months old</option>
                                                         <option value="209">7-9 months old</option>
@@ -102,28 +96,28 @@
                                             <div class="control-group">
                                                 <label class="control-label" for="height">Height:</label>
                                                 <div class="controls">
-                                                    <input class="input-small" id="height" name="height-<%=childpersonId.get(x)%>" type="number" required/>in
+                                                    <input class="input-small" name="height-<%=childpersonId.get(x)%>" type="number" required/>in
                                                 </div>
                                             </div>
 
                                             <div class="control-group">
                                                 <label class="control-label" for="weight">Weight:</label>
                                                 <div class="controls">
-                                                    <input class="input-small" id="weight" name="weight-<%=childpersonId.get(x)%>" type="number" required/>lbs
+                                                    <input class="input-small" name="weight-<%=childpersonId.get(x)%>" type="number" required/>lbs
                                                 </div>
                                             </div>
 
                                             <div class="control-group">
                                                 <label class="control-label" for="vitamins">Vitamin Taken</label>
                                                 <div class="controls">
-                                                   <label class="checkbox"><input type="checkbox" id="vitA" name="vitamins-<%=childpersonId.get(x)%>" value="216" />Vitamin A</label>
-                                                    <label class="checkbox"><input type="checkbox" id="vitB12" name="vitamins-<%=childpersonId.get(x)%>" value="217" />Vitamin B12</label>
-                                                    <label class="checkbox"><input type="checkbox" id="vitC" name="vitamins-<%=childpersonId.get(x)%>" value="218" />Vitamin C</label>
-                                                    <label class="checkbox"><input type="checkbox" id="vitD" name="vitamins-<%=childpersonId.get(x)%>" value="219" />Vitamin D</label>
-                                                    <label class="checkbox"><input type="checkbox" id="vitIron" name="vitamins-<%=childpersonId.get(x)%>" value="220" />Iron</label>
-                                                    <label class="checkbox"><input type="checkbox" id="vitZinc" name="vitamins-<%=childpersonId.get(x)%>" value="221" />Zinc</label>
-                                                    <label class="checkbox"><input type="checkbox" id="vitMulti" name="vitamins-<%=childpersonId.get(x)%>" value="222" />Multi-Vitamins</label>
-                                                    <label class="checkbox"><input type="checkbox" id="vitOthers" name="vitamins-<%=childpersonId.get(x)%>" value="82" />Others</label>
+                                                   <label class="checkbox"><input type="checkbox" name="vitamins-<%=childpersonId.get(x)%>" value="216" />Vitamin A</label>
+                                                    <label class="checkbox"><input type="checkbox" name="vitamins-<%=childpersonId.get(x)%>" value="217" />Vitamin B12</label>
+                                                    <label class="checkbox"><input type="checkbox" name="vitamins-<%=childpersonId.get(x)%>" value="218" />Vitamin C</label>
+                                                    <label class="checkbox"><input type="checkbox" name="vitamins-<%=childpersonId.get(x)%>" value="219" />Vitamin D</label>
+                                                    <label class="checkbox"><input type="checkbox" name="vitamins-<%=childpersonId.get(x)%>" value="220" />Iron</label>
+                                                    <label class="checkbox"><input type="checkbox" name="vitamins-<%=childpersonId.get(x)%>" value="221" />Zinc</label>
+                                                    <label class="checkbox"><input type="checkbox" name="vitamins-<%=childpersonId.get(x)%>" value="222" />Multi-Vitamins</label>
+                                                    <label class="checkbox"><input type="checkbox" name="vitamins-<%=childpersonId.get(x)%>" value="82" />Others</label>
                                                 </div>
                                             </div>
                                                 
