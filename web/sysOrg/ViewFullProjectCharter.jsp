@@ -1,3 +1,6 @@
+<%@page import="java.util.Date"%>
+<%@page import="dbdao.ProjectCharterDateDAO"%>
+<%@page import="dbentities.ProjectCharterDateEntity"%>
 <%@page import="dbentities.UnavailableProjectEntity"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,35 +63,50 @@
                                             <%
                                                 UnavailableProjectEntity unavailableProj = (UnavailableProjectEntity) request.getAttribute("unavailableProj");
                                             %>
-                                            <legend><%=unavailableProj.getTitle()%></legend>
+                                            <h2><%=unavailableProj.getTitle()%></h2>
                                             <blockquote>
                                                 <p>Project Type: <%=unavailableProj.getType()%></p>
                                                 <p>Community Name: <%=unavailableProj.getCommunity_name()%></p>
                                                 <p>Prepared by: <%=unavailableProj.getPreparedby()%></p>
-                                                <p>Implementation Date: <%=unavailableProj.getMeetingdate()%></p>
+                                                <%
+                                                    ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
+                                                    ProjectCharterDateEntity projdate = project_date.getProjectDate(unavailableProj.getProject_id());
+                                                    Date date = new Date();
+                                                    if(unavailableProj.getStatus() == 2){
+                                                        date = projdate.getDate_target_implement();
+                                                    }else if(unavailableProj.getStatus() == 3){
+                                                        date = projdate.getDate_implemented();
+                                                    }else if(unavailableProj.getStatus() == 4){
+                                                        date = projdate.getDate_closed();
+                                                    }else if(unavailableProj.getStatus() == 6){
+                                                        date = projdate.getDate_cancelled();
+                                                    }
+                                                %>
+                                                
+                                                <p>Implementation Date: <%=date%></p>
                                             </blockquote>
 
-                                            <legend>Brief Description</legend>
+                                            <h2>Brief Description</h2>
                                             <blockquote>
                                                 <p><%=unavailableProj.getDescription()%></p>
                                             </blockquote>
 
-                                            <legend>Main Objective</legend>
+                                            <h2>Main Objective</h2>
                                             <blockquote>
                                                 <p><%=unavailableProj.getObjectives()%></p>
                                             </blockquote>
 
-                                            <legend>Project Scope</legend>
+                                            <h2>Project Scope</h2>
                                             <blockquote>
                                                 <p><%=unavailableProj.getScope()%></p>
                                             </blockquote>
 
-                                            <legend>Additional Requirements</legend>
+                                            <h2>Additional Requirements</h2>
                                             <blockquote>
                                                 <p><%=unavailableProj.getRequirements()%></p>
                                             </blockquote>
                                             <div class="form-actions">
-                                                <a href="CurrentProjects  " type="button" class="btn">Finish</a>
+                                                <a href="CurrentProjects"  class="btn">Finish</a>
                                                 <button type="submit" class="btn btn-warning">Edit Charter</button>
                                             </div>
                                         </form>

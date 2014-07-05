@@ -10,7 +10,7 @@ package dbentities;
  *
  * @author Renliw
  */
-public class AvailableProjectEntity extends ProjectEntity{
+public class AvailableProjectEntity{
     private Integer project_id;
     private String title;
     private String description;

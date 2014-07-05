@@ -1,3 +1,5 @@
+<%@page import="dbentities.ProjectCharterDateEntity"%>
+<%@page import="dbdao.ProjectCharterDateDAO"%>
 <%@page import="java.util.concurrent.TimeUnit"%>
 <%@page import="Utilities.CompareDate"%>
 <%@page import="java.util.Calendar"%>
@@ -104,13 +106,15 @@
                                                         <td><%=currentProj.get(x).getDescription()%></td>
                                                         <td><%=currentProj.get(x).getStudent_firstname()%> <%=currentProj.get(x).getStudent_lastname()%></td>
                                                         <%
-                                                            if (CompareDate.getDateDiff(currentProj.get(x).getMeetingdate(), TimeUnit.DAYS) < 3 && CompareDate.getDateDiff(currentProj.get(x).getMeetingdate(), TimeUnit.DAYS) >= 0) {
+                                                            ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
+                                                            ProjectCharterDateEntity projdate = project_date.getProjectDate(currentProj.get(x).getProject_id());
+                                                            if (CompareDate.getDateDiff(projdate.getDate_target_implement(), TimeUnit.DAYS) < 3 && CompareDate.getDateDiff(projdate.getDate_target_implement(), TimeUnit.DAYS) >= 0) {
                                                         %>
-                                                        <td><span class="badge badge-warning"><%=currentProj.get(x).getMeetingdate()%></span></td>
-                                                            <%} else if (CompareDate.compareDates(currentProj.get(x).getMeetingdate()) < 0) {%>
-                                                        <td><span class="badge badge-info"><%=currentProj.get(x).getMeetingdate()%></span></td>
+                                                        <td><span class="badge badge-warning"><%=projdate.getDate_target_implement()%></span></td>
+                                                            <%} else if (CompareDate.compareDates(projdate.getDate_target_implement()) < 0) {%>
+                                                        <td><span class="badge badge-info"><%=projdate.getDate_target_implement()%></span></td>
                                                             <%} else {%>
-                                                        <td><span class="badge badge-important"><%=currentProj.get(x).getMeetingdate()%></span></td>
+                                                        <td><span class="badge badge-important"><%=projdate.getDate_target_implement()%></span></td>
                                                             <%}%>
                                                         <td>
                                                             <button name="ViewFullProjectCharter" value="<%=currentProj.get(x).getProject_id()%>" class="btn btn-success">Details</button>

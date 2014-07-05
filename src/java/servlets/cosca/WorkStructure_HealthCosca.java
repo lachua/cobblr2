@@ -9,6 +9,7 @@ package servlets.cosca;
 import Utilities.Year;
 import dbdao.NotificationDAO;
 import dbdao.ProjectCharterDAO;
+import dbdao.ProjectCharterDateDAO;
 import dbdao.UnavailableProjectDAO;
 import dbentities.NotificationEntity;
 import dbentities.ProjectCharterEntity;
@@ -53,6 +54,8 @@ public class WorkStructure_HealthCosca extends HttpServlet {
                 
                 charterDAO = new ProjectCharterDAO();
                 boolean DB = charterDAO.updateProjectStatus(Integer.parseInt(project_id), ProjectCharterDAO.CANCELED);
+                ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
+                DB = project_date.setDateCancelled(Integer.parseInt(project_id));
                 
                 if(DB){
                 charterDAO = new ProjectCharterDAO();

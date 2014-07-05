@@ -1,3 +1,5 @@
+<%@page import="dbentities.ProjectCharterDateEntity"%>
+<%@page import="dbdao.ProjectCharterDateDAO"%>
 <%@page import="java.util.concurrent.TimeUnit"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="dbentities.TaskDetailsEntity"%>
@@ -61,13 +63,15 @@
                                     String hidden = "";
                                     String hiddenImp = "";
                                     String badgeColor = "";
-                                    if (CompareDate.getDateDiff(unavailableProj.getMeetingdate(), TimeUnit.DAYS) < 3 && CompareDate.getDateDiff(unavailableProj.getMeetingdate(), TimeUnit.DAYS) >= 0) {
+                                    ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
+                                    ProjectCharterDateEntity projdate = project_date.getProjectDate(unavailableProj.getProject_id());
+                                    if (CompareDate.getDateDiff(projdate.getDate_target_implement(), TimeUnit.DAYS) < 3 && CompareDate.getDateDiff(projdate.getDate_target_implement(), TimeUnit.DAYS) >= 0) {
                                         hiddenImp = "";
                                         badgeColor = "badge-warning";
-                                    } else if (CompareDate.compareDates(unavailableProj.getMeetingdate()) < 0) {
+                                    } else if (CompareDate.compareDates(projdate.getDate_target_implement()) < 0) {
                                         hiddenImp = "hidden";
                                         badgeColor = "badge-success";
-                                    } else if (CompareDate.compareDates(unavailableProj.getMeetingdate()) > 0) {
+                                    } else if (CompareDate.compareDates(projdate.getDate_target_implement()) > 0) {
                                         hiddenImp = "";
                                         badgeColor = "badge-important";
                                     }
@@ -85,7 +89,7 @@
                                         <strong>Partner Community: </strong> <%=unavailableProj.getCommunity_name()%><br />
                                         <strong>Location: </strong> <%=unavailableProj.getCommunity_address()%><br/>
                                         <strong>Description: </strong> <%=unavailableProj.getDescription()%> <br/> 
-                                        <strong>Project Deadline: </strong> <span id="dateChange" class="badge <%=badgeColor%>"> <%=unavailableProj.getMeetingdate()%> </span><br/><br/>
+                                        <strong>Project Deadline: </strong> <span id="dateChange" class="badge <%=badgeColor%>"> <%=projdate.getDate_target_implement()%> </span><br/><br/>
                                     </li>
                                 </ul>
                                 <%

@@ -1,3 +1,5 @@
+<%@page import="dbentities.ProjectCharterDateEntity"%>
+<%@page import="dbdao.ProjectCharterDateDAO"%>
 <%@page import="java.util.concurrent.TimeUnit"%>
 <%@page import="Utilities.CompareDate"%>
 <%@page import="java.util.Calendar"%>
@@ -106,7 +108,11 @@
                                                         <td><%=closedProj.get(x).getDescription()%></td>
                                                         <td><%=closedProj.get(x).getStudent_firstname()%> <%=closedProj.get(x).getStudent_lastname()%></td>
                                                         <td><%=closedProj.get(x).getStudent_mobileno()%></td>
-                                                        <td><span class="badge badge-inverse"><%=closedProj.get(x).getMeetingdate()%></span></td>
+                                                        <%
+                                                            ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
+                                                            ProjectCharterDateEntity projdate = project_date.getProjectDate(closedProj.get(x).getProject_id());
+                                                        %>
+                                                        <td><span class="badge badge-inverse"><%=projdate.getDate_closed() %></span></td>
                                                         <td>
                                                             <button name="ViewFullProjectCharter" value="<%=closedProj.get(x).getProject_id()%>" class="btn btn-inverse">Details</button>
                                                             <button name="WorkStructure" value="<%=closedProj.get(x).getProject_id()%>-<%=closedProj.get(x).getType()%>" class="btn btn-inverse">Tasks</button>
@@ -115,7 +121,7 @@
                                                     <%}%>
                                                 </tbody>
                                             </table>
-                                            </from>
+                                            </form>
                                     </div>
                                 </div>
                             </div>

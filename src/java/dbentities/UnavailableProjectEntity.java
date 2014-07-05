@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author Renliw
  */
-public class UnavailableProjectEntity extends ProjectEntity{
+public class UnavailableProjectEntity{
     private Integer project_id;
     private Integer community_id;
     private String title;

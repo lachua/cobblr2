@@ -87,9 +87,27 @@ public class ProjectCharterDAO extends QueryTemplate {
         }
     }
     
+    public boolean setOngoingDate(int id){
+        setQuery("UPDATE project_charter SET date_ongoing =? WHERE id=?;");
+
+        KeyValuePair onePair;
+        
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.DATE);
+        onePair.setValue("" + Year.getCurrentDate());
+        getParameters().add(onePair);
+        
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.INT);
+        onePair.setValue("" + id);
+        getParameters().add(onePair);
+        
+        return executeUpdate();
+    }
+    
     //Get charter for project
     public boolean updateFullCharter(UnavailableProjectEntity fullCharter) {
-        setQuery("UPDATE project_charter SET title=?, description=?, preparedby=?, objectives=?, scope=?, requirements=?, status='2', meetingdate =? WHERE id=?;");
+        setQuery("UPDATE project_charter SET title=?, description=?, preparedby=?, objectives=?, scope=?, requirements=?, status='2' WHERE id=?;");
 
         KeyValuePair onePair;
 
@@ -124,14 +142,12 @@ public class ProjectCharterDAO extends QueryTemplate {
         getParameters().add(onePair);
         
         onePair = new KeyValuePair();
-        onePair.setKey(KeyValuePair.DATE);
-        onePair.setValue("" + fullCharter.getMeetingdate());
-        getParameters().add(onePair);
-        
-        onePair = new KeyValuePair();
         onePair.setKey(KeyValuePair.INT);
         onePair.setValue("" + fullCharter.getProject_id());
         getParameters().add(onePair);
+        
+        ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
+        project_date.setDateTargetImplement(fullCharter.getProject_id(), fullCharter.getMeetingdate());
 
         return executeUpdate();
     }
@@ -330,7 +346,7 @@ public class ProjectCharterDAO extends QueryTemplate {
 
     //Approve Pending Project
     public boolean approvePendingProject(int project_id, Date date) {
-        setQuery("UPDATE project_charter SET status = 5, meetingdate = ? WHERE id = ?;");
+        setQuery("UPDATE project_charter SET status = 5 WHERE id = ?;");
 
         KeyValuePair onePair;
         
@@ -338,6 +354,9 @@ public class ProjectCharterDAO extends QueryTemplate {
         onePair.setKey(KeyValuePair.DATE);
         onePair.setValue("" + date);
         getParameters().add(onePair);
+        
+        ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
+        project_date.setDateConfirmed(project_id, date);
         
         onePair = new KeyValuePair();
         onePair.setKey(KeyValuePair.INT);

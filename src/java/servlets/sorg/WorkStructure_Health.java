@@ -5,7 +5,9 @@
  */
 package servlets.sorg;
 
+import Utilities.Year;
 import dbdao.ProjectCharterDAO;
+import dbdao.ProjectCharterDateDAO;
 import dbdao.ProjectTaskDAO;
 import dbdao.TaskDetailsDAO;
 import dbdao.UnavailableProjectDAO;
@@ -126,6 +128,10 @@ public class WorkStructure_Health extends HttpServlet {
                 } else {
                     ProjectCharterDAO charterDAO = new ProjectCharterDAO();
                     boolean addDB = charterDAO.updateProjectStatus(project_id, ProjectCharterDAO.IMPLMENTED);
+                    if(addDB){
+                     ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
+                     project_date.setDateImplemented(project_id);
+                    }
 
                     if (addDB) {
                         session.removeAttribute("project_id");

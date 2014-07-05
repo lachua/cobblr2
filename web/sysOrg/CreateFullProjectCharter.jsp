@@ -1,3 +1,6 @@
+<%@page import="java.util.Date"%>
+<%@page import="dbentities.ProjectCharterDateEntity"%>
+<%@page import="dbdao.ProjectCharterDateDAO"%>
 <%@page import="dbentities.UnavailableProjectEntity"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -89,7 +92,23 @@
                                                     <tr>
                                                         <td>Implementation Date</td>
                                                         <td>
-                                                            <input type="text" class="form-control datepicker" style="width: 95%" id="date" name="date" value="<%=unavailableProj.getMeetingdate()%>"/>
+                                                            <%
+                                                                ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
+                                                                ProjectCharterDateEntity projdate = project_date.getProjectDate(unavailableProj.getProject_id());
+                                                                Date date = new Date();
+                                                                if(unavailableProj.getStatus() == 2){
+                                                                    date = projdate.getDate_target_implement();
+                                                                }else if(unavailableProj.getStatus() == 3){
+                                                                    date = projdate.getDate_implemented();
+                                                                }else if(unavailableProj.getStatus() == 4){
+                                                                    date = projdate.getDate_closed();
+                                                                }else if(unavailableProj.getStatus() == 6){
+                                                                    date = projdate.getDate_cancelled();
+                                                                }else{
+                                                                    date = unavailableProj.getMeetingdate();
+                                                                }
+                                                            %>
+                                                            <input type="text" class="form-control datepicker" style="width: 95%" id="date" name="date" value="<%=date%>"/>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -106,7 +125,7 @@
                                             <br>
                                             <div class="form-actions">
                                                 <button name="action" value="FinalizeFullProjectCharter" type="submit" class="btn btn-primary">Finalize Project Requirements</button>
-                                                <a href="SOrgHome" type="button" class="btn">Cancel</a>
+                                                <a href="SOrgHome" class="btn">Cancel</a>
                                             </div>
                                         </form>
                                     </div>

@@ -35,6 +35,11 @@ public class Year {
         return x;
     }
     
+    public static Date getCurrentDateinDate() {
+        Calendar cal = new GregorianCalendar();
+        return Converter.toDate(cal);
+    }
+    
     public static String getPreviousDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = new GregorianCalendar();

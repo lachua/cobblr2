@@ -107,7 +107,7 @@
                                                         <td><%=confirmedProj.get(x).getStudent_firstname()%> <%=confirmedProj.get(x).getStudent_lastname()%></td>
                                                         <td><%=confirmedProj.get(x).getStudent_mobileno()%></td>
                                                         <%
-                                                            if (CompareDate.getDateDiff(confirmedProj.get(x).getMeetingdate(), TimeUnit.DAYS) > 5) {
+                                                            if (CompareDate.getDateDiff(confirmedProj.get(x).getMeetingdate(), TimeUnit.DAYS) < 5) {
                                                         %>
                                                         <td><span class="badge badge-warning"><%=confirmedProj.get(x).getMeetingdate()%></span></td>
                                                             <%} else {%>

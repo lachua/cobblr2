@@ -9,6 +9,7 @@ import Utilities.Converter;
 import Utilities.Year;
 import dbdao.NotificationDAO;
 import dbdao.ProjectCharterDAO;
+import dbdao.ProjectCharterDateDAO;
 import dbdao.ProjectTaskDAO;
 import dbentities.NotificationEntity;
 import dbentities.ProjectTaskEntity;
@@ -54,9 +55,18 @@ public class FinalizeFullProjectCharter extends HttpServlet {
                 HttpSession session = request.getSession();
 
                 UnavailableProjectEntity fullCharter = (UnavailableProjectEntity) session.getAttribute("fullCharter");
-
-                ProjectCharterDAO fullCharterDAO = new ProjectCharterDAO();
-                boolean addDB = fullCharterDAO.updateFullCharter(fullCharter);
+                
+                boolean addDB = true;
+                ProjectCharterDAO fullCharterDAO;
+                if (session.getAttribute("isChangeCharter") == null) {
+                    ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
+                    addDB = project_date.setDateOngoing(fullCharter.getProject_id());
+                }
+                if (addDB) {
+                    fullCharterDAO = new ProjectCharterDAO();
+                    addDB = fullCharterDAO.updateFullCharter(fullCharter);
+                }
+                
                 if (addDB) {
                     NotificationDAO notifDAO = new NotificationDAO();
                     addDB = notifDAO.finalizedFullCharter(fullCharter.getProject_id(), fullCharter.getOrg_id());

@@ -1,3 +1,5 @@
+<%@page import="dbentities.ProjectCharterDateEntity"%>
+<%@page import="dbdao.ProjectCharterDateDAO"%>
 <%@page import="Utilities.CompareDate"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="dbentities.UnavailableProjectEntity"%>
@@ -179,15 +181,17 @@
                                                         <td><%=confirmedProj.get(x).getStudent_firstname()%> <%=unavailableProj.get(x).getStudent_lastname()%></td>
                                                         <td><%=confirmedProj.get(x).getStudent_mobileno()%></td>
                                                         <%
-                                                            if (CompareDate.compareDates(confirmedProj.get(x).getMeetingdate()) < 0) {
+                                                            ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
+                                                            ProjectCharterDateEntity projdate = project_date.getProjectDate(confirmedProj.get(x).getProject_id());
+                                                            if (CompareDate.compareDates(projdate.getDate_confirmed()) < 0) {
                                                         %>
-                                                        <td><span class="badge badge-info"><%=confirmedProj.get(x).getMeetingdate()%></span></td>
-                                                            <%} else if (CompareDate.compareDates(confirmedProj.get(x).getMeetingdate()) > 0) {%>
-                                                        <td><span class="badge badge-important"><%=confirmedProj.get(x).getMeetingdate()%></span></td>
+                                                        <td><span class="badge badge-info"><%=projdate.getDate_confirmed()%></span></td>
+                                                            <%} else if (CompareDate.compareDates(projdate.getDate_confirmed()) > 0) {%>
+                                                        <td><span class="badge badge-important"><%=projdate.getDate_confirmed()%></span></td>
                                                             <%} else {%>
-                                                        <td><span class="badge badge-warning"><%=confirmedProj.get(x).getMeetingdate()%></span></td>
+                                                        <td><span class="badge badge-warning"><%=projdate.getDate_confirmed()%></span></td>
                                                             <%}%>
-                                                        <td><button name="ConfirmedDetails" value="<%=confirmedProj.get(x).getProject_id()%>" class="btn btn-inverse">Details</button></td>
+                                                        <td><button name="ConfirmedDetails" value="<%=projdate.getDate_confirmed()%>" class="btn btn-inverse">Details</button></td>
                                                     </tr>
                                                     <%}%>
                                                 </tbody>

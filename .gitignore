@@ -13,3 +13,4 @@ hs_err_pid*
 
 # glassfish_resources
 setup/
+/dist/

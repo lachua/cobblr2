@@ -1,3 +1,5 @@
+<%@page import="dbentities.ProjectCharterDateEntity"%>
+<%@page import="dbdao.ProjectCharterDateDAO"%>
 <%@page import="java.util.concurrent.TimeUnit"%>
 <%@page import="Utilities.CompareDate"%>
 <%@page import="java.util.Calendar"%>
@@ -107,11 +109,14 @@
                                                         <td><%=closedProj.get(x).getStudent_firstname()%> <%=closedProj.get(x).getStudent_lastname()%></td>
                                                         <td><%=closedProj.get(x).getStudent_mobileno()%></td>
                                                         <%
-                                                            if (CompareDate.getDateDiff(closedProj.get(x).getMeetingdate(), TimeUnit.DAYS) > -7) {
+                                                            ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
+                                                            ProjectCharterDateEntity projdate = project_date.getProjectDate(closedProj.get(x).getProject_id());
+                                                        
+                                                            if (CompareDate.getDateDiff(projdate.getDate_implemented(), TimeUnit.DAYS) > -7) {
                                                         %>
-                                                        <td><span class="badge badge-warning"><%=closedProj.get(x).getMeetingdate()%></span></td>
+                                                        <td><span class="badge badge-warning"><%=projdate.getDate_implemented()%></span></td>
                                                             <%} else {%>
-                                                        <td><span class="badge badge-info"><%=closedProj.get(x).getMeetingdate()%></span></td>
+                                                        <td><span class="badge badge-info"><%=projdate.getDate_implemented()%></span></td>
                                                             <%}%>
                                                         <td>
 

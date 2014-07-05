@@ -5,10 +5,12 @@
  */
 package servlets.sorg;
 
+import Utilities.Year;
 import dbdao.CommunityMembersDAO;
 import dbdao.OrgAnswerDAO;
 import dbdao.PersonAnswerDAO;
 import dbdao.ProjectCharterDAO;
+import dbdao.ProjectCharterDateDAO;
 import dbdao.SurveyQuestionAnswerDAO;
 import dbdao.UnavailableProjectDAO;
 import dbdao.UserEntityDAO;
@@ -144,6 +146,8 @@ public class SurveyOrg extends HttpServlet {
                 if (orgDB) {
                     ProjectCharterDAO charterDAO = new ProjectCharterDAO();
                     charterDAO.updateProjectStatus(project_id, ProjectCharterDAO.ACCOMPLISHED);
+                    ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
+                    project_date.setDateClosed(project_id);
                 }
 
                 if (orgDB) {
