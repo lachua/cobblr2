@@ -235,6 +235,24 @@ public class ProjectCharterDateDAO extends QueryTemplate {
         return executeUpdate();
     }
     
+     public boolean setNewTargetNum(int project_id, int target_num){
+        setQuery("UPDATE project_charter_date  SET target_participant_num = ? WHERE project_id = ?");
+        
+        KeyValuePair onePair;
+
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.INT);
+        onePair.setValue("" + target_num);
+        getParameters().add(onePair);
+        
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.INT);
+        onePair.setValue("" + project_id);
+        getParameters().add(onePair);
+        
+        return executeUpdate();
+    }
+    
     public boolean insertNewProject(int project_id, int target_no){
         setQuery("INSERT INTO project_charter_date VALUES (?, NULL, NULL, NULL, NULL, NULL, NULL, ?)");
         

@@ -9,12 +9,17 @@ package servlets.cosca;
 import Utilities.Year;
 import dbdao.NotificationDAO;
 import dbdao.ProjectCharterDAO;
+import dbdao.ProjectCharterDateDAO;
+import dbdao.ProjectTargetDAO;
 import dbdao.UnavailableProjectDAO;
 import dbentities.NotificationEntity;
+import dbentities.ProjectCharterDateEntity;
 import dbentities.ProjectCharterEntity;
+import dbentities.ProjectTargetEntity;
 import dbentities.UnavailableProjectEntity;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -47,16 +52,34 @@ public class WorkStructure_SeminarCosca extends HttpServlet {
                 
                 UnavailableProjectDAO ongoingDAO = new UnavailableProjectDAO();
                 UnavailableProjectEntity ongoing = ongoingDAO.getUnavailableProject(Integer.parseInt(project_id));
+                ProjectCharterDateDAO projectdateDAO = new ProjectCharterDateDAO();
+                ProjectCharterDateEntity projectdateEntity = projectdateDAO.getProjectDate(Integer.parseInt(project_id));
+                ProjectTargetDAO projecttargetDAO = new ProjectTargetDAO();
+                List<ProjectTargetEntity> projecttargetEntity = projecttargetDAO.getAllProjectTarget(Integer.parseInt(project_id));
                 
                 ProjectCharterDAO charterDAO = new ProjectCharterDAO();
                 ProjectCharterEntity charter = charterDAO.getProjectCharter(Integer.parseInt(project_id));
                 
                 charterDAO = new ProjectCharterDAO();
                 boolean DB = charterDAO.updateProjectStatusDate(Integer.parseInt(project_id), ProjectCharterDAO.CANCELED, Year.getCurrentDateinCalendar().getTime());
+                ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
+                DB = project_date.setDateCancelled(Integer.parseInt(project_id));
                 
                 if(DB){
                 charterDAO = new ProjectCharterDAO();
                 DB = charterDAO.createNewProject(charter);
+                charterDAO = new ProjectCharterDAO();
+                int newProject_id = charterDAO.getLastId();
+                if(DB){
+                    projectdateDAO = new ProjectCharterDateDAO();
+                    DB = projectdateDAO.insertNewProject(newProject_id, projectdateEntity.getTarget_participant_num());
+                }
+                for (int x = 0; x < projecttargetEntity.size(); x++) {
+                    if (DB) {
+                        projecttargetDAO = new ProjectTargetDAO();
+                        DB = projecttargetDAO.insertProjectTarget(newProject_id, projecttargetEntity.get(x).getOfferedanswer_id());
+                    }
+                }
                 }
                 
                 if(DB){

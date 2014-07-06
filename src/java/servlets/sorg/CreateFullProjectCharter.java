@@ -75,8 +75,13 @@ public class CreateFullProjectCharter extends HttpServlet {
                 Date date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date"));
                 java.sql.Date datesql = new java.sql.Date(date.getTime());
                 unavailableProj.setMeetingdate(datesql);
+                
+                String[] target_sickness = request.getParameterValues("target_sickness");
+                String target_number = request.getParameter("target_number");
 
                 session.setAttribute("fullCharter", unavailableProj);
+                session.setAttribute("target_sickness", target_sickness);
+                session.setAttribute("target_number", target_number);
                 response.sendRedirect("FinalizeFullProjectCharter");
             }
         } catch (ParseException ex) {

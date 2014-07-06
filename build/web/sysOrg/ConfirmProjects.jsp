@@ -21,7 +21,7 @@
 
         <!-- Simplenso -->
         <link href="../css/simplenso.css" rel="stylesheet" />
-
+        
         <!-- Renliw -->
         <link href="../css/renliw.css" rel="stylesheet" />
 
@@ -206,7 +206,7 @@
         <script src="../scripts/jquery-ui/ui/minified/jquery.ui.sortable.min.js"></script>
         <script src="../scripts/jquery-ui/ui/minified/jquery.ui.widget.min.js"></script>
 
-        <!-- Bootstrap -->
+        <!-- Bootstrap -->  
         <script src="../bootstrap/js/bootstrap.min.js"></script>
         <script src="../scripts/bootbox/bootbox.min.js"></script>
 

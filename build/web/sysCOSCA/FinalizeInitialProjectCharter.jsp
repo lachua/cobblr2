@@ -1,3 +1,4 @@
+<%@page import="dbdao.OfferedAnswerDAO"%>
 <%@page import="dbentities.ProjectCharterEntity"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,37 +62,58 @@
                                             <%
                                                 String communityName = (String) request.getAttribute("communityName");
                                                 ProjectCharterEntity initialCharter = (ProjectCharterEntity) request.getAttribute("initialCharter");
+                                                String[] target_sickness = (String[]) request.getAttribute("target_sickness");
+                                                String target_number = (String) request.getAttribute("target_number");
 
                                             %>
 
-                                            <legend><%=initialCharter.getTitle()%></legend>
+                                            <h3><%=initialCharter.getTitle()%></h3>
                                             <blockquote>
                                                 <p>For Community: <%=communityName%></p>
                                                 <p>Prepared by: <%=initialCharter.getPreparedby()%></p>
                                             </blockquote>
 
-                                            <legend>Brief Description</legend>
+                                            <h3>Brief Description</h3>
                                             <blockquote>
                                                 <p><%=initialCharter.getDescription()%></p>
                                             </blockquote>
 
-                                            <legend>Main Objective</legend>
+                                            <h3>Main Objective</h3>
                                             <blockquote>
                                                 <p><%=initialCharter.getObjectives()%></p>
                                             </blockquote>
+                                            
+                                            <h3>Target Concern(s)</h3>
+                                            <blockquote>
+                                                <ul>
+                                                    <%
+                                                    String answertext ="";
+                                                    for(int x = 0; x < target_sickness.length; x++){
+                                                        OfferedAnswerDAO answer = new OfferedAnswerDAO();
+                                                        answertext = answer.getOfferedAnswer(Integer.parseInt(target_sickness[x])).getAnswertext();
+                                                    %>
+                                                    <li><%=answertext %></li>
+                                                    <%}%>
+                                                </ul>
+                                            </blockquote>
+                                            
+                                            <h3>Number of Beneficiaries</h3>
+                                            <blockquote>
+                                                <p><%=target_number%> people</p>
+                                            </blockquote>
 
-                                            <legend>Project Scope</legend>
+                                            <h3>Project Scope</h3>
                                             <blockquote>
                                                 <p><%=initialCharter.getScope()%></p>
                                             </blockquote>
 
-                                            <legend>Additional Requirements</legend>
+                                            <h3>Additional Requirements</h3>
                                             <blockquote>
                                                 <p><%=initialCharter.getRequirements()%></p>
                                             </blockquote>
                                             <div class="form-actions">
                                                 <button name="action" value="ProjectList" type="submit" class="btn btn-primary">Finish</button>
-                                                <a href="CreateInitialProjectCharter" type="button" class="btn">Back</a>
+                                                <a href="CreateInitialProjectCharter" class="btn">Back</a>
                                             </div>
                                         </form>
                                     </div>

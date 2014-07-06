@@ -107,79 +107,80 @@
                         </div>   
                     </div>
                 </div>
-            </div><!--/.fluid-container-->
-            <!-- javascript Templates
-        ================================================== -->
-            <!-- Placed at the end of the document so the pages load faster -->
+            </div>
+        </div><!--/.fluid-container-->
+        <!-- javascript Templates
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
 
-            <!-- Google API -->
-            <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <!-- Google API -->
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 
-            <!-- jQuery -->
-            <script src="../jquery/1.8.3/jquery.min.js"></script>
+        <!-- jQuery -->
+        <script src="../jquery/1.8.3/jquery.min.js"></script>
 
-            <!-- Data Tables -->
-            <script src="../scripts/DataTables/media/js/jquery.dataTables.js"></script>
+        <!-- Data Tables -->
+        <script src="../scripts/DataTables/media/js/jquery.dataTables.js"></script>
 
-            <!-- jQuery UI Sortable -->
-            <script src="../scripts/jquery-ui/ui/minified/jquery.ui.core.min.js"></script>
-            <script src="../scripts/jquery-ui/ui/minified/jquery.ui.widget.min.js"></script>
-            <script src="../scripts/jquery-ui/ui/minified/jquery.ui.mouse.min.js"></script>
-            <script src="../scripts/jquery-ui/ui/minified/jquery.ui.sortable.min.js"></script>
-            <script src="../scripts/jquery-ui/ui/minified/jquery.ui.widget.min.js"></script>
+        <!-- jQuery UI Sortable -->
+        <script src="../scripts/jquery-ui/ui/minified/jquery.ui.core.min.js"></script>
+        <script src="../scripts/jquery-ui/ui/minified/jquery.ui.widget.min.js"></script>
+        <script src="../scripts/jquery-ui/ui/minified/jquery.ui.mouse.min.js"></script>
+        <script src="../scripts/jquery-ui/ui/minified/jquery.ui.sortable.min.js"></script>
+        <script src="../scripts/jquery-ui/ui/minified/jquery.ui.widget.min.js"></script>
 
-            <!-- Bootstrap -->
-            <script src="../bootstrap/js/bootstrap.min.js"></script>
-            <script src="../scripts/bootbox/bootbox.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="../bootstrap/js/bootstrap.min.js"></script>
+        <script src="../scripts/bootbox/bootbox.min.js"></script>
 
-            <!-- Bootstrap Date Picker -->
-            <script src="../scripts/datepicker/js/bootstrap-datepicker.js"></script>
+        <!-- Bootstrap Date Picker -->
+        <script src="../scripts/datepicker/js/bootstrap-datepicker.js"></script>
 
-            <!-- jQuery Cookie -->
-            <script src="../scripts/jquery.cookie/jquery.cookie.js"></script>
+        <!-- jQuery Cookie -->
+        <script src="../scripts/jquery.cookie/jquery.cookie.js"></script>
 
-            <!-- Full Calender -->
-            <script type='text/javascript' src="../scripts/fullcalendar/fullcalendar/fullcalendar.min.js"></script>
+        <!-- Full Calender -->
+        <script type='text/javascript' src="../scripts/fullcalendar/fullcalendar/fullcalendar.min.js"></script>
 
-            <!-- CK Editor -->
-            <script type="text/javascript" src="../scripts/ckeditor/ckeditor.js"></script>
+        <!-- CK Editor -->
+        <script type="text/javascript" src="../scripts/ckeditor/ckeditor.js"></script>
 
-            <!-- Chosen multiselect -->
-            <script type="text/javascript" language="javascript" src="../scripts/chosen/chosen/chosen.jquery.min.js"></script>
+        <!-- Chosen multiselect -->
+        <script type="text/javascript" language="javascript" src="../scripts/chosen/chosen/chosen.jquery.min.js"></script>
 
-            <!-- Uniform -->
-            <script type="text/javascript" language="javascript" src="../scripts/uniform/jquery.uniform.min.js"></script>
+        <!-- Uniform -->
+        <script type="text/javascript" language="javascript" src="../scripts/uniform/jquery.uniform.min.js"></script>
 
-            <!-- Simplenso Scripts -->
-            <script src="../scripts/simplenso/simplenso.js"></script>
+        <!-- Simplenso Scripts -->
+        <script src="../scripts/simplenso/simplenso.js"></script>
 
-            <script src="../bootstrap/js/jquery-ui.js" type="text/javascript"></script>
-            <script src="../bootstrap/js/jquery.dataTables.columnFilter.js" type="text/javascript"></script>
-            <script type="text/javascript" charset="utf-8">
-                <%
-                    List<AvailableProjectEntity> availableProjList = (List<AvailableProjectEntity>) request.getAttribute("availableProjList");
-                %>
-                $(document).ready(function() {
-                    $('#dtable th').bind('mouseup', function(event) {
-                        var index = $(this).parent().children().index($(this));
-                        var colWidth = $(this).css('width');
-                        var input = $('#dtable thead tr:nth-child(2) input:eq(' + index + ')');
-                        input.css("width", colWidth);
-                    });
-                    $('#dtable').dataTable().columnFilter({
-                    sPlaceHolder: "head:after",
-                            aoColumns: [
-                            {},
-                            {type: "twitter-dropdown", values: ['Dental Mission', 'Medical Mission', 'Medical-Dental Mission', 'Seminar']},
-                            {type: "twitter-dropdown", values: [
-                <%
-                    for (int x = 0; x < availableProjList.size(); x++) {
-                %>
-                            '<%=availableProjList.get(x).getCommunity_name()%>',
-                <%
-                    }
-                %>
-                            ]},
+        <script src="../bootstrap/js/jquery-ui.js" type="text/javascript"></script>
+        <script src="../bootstrap/js/jquery.dataTables.columnFilter.js" type="text/javascript"></script>
+        <script type="text/javascript" charset="utf-8">
+            <%
+                List<AvailableProjectEntity> availableProjList = (List<AvailableProjectEntity>) request.getAttribute("availableProjList");
+            %>
+            $(document).ready(function() {
+                $('#dtable th').bind('mouseup', function(event) {
+                    var index = $(this).parent().children().index($(this));
+                    var colWidth = $(this).css('width');
+                    var input = $('#dtable thead tr:nth-child(2) input:eq(' + index + ')');
+                    input.css("width", colWidth);
+                });
+                $('#dtable').dataTable().columnFilter({
+                sPlaceHolder: "head:after",
+                        aoColumns: [
+                        {},
+                        {type: "twitter-dropdown", values: ['Dental Mission', 'Medical Mission', 'Medical-Dental Mission', 'Seminar']},
+                        {type: "twitter-dropdown", values: [
+            <%
+                for (int x = 0; x < availableProjList.size(); x++) {
+            %>
+                        '<%=availableProjList.get(x).getCommunity_name()%>',
+            <%
+                }
+            %>
+                        ]},
                             {type: "twitter-dropdown", values: [
                 <%
                     for (int x = 0; x < availableProjList.size(); x++) {
@@ -189,17 +190,17 @@
                     }
                 %>
                             ]},
-                                    null,
-                                    null
-                            ]
+                                null,
+                                null
+                        ]
 
-                });
-                $('#dtable thead tr:nth-child(2)').find(':input').each(function(index) {
-                    var colWidth = $('#dtable thead tr:nth-child(2) th:eq(' + index + ')').css('width');
-                    $(this).css("width", colWidth);
-                });
-                });
+            });
+            $('#dtable thead tr:nth-child(2)').find(':input').each(function(index) {
+                var colWidth = $('#dtable thead tr:nth-child(2) th:eq(' + index + ')').css('width');
+                $(this).css("width", colWidth);
+            });
+            });
 
-            </script>
+        </script>
     </body>
 </html>

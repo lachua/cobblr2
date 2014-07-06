@@ -1,3 +1,5 @@
+<%@page import="dbentities.ProjectTargetEntity"%>
+<%@page import="dbdao.ProjectTargetDAO"%>
 <%@page import="dbentities.ProjectCharterDateEntity"%>
 <%@page import="dbdao.ProjectCharterDateDAO"%>
 <%@page import="java.util.concurrent.TimeUnit"%>
@@ -89,11 +91,26 @@
                                         <strong>Partner Community: </strong> <%=unavailableProj.getCommunity_name()%><br />
                                         <strong>Location: </strong> <%=unavailableProj.getCommunity_address()%><br/>
                                         <strong>Description: </strong> <%=unavailableProj.getDescription()%> <br/> 
+                                        <strong>Target Concern(s): </strong> <br/>
+                                        <%
+                                        ProjectTargetDAO target = new ProjectTargetDAO();
+                                        List<ProjectTargetEntity> targetEntity = target.getAllProjectTarget(unavailableProj.getProject_id());
+
+                                        for(int x = 0; x < targetEntity.size(); x++){
+                                        %>
+                                        &emsp;&emsp;<%=targetEntity.get(x).getAnswertext() %><br/>
+                                        <%}%>  
+                                        <strong>No. of Beneficiaries: </strong> 
+                                        <%
+                                            ProjectCharterDateDAO proj_date = new ProjectCharterDateDAO();
+                                            ProjectCharterDateEntity dateEntity = proj_date.getProjectDate(unavailableProj.getProject_id());
+                                        %> <%=dateEntity.getTarget_participant_num() %> people <br/>                 
+                                        
                                         <strong>Project Deadline: </strong> <span id="dateChange" class="badge <%=badgeColor%>"> <%=projdate.getDate_target_implement()%> </span><br/><br/>
                                     </li>
                                 </ul>
                                 <%
-                                    if (session.getAttribute("isOnGoing") != null) {
+                                    if (unavailableProj.getStatus() == 2) {
                                 %>
                                 <div class="row-fluid span6 alert alert-block">
                                     <form id="cancelForm" method="POST" action="WorkStructure_HealthCosca">
@@ -130,7 +147,6 @@
                                 <tr>
                                     <th><%=preActs.getTitle()%></th>
                                     <th><span style="margin-bottom: 5px" class="badge <%=badgeColor%>"> <%=status%></span></th>
-<!--                                    <th><button type="submit" class="btn <%=btncolor%> <%=hidden%>"><%=button%></button></th>-->
                                 </tr>
                             </thead>
                         </table>
@@ -143,19 +159,6 @@
                                 <h4 class="box-header round-top">Medicine</h4>         
                                 <div class="box-container-toggle">
                                     <div class="box-content">
-<!--                                        <div class="row-fluid span12 <%=hidden%>">
-                                            <form method="GET" action="Medicine">
-                                                <span>Action:</span>
-                                                <button name="action" value="add" type="submit" class="btn btn-success">
-                                                    <i class="icon-plus icon-white"></i> Add New Requirement
-                                                </button>
-                                                <button name="action" value="edit" type="submit" class="btn btn-primary">
-                                                    <i class="icon-edit icon-white"></i> Edit Current Numbers
-                                                </button>
-                                            </form>
-                                        </div>-->
-                                        <br/>
-                                        <br/>
                                         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered bootstrap-datatable" id="datatable2">
                                             <thead>
                                                 <tr>
@@ -189,19 +192,6 @@
                                 <h4 class="box-header round-top">Equipment</h4>         
                                 <div class="box-container-toggle">
                                     <div class="box-content">
-                                        <div class="row-fluid span12 <%=hidden%>">
-                                            <!--                                            <form method="GET" action="Equipment">
-                                                                                            <span>Action:</span>
-                                                                                            <button name="action" value="add" type="submit" class="btn btn-success">
-                                                                                                <i class="icon-plus icon-white"></i> Add New Requirement
-                                                                                            </button>
-                                                                                            <button name="action" value="edit" type="submit" class="btn btn-primary">
-                                                                                                <i class="icon-edit icon-white"></i> Edit Current Numbers
-                                                                                            </button>
-                                                                                        </form>-->
-                                        </div>
-                                        <br/>
-                                        <br/>
                                         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered bootstrap-datatable" id="datatable3">
                                             <thead>
                                                 <tr>
@@ -238,19 +228,6 @@
                                     <h4 class="box-header round-top">Medical Professionals</h4>         
                                     <div class="box-container-toggle">
                                         <div class="box-content">
-<!--                                            <div class="row-fluid span12 <%=hidden%>">
-                                                <form method="GET" action="Doctors">
-                                                    <span>Action:</span>
-                                                    <button name="action" value="add" type="submit" class="btn btn-success">
-                                                        <i class="icon-plus icon-white"></i> Add New Requirement
-                                                    </button>
-                                                    <button name="action" value="edit" type="submit" class="btn btn-primary">
-                                                        <i class="icon-edit icon-white"></i> Edit Current Numbers
-                                                    </button>
-                                                </form>
-                                            </div>-->
-                                            <br/> 
-                                            <br/>
                                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered bootstrap-datatable" id="datatable4">
                                                 <thead>
                                                     <tr>

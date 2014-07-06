@@ -10,6 +10,7 @@ import Utilities.Year;
 import dbdao.NotificationDAO;
 import dbdao.ProjectCharterDAO;
 import dbdao.ProjectCharterDateDAO;
+import dbdao.ProjectTargetDAO;
 import dbdao.ProjectTaskDAO;
 import dbentities.NotificationEntity;
 import dbentities.ProjectTaskEntity;
@@ -47,20 +48,40 @@ public class FinalizeFullProjectCharter extends HttpServlet {
                 HttpSession session = request.getSession();
 
                 UnavailableProjectEntity fullCharter = (UnavailableProjectEntity) session.getAttribute("fullCharter");
+                String[] target_sickness = (String[])session.getAttribute("target_sickness");
+                String target_number = (String)session.getAttribute("target_number");
 
                 request.setAttribute("fullCharter", fullCharter);
+                request.setAttribute("target_sickness", target_sickness);
+                request.setAttribute("target_number", target_number);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/sysOrg/FinalizeFullProjectCharter.jsp");
                 dispatcher.forward(request, response);
             } else if (request.getMethod().equals("POST")) {
                 HttpSession session = request.getSession();
 
                 UnavailableProjectEntity fullCharter = (UnavailableProjectEntity) session.getAttribute("fullCharter");
+                String[] target_sickness = (String[])session.getAttribute("target_sickness");
+                String target_number = (String)session.getAttribute("target_number");
                 
                 boolean addDB = true;
                 ProjectCharterDAO fullCharterDAO;
                 if (session.getAttribute("isChangeCharter") == null) {
                     ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
                     addDB = project_date.setDateOngoing(fullCharter.getProject_id());
+                }
+                if(addDB){
+                    ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
+                    addDB = project_date.setNewTargetNum(fullCharter.getProject_id(), Integer.parseInt(target_number));
+                }
+                if(addDB){
+                    ProjectTargetDAO targetDAO = new ProjectTargetDAO();
+                    addDB = targetDAO.deleteProjectTarget(fullCharter.getProject_id());
+                }
+                for (String target_sicknes : target_sickness) {
+                    if (addDB) {
+                        ProjectTargetDAO target = new ProjectTargetDAO();
+                        target.insertProjectTarget(fullCharter.getProject_id(), Integer.parseInt(target_sicknes));
+                    }
                 }
                 if (addDB) {
                     fullCharterDAO = new ProjectCharterDAO();

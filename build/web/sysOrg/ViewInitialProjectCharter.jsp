@@ -1,3 +1,10 @@
+<%@page import="dbentities.ProjectTargetEntity"%>
+<%@page import="dbentities.ProjectCharterDateEntity"%>
+<%@page import="dbdao.ProjectCharterDateDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="dbdao.ProjectTargetDAO"%>
+<%@page import="dbdao.CommunityListDAO"%>
+<%@page import="dbentities.CommunityListEntity"%>
 <%@page import="dbentities.AvailableProjectEntity"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,6 +102,29 @@
                                             <blockquote>
                                                 <p><%=availableProject.getObjectives()%></p>
                                             </blockquote>
+                                            
+                                            <h3>Target Concern(s)</h3>
+                                            <blockquote>
+                                                <ul>
+                                                    <%
+                                                    ProjectTargetDAO target = new ProjectTargetDAO();
+                                                    List<ProjectTargetEntity> targetEntity = target.getAllProjectTarget(availableProject.getProject_id());
+                                                    
+                                                    for(int x = 0; x < targetEntity.size(); x++){
+                                                    %>
+                                                    <li><%=targetEntity.get(x).getAnswertext() %></li>
+                                                    <%}%>
+                                                </ul>
+                                            </blockquote>
+                                            
+                                            <h3>Number of Beneficiaries</h3>
+                                            <blockquote>
+                                                <%
+                                                    ProjectCharterDateDAO proj_date = new ProjectCharterDateDAO();
+                                                    ProjectCharterDateEntity dateEntity = proj_date.getProjectDate(availableProject.getProject_id());
+                                                %>
+                                                <p><%=dateEntity.getTarget_participant_num() %> people</p>
+                                            </blockquote>        
 
                                             <legend>Project Scope</legend>
                                             <blockquote>
@@ -173,34 +203,27 @@
 
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
         <script>
-            var geocoder;
             var map;
             var mapOptions;
             function initialize() {
-                geocoder = new google.maps.Geocoder();
-                var latlng = new google.maps.LatLng(-34.397, 150.644);
-                mapOptions = {
-                    zoom: 9,
-                    center: latlng
-                };
-                map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
-                codeAddress();
-            }
+                <%
+                    CommunityListDAO comDAO = new CommunityListDAO();
+                    CommunityListEntity comlist = comDAO.getCommunity(availableProject.getCommunity_id());
+                
+                %>
+                
+                var myLatlng = new google.maps.LatLng(<%=comlist.getLatitude() %>,<%=comlist.getLongitude() %>);
+                var mapOptions = {
+                  zoom: 12,
+                  center: myLatlng
+                }
+                var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
-            function codeAddress() {
-                var address = "<%=availableProject.getCommunity_address() %>";
-                geocoder.geocode({'address': address}, function(results, status) {
-                    if (status === google.maps.GeocoderStatus.OK) {
-                        map.setCenter(results[0].geometry.location);
-                        var marker = new google.maps.Marker({
-                            map: map,
-                            position: results[0].geometry.location
-                        });
-                        if (results[0].geometry.viewport)
-                            map.fitBounds(results[0].geometry.viewport);
-                    } else {
-                        alert('Geocode was not successful for the following reason: ' + status);
-                    }
+                // To add the marker to the map, use the 'map' property
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    title:"<%=comlist.getName() %>"
                 });
             }
 

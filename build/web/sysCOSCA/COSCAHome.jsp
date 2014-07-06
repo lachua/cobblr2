@@ -117,8 +117,7 @@
                                                 if (!hasProjectReservationNotif) {
                                             %>
                                             <h4 class="alert alert-info">No new notifications</h4>
-                                            <%
-                                            } else {
+                                            <%} else {
                                                 for (int x = 0; x < notif.size(); x++) {
                                                     ProjectCharterDAO charterDAO = new ProjectCharterDAO();
                                                     ProjectCharterEntity charter = charterDAO.getProjectCharter(notif.get(x).getProject_id());

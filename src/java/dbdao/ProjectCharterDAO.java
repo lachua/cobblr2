@@ -350,11 +350,6 @@ public class ProjectCharterDAO extends QueryTemplate {
 
         KeyValuePair onePair;
         
-        onePair = new KeyValuePair();
-        onePair.setKey(KeyValuePair.DATE);
-        onePair.setValue("" + date);
-        getParameters().add(onePair);
-        
         ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
         project_date.setDateConfirmed(project_id, date);
         

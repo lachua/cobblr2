@@ -1,3 +1,5 @@
+<%@page import="dbentities.ProjectTargetEntity"%>
+<%@page import="dbdao.ProjectTargetDAO"%>
 <%@page import="dbentities.ProjectCharterDateEntity"%>
 <%@page import="dbdao.ProjectCharterDateDAO"%>
 <%@page import="java.util.concurrent.TimeUnit"%>
@@ -91,6 +93,21 @@
                                         <strong>Partner Community: </strong> <%=unavailableProj.getCommunity_name()%><br />
                                         <strong>Location: </strong> <%=unavailableProj.getCommunity_address()%><br/>
                                         <strong>Description: </strong> <%=unavailableProj.getDescription()%> <br/> 
+                                        <strong>Target Concern(s): </strong> <br/>
+                                        <%
+                                        ProjectTargetDAO target = new ProjectTargetDAO();
+                                        List<ProjectTargetEntity> targetEntity = target.getAllProjectTarget(unavailableProj.getProject_id());
+
+                                        for(int x = 0; x < targetEntity.size(); x++){
+                                        %>
+                                        &emsp;&emsp;<%=targetEntity.get(x).getAnswertext() %><br/>
+                                        <%}%>  
+                                        <strong>No. of Beneficiaries: </strong> 
+                                        <%
+                                            ProjectCharterDateDAO proj_date = new ProjectCharterDateDAO();
+                                            ProjectCharterDateEntity dateEntity = proj_date.getProjectDate(unavailableProj.getProject_id());
+                                        %> <%=dateEntity.getTarget_participant_num() %> people <br/>       
+                                        
                                         <strong>Project Deadline: </strong> <span id="dateChange" class="badge <%=badgeColor%>"> <%=projdate.getDate_target_implement()%> </span><br/><br/>
                                     </li>
                                 </ul>
@@ -140,7 +157,7 @@
                                 </tr>
                             </thead>
                         </table>
-                    </form
+                    </form>
 
                     <div class="span12">
                         <!-- Portlet: Browser Usage Graph -->

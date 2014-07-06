@@ -96,8 +96,11 @@
                                             <h3>Project Objective</h3>
                                             <textarea style="width: 95%" class="form-control" rows="6" id="textArea" name="objective" placeholder="Indicate what the project aims to achieve" required></textarea>
                                             <br>
-                                            <h3>Target Illness</h3>
-                                            <select style="width: 95%" class="chzn-select" id="target_sickness" multiple name="target_sickness" required>
+                                            <h3>Target Concern(s)</h3>
+                                            <select required style="width: 95%" class="chzn-select" id="target_sickness"  name="target_sickness" multiple >
+                                                <optgroup label="If concerns below is not applicable:">
+                                                    <option value="82" selected>Others</option>
+                                                </optgroup>
                                                 <optgroup label="Sicknesses:">
                                                     <option value="98">Allergy</option>
                                                     <option value="99">Altherosclerosis</option>
@@ -127,11 +130,11 @@
                                                     <option value="233">OPV3</option>
                                                 </optgroup>
                                                 <optgroup label="Child Vitamin Deficiency:">
-                                                    <option value="216">A</option>
-                                                    <option value="217">B12</option>
-                                                    <option value="218">C</option>
-                                                    <option value="219">D</option>
-                                                    <option value="220">E</option>
+                                                    <option value="216">Vitamin A</option>
+                                                    <option value="217">Vitamin B12</option>
+                                                    <option value="218">Vitamin C</option>
+                                                    <option value="219">Vitamin D</option>
+                                                    <option value="220">Vitamin E</option>
                                                     <option value="221">Iron</option>
                                                     <option value="222">Multi-Vitamins</option>
                                                 </optgroup>
@@ -140,13 +143,10 @@
                                                     <option value="236">Over weight</option>
                                                     <option value="237">Obese</option>
                                                 </optgroup>
-                                                <optgroup label="If none is applicable">
-                                                    <option value="82">Others</option>
-                                                </optgroup>
                                             </select>
                                             <br>
-                                            <h3>Target Number of Participants</h3>
-                                            <input style="width: 95%" class="form-control" type="number" id="target_number" name="target_number" value="0" required/>
+                                            <h3>Number of Beneficiaries</h3>
+                                            <input style="width: 95%" class="form-control" type="number" id="target_number" name="target_number" min="1" value="1" required/>
                                             <br>
                                             <h3>Project Scope</h3>
                                             <textarea style="width: 95%" class="form-control" rows="6" id="textArea" name="scope" placeholder="Indicate the extent of the project" required></textarea>
@@ -155,7 +155,7 @@
                                             <textarea style="width: 95%" class="form-control" rows="6" id="textArea" name="requirements" placeholder="Supplementary to the present and available requirements" required></textarea>
                                             <br>
                                             <div class="form-actions">
-                                                <button name="action" value="FinalizeInitialProjectCharter" type="submit" class="btn btn-primary">Create Initial Project Charter</button>
+                                                <button name="action" value="FinalizeInitialProjectCharter" type="submit" onClick="Submit();" class="btn btn-primary">Create Initial Project Charter</button>
                                                 <a href="CommunitySurvey" class="btn">Cancel</a>
                                             </div>
                                         </form>
@@ -203,19 +203,14 @@
         <!-- Simplenso Scripts -->
         <script src="../scripts/simplenso/simplenso.js"></script>
         
-        <!-- JQuery Valdation -->
-        <script src="../jquery/jquery-validate/jquery.validate.js"></script>
         <script>
-            $().ready(function() {
-                // validate signup form on keyup and submit
-                $("#projectCharter").validate({
-                    rules: {
-                        yearsInCommunity: {
-                            min: 0
-                        }
-                    }
-                });
-            });
+            function Submit(){ 
+                if(document.getElementById("target_sickness").value === ""){
+                    alert("Please Indidcate Target Concern(s)");
+                }
+                return;
+            }
         </script>
+        
     </body>
 </html>

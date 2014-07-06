@@ -1,3 +1,6 @@
+<%@page import="dbentities.ProjectTargetEntity"%>
+<%@page import="java.util.List"%>
+<%@page import="dbdao.ProjectTargetDAO"%>
 <%@page import="java.util.Date"%>
 <%@page import="dbentities.ProjectCharterDateEntity"%>
 <%@page import="dbdao.ProjectCharterDateDAO"%>
@@ -63,7 +66,7 @@
                                             <%
                                                 UnavailableProjectEntity unavailableProj = (UnavailableProjectEntity) request.getAttribute("unavailableProj");
                                             %>
-                                            <h2><%=unavailableProj.getTitle()%></h2>
+                                            <h3><%=unavailableProj.getTitle()%></h3>
                                             <blockquote>
                                                 <p>Project Type: <%=unavailableProj.getType()%></p>
                                                 <p>Community Name: <%=unavailableProj.getCommunity_name()%></p>
@@ -86,22 +89,45 @@
                                                 <p>Implementation Date: <%=date%></p>
                                             </blockquote>
 
-                                            <h2>Brief Description</h2>
+                                            <h3>Brief Description</h3>
                                             <blockquote>
                                                 <p><%=unavailableProj.getDescription()%></p>
                                             </blockquote>
 
-                                            <h2>Main Objective</h2>
+                                            <h3>Main Objective</h3>
                                             <blockquote>
                                                 <p><%=unavailableProj.getObjectives()%></p>
                                             </blockquote>
+                                            
+                                            <h3>Target Concern(s)</h3>
+                                            <blockquote>
+                                                <ul>
+                                                    <%
+                                                    ProjectTargetDAO target = new ProjectTargetDAO();
+                                                    List<ProjectTargetEntity> targetEntity = target.getAllProjectTarget(unavailableProj.getProject_id());
+                                                    
+                                                    for(int x = 0; x < targetEntity.size(); x++){
+                                                    %>
+                                                    <li><%=targetEntity.get(x).getAnswertext() %></li>
+                                                    <%}%>
+                                                </ul>
+                                            </blockquote>
+                                            
+                                            <h3>Number of Beneficiaries</h3>
+                                            <blockquote>
+                                                <%
+                                                    ProjectCharterDateDAO proj_date = new ProjectCharterDateDAO();
+                                                    ProjectCharterDateEntity dateEntity = proj_date.getProjectDate(unavailableProj.getProject_id());
+                                                %>
+                                                <p><%=dateEntity.getTarget_participant_num() %> people</p>
+                                            </blockquote> 
 
-                                            <h2>Project Scope</h2>
+                                            <h3>Project Scope</h3>
                                             <blockquote>
                                                 <p><%=unavailableProj.getScope()%></p>
                                             </blockquote>
 
-                                            <h2>Additional Requirements</h2>
+                                            <h3>Additional Requirements</h3>
                                             <blockquote>
                                                 <p><%=unavailableProj.getRequirements()%></p>
                                             </blockquote>

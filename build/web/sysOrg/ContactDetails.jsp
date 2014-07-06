@@ -100,7 +100,7 @@
                                             <div class="control-group">
                                                 <label class="control-label" for="idno">ID No:</label>
                                                 <div class="controls">
-                                                    <input class="input-xlarge" id="idno" name="idno" type="text" placeholder="ID No." required/>
+                                                    <input class="input-xlarge" id="idno" name="idno" type="number" placeholder="ID No." required/>
                                                 </div>
                                             </div>
                                             <div class="control-group">

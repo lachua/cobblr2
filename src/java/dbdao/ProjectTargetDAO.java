@@ -38,7 +38,7 @@ public class ProjectTargetDAO extends QueryTemplate{
     }
     
     //Get all data
-    public ProjectTargetEntity getAllProjectTarget(int project_id) {
+    public List<ProjectTargetEntity> getAllProjectTarget(int project_id) {
         setQuery("SELECT project_id, a.offeredanswer_id, answertext \n" +
                     "FROM project_target a \n" +
                     "Join offeredanswer b \n" +
@@ -55,7 +55,7 @@ public class ProjectTargetDAO extends QueryTemplate{
         List<ProjectTargetEntity> results = executeQuery();
 
         if (results != null) {
-            return results.get(0);
+            return results;
         } else {
             return null;
         }
@@ -75,6 +75,20 @@ public class ProjectTargetDAO extends QueryTemplate{
         onePair = new KeyValuePair();
         onePair.setKey(KeyValuePair.INT);
         onePair.setValue(""+offeredanswer_id);
+        getParameters().add(onePair);
+        
+        return executeUpdate();
+    }
+    
+    //Get all data
+    public boolean deleteProjectTarget(int project_id) {
+        setQuery("DELETE FROM project_target WHERE project_id = ?");
+        
+        KeyValuePair onePair;
+
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.INT);
+        onePair.setValue(""+project_id);
         getParameters().add(onePair);
         
         return executeUpdate();

@@ -1,3 +1,7 @@
+<%@page import="Utilities.Compare"%>
+<%@page import="java.util.List"%>
+<%@page import="dbentities.ProjectTargetEntity"%>
+<%@page import="dbdao.ProjectTargetDAO"%>
 <%@page import="java.util.Date"%>
 <%@page import="dbentities.ProjectCharterDateEntity"%>
 <%@page import="dbdao.ProjectCharterDateDAO"%>
@@ -24,6 +28,9 @@
 
         <!-- Bootstrap Date Picker --> 
         <link href="../scripts/datepicker/css/datepicker.css" rel="stylesheet" />
+        
+        <!-- Chosen multiselect -->
+        <link type="text/css" href="../scripts/chosen/chosen/chosen.intenso.css" rel="stylesheet" />  
 
         <!-- Renliw -->
         <link href="../css/renliw.css" rel="stylesheet" />
@@ -117,6 +124,66 @@
                                             <h3>Project Objective</h3>
                                             <textarea style="width: 95%" class="form-control" rows="6" id="textArea" name="objective" value="<%=unavailableProj.getObjectives()%>"><%=unavailableProj.getObjectives()%></textarea>
                                             <br>
+                                            <h3>Target Concern(s)</h3>
+                                            <%
+                                                ProjectTargetDAO targetDAO = new ProjectTargetDAO();
+                                                List<ProjectTargetEntity> targets = targetDAO.getAllProjectTarget(unavailableProj.getProject_id());
+                                            %>
+                                            <select required style="width: 95%" class="chzn-select" id="target_sickness"  name="target_sickness" multiple >
+                                                <optgroup label="If concerns below is not applicable:">
+                                                    <option value="82" <%if(Compare.isProjectTarget(targets, 82)){%>selected<%}%>>Others</option>
+                                                </optgroup>
+                                                <optgroup label="Sicknesses:">
+                                                    <option value="98" <%if(Compare.isProjectTarget(targets, 98)){%>selected<%}%>>Allergy</option>
+                                                    <option value="99" <%if(Compare.isProjectTarget(targets, 99)){%>selected<%}%>>Altherosclerosis</option>
+                                                    <option value="100" <%if(Compare.isProjectTarget(targets, 100)){%>selected<%}%>>Asthma</option>
+                                                    <option value="101" <%if(Compare.isProjectTarget(targets, 101)){%>selected<%}%>>Coughs & Colds</option>
+                                                    <option value="102" <%if(Compare.isProjectTarget(targets, 102)){%>selected<%}%>>Dengue</option>
+                                                    <option value="103" <%if(Compare.isProjectTarget(targets, 103)){%>selected<%}%>>Diabetes</option>
+                                                    <option value="104" <%if(Compare.isProjectTarget(targets, 104)){%>selected<%}%>>Gl Obstruction</option>
+                                                    <option value="105" <%if(Compare.isProjectTarget(targets, 105)){%>selected<%}%>>Hemmorhage</option>
+                                                    <option value="106" <%if(Compare.isProjectTarget(targets, 106)){%>selected<%}%>>KidneyStones</option>
+                                                    <option value="107" <%if(Compare.isProjectTarget(targets, 107)){%>selected<%}%>>Overfatigue</option>
+                                                    <option value="108" <%if(Compare.isProjectTarget(targets, 108)){%>selected<%}%>>Pneumonia</option>
+                                                    <option value="109" <%if(Compare.isProjectTarget(targets, 109)){%>selected<%}%>>Renal Failure</option>
+                                                    <option value="110" <%if(Compare.isProjectTarget(targets, 110)){%>selected<%}%>>Fever</option>
+                                                </optgroup>
+                                                <optgroup label="Child Vaccinations:">
+                                                    <option value="223" <%if(Compare.isProjectTarget(targets, 223)){%>selected<%}%>>Flu</option>
+                                                    <option value="224" <%if(Compare.isProjectTarget(targets, 224)){%>selected<%}%>>Hepatitis B</option>
+                                                    <option value="225" <%if(Compare.isProjectTarget(targets, 225)){%>selected<%}%>>MVC1</option>
+                                                    <option value="226" <%if(Compare.isProjectTarget(targets, 226)){%>selected<%}%>>MVC2</option>
+                                                    <option value="227" <%if(Compare.isProjectTarget(targets, 227)){%>selected<%}%>>TT 2+</option>
+                                                    <option value="228" <%if(Compare.isProjectTarget(targets, 228)){%>selected<%}%>>BGC</option>
+                                                    <option value="229" <%if(Compare.isProjectTarget(targets, 229)){%>selected<%}%>>DTP</option>
+                                                    <option value="230" <%if(Compare.isProjectTarget(targets, 230)){%>selected<%}%>>Rotavirus</option>
+                                                    <option value="231" <%if(Compare.isProjectTarget(targets, 231)){%>selected<%}%>>Pneumococcal</option>
+                                                    <option value="232" <%if(Compare.isProjectTarget(targets, 232)){%>selected<%}%>>OPV1</option>
+                                                    <option value="233" <%if(Compare.isProjectTarget(targets, 233)){%>selected<%}%>>OPV3</option>
+                                                </optgroup>
+                                                <optgroup label="Child Vitamin Deficiency:">
+                                                    <option value="216" <%if(Compare.isProjectTarget(targets, 216)){%>selected<%}%>>Vitamin A</option>
+                                                    <option value="217" <%if(Compare.isProjectTarget(targets, 217)){%>selected<%}%>>Vitamin B12</option>
+                                                    <option value="218" <%if(Compare.isProjectTarget(targets, 218)){%>selected<%}%>>Vitamin C</option>
+                                                    <option value="219" <%if(Compare.isProjectTarget(targets, 219)){%>selected<%}%>>Vitamin D</option>
+                                                    <option value="220" <%if(Compare.isProjectTarget(targets, 220)){%>selected<%}%>>Vitamin E</option>
+                                                    <option value="221" <%if(Compare.isProjectTarget(targets, 221)){%>selected<%}%>>Iron</option>
+                                                    <option value="222" <%if(Compare.isProjectTarget(targets, 222)){%>selected<%}%>>Multi-Vitamins</option>
+                                                </optgroup>
+                                                <optgroup label="Child Malnutrition:">
+                                                    <option value="234" <%if(Compare.isProjectTarget(targets, 234)){%>selected<%}%>>Under weight</option>
+                                                    <option value="236" <%if(Compare.isProjectTarget(targets, 236)){%>selected<%}%>>Over weight</option>
+                                                    <option value="237" <%if(Compare.isProjectTarget(targets, 237)){%>selected<%}%>>Obese</option>
+                                                </optgroup>
+                                            </select>
+                                            <br>
+                                            <h3>Number of Beneficiaries</h3>
+                                            <%
+                                                    ProjectCharterDateDAO dateDAO = new ProjectCharterDateDAO();
+                                                    ProjectCharterDateEntity dateEntity = dateDAO.getProjectDate(unavailableProj.getProject_id());
+                                            %>
+                                            <input style="width: 95%" class="form-control" type="number" id="target_number" name="target_number" min="1" value="<%=dateEntity.getTarget_participant_num()%>" required/>
+                                            <br>
                                             <h3>Project Scope</h3>
                                             <textarea style="width: 95%" class="form-control" rows="6" id="textArea" name="scope" value="<%=unavailableProj.getScope()%>"><%=unavailableProj.getScope()%></textarea>
                                             <br>
@@ -155,6 +222,8 @@
         <!-- Bootstrap Date Picker -->
         <script src="../scripts/datepicker/js/bootstrap-datepicker.js"></script>
 
+        <!-- Chosen multiselect -->
+        <script type="text/javascript" language="javascript" src="../scripts/chosen/chosen/chosen.jquery.min.js"></script>
 
         <!-- jQuery Cookie -->
         <script src="../scripts/jquery.cookie/jquery.cookie.js"></script>

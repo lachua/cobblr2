@@ -1,3 +1,4 @@
+<%@page import="dbdao.OfferedAnswerDAO"%>
 <%@page import="dbentities.UnavailableProjectEntity"%>
 <%@page import="dbentities.ProjectCharterEntity"%>
 <!DOCTYPE html>
@@ -64,9 +65,10 @@
                                             <form method="POST" action="FinalizeFullProjectCharter">
                                             <%
                                                 UnavailableProjectEntity fullCharter = (UnavailableProjectEntity) request.getAttribute("fullCharter");
-                                                
+                                                String[] target_sickness = (String[]) request.getAttribute("target_sickness");
+                                                String target_number = (String) request.getAttribute("target_number");
                                             %>
-                                            <legend><%=fullCharter.getTitle()%></legend>
+                                            <h3><%=fullCharter.getTitle()%></h3>
                                             <blockquote>
                                                 <p><%=fullCharter.getType()%></p>
                                                 <p>For Community: <%=fullCharter.getCommunity_name() %></p>
@@ -74,28 +76,47 @@
                                                 <p>Implementation Date: <%=fullCharter.getMeetingdate()%></p>
                                             </blockquote>
 
-                                            <legend>Brief Description</legend>
+                                            <h3>Brief Description</h3>
                                             <blockquote>
                                                 <p><%=fullCharter.getDescription()%></p>
                                             </blockquote>
 
-                                            <legend>Main Objective</legend>
+                                            <h3>Main Objective</h3>
                                             <blockquote>
                                                 <p><%=fullCharter.getObjectives()%></p>
                                             </blockquote>
 
-                                            <legend>Project Scope</legend>
+                                            <h3>Target Concern(s)</h3>
+                                            <blockquote>
+                                                <ul>
+                                                    <%
+                                                    String answertext ="";
+                                                    for(int x = 0; x < target_sickness.length; x++){
+                                                        OfferedAnswerDAO answer = new OfferedAnswerDAO();
+                                                        answertext = answer.getOfferedAnswer(Integer.parseInt(target_sickness[x])).getAnswertext();
+                                                    %>
+                                                    <li><%=answertext %></li>
+                                                    <%}%>
+                                                </ul>
+                                            </blockquote>
+                                            
+                                            <h3>Number of Beneficiaries</h3>
+                                            <blockquote>
+                                                <p><%=target_number%> people</p>
+                                            </blockquote>
+                                            
+                                            <h3>Project Scope</h3>
                                             <blockquote>
                                                 <p><%=fullCharter.getScope()%></p>
                                             </blockquote>
 
-                                            <legend>Additional Requirements</legend>
+                                            <h3>Additional Requirements</h3>
                                             <blockquote>
                                                 <p><%=fullCharter.getRequirements()%></p>
                                             </blockquote>
                                             <div class="form-actions">
                                                 <button name="action" value="CreateWorkStructure" type="submit" class="btn btn-primary">Finish</button>
-                                                <a href="CreateFullProjectCharter" type="button" class="btn">Back</a>
+                                                <a href="CreateFullProjectCharter" class="btn">Back</a>
                                             </div>
                                         </form>
                                     </div>

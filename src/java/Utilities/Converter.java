@@ -41,6 +41,11 @@ public class Converter {
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         return sqlDate;
     }
+    
+     public static Date toDateUtil(Calendar cal) {
+        Date date = cal.getTime();
+        return date;
+    }
 
     public static String toString(Calendar cal) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

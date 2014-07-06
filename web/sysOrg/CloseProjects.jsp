@@ -112,11 +112,11 @@
                                                             ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
                                                             ProjectCharterDateEntity projdate = project_date.getProjectDate(closedProj.get(x).getProject_id());
                                                         
-                                                            if (CompareDate.getDateDiff(projdate.getDate_implemented(), TimeUnit.DAYS) > -7) {
+                                                            if (CompareDate.getDateDiff(projdate.getDate_target_implement(), TimeUnit.DAYS) > -7) {
                                                         %>
-                                                        <td><span class="badge badge-warning"><%=projdate.getDate_implemented()%></span></td>
+                                                        <td><span class="badge badge-warning"><%=projdate.getDate_target_implement()%></span></td>
                                                             <%} else {%>
-                                                        <td><span class="badge badge-info"><%=projdate.getDate_implemented()%></span></td>
+                                                        <td><span class="badge badge-info"><%=projdate.getDate_target_implement()%></span></td>
                                                             <%}%>
                                                         <td>
 

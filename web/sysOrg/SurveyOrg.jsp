@@ -1,3 +1,5 @@
+<%@page import="dbentities.ProjectCharterDateEntity"%>
+<%@page import="dbdao.ProjectCharterDateDAO"%>
 <%@page import="dbentities.UnavailableProjectEntity"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,7 +87,11 @@
                                                 <strong>Partner Community: </strong> <%=closedProj.getCommunity_name()%><br />
                                                 <strong>Location: </strong> <%=closedProj.getCommunity_address()%><br/>
                                                 <strong>Description: </strong> <%=closedProj.getDescription()%> <br/> 
-                                                <strong>Project Deadline: </strong> <span id="dateChange" class="badge badge-inverse"> <%=closedProj.getMeetingdate()%> </span><br/><br/>
+                                                <%
+                                                    ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
+                                                    ProjectCharterDateEntity projdate = project_date.getProjectDate(closedProj.getProject_id());
+                                                %>
+                                                <strong>Project Deadline: </strong> <span id="dateChange" class="badge badge-inverse"> <%=projdate.getDate_target_implement() %> </span><br/><br/>
                                             </li>
                                         </ul>
                                         <form id="surveyForm" method="POST" action="SurveyOrg" class="form-horizontal" enctype="multipart/form-data">

@@ -178,7 +178,7 @@
                                                         <td><%=confirmedProj.get(x).getCommunity_address()%></td>
                                                         <td><%=confirmedProj.get(x).getDescription()%></td>
                                                         <td><%=confirmedProj.get(x).getOrg_name()%></td>
-                                                        <td><%=confirmedProj.get(x).getStudent_firstname()%> <%=unavailableProj.get(x).getStudent_lastname()%></td>
+                                                        <td><%=confirmedProj.get(x).getStudent_firstname()%> <%=confirmedProj.get(x).getStudent_lastname()%></td>
                                                         <td><%=confirmedProj.get(x).getStudent_mobileno()%></td>
                                                         <%
                                                             ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
@@ -191,7 +191,7 @@
                                                             <%} else {%>
                                                         <td><span class="badge badge-warning"><%=projdate.getDate_confirmed()%></span></td>
                                                             <%}%>
-                                                        <td><button name="ConfirmedDetails" value="<%=projdate.getDate_confirmed()%>" class="btn btn-inverse">Details</button></td>
+                                                        <td><button name="ConfirmedDetails" value="<%=confirmedProj.get(x).getProject_id()%>" class="btn btn-inverse">Details</button></td>
                                                     </tr>
                                                     <%}%>
                                                 </tbody>

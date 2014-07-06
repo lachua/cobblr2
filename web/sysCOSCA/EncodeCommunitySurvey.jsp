@@ -715,6 +715,8 @@
                 },
                 unhighlight: function(element, errorClass, validClass) {
                     this.findByName(element.name).parent().parent().removeClass(errorClass).addClass(validClass);
+                    
+                    $("label.error").hide();
                 },
                 errorPlacement: function(error, element) {
                     var id = element[0]['id'];

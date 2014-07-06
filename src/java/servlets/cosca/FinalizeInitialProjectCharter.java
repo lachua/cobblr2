@@ -8,6 +8,8 @@ package servlets.cosca;
 import Utilities.Year;
 import dbdao.NotificationDAO;
 import dbdao.ProjectCharterDAO;
+import dbdao.ProjectCharterDateDAO;
+import dbdao.ProjectTargetDAO;
 import dbdao.StudentOrgDAO;
 import dbentities.NotificationEntity;
 import dbentities.ProjectCharterEntity;
@@ -48,18 +50,37 @@ public class FinalizeInitialProjectCharter extends HttpServlet {
                 ProjectCharterEntity initialCharter = (ProjectCharterEntity) session.getAttribute("initialCharter");
                 String communityDetail = (String) session.getAttribute("CommunityDetail");
                 String[] communityName = communityDetail.split("-");
+                
+                String[] target_sickness = (String[]) session.getAttribute("target_sickness");
+                String target_number = (String) session.getAttribute("target_number");
 
                 request.setAttribute("communityName", communityName[1]);
                 request.setAttribute("initialCharter", initialCharter);
+                request.setAttribute("target_sickness", target_sickness);
+                request.setAttribute("target_number", target_number);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/sysCOSCA/FinalizeInitialProjectCharter.jsp");
                 dispatcher.forward(request, response);
             } else if (request.getMethod().equals("POST")) {
                 HttpSession session = request.getSession();
 
                 ProjectCharterEntity initialCharter = (ProjectCharterEntity) session.getAttribute("initialCharter");
+                String[] target_sickness = (String[]) session.getAttribute("target_sickness");
+                String target_number = (String) session.getAttribute("target_number");
 
                 ProjectCharterDAO initialCharterDAO = new ProjectCharterDAO();
                 boolean addDB = initialCharterDAO.createNewProject(initialCharter);
+                initialCharterDAO = new ProjectCharterDAO();
+                int project_id = initialCharterDAO.getLastId();
+                if(addDB){
+                    ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
+                    addDB = project_date.insertNewProject(project_id, Integer.parseInt(target_number));
+                }
+                for (String target_sicknes : target_sickness) {
+                    if (addDB) {
+                        ProjectTargetDAO target = new ProjectTargetDAO();
+                        target.insertProjectTarget(project_id, Integer.parseInt(target_sicknes));
+                    }
+                }
 
                 StudentOrgDAO sorgDAO = new StudentOrgDAO();
                 List<StudentOrgEntity> sorg = sorgDAO.getUserDetails();

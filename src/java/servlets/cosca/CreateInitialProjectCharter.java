@@ -62,6 +62,8 @@ public class CreateInitialProjectCharter extends HttpServlet {
                 String objective = request.getParameter("objective");
                 String scope = request.getParameter("scope");
                 String requirements = request.getParameter("requirements");
+                String[] target_sickness = request.getParameterValues("target_sickness");
+                String target_number = request.getParameter("target_number");
                 
                 HttpSession session = request.getSession();
                 
@@ -72,6 +74,8 @@ public class CreateInitialProjectCharter extends HttpServlet {
                 ProjectCharterEntity initialCharter = new ProjectCharterEntity(Integer.parseInt(communitySplit[0]), title, description, preparedby, objective, scope, requirements, projectType);
                 
                 session.setAttribute("initialCharter", initialCharter);
+                session.setAttribute("target_sickness", target_sickness);
+                session.setAttribute("target_number", target_number);
                 response.sendRedirect("FinalizeInitialProjectCharter");
             }
         } finally {
