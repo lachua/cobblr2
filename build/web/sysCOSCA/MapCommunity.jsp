@@ -68,6 +68,7 @@
                                                      List<FilterEntity> filterList = (List<FilterEntity>) request.getAttribute("filterList");
                                                      String[] imagetype = new String[comList.size()];
                                             %>
+                                            <h3>No. of Community(s): <%=comList.size()%></h3>
                                             <div>
                                                 <form method="POST" action="CommunityMap">
                                                     <div>
@@ -91,6 +92,13 @@
                                                     OfferedAnswerEntity answerEntity = answerDAO.getOfferedAnswer(offeredanswer_id);
                                                 %>
                                                 <h4>Filter for: <strong><%=answerEntity.getAnswertext()%></strong></h4>
+                                                <h5>Legends:</h5>
+                                                <div>
+                                                    <img class="legendsize" src="../images/markers/red_cross.png" /> - 20% or more is affected &nbsp;
+                                                    <img class="legendsize" src="../images/markers/yellow_exclamation.png" /> - 10% or more is affected &nbsp;
+                                                    <img class="legendsize" src="../images/markers/green_star.png" /> - less than 10% is affected &nbsp;
+                                                    <br/><br/>
+                                                </div>
                                                 <%}%>
                                                 <div id="map_canvas"
                                                      style="

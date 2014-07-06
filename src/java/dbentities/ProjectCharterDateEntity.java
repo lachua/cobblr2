@@ -20,6 +20,7 @@ public class ProjectCharterDateEntity {
     private Date date_implemented;
     private Date date_closed;
     private Date date_cancelled;
+    private int target_participant_num;
 
     /**
      * @return the project_id
@@ -117,5 +118,19 @@ public class ProjectCharterDateEntity {
      */
     public void setDate_cancelled(Date date_cancelled) {
         this.date_cancelled = date_cancelled;
+    }
+
+    /**
+     * @return the target_participant_num
+     */
+    public int getTarget_participant_num() {
+        return target_participant_num;
+    }
+
+    /**
+     * @param target_participant_num the target_participant_num to set
+     */
+    public void setTarget_participant_num(int target_participant_num) {
+        this.target_participant_num = target_participant_num;
     }
 }

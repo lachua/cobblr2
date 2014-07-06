@@ -88,3 +88,9 @@ For validation
 .error{
     color: #b94a48;
 }
+
+.legendsize{
+    height: 40px;
+    width: 40px;
+    border: 1px solid;
+}

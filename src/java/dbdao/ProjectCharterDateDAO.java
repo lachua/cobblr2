@@ -235,6 +235,24 @@ public class ProjectCharterDateDAO extends QueryTemplate {
         return executeUpdate();
     }
     
+    public boolean insertNewProject(int project_id, int target_no){
+        setQuery("INSERT INTO project_charter_date VALUES (?, NULL, NULL, NULL, NULL, NULL, NULL, ?)");
+        
+        KeyValuePair onePair;
+        
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.INT);
+        onePair.setValue("" + project_id);
+        getParameters().add(onePair);
+        
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.INT);
+        onePair.setValue("" + target_no);
+        getParameters().add(onePair);
+        
+        return executeUpdate();
+    }
+    
     @Override
     protected Object storeResults(ResultSet rs) {
         ProjectCharterDateEntity entity = new ProjectCharterDateEntity();
@@ -273,7 +291,11 @@ public class ProjectCharterDateDAO extends QueryTemplate {
         } catch (SQLException ex) {
             Logger.getLogger(UserEntityDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        try {
+            entity.setTarget_participant_num(rs.getInt("target_participant_num"));
+        } catch (SQLException ex) {
+            Logger.getLogger(UserEntityDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return entity;
     }
 }

@@ -15,6 +15,9 @@
 
         <!-- Simplenso -->
         <link href="../css/simplenso.css" rel="stylesheet" />
+        
+        <!-- Chosen multiselect -->
+        <link type="text/css" href="../scripts/chosen/chosen/chosen.intenso.css" rel="stylesheet" />   
 
         <!-- Full Calender -->
         <link rel="stylesheet" type="text/css" href="../scripts/fullcalendar/fullcalendar/fullcalendar.css" />
@@ -54,7 +57,7 @@
                                     <h4 class="box-header round-top">Initial Project Charter</h4>
                                     <div class="box-container-toggle">
                                         <div class="box-content">
-                                            <form method="POST" action="CreateInitialProjectCharter">
+                                            <form id="projectCharter" method="POST" action="CreateInitialProjectCharter">
                                             <%
                                                 String projectType = (String) request.getAttribute("projectType");
                                                 String communityName = (String) request.getAttribute("communityName");
@@ -65,7 +68,7 @@
                                                     charter = (ProjectCharterEntity) request.getAttribute("charter");
                                                 }
                                             %>
-                                            <legend><%=projectType%> for <%=communityName%></legend>
+                                            <h3><%=projectType%> for <%=communityName%></h3>
 
                                             <table class="table table-bordered">
                                                 <tbody>
@@ -93,6 +96,58 @@
                                             <h3>Project Objective</h3>
                                             <textarea style="width: 95%" class="form-control" rows="6" id="textArea" name="objective" placeholder="Indicate what the project aims to achieve" required></textarea>
                                             <br>
+                                            <h3>Target Illness</h3>
+                                            <select style="width: 95%" class="chzn-select" id="target_sickness" multiple name="target_sickness" required>
+                                                <optgroup label="Sicknesses:">
+                                                    <option value="98">Allergy</option>
+                                                    <option value="99">Altherosclerosis</option>
+                                                    <option value="100">Asthma</option>
+                                                    <option value="101">Coughs & Colds</option>
+                                                    <option value="102">Dengue</option>
+                                                    <option value="103">Diabetes</option>
+                                                    <option value="104">Gl Obstruction</option>
+                                                    <option value="105">Hemmorhage</option>
+                                                    <option value="106">KidneyStones</option>
+                                                    <option value="107">Overfatigue</option>
+                                                    <option value="108">Pneumonia</option>
+                                                    <option value="109">Renal Failure</option>
+                                                    <option value="110">Fever</option>
+                                                </optgroup>
+                                                <optgroup label="Child Vaccinations:">
+                                                    <option value="223">Flu</option>
+                                                    <option value="224">Hepatitis B</option>
+                                                    <option value="225">MVC1</option>
+                                                    <option value="226">MVC2</option>
+                                                    <option value="227">TT 2+</option>
+                                                    <option value="228">BGC</option>
+                                                    <option value="229">DTP</option>
+                                                    <option value="230">Rotavirus</option>
+                                                    <option value="231">Pneumococcal</option>
+                                                    <option value="232">OPV1</option>
+                                                    <option value="233">OPV3</option>
+                                                </optgroup>
+                                                <optgroup label="Child Vitamin Deficiency:">
+                                                    <option value="216">A</option>
+                                                    <option value="217">B12</option>
+                                                    <option value="218">C</option>
+                                                    <option value="219">D</option>
+                                                    <option value="220">E</option>
+                                                    <option value="221">Iron</option>
+                                                    <option value="222">Multi-Vitamins</option>
+                                                </optgroup>
+                                                <optgroup label="Child Malnutrition:">
+                                                    <option value="234">Under weight</option>
+                                                    <option value="236">Over weight</option>
+                                                    <option value="237">Obese</option>
+                                                </optgroup>
+                                                <optgroup label="If none is applicable">
+                                                    <option value="82">Others</option>
+                                                </optgroup>
+                                            </select>
+                                            <br>
+                                            <h3>Target Number of Participants</h3>
+                                            <input style="width: 95%" class="form-control" type="number" id="target_number" name="target_number" value="0" required/>
+                                            <br>
                                             <h3>Project Scope</h3>
                                             <textarea style="width: 95%" class="form-control" rows="6" id="textArea" name="scope" placeholder="Indicate the extent of the project" required></textarea>
                                             <br>
@@ -101,7 +156,7 @@
                                             <br>
                                             <div class="form-actions">
                                                 <button name="action" value="FinalizeInitialProjectCharter" type="submit" class="btn btn-primary">Create Initial Project Charter</button>
-                                                <a href="CommunitySurvey" type="button" class="btn">Cancel</a>
+                                                <a href="CommunitySurvey" class="btn">Cancel</a>
                                             </div>
                                         </form>
                                     </div>
@@ -113,7 +168,6 @@
             </div><!--/span-->
         </div><!--/row-->
 
-        <!--===============================================================================-->
         <!-- jQuery -->
         <script src="../jquery/1.8.3/jquery.min.js"></script>
 
@@ -124,13 +178,12 @@
         <script src="../scripts/jquery-ui/ui/minified/jquery.ui.sortable.min.js"></script>
         <script src="../scripts/jquery-ui/ui/minified/jquery.ui.widget.min.js"></script>
 
-        <!-- Bootstrap -->
+        <!-- Bootstrap -->  
         <script src="../bootstrap/js/bootstrap.min.js"></script>
         <script src="../scripts/bootbox/bootbox.min.js"></script>
 
         <!-- Bootstrap Date Picker -->
         <script src="../scripts/datepicker/js/bootstrap-datepicker.js"></script>
-
 
         <!-- jQuery Cookie -->
         <script src="../scripts/jquery.cookie/jquery.cookie.js"></script>
@@ -149,5 +202,20 @@
 
         <!-- Simplenso Scripts -->
         <script src="../scripts/simplenso/simplenso.js"></script>
+        
+        <!-- JQuery Valdation -->
+        <script src="../jquery/jquery-validate/jquery.validate.js"></script>
+        <script>
+            $().ready(function() {
+                // validate signup form on keyup and submit
+                $("#projectCharter").validate({
+                    rules: {
+                        yearsInCommunity: {
+                            min: 0
+                        }
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
