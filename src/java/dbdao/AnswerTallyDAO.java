@@ -134,6 +134,61 @@ public class AnswerTallyDAO extends QueryTemplate {
             return null;
         }
     }
+    
+    public List<AnswerTallyEntity> tallyChildAnswers(int community_id, int surveyyear) {
+
+        String query = "SELECT \n"
+                + "    qas.survey_id,\n"
+                + "    qas.question_id,\n"
+                + "    qas.offeredanswer_id,\n"
+                + "    COUNT(commans.offeredanswer_id) AS answercount\n"
+                + "FROM\n"
+                + "    (SELECT \n"
+                + "        sq.survey_id, sq.question_id, sqa.offeredanswer_id\n"
+                + "    FROM\n"
+                + "        survey_question sq\n"
+                + "    LEFT JOIN survey_question_answer sqa ON sq.survey_id = sqa.survey_id\n"
+                + "        AND sq.question_id = sqa.question_id\n"
+                + "    WHERE\n"
+                + "        sq.survey_id = 5) qas\n"
+                + "        LEFT JOIN\n"
+                + "    (SELECT \n"
+                + "        pa.survey_id,\n"
+                + "            pa.person_id,\n"
+                + "            pa.question_id,\n"
+                + "            pa.offeredanswer_id\n"
+                + "    FROM\n"
+                + "        community_family cf\n"
+                + "    INNER JOIN community_members cm ON cf.id = cm.family_id\n"
+                + "    INNER JOIN person_answer pa ON pa.person_id = cm.person_id\n"
+                + "    WHERE\n"
+                + "        community_id = ?\n"
+                + "            AND YEAR(pa.date_answered) = ?) commans ON qas.question_id = commans.question_id\n"
+                + "        AND qas.offeredanswer_id = commans.offeredanswer_id\n"
+                + "GROUP BY qas.question_id , qas.offeredanswer_id\n"
+                + "ORDER BY question_id , offeredanswer_id";
+
+        setQuery(query);
+        KeyValuePair onePair;
+
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.INT);
+        onePair.setValue("" + community_id);
+        getParameters().add(onePair);
+
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.INT);
+        onePair.setValue("" + surveyyear);
+        getParameters().add(onePair);
+
+        List<AnswerTallyEntity> results = executeQuery();
+
+        if (results != null) {
+            return results;
+        } else {
+            return null;
+        }
+    }
 
     public List<AnswerTallyEntity> tallyAgesByGender(int community_id, int surveyyear, String gender) {
 

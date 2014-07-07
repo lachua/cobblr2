@@ -824,7 +824,7 @@
                     
                         <div id='child_div'>
                             <div class="row-fluid">
-                                <div class="span6">
+                                <div class="span12">
                                     <div class="box">
                                         <h4 class="box-header round-top">Child Ages</h4>         
                                         <div class="box-container-toggle">
@@ -837,7 +837,7 @@
                             </div>
                                         
                             <div class="row-fluid">
-                                <div class="span6">
+                                <div class="span12">
                                     <div class="box">
                                         <h4 class="box-header round-top">Child Weight</h4>         
                                         <div class="box-container-toggle">
@@ -850,30 +850,7 @@
                             </div>
                                         
                             <div class="row-fluid">
-                                <div class="span6">
-                                    <div class="box">
-                                        <h4 class="box-header round-top">Child Meals Per Day <%=lastYear%></h4>         
-                                        <div class="box-container-toggle">
-                                            <div class="box-content">
-                                                <div id="childMealsPrevious_pie"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="span6">
-                                    <div class="box">
-                                        <h4 class="box-header round-top">Child Meals Per Day <%=thisYear%></h4>         
-                                        <div class="box-container-toggle">
-                                            <div class="box-content">
-                                                <div id="childMealsCurrent_pie"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>    
-                                        
-                            <div class="row-fluid">
-                                <div class="span6">
+                                <div class="span12">
                                     <div class="box">
                                         <h4 class="box-header round-top">Vitamins Taken </h4>         
                                         <div class="box-container-toggle">
@@ -921,7 +898,7 @@
                                 </div>
                                 <div class="span6">
                                     <div class="box">
-                                        <h4 class="box-header round-top">Newborn Screening <%=thisYear%></h4>         
+                                        <h4 class="box-header round-top">Vaccination <%=thisYear%></h4>         
                                         <div class="box-container-toggle">
                                             <div class="box-content">
                                                 <div id="vaccinationCurrent_table"></div>
@@ -944,6 +921,7 @@
                                             <input class="input-small checkbox" id="socioeconomic_filter" name="socioeconomic_filter" type="checkbox" checked/>Socioeconomic & Cultural Factors<br/>
                                             <input class="input-small checkbox" id="home_environment_filter" name="home_environment_filter" type="checkbox" checked/>Home & Environmental Factors<br/>
                                             <input class="input-small checkbox" id="health_filter" name="health_filter" type="checkbox" checked/>Health Assessment<br/>
+                                            <input class="input-small checkbox" id="child_filter" name="child_filter" type="checkbox" checked/>Child Data<br/>
                                         </div>
                                     </div>
                                 </div>
@@ -1086,6 +1064,13 @@
                         $("#health_div").slideDown("slow");
                     } else {
                         $("#health_div").slideUp("slow");
+                    }
+                });
+                $('#child_filter').change(function() {
+                    if ($('#child_filter').is(':checked')) {
+                        $("#child_div").slideDown("slow");
+                    } else {
+                        $("#child_div").slideUp("slow");
                     }
                 });
             });
@@ -2275,6 +2260,146 @@
 
                 var chart = new google.visualization.BarChart(document.getElementById('specAge_bar'));
                 chart.draw(data, options);
+                
+                //Child Weight
+                var data = google.visualization.arrayToDataTable([
+            <% oneSet = currentChildResult.getSurveyResults().get(77);%>
+            <% twoSet = currentChildResult.getSurveyResults().get(77);%>
+                    ['Child Weight', '' + lastYear, '' + thisYear],
+                    ['Normal Weight', <%=twoSet.getAnswerset().get(235)%>, <%=oneSet.getAnswerset().get(235)%>],
+                    ['Under Weight', <%=twoSet.getAnswerset().get(234)%>, <%=oneSet.getAnswerset().get(234)%>],
+                    ['Over Weight', <%=twoSet.getAnswerset().get(236)%>, <%=oneSet.getAnswerset().get(236)%>],
+                    ['Obese', <%=twoSet.getAnswerset().get(237)%>, <%=oneSet.getAnswerset().get(237)%>]
+                ]);
+                        var options = {
+                            title: 'Child Weight'
+                        };
+
+                var chart = new google.visualization.ColumnChart(document.getElementById('childWeight_col'));
+                chart.draw(data, options);
+                
+                //Vitamins Taken
+                var data = google.visualization.arrayToDataTable([
+                    ['Vitamins Taken', '' + lastYear, '' + thisYear],
+            <% oneSet = currentChildResult.getSurveyResults().get(71);%>
+            <% twoSet = pastChildResult.getSurveyResults().get(71);%>
+                    ['Vitamin A', <%=twoSet.getAnswerset().get(216)%>, <%=oneSet.getAnswerset().get(216)%>],
+                    ['Vitamin B12', <%=twoSet.getAnswerset().get(217)%>, <%=oneSet.getAnswerset().get(217)%>],
+                    ['Vitamin C', <%=twoSet.getAnswerset().get(218)%>, <%=oneSet.getAnswerset().get(218)%>],
+                    ['Vitamin D', <%=twoSet.getAnswerset().get(219)%>, <%=oneSet.getAnswerset().get(219)%>],
+                    ['Iron', <%=twoSet.getAnswerset().get(220)%>, <%=oneSet.getAnswerset().get(220)%>],
+                    ['Zinc', <%=twoSet.getAnswerset().get(221)%>, <%=oneSet.getAnswerset().get(221)%>],
+                    ['Multi-Vitamins', <%=twoSet.getAnswerset().get(222)%>, <%=oneSet.getAnswerset().get(222)%>]
+                ]);
+
+                var options = {
+                    title: 'Vitamins Taken',
+                    vAxis: {title: 'Vitamins Taken', titleTextStyle: {color: 'black'}}
+                };
+
+                var chart = new google.visualization.BarChart(document.getElementById('vitaminsPrevious_bar'));
+                chart.draw(data, options);
+                
+                //Newborn Screening Previous
+                var data = google.visualization.arrayToDataTable([
+                    ['Newborn Screening', '' + lastYear],
+            <% oneSet = pastChildResult.getSurveyResults().get(75);%>
+                    ['Yes', <%=oneSet.getAnswerset().get(49)%>],
+                    ['No', <%=oneSet.getAnswerset().get(50)%>]
+                ]);
+
+                string = 'Newborn Screening' + lastYear;
+                if (<%=oneSet.getAnswerset().get(49)%> === 0 && <%=oneSet.getAnswerset().get(50)%> === 0) {
+                    string = empty;
+                }
+
+                var options = {
+                    title: string
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('screeningPrevious_pie'));
+                chart.draw(data, options);
+
+                //Newborn Screening Current
+                var data = google.visualization.arrayToDataTable([
+                    ['Newborn Screening', '' + thisYear],
+            <% oneSet = currentChildResult.getSurveyResults().get(75);%>
+                    ['Yes', <%=oneSet.getAnswerset().get(49)%>],
+                    ['No', <%=oneSet.getAnswerset().get(50)%>]
+                ]);
+
+                string = 'Newborn Screening' + thisYear;
+                if (<%=oneSet.getAnswerset().get(49)%> === 0 && <%=oneSet.getAnswerset().get(50)%> === 0) {
+                    string = empty;
+                }
+
+                var options = {
+                    title: string
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('screeningCurrent_pie'));
+                chart.draw(data, options);
+                
+                //Vaccination Previous
+                var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'Vaccination');
+                data.addColumn('number', 'Number of Vaccinated Children');
+                data.addRows([
+            <%
+                oneSet = pastChildResult.getSurveyResults().get(76);
+                 alP = new ArrayList();
+                for (int x = 223; x <= 233; x++) {
+                    alP.add(oneSet.getAnswerset().get(x));
+                }
+            %>
+                    ['Flu', <%=oneSet.getAnswerset().get(223)%>],
+                    ['Hepatitis B', <%=oneSet.getAnswerset().get(224)%>],
+                    ['MVC1', <%=oneSet.getAnswerset().get(225)%>],
+                    ['MVC2', <%=oneSet.getAnswerset().get(226)%>],
+                    ['TT 2+', <%=oneSet.getAnswerset().get(227)%>],
+                    ['BCG', <%=oneSet.getAnswerset().get(228)%>],
+                    ['DTP', <%=oneSet.getAnswerset().get(229)%>],
+                    ['Rotavirus', <%=oneSet.getAnswerset().get(230)%>],
+                    ['Pneumococcal', <%=oneSet.getAnswerset().get(231)%>],
+                    ['OPV1', <%=oneSet.getAnswerset().get(232)%>],
+                    ['OPV3', <%=oneSet.getAnswerset().get(233)%>],
+                    ['Complete', <%=Immunization.getComplete(alP)%>],
+                    ['Incomplete', <%=Immunization.getIncomplete(alP)%>]
+                ]);
+
+                var table = new google.visualization.Table(document.getElementById('vaccinationCurrent_table'));
+                table.draw(data, options);
+
+                //Vaccination Current
+                var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Vaccination');
+                data.addColumn('number', 'Number of Vaccinated Children');
+                data.addRows([
+                    <%
+                        oneSet = currentChildResult.getSurveyResults().get(76);
+                        alC = new ArrayList();
+                        for (int x = 223; x < 233; x++) {
+                            alC.add(oneSet.getAnswerset().get(x));
+                        }
+                    %>
+                    ['Flu', <%=oneSet.getAnswerset().get(223)%>],
+                    ['Hepatitis B', <%=oneSet.getAnswerset().get(224)%>],
+                    ['MVC1', <%=oneSet.getAnswerset().get(225)%>],
+                    ['MVC2', <%=oneSet.getAnswerset().get(226)%>],
+                    ['TT 2+', <%=oneSet.getAnswerset().get(227)%>],
+                    ['BCG', <%=oneSet.getAnswerset().get(228)%>],
+                    ['DTP', <%=oneSet.getAnswerset().get(229)%>],
+                    ['Rotavirus', <%=oneSet.getAnswerset().get(230)%>],
+                    ['Pneumococcal', <%=oneSet.getAnswerset().get(231)%>],
+                    ['OPV1', <%=oneSet.getAnswerset().get(232)%>],
+                    ['OPV3', <%=oneSet.getAnswerset().get(233)%>],
+                    ['Complete', <%=Immunization.getComplete(alC)%>],
+                    ['Incomplete', <%=Immunization.getIncomplete(alC)%>]
+                ]);
+
+                var table = new google.visualization.Table(document.getElementById('vaccinationPrevious_table'));
+                table.draw(data, options);
+                
             }
         </script>
     </body>

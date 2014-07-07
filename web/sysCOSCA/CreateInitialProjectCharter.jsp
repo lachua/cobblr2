@@ -134,8 +134,8 @@
                                                     <option value="217">Vitamin B12</option>
                                                     <option value="218">Vitamin C</option>
                                                     <option value="219">Vitamin D</option>
-                                                    <option value="220">Vitamin E</option>
-                                                    <option value="221">Iron</option>
+                                                    <option value="220">Iron</option>
+                                                    <option value="221">Zinc</option>
                                                     <option value="222">Multi-Vitamins</option>
                                                 </optgroup>
                                                 <optgroup label="Child Malnutrition:">

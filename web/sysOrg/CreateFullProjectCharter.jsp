@@ -166,8 +166,8 @@
                                                     <option value="217" <%if(Compare.isProjectTarget(targets, 217)){%>selected<%}%>>Vitamin B12</option>
                                                     <option value="218" <%if(Compare.isProjectTarget(targets, 218)){%>selected<%}%>>Vitamin C</option>
                                                     <option value="219" <%if(Compare.isProjectTarget(targets, 219)){%>selected<%}%>>Vitamin D</option>
-                                                    <option value="220" <%if(Compare.isProjectTarget(targets, 220)){%>selected<%}%>>Vitamin E</option>
-                                                    <option value="221" <%if(Compare.isProjectTarget(targets, 221)){%>selected<%}%>>Iron</option>
+                                                    <option value="220" <%if(Compare.isProjectTarget(targets, 220)){%>selected<%}%>>Iron</option>
+                                                    <option value="221" <%if(Compare.isProjectTarget(targets, 221)){%>selected<%}%>>Zinc</option>
                                                     <option value="222" <%if(Compare.isProjectTarget(targets, 222)){%>selected<%}%>>Multi-Vitamins</option>
                                                 </optgroup>
                                                 <optgroup label="Child Malnutrition:">
