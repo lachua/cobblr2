@@ -49,6 +49,7 @@ public class WorkStructure_SeminarCosca extends HttpServlet {
             if (request.getMethod().equals("GET")) {
             } else if (request.getMethod().equals("POST")) {
                 String project_id = request.getParameter("project_id");
+                String cancel_reason = request.getParameter("cancel_reason");
                 
                 UnavailableProjectDAO ongoingDAO = new UnavailableProjectDAO();
                 UnavailableProjectEntity ongoing = ongoingDAO.getUnavailableProject(Integer.parseInt(project_id));
@@ -62,8 +63,14 @@ public class WorkStructure_SeminarCosca extends HttpServlet {
                 
                 charterDAO = new ProjectCharterDAO();
                 boolean DB = charterDAO.updateProjectStatusDate(Integer.parseInt(project_id), ProjectCharterDAO.CANCELED, Year.getCurrentDateinCalendar().getTime());
-                ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
-                DB = project_date.setDateCancelled(Integer.parseInt(project_id));
+                if(DB){
+                    projectdateDAO = new ProjectCharterDateDAO();
+                    DB = projectdateDAO.setDateCancelled(Integer.parseInt(project_id));
+                }
+                if(DB){
+                    projectdateDAO = new ProjectCharterDateDAO();
+                    DB = projectdateDAO.setCancelReason(Integer.parseInt(project_id), cancel_reason);
+                }
                 
                 if(DB){
                 charterDAO = new ProjectCharterDAO();

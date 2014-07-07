@@ -21,6 +21,8 @@ public class ProjectCharterDateEntity {
     private Date date_closed;
     private Date date_cancelled;
     private int target_participant_num;
+    private String cancel_reason;
+    
 
     /**
      * @return the project_id
@@ -132,5 +134,19 @@ public class ProjectCharterDateEntity {
      */
     public void setTarget_participant_num(int target_participant_num) {
         this.target_participant_num = target_participant_num;
+    }
+
+    /**
+     * @return the cancel_reason
+     */
+    public String getCancel_reason() {
+        return cancel_reason;
+    }
+
+    /**
+     * @param cancel_reason the cancel_reason to set
+     */
+    public void setCancel_reason(String cancel_reason) {
+        this.cancel_reason = cancel_reason;
     }
 }

@@ -78,7 +78,7 @@
                                                         <th></th>
                                                         <th>Type</th>
                                                         <th>Community</th>
-                                                        <th>Location</th>
+                                                        <th></th>
                                                         <th></th>
                                                         <th></th>
                                                         <th></th>
@@ -90,23 +90,24 @@
                                                         <th>Project Title</th>
                                                         <th>Project Type</th>
                                                         <th>Partner Community</th>
-                                                        <th>Location</th>
                                                         <th>Description</th>
+                                                        <th>Reason for Cancellation</th>
                                                         <th>Student Organization</th>
                                                         <th>Project Head</th>
                                                         <th>Contact No.</th>
-                                                        <th>Project Deadline</th>
+                                                        <th>Date Canceled</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <%for (int x = 0; x < currentProj.size(); x++) {%>
+                                                    <%ProjectCharterDateDAO dateDAO = new ProjectCharterDateDAO();%>
                                                     <tr>
                                                         <td><%=currentProj.get(x).getTitle()%></td>
                                                         <td><%=currentProj.get(x).getType()%></td>
                                                         <td><%=currentProj.get(x).getCommunity_name()%></td>
-                                                        <td><%=currentProj.get(x).getCommunity_address()%></td>
                                                         <td><%=currentProj.get(x).getDescription()%></td>
+                                                        <td><%=dateDAO.getProjectDate(currentProj.get(x).getProject_id()).getCancel_reason()%></td>
                                                         <td><%=currentProj.get(x).getOrg_name()%></td>
                                                         <td><%=currentProj.get(x).getStudent_firstname()%> <%=currentProj.get(x).getStudent_lastname()%></td>
                                                         <td><%=currentProj.get(x).getStudent_mobileno()%></td>
@@ -213,15 +214,7 @@
                 }
             %>
                         ]},
-                        {type: "twitter-dropdown", values: [
-            <%
-                for (int x = 0; x < currentProjList.size(); x++) {
-            %>
-                        '<%=currentProjList.get(x).getCommunity_address()%>',
-            <%
-                }
-            %>
-                        ]},
+                                null,
                                 null,
                                 null,
                                 null,

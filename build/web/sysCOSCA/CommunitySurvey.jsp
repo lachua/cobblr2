@@ -1,4 +1,5 @@
 
+<%@page import="classes.ChildSurveyResults"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="classes.PersonalSurveyResults"%>
 <%@page import="classes.PersonalSurveyResults"%>
@@ -80,6 +81,8 @@
                     SurveyResults pastResult = (SurveyResults) request.getAttribute("pastResult");
                     PersonalSurveyResults currentPerResult = (PersonalSurveyResults) request.getAttribute("currentPerResult");
                     PersonalSurveyResults pastPerResult = (PersonalSurveyResults) request.getAttribute("pastPerResult");
+                    ChildSurveyResults currentChildResult = (ChildSurveyResults) request.getAttribute("currentChildResult");
+                    ChildSurveyResults pastChildResult = (ChildSurveyResults) request.getAttribute("pastChildResult");
                     int thisYear = Year.getCurrentYear();
                     int lastYear = Year.getPreviousYear();
                     QuestionAnswerSet oneSet, twoSet;
@@ -818,6 +821,116 @@
                                 </div>
                             </div>
                         </div><!--Filter 4-->
+                    
+                        <div id='child_div'>
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="box">
+                                        <h4 class="box-header round-top">Child Ages</h4>         
+                                        <div class="box-container-toggle">
+                                            <div class="box-content">
+                                                <div id="specAge_bar"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                        
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="box">
+                                        <h4 class="box-header round-top">Child Weight</h4>         
+                                        <div class="box-container-toggle">
+                                            <div class="box-content">
+                                                <div id="childWeight_col"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                        
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="box">
+                                        <h4 class="box-header round-top">Child Meals Per Day <%=lastYear%></h4>         
+                                        <div class="box-container-toggle">
+                                            <div class="box-content">
+                                                <div id="childMealsPrevious_pie"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="box">
+                                        <h4 class="box-header round-top">Child Meals Per Day <%=thisYear%></h4>         
+                                        <div class="box-container-toggle">
+                                            <div class="box-content">
+                                                <div id="childMealsCurrent_pie"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>    
+                                        
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="box">
+                                        <h4 class="box-header round-top">Vitamins Taken </h4>         
+                                        <div class="box-container-toggle">
+                                            <div class="box-content">
+                                                <div id="vitaminsPrevious_bar"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                                        
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="box">
+                                        <h4 class="box-header round-top">Newborn Screening <%=lastYear%></h4>         
+                                        <div class="box-container-toggle">
+                                            <div class="box-content">
+                                                <div id="screeningPrevious_pie"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="box">
+                                        <h4 class="box-header round-top">Newborn Screening <%=thisYear%></h4>         
+                                        <div class="box-container-toggle">
+                                            <div class="box-content">
+                                                <div id="screeningCurrent_pie"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                        
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="box">
+                                        <h4 class="box-header round-top">Vaccination <%=lastYear%></h4>         
+                                        <div class="box-container-toggle">
+                                            <div class="box-content">
+                                                <div id="vaccinationPrevious_table"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="box">
+                                        <h4 class="box-header round-top">Newborn Screening <%=thisYear%></h4>         
+                                        <div class="box-container-toggle">
+                                            <div class="box-content">
+                                                <div id="vaccinationCurrent_table"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--Filter 5-->
                     </div><!--row fuild span8-->
 
                     <div id="scroll_div" class="span4">
@@ -847,7 +960,6 @@
                                                 <li>
                                                     <strong>Location: Community Location</strong><br/>
                                                     <br/>
-
                                                     <% oneSet = currentResult.getSurveyResults().get(38);%>
                                                     <% twoSet = pastResult.getSurveyResults().get(38);%>
                                                     <strong><u><%=thisYear%> Surveys</u></strong><br />
@@ -992,6 +1104,7 @@
             google.setOnLoadCallback(drawSocioChart);
             google.setOnLoadCallback(drawHomeChart);
             google.setOnLoadCallback(drawHealthChart);
+            google.setOnLoadCallback(drawChildChart);
             function drawFamilyChart() {
                 //Family Structure Previous
                 var data = google.visualization.arrayToDataTable([
@@ -1256,6 +1369,7 @@
                         var table = new google.visualization.Table(document.getElementById('occupationCurrent_table'));
                 table.draw(data);
             }
+            
             function drawSocioChart() {
                 //Monthly Income Bar
                 var data = google.visualization.arrayToDataTable([
@@ -2134,7 +2248,33 @@
 
                 var table = new google.visualization.Table(document.getElementById('adequateavtivityCurrent_table'));
                 table.draw(data);
+             
+            }
+            
+             function drawChildChart() {
+                //Child Age
+                var data = google.visualization.arrayToDataTable([
+                    ['Child Ages', '' + lastYear, '' + thisYear],
+            <% oneSet = currentChildResult.getSurveyResults().get(71);%>
+            <% twoSet = pastChildResult.getSurveyResults().get(71);%>
+                    ['0-3 months old', <%=twoSet.getAnswerset().get(207)%>, <%=oneSet.getAnswerset().get(207)%>],
+                    ['4-6 months old', <%=twoSet.getAnswerset().get(208)%>, <%=oneSet.getAnswerset().get(208)%>],
+                    ['7-9 months old', <%=twoSet.getAnswerset().get(209)%>, <%=oneSet.getAnswerset().get(209)%>],
+                    ['10-11 months old', <%=twoSet.getAnswerset().get(210)%>, <%=oneSet.getAnswerset().get(210)%>],
+                    ['1 year old', <%=twoSet.getAnswerset().get(211)%>, <%=oneSet.getAnswerset().get(211)%>],
+                    ['2 years old', <%=twoSet.getAnswerset().get(212)%>, <%=oneSet.getAnswerset().get(212)%>],
+                    ['3 years old', <%=twoSet.getAnswerset().get(213)%>, <%=oneSet.getAnswerset().get(213)%>],
+                    ['4 years old', <%=twoSet.getAnswerset().get(214)%>, <%=oneSet.getAnswerset().get(214)%>],
+                    ['5 years old', <%=twoSet.getAnswerset().get(215)%>, <%=oneSet.getAnswerset().get(215)%>]
+                ]);
 
+                var options = {
+                    title: 'Child Ages',
+                    vAxis: {title: 'Child Ages', titleTextStyle: {color: 'black'}}
+                };
+
+                var chart = new google.visualization.BarChart(document.getElementById('specAge_bar'));
+                chart.draw(data, options);
             }
         </script>
     </body>

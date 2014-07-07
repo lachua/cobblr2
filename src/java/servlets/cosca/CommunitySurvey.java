@@ -6,6 +6,7 @@
 package servlets.cosca;
 
 import Utilities.Year;
+import classes.ChildSurveyResults;
 import classes.PersonalSurveyResults;
 import classes.SurveyResults;
 import dbdao.ProjectTypesDAO;
@@ -53,12 +54,16 @@ public class CommunitySurvey extends HttpServlet {
                 SurveyResults pastResult = new SurveyResults(Integer.parseInt(communityName[0]), Year.getPreviousYear());
                 PersonalSurveyResults currentPerResult = new PersonalSurveyResults(Integer.parseInt(communityName[0]), Year.getCurrentYear());
                 PersonalSurveyResults pastPerResult = new PersonalSurveyResults(Integer.parseInt(communityName[0]), Year.getPreviousYear());
+                ChildSurveyResults currentChildResult = new ChildSurveyResults(Integer.parseInt(communityName[0]), Year.getCurrentYear());
+                ChildSurveyResults pastChildResult = new ChildSurveyResults(Integer.parseInt(communityName[0]), Year.getPreviousYear());
 
                 request.setAttribute("types", types);
                 request.setAttribute("currentResult", currentResult);
                 request.setAttribute("pastResult", pastResult);
                 request.setAttribute("currentPerResult", currentPerResult);
                 request.setAttribute("pastPerResult", pastPerResult);
+                request.setAttribute("currentChildResult", currentChildResult);
+                request.setAttribute("pastChildResult", pastChildResult);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/sysCOSCA/CommunitySurvey.jsp");
 //                RequestDispatcher dispatcher = request.getRequestDispatcher("/sysCOSCA/newjsp.jsp");
                 dispatcher.forward(request, response);

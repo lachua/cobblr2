@@ -49,6 +49,7 @@ public class WorkStructure_HealthCosca extends HttpServlet {
             if (request.getMethod().equals("GET")) {
             } else if (request.getMethod().equals("POST")) {
                 String project_id = request.getParameter("project_id");
+                String cancel_reason = request.getParameter("cancel_reason");
                 
                 UnavailableProjectDAO ongoingDAO = new UnavailableProjectDAO();
                 UnavailableProjectEntity ongoing = ongoingDAO.getUnavailableProject(Integer.parseInt(project_id));
@@ -62,12 +63,18 @@ public class WorkStructure_HealthCosca extends HttpServlet {
                 
                 charterDAO = new ProjectCharterDAO();
                 boolean DB = charterDAO.updateProjectStatus(Integer.parseInt(project_id), ProjectCharterDAO.CANCELED);
-                ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
-                DB = project_date.setDateCancelled(Integer.parseInt(project_id));
-                
                 if(DB){
-                charterDAO = new ProjectCharterDAO();
-                DB = charterDAO.createNewProject(charter);
+                    projectdateDAO = new ProjectCharterDateDAO();
+                    DB = projectdateDAO.setDateCancelled(Integer.parseInt(project_id));
+                }
+                if(DB){
+                    projectdateDAO = new ProjectCharterDateDAO();
+                    DB = projectdateDAO.setCancelReason(Integer.parseInt(project_id), cancel_reason);
+                }
+                if(DB){
+                    charterDAO = new ProjectCharterDAO();
+                    DB = charterDAO.createNewProject(charter);
+                }
                 charterDAO = new ProjectCharterDAO();
                 int newProject_id = charterDAO.getLastId();
                 if(DB){
@@ -79,7 +86,6 @@ public class WorkStructure_HealthCosca extends HttpServlet {
                         projecttargetDAO = new ProjectTargetDAO();
                         DB = projecttargetDAO.insertProjectTarget(newProject_id, projecttargetEntity.get(x).getOfferedanswer_id());
                     }
-                }
                 }
                 
                 if(DB){

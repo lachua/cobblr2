@@ -254,7 +254,7 @@ public class ProjectCharterDateDAO extends QueryTemplate {
     }
     
     public boolean insertNewProject(int project_id, int target_no){
-        setQuery("INSERT INTO project_charter_date VALUES (?, NULL, NULL, NULL, NULL, NULL, NULL, ?)");
+        setQuery("INSERT INTO project_charter_date (project_id, target_participant_num) VALUES (?, ?)");
         
         KeyValuePair onePair;
         
@@ -266,6 +266,24 @@ public class ProjectCharterDateDAO extends QueryTemplate {
         onePair = new KeyValuePair();
         onePair.setKey(KeyValuePair.INT);
         onePair.setValue("" + target_no);
+        getParameters().add(onePair);
+        
+        return executeUpdate();
+    }
+    
+    public boolean setCancelReason(int project_id, String reason){
+        setQuery("UPDATE project_charter_date SET cancel_reason = ? WHERE project_id = ?");
+        
+        KeyValuePair onePair;
+        
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.STRING);
+        onePair.setValue("" + reason);
+        getParameters().add(onePair);
+        
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.INT);
+        onePair.setValue("" + project_id);
         getParameters().add(onePair);
         
         return executeUpdate();
@@ -311,6 +329,11 @@ public class ProjectCharterDateDAO extends QueryTemplate {
         }
         try {
             entity.setTarget_participant_num(rs.getInt("target_participant_num"));
+        } catch (SQLException ex) {
+            Logger.getLogger(UserEntityDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            entity.setCancel_reason(rs.getString("cancel_reason"));
         } catch (SQLException ex) {
             Logger.getLogger(UserEntityDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

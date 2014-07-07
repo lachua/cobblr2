@@ -114,14 +114,22 @@
                                 <%
                                     if (unavailableProj.getStatus() == 2) {
                                 %>
-                                <div class="row-fluid span6 alert alert-block">
-                                    <form id="cancelForm" method="POST" action="WorkStructure_SeminarCosca">
-                                        <h4>
-                                            <strong>Cancel Project?</strong>
-                                            <input type="hidden" name="project_id" value="<%=unavailableProj.getProject_id()%>">
-                                            <button id="cancel" type="button" style="margin-left: 30px" class="btn btn-mini btn-danger">Cancel</button>
-                                        </h4>
-                                    </form>
+                                <div class="row-fluid">
+                                    <div class="span5 alert">
+                                        <form id="cancelForm" method="POST" action="WorkStructure_HealthCosca">
+                                            <h4>
+                                                <strong>Cancel Project?</strong>
+                                                <input type="hidden" name="project_id" value="<%=unavailableProj.getProject_id()%>">
+                                                <button id="cancelInitial" type="button" style="margin-left: 30px" class="btn btn-mini btn-danger">Cancel</button>
+                                            </h4>
+                                            <div id="cancelFinal" hidden>
+                                                <label>Are you sure you want cancel this project?</label>
+                                                <input type="text" name="cancel_reason" placeholder="Reason for cancellation" required/>    
+                                                <button id="cancelNo" type="button" class="btn btn-mini btn-warning">NO</button>
+                                                <button id="cancelYes" type="submit" class="btn btn-mini btn-danger">YES</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                                 <%}%>
                             </div>
@@ -236,12 +244,13 @@
 
         <script>
             $(document).ready(function() {
-                $('#cancel').click(function() {
-                    if (confirm('Are you sure you want cancel this project?')) {
-                        $('#cancelForm').submit();
-                    } else {
-                        // Do nothing!
-                    }
+                $('#cancelInitial').click(function() {
+                    $('#cancelFinal').slideDown("hidden");
+                    $('#cancelInitial').slideUp("hidden");
+                });
+                $('#cancelNo').click(function() {
+                    $('#cancelFinal').slideUp("hidden");
+                    $('#cancelInitial').slideDown("hidden");
                 });
             });
 
