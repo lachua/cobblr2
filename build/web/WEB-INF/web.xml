@@ -229,10 +229,6 @@
         <servlet-class>servlets.cosca.PrintDiseases</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ReportYearEnd</servlet-name>
-        <servlet-class>servlets.cosca.ReportYearEnd</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>WorkStructure_HealthCosca</servlet-name>
         <servlet-class>servlets.cosca.WorkStructure_HealthCosca</servlet-class>
     </servlet>
@@ -283,6 +279,26 @@
     <servlet>
         <servlet-name>ChildSurvey</servlet-name>
         <servlet-class>servlets.cosca.ChildSurvey</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReportAnnual</servlet-name>
+        <servlet-class>servlets.cosca.ReportAnnual</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReportEnd</servlet-name>
+        <servlet-class>servlets.cosca.ReportEnd</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReportCanceled</servlet-name>
+        <servlet-class>servlets.cosca.ReportCanceled</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReportCommunity</servlet-name>
+        <servlet-class>servlets.cosca.ReportCommunity</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReportChild</servlet-name>
+        <servlet-class>servlets.cosca.ReportChild</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -514,10 +530,6 @@
         <url-pattern>/sysCOSCA/PrintDiseases</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ReportYearEnd</servlet-name>
-        <url-pattern>/sysCOSCA/ReportYearEnd</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>WorkStructure_HealthCosca</servlet-name>
         <url-pattern>/sysCOSCA/WorkStructure_HealthCosca</url-pattern>
     </servlet-mapping>
@@ -569,6 +581,30 @@
         <servlet-name>ChildSurvey</servlet-name>
         <url-pattern>/sysCOSCA/ChildSurvey</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReportAnnual</servlet-name>
+        <url-pattern>/sysCOSCA/ReportAnnual</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReportMagnitude</servlet-name>
+        <url-pattern>/sysCOSCA/ReportMagnitude</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReportEnd</servlet-name>
+        <url-pattern>/sysCOSCA/ReportEnd</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReportCanceled</servlet-name>
+        <url-pattern>/sysCOSCA/ReportCanceled</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReportCommunity</servlet-name>
+        <url-pattern>/sysCOSCA/ReportCommunity</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReportChild</servlet-name>
+        <url-pattern>/sysCOSCA/ReportChild</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             0
@@ -577,4 +613,8 @@
     <welcome-file-list>
         <welcome-file>Login</welcome-file>
     </welcome-file-list>
+    <servlet>
+        <servlet-name>ReportMagnitude</servlet-name>
+        <servlet-class>servlets.cosca.ReportMagnitude</servlet-class>
+    </servlet>
 </web-app>

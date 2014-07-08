@@ -52,6 +52,12 @@ public class Converter {
         String x = sdf.format(cal.getTime());
         return x;
     }
+    
+    public static String toYear(Calendar cal) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+        String x = sdf.format(cal.getTime());
+        return x;
+    }
 
     public static String toStringYear(Calendar cal) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy");

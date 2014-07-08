@@ -1,3 +1,6 @@
+<%@page import="Utilities.Year"%>
+<%@page import="dbentities.ReportAnnualEntity"%>
+<%@page import="java.util.List"%>
 <%@page import="Utilities.GetPercentage"%>
 <%@page import="Utilities.Converter"%>
 <%@page import="ReportYearEndActivity.ActivityReport"%>
@@ -51,64 +54,62 @@
                                     <h4 class="box-header round-top">Annual Report</h4>         
                                     <div class="box-container-toggle">
                                         <div class="box-content">
+                                            <%
+                                                List<ReportAnnualEntity> report = (List<ReportAnnualEntity>) session.getAttribute("report");
+                                                String datestart = (String) session.getAttribute("datestart");
+                                                String dateend = (String) session.getAttribute("dateend");
+                                                
+                                            %>
+                                            
                                         <h1 align="center">Center for Social Concern and Action </h1>
                                         <h2 align="center">Annual Report </h2>
-                                        <h2 align="center">for the year 2013 - 2014</h2>
+                                        <h2 align="center">for the year <%=datestart%> - <%=dateend%></h2>
 
                                         <br><br>
 
                                         <div class="row">
-                                            <div class="col-md-6 col-md-offset-3">
-                                                <b>Projects Canceled</b>
+                                            <div class="col-md-8 col-md-offset-2">
                                                 <center>
                                                 <table cellpadding="0" cellspacing="0" class="table table-striped table-bordered" border="0" width="400"  id="tables">
                                                     <thead>
                                                         <tr>
-                                                            <th>Sickness</th>
-                                                            <th>Project Status</th>
+                                                            <th rowspan="2" style="width: 25%"><center>HEALTH PROBLEM</center></th>
+                                                            <th colspan="4"><center>PROJECT IMPLEMENTED TO ADDRESS THE PROBLEM</center></th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Projects</th>
+                                                            <th>Partner Community</th>
+                                                            <th>No. of Participants</th>
+                                                            <th>Date of Implementation</th>
                                                         </tr>
                                                     </thead>
-                                                    <tr>
-                                                        <td>1. Dengue</td>
-                                                        <td>
-                                                            <i>Projects Implemented</i><br/>
-                                                            <ul>
-                                                                <li>Sugpuin ang Dengue</li>
-                                                                <li>Fight Dengue</li>
-                                                            </ul>
-                                                            <br/>
-                                                            <i>Projects Available</i><br>
-                                                            <ul>
-                                                                <li>Stop Dengue Now</li>
-                                                            </ul>
-                                                            <br/>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2. Pneumonia</td>
-                                                        <td>
-                                                            <i>Projects Implemented</i><br/>
-                                                            <ul>
-                                                                <li>Fight Pneumonia</li>
-                                                            </ul>
-                                                            <br/>
-                                                            <i>Projects Available</i><br>
-                                                            <ul>
-                                                                <li>Stop Pneumonia Now</li>
-                                                            </ul>
-                                                            <br/>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3. Diabetes</td>
-                                                        <td>
-                                                            <i>Projects Implemented</i><br/>
-                                                            <ul>
-                                                                <li>Fight Diabetes</li>
-                                                            </ul>
-                                                            <br/>
-                                                        </td>
-                                                    </tr>
+                                                    <tbody>
+                                                        <%int count = 0;%>
+                                                        <%for(int x = 0; x < report.size(); x++){%>
+                                                        <tr>
+                                                            <%
+                                                                if(count == 0){
+                                                                    int startid = report.get(x).getProblem_id();
+                                                                for(int y = x; y < report.size(); y++ ){
+                                                                    if(startid == report.get(y).getProblem_id()){
+                                                                        count++;
+                                                                    }else{
+                                                                        break;
+                                                                    }
+                                                                }
+                                                            %>
+                                                            <td rowspan="<%=count%>"><%=report.get(x).getProblem() %></td>
+                                                            <%
+                                                                }
+                                                            %>
+                                                            <td><%=report.get(x).getProject_title() %></td>
+                                                            <td><%=report.get(x).getCommunity_name()%></td>
+                                                            <td><%=report.get(x).getParticipant_count()%></td>
+                                                            <td><%=report.get(x).getDate_target_implement()%></td>
+                                                        </tr>
+                                                        <%count--;%>
+                                                        <%}%>
+                                                    </tbody>
                                                 </table>
                                                 </center>
                                             </div>
@@ -116,9 +117,9 @@
 
                                         <br><br>
                                         <div class="container">
-                                            <p align="center">Date Printed: 2014-06-23</p>
+                                            <p class="col-md-offset-3" align="center">Date Printed: <%=Year.getCurrentDate() %></p>
                                         </div>
-                                        <form method="POST" action="ReportYearEnd">
+                                        <form method="POST" action="ReportAnnual">
                                             <button class="btn btn-primary">View as PDF</button>
                                             <a href="ReportYear" class="btn">Back</a>
                                         </form>

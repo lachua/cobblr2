@@ -1,3 +1,8 @@
+<%@page import="Utilities.Year"%>
+<%@page import="dbentities.OfferedAnswerEntity"%>
+<%@page import="dbdao.OfferedAnswerDAO"%>
+<%@page import="dbentities.ReportMagnitudeEntity"%>
+<%@page import="java.util.List"%>
 <%@page import="Utilities.GetPercentage"%>
 <%@page import="Utilities.Converter"%>
 <%@page import="ReportYearEndActivity.ActivityReport"%>
@@ -51,49 +56,52 @@
                                     <h4 class="box-header round-top">Comparative Analysis of Magnitude of Disease Report</h4>         
                                     <div class="box-container-toggle">
                                         <div class="box-content">
+                                        <%
+                                            List<ReportMagnitudeEntity> report = (List<ReportMagnitudeEntity>) session.getAttribute("report");
+                                            String datestart = (String) session.getAttribute("datestart");
+                                            String dateend = (String) session.getAttribute("dateend");
+                                            OfferedAnswerDAO dao = new OfferedAnswerDAO();
+                                            OfferedAnswerEntity answer = dao.getOfferedAnswer(report.get(0).getOfferedanswer_id());
+                                            int count = 1;
+                                        %>
                                         <h1 align="center">Center for Social Concern and Action </h1>
                                         <h2 align="center">Comparative Analysis of Magnitude of Disease Report</h2>
-                                        <h2 align="center">for the year 2013 - 2014</h2>
+                                        <h2 align="center">for the year <%=datestart%> - <%=dateend%></h2>
 
                                         <br><br>
 
                                         <div class="row">
                                             <div class="col-md-6 col-md-offset-3">
-                                                <p>The projects implemented to fight <b>Dengue</b> resulted to the following changes in magnitude after a year:</p>
+                                                <p>The projects implemented to fight <b><%=answer.getAnswertext()%></b> resulted to the following changes in magnitude after a year:</p>
                                                 <center>
-                                                <table cellpadding="0" cellspacing="0" class="table table-striped table-bordered" border="0" width="400"  id="tables">
-                                                    <thead>
-                                                        <tr>
-                                                            <th></th>
-                                                            <th>Community</th>
-                                                            <th>%Change</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tr>
-                                                        <td>1.</td>
-                                                        <td>Amihan</td>
-                                                        <td>10%</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2.</td>
-                                                        <td>Dagat-Dagatan</td>
-                                                        <td>8%</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3.</td>
-                                                        <td>Bagak</td>
-                                                        <td>55%</td>
-                                                    </tr>
-                                                </table>
+                                                    <table cellpadding="0" cellspacing="0" class="table table-striped table-bordered" border="0" width="400"  id="tables">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Community</th>
+                                                                <th>%Change</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <%for (int x = 0; x < report.size(); x++) {%>
+                                                            <tr>
+                                                                <td><%=count%>.</td>
+                                                                <td><%=report.get(x).getCommunity_name()%></td>
+                                                                <td><%=report.get(x).getPercent_change()%>%</td>
+                                                            </tr>
+                                                            <%count++;%>
+                                                            <%}%>
+                                                        </tbody>
+                                                    </table>
                                                 </center>
                                             </div>
                                         </div>
 
                                         <br><br>
                                         <div class="container">
-                                            <p align="center">Date Printed: 2014-06-23</p>
+                                            <p align="center">Date Printed: <%=Year.getCurrentDate()%></p>
                                         </div>
-                                        <form method="POST" action="ReportYearEnd">
+                                        <form method="POST" action="ReportMagnitude">
                                             <button class="btn btn-primary">View as PDF</button>
                                             <a href="ReportYear" class="btn">Back</a>
                                         </form>

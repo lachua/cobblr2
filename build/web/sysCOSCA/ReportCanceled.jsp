@@ -1,11 +1,10 @@
+
 <%@page import="Utilities.Year"%>
-<%@page import="dbentities.OfferedAnswerEntity"%>
-<%@page import="dbdao.OfferedAnswerDAO"%>
-<%@page import="dbentities.ReportMagnitudeEntity"%>
 <%@page import="java.util.List"%>
-<%@page import="Utilities.GetPercentage"%>
+<%@page import="dbentities.ReportCanceledEntity"%>
+<%@page import="dbdao.ReportCanceledDAO"%>
 <%@page import="Utilities.Converter"%>
-<%@page import="ReportYearEndActivity.ActivityReport"%>
+<%@page import="java.util.Calendar"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -47,49 +46,46 @@
             <!-- Main Content Area | Side Nav | Content -->
             <div class="container-fluid">
                 <div class="row-fluid">  
-
-                    <div class="row-fluid">
                         <div class="row">
                             <div class="col-md-10 col-md-offset-1">
-
                                 <div class="box" id="box-3">
-                                    <h4 class="box-header round-top">Comparative Analysis of Magnitude of Disease Report</h4>         
+                                    <h4 class="box-header round-top">Exception Report - Projects Cancelled</h4>         
                                     <div class="box-container-toggle">
                                         <div class="box-content">
                                         <%
-                                            List<ReportMagnitudeEntity> report = (List<ReportMagnitudeEntity>) session.getAttribute("report");
-                                            String datestart = (String) session.getAttribute("datestart");
-                                            String dateend = (String) session.getAttribute("dateend");
-                                            OfferedAnswerDAO dao = new OfferedAnswerDAO();
-                                            OfferedAnswerEntity answer = dao.getOfferedAnswer(report.get(0).getOfferedanswer_id());
-                                            int count = 1;
+                                            Calendar calstart = (Calendar) session.getAttribute("calstart");        
+                                            Calendar calend = (Calendar) session.getAttribute("calend");
+                                            
+                                            ReportCanceledDAO reportdao = new ReportCanceledDAO();
+                                            List<ReportCanceledEntity> report = reportdao.getReport(Converter.toDate(calstart), Converter.toDate(calend));
+                                            
                                         %>
                                         <h1 align="center">Center for Social Concern and Action </h1>
-                                        <h2 align="center">Comparative Analysis of Magnitude of Disease Report</h2>
-                                        <h2 align="center">for the year <%=datestart%> - <%=dateend%></h2>
+                                        <h2 align="center">Projects Cancelled</h2>
+                                        <h2 align="center">for the year <%=Converter.toYear(calstart) %> - <%=Converter.toYear(calend)%></h2>
 
                                         <br><br>
 
                                         <div class="row">
-                                            <div class="col-md-6 col-md-offset-3">
-                                                <p>The projects implemented to fight <b><%=answer.getAnswertext()%></b> resulted to the following changes in magnitude after a year:</p>
+                                            <div class="col-md-8 col-md-offset-2">
                                                 <center>
                                                     <table cellpadding="0" cellspacing="0" class="table table-striped table-bordered" border="0" width="400"  id="tables">
                                                         <thead>
                                                             <tr>
-                                                                <th></th>
-                                                                <th>Community</th>
-                                                                <th>%Change</th>
+                                                                <th>Date</th>
+                                                                <th>Partner Community</th>
+                                                                <th>Sponsoring Student Organization</th>
+                                                                <th>Reason</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <%for (int x = 0; x < report.size(); x++) {%>
                                                             <tr>
-                                                                <td><%=count%>.</td>
+                                                                <td><%=report.get(x).getDate_cancelled().toString() %></td>
                                                                 <td><%=report.get(x).getCommunity_name()%></td>
-                                                                <td><%=report.get(x).getPercent_change()%>%</td>
+                                                                <td><%=report.get(x).getOrg_name()%></td>
+                                                                <td><%=report.get(x).getCancel_reason()%></td>
                                                             </tr>
-                                                            <%count++;%>
                                                             <%}%>
                                                         </tbody>
                                                     </table>
@@ -110,7 +106,6 @@
 
                                 </div><!--/span-->
                             </div>
-                        </div> 
                     </div>
                 </div>
             </div>

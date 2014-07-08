@@ -3,13 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package servlets.cosca;
 
-import ReportYearEndActivity.ActivityReport;
+import Utilities.Converter;
+import dbdao.ReportMagnitudeDAO;
+import dbentities.ReportMagnitudeEntity;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +25,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Renliw
  */
-public class ReportYearEnd extends HttpServlet {
+public class ReportMagnitude extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,8 +42,10 @@ public class ReportYearEnd extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             if (request.getMethod().equals("GET")) {
-                String datestart = request.getParameter("datestart");
-                String dateend = request.getParameter("dateend");
+                String datestart = request.getParameter("magdatestart");
+                String dateend = request.getParameter("magdateend");
+                String disease = request.getParameter("disease");
+                String[] questionAnswer = disease.split("-");
 
                 Calendar calstart = new GregorianCalendar();
                 Calendar calend = new GregorianCalendar();
@@ -47,16 +53,18 @@ public class ReportYearEnd extends HttpServlet {
                 calstart.set(Calendar.YEAR, Integer.parseInt(datestart));
                 calend.set(Calendar.YEAR, Integer.parseInt(dateend));
 
-                ActivityReport activity = new ActivityReport(calstart, calend);
+                ReportMagnitudeDAO dao = new ReportMagnitudeDAO();
+                List<ReportMagnitudeEntity> report = dao.getReportMagnitudeEntity(Integer.parseInt(questionAnswer[0]),Integer.parseInt(questionAnswer[1]),Converter.toDate(calstart), Converter.toDate(calend));
 
                 HttpSession session = request.getSession();
-                session.setAttribute("activity", activity);
-                request.setAttribute("activity", activity);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/sysCOSCA/ReportYearEnd.jsp");
+                session.setAttribute("report", report);
+                session.setAttribute("datestart", datestart);
+                session.setAttribute("dateend", dateend);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/sysCOSCA/ReportMagnitude.jsp");
                 dispatcher.forward(request, response);
             } else if (request.getMethod().equals("POST")) {
 
-                response.sendRedirect("PrintYearEnd");
+                response.sendRedirect("PrintMagnitude");
             }
         } finally {
             out.close();
