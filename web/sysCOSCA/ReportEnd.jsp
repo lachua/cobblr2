@@ -103,7 +103,7 @@
                                                 </div>
                                                 <div class="col-md-8 col-md-offset-2">
                                                     <center>
-                                                        <div id="barGraph"></div>
+                                                        <div id="barGraph" style="height: 500px;"></div>
                                                     </center>
                                                 </div>
                                                 <div class="col-md-6 col-md-offset-3">
@@ -277,7 +277,10 @@
                                    sourceColumn: 1,
                                    type: "string",
                                    role: "annotation" },
-                                 2]);
+                                 2,{ calc: "stringify",
+                                   sourceColumn: 2,
+                                   type: "string",
+                                   role: "annotation" }]);
 
                 var options = {
                     title: 'Project per Target Health Problem',
@@ -285,7 +288,7 @@
                 };
 
                 var chart = new google.visualization.BarChart(document.getElementById('barGraph'));
-                chart.draw(data, options);
+                chart.draw(view, options);
             }
             
         </script>

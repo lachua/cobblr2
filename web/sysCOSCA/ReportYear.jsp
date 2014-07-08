@@ -104,7 +104,7 @@
                                                             <%
                                                                 for (int x = 0; x < 10; x++) {
                                                             %>
-                                                            <option value="<%=Year.getCurrentYear() - x%>"><%=Year.getCurrentYear() - x%> </option> 
+                                                            <option value="<%=Year.getCurrentYear() - x-1%>"><%=Year.getCurrentYear() - x-1%> </option> 
                                                             <%
                                                                 }
                                                             %>
@@ -139,7 +139,7 @@
                                                             <%
                                                                 for (int x = 0; x < 10; x++) {
                                                             %>
-                                                            <option value="<%=Year.getCurrentYear() - x + 1%>"><%=Year.getCurrentYear() - x + 1%> </option> 
+                                                            <option value="<%=Year.getCurrentYear() - x-1%>"><%=Year.getCurrentYear() - x-1%> </option> 
                                                             <%
                                                                 }
                                                             %>
@@ -149,7 +149,7 @@
                                                             <%
                                                                 for (int x = 0; x < 10; x++) {
                                                             %>
-                                                            <option value="<%=Year.getCurrentYear() - x + 1%>"><%=Year.getCurrentYear() - x + 1%> </option> 
+                                                            <option value="<%=Year.getCurrentYear() - x%>"><%=Year.getCurrentYear() - x %> </option> 
                                                             <%
                                                                 }
                                                             %>
@@ -222,7 +222,7 @@
                                                             <%
                                                                 for (int x = 0; x < 10; x++) {
                                                             %>
-                                                            <option value="<%=Year.getCurrentYear() - x + 1%>"><%=Year.getCurrentYear() - x + 1%> </option> 
+                                                            <option value="<%=Year.getCurrentYear() - x %>"><%=Year.getCurrentYear() - x%> </option> 
                                                             <%
                                                                 }
                                                             %>
@@ -256,7 +256,7 @@
                                                             <%
                                                                 for (int x = 0; x < 10; x++) {
                                                             %>
-                                                            <option value="<%=Year.getCurrentYear() - x + 1%>"><%=Year.getCurrentYear() - x + 1%> </option> 
+                                                            <option value="<%=Year.getCurrentYear() - x %>"><%=Year.getCurrentYear() - x%> </option> 
                                                             <%
                                                                 }
                                                             %>
@@ -300,7 +300,7 @@
                                                             <%
                                                                 for (int x = 0; x < 10; x++) {
                                                             %>
-                                                            <option value="<%=Year.getCurrentYear() - x%>"><%=Year.getCurrentYear() - x%> </option> 
+                                                            <option value="<%=Year.getCurrentYear() - x+1%>"><%=Year.getCurrentYear() - x+1%> </option> 
                                                             <%
                                                                 }
                                                             %>
@@ -339,7 +339,7 @@
                                                             <%
                                                                 for (int x = 0; x < 10; x++) {
                                                             %>
-                                                            <option value="<%=Year.getCurrentYear() - x%>"><%=Year.getCurrentYear() - x%> </option> 
+                                                            <option value="<%=Year.getCurrentYear() - x-1%>"><%=Year.getCurrentYear() - x-1%> </option> 
                                                             <%
                                                                 }
                                                             %>
@@ -387,7 +387,7 @@
                                                             <%
                                                                 for (int x = 0; x < 10; x++) {
                                                             %>
-                                                            <option value="<%=Year.getCurrentYear() - x%>"><%=Year.getCurrentYear() - x%> </option> 
+                                                            <option value="<%=Year.getCurrentYear() - x-1%>"><%=Year.getCurrentYear() - x-1%> </option> 
                                                             <%
                                                                 }
                                                             %>
@@ -411,8 +411,8 @@
                                         </div>
 
                                         <!--Project Evaluation-->
-                                        <div id="report" style="display: none;">
-                                            <form class="form-horizontal" method="GET" action="ReportProjectEvaluation">
+                                        <div id="report8" style="display: none;">
+                                            <form class="form-horizontal" method="GET" action="ReportProject">
                                                 <div class="control-group">
                                                     <label class="control-label" for="project">Select Project</label>
                                                     <div class="controls">

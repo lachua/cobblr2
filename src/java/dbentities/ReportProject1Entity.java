@@ -16,6 +16,7 @@ public class ReportProject1Entity {
     private String title;
     private String target;
     private String partner_community;
+    private String location;
     private String sponsor;
     private Date date_target_implement;
     private Date date_implemented;
@@ -132,6 +133,20 @@ public class ReportProject1Entity {
      */
     public void setObjectives(String objectives) {
         this.objectives = objectives;
+    }
+
+    /**
+     * @return the location
+     */
+    public String getLocation() {
+        return location;
+    }
+
+    /**
+     * @param location the location to set
+     */
+    public void setLocation(String location) {
+        this.location = location;
     }
     
 }

@@ -1,4 +1,5 @@
 
+<%@page import="Utilities.Converter"%>
 <%@page import="classes.ChildSurveyResults"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="classes.PersonalSurveyResults"%>
@@ -2283,13 +2284,13 @@
                     ['Vitamins Taken', '' + lastYear, '' + thisYear],
             <% oneSet = currentChildResult.getSurveyResults().get(71);%>
             <% twoSet = pastChildResult.getSurveyResults().get(71);%>
-                    ['Vitamin A', <%=twoSet.getAnswerset().get(216)%>, <%=oneSet.getAnswerset().get(216)%>],
-                    ['Vitamin B12', <%=twoSet.getAnswerset().get(217)%>, <%=oneSet.getAnswerset().get(217)%>],
-                    ['Vitamin C', <%=twoSet.getAnswerset().get(218)%>, <%=oneSet.getAnswerset().get(218)%>],
-                    ['Vitamin D', <%=twoSet.getAnswerset().get(219)%>, <%=oneSet.getAnswerset().get(219)%>],
-                    ['Iron', <%=twoSet.getAnswerset().get(220)%>, <%=oneSet.getAnswerset().get(220)%>],
-                    ['Zinc', <%=twoSet.getAnswerset().get(221)%>, <%=oneSet.getAnswerset().get(221)%>],
-                    ['Multi-Vitamins', <%=twoSet.getAnswerset().get(222)%>, <%=oneSet.getAnswerset().get(222)%>]
+                    ['Vitamin A', <%=Converter.ifNullReturnZero(twoSet.getAnswerset().get(216))%>, <%=Converter.ifNullReturnZero(oneSet.getAnswerset().get(216))%>],
+                    ['Vitamin B12', <%=Converter.ifNullReturnZero(twoSet.getAnswerset().get(217))%>, <%=Converter.ifNullReturnZero(oneSet.getAnswerset().get(217))%>],
+                    ['Vitamin C', <%=Converter.ifNullReturnZero(twoSet.getAnswerset().get(218))%>, <%=Converter.ifNullReturnZero(oneSet.getAnswerset().get(218))%>],
+                    ['Vitamin D', <%=Converter.ifNullReturnZero(twoSet.getAnswerset().get(219))%>, <%=Converter.ifNullReturnZero(oneSet.getAnswerset().get(219))%>],
+                    ['Iron', <%=Converter.ifNullReturnZero(twoSet.getAnswerset().get(220))%>, <%=Converter.ifNullReturnZero(oneSet.getAnswerset().get(220))%>],
+                    ['Zinc', <%=Converter.ifNullReturnZero(twoSet.getAnswerset().get(221))%>, <%=Converter.ifNullReturnZero(oneSet.getAnswerset().get(221))%>],
+                    ['Multi-Vitamins', <%=Converter.ifNullReturnZero(twoSet.getAnswerset().get(222))%>, <%=Converter.ifNullReturnZero(oneSet.getAnswerset().get(222))%>]
                 ]);
 
                 var options = {

@@ -126,4 +126,12 @@ public class Converter {
  
         return is;
     }
+    
+    public static Object ifNullReturnZero(Object in){
+        if(in == null){
+            return 0;
+        }else{
+            return in;
+        }
+    }
 }
