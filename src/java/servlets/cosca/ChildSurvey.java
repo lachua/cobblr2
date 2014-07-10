@@ -55,7 +55,7 @@ public class ChildSurvey extends HttpServlet {
                 int lastMemeber_id = membersDAO.getNewMemberId();
 
                 for (int x = 0; x < surveyData.getNumOfFamilyMem().length; x++) {
-                    if (Integer.parseInt(surveyData.getAge()[x]) >= 0 && Integer.parseInt(surveyData.getAge()[x]) <= 5) {
+                    if (Double.parseDouble(surveyData.getAge()[x]) >= 0 && Double.parseDouble(surveyData.getAge()[x]) <= 5) {
                         childname.add(surveyData.getName()[x]);
                         childpersonId.add(lastMemeber_id + x + 1);
                     }
@@ -72,15 +72,17 @@ public class ChildSurvey extends HttpServlet {
                 ArrayList<String> childname = new ArrayList();
                 ArrayList<Integer> childpersonId = new ArrayList();
                 ArrayList<Integer> childSurveyIndex = new ArrayList();
+                ArrayList<Double> childage = new ArrayList();
 
                 CommunityMembersDAO membersDAO = new CommunityMembersDAO();
                 int lastMemeber_id = membersDAO.getNewMemberId();
 
                 for (int x = 0; x < surveyData.getNumOfFamilyMem().length; x++) {
-                    if (Integer.parseInt(surveyData.getAge()[x]) >= 0 && Integer.parseInt(surveyData.getAge()[x]) <= 5) {
+                    if (Double.parseDouble(surveyData.getAge()[x]) >= 0 && Double.parseDouble(surveyData.getAge()[x]) <= 5) {
                         childname.add(surveyData.getName()[x]);
                         childpersonId.add(lastMemeber_id + x + 1);
                         childSurveyIndex.add(x);
+                        childage.add(Double.parseDouble(surveyData.getAge()[x]));
                     }
                 }
 
@@ -169,7 +171,7 @@ public class ChildSurvey extends HttpServlet {
                                 members = new CommunityMembersEntity();
                                 members.setFamily_id(newfamily_id);
                                 members.setGivenname(name[x]);
-                                members.setAge(Integer.parseInt(age[x]));
+                                members.setAge((int)Double.parseDouble(age[x]));
                                 members.setGender(gender[x]);
                                 members.setPosition(positionInFamily[x]);
                                 membersDAO = new CommunityMembersDAO();
@@ -233,7 +235,7 @@ public class ChildSurvey extends HttpServlet {
 
                                     //Age
                                     answer.setQuestion_id(39);
-                                    answer.setOfferedanswer_id(ageAnswer(Integer.parseInt(age[x])));
+                                    answer.setOfferedanswer_id(ageAnswer((int)Double.parseDouble(age[x])));
                                     personAns = new PersonAnswerDAO();
                                     upDB = personAns.insertAnswer(answer);
 
@@ -492,7 +494,7 @@ public class ChildSurvey extends HttpServlet {
                                 answer = new AnswerEntity();
                                 answer.setSurvey_id(5);
                                 answer.setQuestion_id(71);
-                                answer.setOfferedanswer_id(Integer.parseInt(request.getParameter("childage-" + childpersonId.get(x))));
+                                answer.setOfferedanswer_id(AnswerId(childage.get(x)));
                                 answer.setId(childpersonId.get(x));
                                 answer.setDate_answered(surveyYear);
                                 answer.setOtheranswer(" ");
@@ -656,6 +658,30 @@ public class ChildSurvey extends HttpServlet {
 
         return ans;
     }
+     
+    private int AnswerId(double age) {
+        if(age >= 0 &&  age <= 0.03){
+            return 207;
+        }else if(age >= 0.04 &&  age <= 0.06){
+            return 208;
+        }else if(age >= 0.07 &&  age <= 0.09){
+            return 209;
+        }else if(age >= 0.10 &&  age <= 0.11){
+            return 210;
+        }else if(age == 1 ){
+            return 211;
+        }else if(age == 2 ){
+            return 212;
+        }else if(age == 3 ){
+            return 213;
+        }else if(age == 4 ){
+            return 214;
+        }else if(age == 5 ){
+            return 215;
+        }else{
+            return 207;
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -695,5 +721,7 @@ public class ChildSurvey extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    
 
 }

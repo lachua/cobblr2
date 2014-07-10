@@ -14,6 +14,7 @@ import java.util.Date;
  */
 public class ReportProject1Entity {
     private String title;
+    private String type;
     private String target;
     private String partner_community;
     private String location;
@@ -147,6 +148,20 @@ public class ReportProject1Entity {
      */
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    /**
+     * @return the type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(String type) {
+        this.type = type;
     }
     
 }

@@ -2141,7 +2141,7 @@
 
                 //Immunization Previous
                 var data = new google.visualization.DataTable();
-                        data.addColumn('string', 'Sickness');
+                        data.addColumn('string', 'Vaccine');
                 data.addColumn('number', 'Number of Immunized People');
                 data.addRows([
             <%
@@ -2152,25 +2152,29 @@
                 }
             %>
                     ['BCG', <%=oneSet.getAnswerset().get(130)%>],
+                    ['Flu', <%=oneSet.getAnswerset().get(138)%>],
+                    ['Measles', <%=oneSet.getAnswerset().get(137)%>],
+                    ['Hepatitis', <%=oneSet.getAnswerset().get(139)%>],
                     ['OPT1', <%=oneSet.getAnswerset().get(131)%>],
                     ['OPT2', <%=oneSet.getAnswerset().get(132)%>],
                     ['OPT3', <%=oneSet.getAnswerset().get(133)%>],
                     ['OPV1', <%=oneSet.getAnswerset().get(134)%>],
                     ['OPV2', <%=oneSet.getAnswerset().get(135)%>],
                     ['OPV3', <%=oneSet.getAnswerset().get(136)%>],
-                    ['Measles', <%=oneSet.getAnswerset().get(137)%>],
-                    ['Flu', <%=oneSet.getAnswerset().get(138)%>],
-                    ['Hepatitis', <%=oneSet.getAnswerset().get(139)%>],
                     ['Complete', <%=Immunization.getComplete(alP)%>],
                     ['Incomplete', <%=Immunization.getIncomplete(alP)%>]
                 ]);
+                data.setCell(10, 0, '','Complete',{'className': 'bold-blue'});
+                data.setCell(11, 0, '','Incomplete',{'className': 'bold-red'});
+                data.setCell(10, 1, '',<%=Immunization.getComplete(alP)%>,{'className': 'bold-blue align-right'});
+                data.setCell(11, 1, '',<%=Immunization.getIncomplete(alP)%>,{'className': 'bold-red align-right'});
 
                 var table = new google.visualization.Table(document.getElementById('immunizationPrevious_pie'));
                 table.draw(data, options);
 
                 //Immunization Current
                 var data = new google.visualization.DataTable();
-                    data.addColumn('string', 'Sickness');
+                    data.addColumn('string', 'Vaccine');
                 data.addColumn('number', 'Number of Immunized People');
                 data.addRows([
                     <%
@@ -2181,18 +2185,22 @@
                         }
                     %>
                     ['BCG', <%=oneSet.getAnswerset().get(130)%>],
+                    ['Flu', <%=oneSet.getAnswerset().get(138)%>],
+                    ['Hepatitis', <%=oneSet.getAnswerset().get(139 )%>],
+                    ['Measles', <%=oneSet.getAnswerset().get(137)%>],
                     ['OPT1', <%=oneSet.getAnswerset().get(131)%>],
                     ['OPT2', <%=oneSet.getAnswerset().get(132)%>],
                     ['OPT3', <%=oneSet.getAnswerset().get(133)%>],
                     ['OPV1', <%=oneSet.getAnswerset().get(134)%>],
                     ['OPV2', <%=oneSet.getAnswerset().get(135)%>],
                     ['OPV3', <%=oneSet.getAnswerset().get(136)%>],
-                    ['Measles', <%=oneSet.getAnswerset().get(137)%>],
-                    ['Flu', <%=oneSet.getAnswerset().get(138)%>],
-                    ['Hepatitis', <%=oneSet.getAnswerset().get(139 )%>],
                     ['Complete', <%=Immunization.getComplete(alC)%>],
                     ['Incomplete', <%=Immunization.getIncomplete(alC)%>]
                 ]);
+                data.setCell(10, 0, '','Complete',{'className': 'bold-blue'});
+                data.setCell(11, 0, '','Incomplete',{'className': 'bold-red'});
+                data.setCell(10, 1, '',<%=Immunization.getComplete(alP)%>,{'className': 'bold-blue align-right'});
+                data.setCell(11, 1, '',<%=Immunization.getIncomplete(alP)%>,{'className': 'bold-red align-right'});
 
                 var table = new google.visualization.Table(document.getElementById('immunizationCurrent_pie'));
                 table.draw(data, options);
@@ -2282,8 +2290,8 @@
                 //Vitamins Taken
                 var data = google.visualization.arrayToDataTable([
                     ['Vitamins Taken', '' + lastYear, '' + thisYear],
-            <% oneSet = currentChildResult.getSurveyResults().get(71);%>
-            <% twoSet = pastChildResult.getSurveyResults().get(71);%>
+            <% oneSet = currentChildResult.getSurveyResults().get(74);%>
+            <% twoSet = pastChildResult.getSurveyResults().get(74);%>
                     ['Vitamin A', <%=Converter.ifNullReturnZero(twoSet.getAnswerset().get(216))%>, <%=Converter.ifNullReturnZero(oneSet.getAnswerset().get(216))%>],
                     ['Vitamin B12', <%=Converter.ifNullReturnZero(twoSet.getAnswerset().get(217))%>, <%=Converter.ifNullReturnZero(oneSet.getAnswerset().get(217))%>],
                     ['Vitamin C', <%=Converter.ifNullReturnZero(twoSet.getAnswerset().get(218))%>, <%=Converter.ifNullReturnZero(oneSet.getAnswerset().get(218))%>],
@@ -2367,8 +2375,12 @@
                     ['Complete', <%=Immunization.getComplete(alP)%>],
                     ['Incomplete', <%=Immunization.getIncomplete(alP)%>]
                 ]);
+                data.setCell(11, 0, '','Complete',{'className': 'bold-blue'});
+                data.setCell(12, 0, '','Incomplete',{'className': 'bold-red'});
+                data.setCell(11, 1, '',<%=Immunization.getComplete(alP)%>,{'className': 'bold-blue align-right'});
+                data.setCell(12, 1, '',<%=Immunization.getIncomplete(alP)%>,{'className': 'bold-red align-right'});
 
-                var table = new google.visualization.Table(document.getElementById('vaccinationCurrent_table'));
+                var table = new google.visualization.Table(document.getElementById('vaccinationPrevious_table'));
                 table.draw(data, options);
 
                 //Vaccination Current
@@ -2397,8 +2409,12 @@
                     ['Complete', <%=Immunization.getComplete(alC)%>],
                     ['Incomplete', <%=Immunization.getIncomplete(alC)%>]
                 ]);
+                data.setCell(11, 0, '','Complete',{'className': 'bold-blue'});
+                data.setCell(12, 0, '','Incomplete',{'className': 'bold-red'});
+                data.setCell(11, 1, '',<%=Immunization.getComplete(alP)%>,{'className': 'bold-blue align-right'});
+                data.setCell(12, 1, '',<%=Immunization.getIncomplete(alP)%>,{'className': 'bold-red align-right'});
 
-                var table = new google.visualization.Table(document.getElementById('vaccinationPrevious_table'));
+                var table = new google.visualization.Table(document.getElementById('vaccinationCurrent_table'));
                 table.draw(data, options);
                 
             }

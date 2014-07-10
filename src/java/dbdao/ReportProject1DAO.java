@@ -25,6 +25,7 @@ public class ReportProject1DAO extends QueryTemplate{
     public List<ReportProject1Entity> getReport(int project_id){
         setQuery("SELECT \n" +
                 "    pc.title,\n" +
+                "    pc.type,\n " +
                 "    oa.answertext AS 'target',\n" +
                 "    c.name AS 'partner_community',\n" +
                 "    c.address AS 'location',\n" +
@@ -78,6 +79,11 @@ public class ReportProject1DAO extends QueryTemplate{
 
         try {
             entity.setTitle(rs.getString("title"));
+        } catch (SQLException ex) {
+            Logger.getLogger(QuestionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            entity.setType(rs.getString("type"));
         } catch (SQLException ex) {
             Logger.getLogger(QuestionDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

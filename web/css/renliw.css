@@ -94,3 +94,16 @@ For validation
     width: 40px;
     border: 1px solid;
 }
+
+.bold-blue{
+    color: blue;
+    font-weight: bold;
+}
+.bold-red{
+    color: red;
+    font-weight: bold;
+}
+
+.align-right{
+    text-align: right;
+}

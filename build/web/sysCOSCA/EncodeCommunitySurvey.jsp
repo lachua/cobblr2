@@ -52,7 +52,7 @@
             <tr id="familyMember-{0}">
                 <input name="numOfFamilyMem" type="hidden">
                 <td><input class="input-small" id="name" name="name" type="text" placeholder="person {0}" required></input></td>
-                <td><input class="input-mini" id="age" name="age" type="number" required></input></td>
+                <td><input class="input-mini" id="age" name="age" step="any" type="number" required></input><br><center><button class="btn sbtn-warning btn-mini btn-link" type="button" onClick="childAge();">child age?</button></center></td>
                 <td>
                     <select class="input-mini" id="gender" name="gender" required>
                         <option value>Select..</option>
@@ -638,6 +638,12 @@
 
     <!-- Simplenso Scripts -->
     <script src="../scripts/simplenso/simplenso.js"></script>
+    
+    <script>
+          function childAge() {
+              alert("Use decimal places for child months. \nEX. \n      1 month old; Enter '0.01'\n    10 months old; Enter '0.1'");
+          };
+    </script>
 
     <!-- JQuery Valdation -->
     <script src="../jquery/jquery-validate/jquery.validate.js"></script>

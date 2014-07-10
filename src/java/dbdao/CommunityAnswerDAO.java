@@ -186,6 +186,48 @@ public class CommunityAnswerDAO extends QueryTemplate {
         }
     }
     
+     public AnswerEntity getLatestSurveyDate(int community_id, Date start, Date end) {
+        setQuery("SELECT \n" +
+                "	NULL AS survey_id,  \n" +
+                "	NULL AS question_id, \n" +
+                "	NULL AS offeredanswer_id, \n" +
+                "	NULL AS family_id, \n" +
+                "		date_answered, \n" +
+                "	NULL AS otheranswer\n" +
+                "FROM community_family cf\n" +
+                "JOIN community_answer ca\n" +
+                "ON cf.id = ca.family_id\n" +
+                "WHERE community_id = ?\n" +
+                "	AND (YEAR(date_answered) >= ? && YEAR(date_answered) <= ?)\n" +
+                "ORDER BY date_created DESC\n" +
+                "Limit 1");
+        
+        KeyValuePair onePair;
+
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.INT);
+        onePair.setValue("" + community_id);
+        getParameters().add(onePair);        
+        
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.DATE);
+        onePair.setValue("" + start);
+        getParameters().add(onePair);
+        
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.DATE);
+        onePair.setValue("" + end);
+        getParameters().add(onePair);
+
+        List<AnswerEntity> results = executeQuery();
+
+        if (results != null) {
+            return results.get(0);
+        } else {
+            return null;
+        }
+    }   
+    
     public List<AnswerEntity> getAllAnswers() {
         setQuery("select * from community_answer");
 

@@ -68,7 +68,7 @@
                                         <form method="POST" action="ChildSurvey" id="surveyForm" class="form-horizontal">
                                             <%
                                                 ArrayList<String> childname = (ArrayList<String>) request.getAttribute("childname");
-                                                ArrayList<Integer> childpersonId = (ArrayList<Integer>) request.getAttribute("childpersonId");
+                                               ArrayList<Integer> childpersonId = (ArrayList<Integer>) request.getAttribute("childpersonId");
                                             
                                                 if(childname.size()>0){
                                                     for(int x = 0; x < childname.size(); x++){
@@ -76,10 +76,11 @@
                                             
                                             <fieldset>
                                                 <legend>Encode Survey for <%=childname.get(x)%></legend>
-                                            <div class="control-group">
+                                                <!-- 
+                                           <div class="control-group">
                                                 <label class="control-label" for="childage">Specific Age:</label>
                                                 <div class="controls">
-                                                    <select name="childage-<%=childpersonId.get(x)%>" class="chzn-select">
+                                                    <select name="childage-childpersonId.get(x)" class="chzn-select">
                                                         <option value="207">0-3 months old</option>
                                                         <option value="208">4-6 months old</option>
                                                         <option value="209">7-9 months old</option>
@@ -91,8 +92,7 @@
                                                         <option value="215">5 years old</option>
                                                     </select>
                                                 </div>
-                                            </div>
-
+                                            </div>-->
                                             <div class="control-group">
                                                 <label class="control-label" for="height">Height:</label>
                                                 <div class="controls">

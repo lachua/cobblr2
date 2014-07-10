@@ -89,6 +89,10 @@
                                                     <tr>
                                                         <td>Project Title</td>
                                                         <td><%=report1.get(0).getTitle() %></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Project Type</td>
+                                                        <td><%=report1.get(0).getType() %></td>
                                                     </tr> 
                                                     <tr>
                                                         <td>Target Health Problem</td>
@@ -113,7 +117,7 @@
                                                         <td><%=report1.get(0).getSponsor()%></td>
                                                     </tr> 
                                                     <tr>
-                                                        <td>Date Implementation</td>
+                                                        <td>Date of Implementation</td>
                                                         <td><%=report1.get(0).getDate_target_implement()%></td>
                                                     </tr> 
                                                     <tr>

@@ -80,14 +80,14 @@
                                                     <div class="controls">
                                                         <select id="reportType" name="reportType" class="chzn-select input-xxlarge">
                                                             <option value="0"></option>
-                                                            <option value="1">Top Diseases Reports</option>
                                                             <option value="2">Annual Report</option>
                                                             <option value="3">Comparative Analysis of Magnitude of Disease Report</option>
-                                                            <option value="4">Year End Report</option>
                                                             <option value="6">Community Health Review</option>
+                                                            <option value="5">Exception Report- Project Cancelled</option>
                                                             <option value="7">Health Review of Children Ages 0-5</option>
                                                             <option value="8">Project Summary Report</option>
-                                                            <option value="5">Exception Report- Project Cancelled</option>
+                                                            <option value="1">Top Diseases Reports</option>
+                                                            <option value="4">Year End Report</option>
                                                         </select>
                                                     </div>
                                                 </div>

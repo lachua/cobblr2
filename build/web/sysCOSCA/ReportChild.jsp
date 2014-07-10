@@ -1,4 +1,6 @@
 
+<%@page import="dbdao.CommunityAnswerDAO"%>
+<%@page import="dbentities.AnswerEntity"%>
 <%@page import="dbentities.ReportChild7Entity"%>
 <%@page import="dbentities.ReportChild6Entity"%>
 <%@page import="dbentities.ReportChild5Entity"%>
@@ -74,6 +76,9 @@
                                             CommunityListDAO comdao = new CommunityListDAO();
                                             CommunityListEntity com = comdao.getCommunity(Integer.parseInt(commId));
                                             
+                                            CommunityAnswerDAO ansdao = new CommunityAnswerDAO();
+                                            AnswerEntity ans = ansdao.getLatestSurveyDate(Integer.parseInt(commId), Converter.toDate(calstart),  Converter.toDate(calend));
+                                            
                                             ReportChild1DAO report1dao = new ReportChild1DAO();
                                             ReportChild2DAO report2dao = new ReportChild2DAO();
                                             ReportChild3DAO report3dao = new ReportChild3DAO();
@@ -97,12 +102,13 @@
 
                                         <br>
                                         
-                                        <h3 align="center">Community: <%=com.getName() %></h3>
+                                        <h2 align="center">Community: <%=com.getName() %></h2>
+                                        <h3 align="center">As of <%=Converter.toString(ans.getDate_answered()) %></h3>
                                         <br><br>
 
                                         <div class="row">
                                             <div class="col-md-8 col-md-offset-2">
-                                                <p>Population of Children Ages 0-5: <%=report1.get(0).getTotal()%></p>
+                                                <h2>Population of Children Ages 0-5: <%=report1.get(0).getTotal()%></h2>
                                                 <center>
                                                     <div id="age"></div>
                                                 </center>
@@ -110,7 +116,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-8 col-md-offset-2">
-                                                <p>Vitamin Deficiency</p>
+                                                <h2>Vitamin Deficiency</h2>
                                                 <center>
                                                     <div id="vitamin"></div>
                                                 </center>
@@ -118,7 +124,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-8 col-md-offset-2">
-                                                <p>Malnutrition</p>
+                                                <h2>Malnutrition</h2>
                                                 <center>
                                                     <div id="malnutrition"></div>
                                                 </center>
@@ -126,7 +132,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-8 col-md-offset-2">
-                                                <p>New Born Screening</p>
+                                                <h2>New Born Screening</h2>
                                                 <center>
                                                     <div id="newborn"></div>
                                                 </center>
@@ -134,7 +140,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-8 col-md-offset-2">
-                                                <p>Immunization</p>
+                                                <h2>Immunization</h2>
                                                 <center>
                                                     <div id="immunization"></div>
                                                 </center>
@@ -192,7 +198,7 @@
                     <%}%>
                 ]);
 
-                string = 'Age';
+                string = '';
                 if (<%=report1.get(0).getTotal() %> == 0) {
                     string = empty;
                 }
@@ -222,7 +228,6 @@
                                    role: "annotation" }]);
 
                 var options = {
-                    title: 'Vitamin Deficiency',
                     vAxis: {title: 'Vitamin Deficiency', titleTextStyle: {color: 'black'}}
                 };
 
@@ -245,7 +250,6 @@
                                    role: "annotation" }]);
 
                 var options = {
-                    title: 'Malnutrition',
                     vAxis: {title: 'Malnutrition', titleTextStyle: {color: 'black'}}
                 };
 
@@ -261,7 +265,7 @@
                   
                 ]);
 
-                string = 'New Born Screening';
+                string = '';
                 if (<%=report1.get(0).getTotal() %> == 0) {
                     string = empty;
                 }

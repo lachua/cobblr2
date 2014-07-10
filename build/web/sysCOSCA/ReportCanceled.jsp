@@ -74,8 +74,8 @@
                                                             <tr>
                                                                 <th>Date</th>
                                                                 <th>Partner Community</th>
-                                                                <th>Sponsoring Student Organization</th>
-                                                                <th>Reason</th>
+                                                                <th width="20%">Sponsoring Student Organization</th>
+                                                                <th width="40%">Reason</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
