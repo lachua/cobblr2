@@ -3,6 +3,8 @@
     Created on : Jun 10, 2014, 9:37:10 PM
     Author     : Renliw
 --%>
+<%@page import="Utilities.Year"%>
+<%@page import="dbdao.ChildAgeDAO"%>
 <%@page import="dbentities.OfferedAnswerEntity"%>
 <%@page import="dbdao.OfferedAnswerDAO"%>
 <%@page import="java.util.ArrayList"%>
@@ -34,6 +36,12 @@
         <!--[if lt IE 9]>
           <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
+        
+        <style>
+            .child li{
+                font-size: smaller;
+            }
+        </style>
         
         <!-- Le fav and touch icons -->
         <link rel="shortcut icon" href="../images/ico/favicon.ico" />
@@ -170,14 +178,28 @@
                                                                badgeword = "Low";
                                                                imagetype[x] = "../images/markers/green_star.png";
                                                            }
+                                                           
+                                                           ChildAgeDAO childdao;
+                                                            childdao = new ChildAgeDAO();
+                                                            int currentchildM = childdao.getGenderCount(comList.get(x).getId(), Year.getCurrentYear(), "M");
+                                                            childdao = new ChildAgeDAO();
+                                                            int currentchildF = childdao.getGenderCount(comList.get(x).getId(), Year.getCurrentYear(), "F");
                                                         %>
                                                             <tr>
                                                                 <td><button style="text-align: left;" id="com-<%=x%>" class="btn btn-link"><%=comList.get(x).getName() %></button></td>
                                                                 <td><%=filterList.get(x).getTotal_community_members() %></td>
-                                                                <td><%=filterList.get(x).getTotal_affected() %></td>
+                                                                <td>
+                                                                    <%=filterList.get(x).getTotal_affected() %>
+                                                                    <ul class="child">
+                                                                        <li>Total Children: <%=currentchildM+currentchildF %></li>
+                                                                        <li>Male Children: <%=currentchildM%></li>
+                                                                        <li>Female Children: <%=currentchildF%></li>
+                                                                    </ul>
+                                                                </td>
                                                                 <td><%=String.format("%.2f",filterList.get(x).getPercent_affected()) %>%</td>
                                                                 <td><span class="badge <%=badgetype%>"><%=badgeword%></span></td>
                                                             </tr>
+                                                            
                                                         <%}%>
                                                     </tbody>
                                                 </table>

@@ -7,6 +7,7 @@
 package servlets.cosca;
 
 import Utilities.Year;
+import dbdao.ChildAgeDAO;
 import dbdao.CommunityListDAO;
 import dbdao.FilterDAO;
 import dbentities.CommunityListEntity;
@@ -68,7 +69,6 @@ public class MapFilters extends HttpServlet {
                         clEntity = clDAO.getCommunity(filterList.get(x).getCommunity_id());
                         comlist.add(clEntity);
                     }
-                    
                     
                     request.setAttribute("comlist", comlist);                    
                     request.setAttribute("filterList", filterList);

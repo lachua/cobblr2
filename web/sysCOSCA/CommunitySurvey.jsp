@@ -1,4 +1,5 @@
 
+<%@page import="dbentities.ChildAgeEntity"%>
 <%@page import="Utilities.Converter"%>
 <%@page import="classes.ChildSurveyResults"%>
 <%@page import="java.util.HashMap"%>
@@ -84,6 +85,10 @@
                     PersonalSurveyResults pastPerResult = (PersonalSurveyResults) request.getAttribute("pastPerResult");
                     ChildSurveyResults currentChildResult = (ChildSurveyResults) request.getAttribute("currentChildResult");
                     ChildSurveyResults pastChildResult = (ChildSurveyResults) request.getAttribute("pastChildResult");
+                    int currentchildM = (Integer) request.getAttribute("currentchildM");
+                    int currentchildF = (Integer) request.getAttribute("currentchildF");
+                    int pastchildM = (Integer) request.getAttribute("pastchildM");
+                    int pastchildF = (Integer) request.getAttribute("pastchildF");
                     int thisYear = Year.getCurrentYear();
                     int lastYear = Year.getPreviousYear();
                     QuestionAnswerSet oneSet, twoSet;
@@ -947,11 +952,19 @@
                                                     <strong>No. of Males Surveyed:</strong> <%=currentResult.getNumMales()%> Males <br/>
                                                     <strong>No. of Females Surveyed:</strong> <%=currentResult.getNumFemales()%> Females <br/>
                                                     <br/>
+                                                    <strong>No. of Children Surveyed:</strong> <%=currentchildM + currentchildF%> Children <br/>
+                                                    <strong>No. of Male Children Surveyed:</strong> <%=currentchildM%> Males <br/>
+                                                    <strong>No. of Female Children Surveyed:</strong> <%=currentchildF%> Females <br/>
+                                                    <br/><br/>
                                                     <strong><u><%=lastYear%> Surveys</u></strong><br />
                                                     <strong>No. of Families Surveyed:</strong> <%=pastResult.getNumFamilies()%> Families <br/>
                                                     <strong>No. of Individuals Surveyed:</strong> <%=pastResult.getNumIndividuals()%> Individuals <br/>
                                                     <strong>No. of Males Surveyed:</strong> <%=pastResult.getNumMales()%> Males <br/>
                                                     <strong>No. of Females Surveyed:</strong> <%=pastResult.getNumFemales()%> Females <br/>
+                                                    <br/>
+                                                    <strong>No. of Children Surveyed:</strong> <%=pastchildM + pastchildF%> Children <br/>
+                                                    <strong>No. of Male Children Surveyed:</strong> <%=pastchildM%> Males <br/>
+                                                    <strong>No. of Female Children Surveyed:</strong> <%=pastchildF%> Females <br/>
                                                     <br/>
                                                     <button type="submit" name="action" value="EncodeCommunitySurvey" class="btn btn-primary"> Add Surveys</button><br />
                                                 </li>

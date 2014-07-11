@@ -110,7 +110,7 @@
                                             <div class="col-md-8 col-md-offset-2">
                                                 <h2>Population of Children Ages 0-5: <%=report1.get(0).getTotal()%></h2>
                                                 <center>
-                                                    <div id="age"></div>
+                                                    <div id="age" style="height: 300px;"></div>
                                                 </center>
                                             </div>
                                         </div>
@@ -118,7 +118,7 @@
                                             <div class="col-md-8 col-md-offset-2">
                                                 <h2>Vitamin Deficiency</h2>
                                                 <center>
-                                                    <div id="vitamin"></div>
+                                                    <div id="vitamin" style="height: 300px;"></div>
                                                 </center>
                                             </div>
                                         </div>
@@ -134,7 +134,7 @@
                                             <div class="col-md-8 col-md-offset-2">
                                                 <h2>New Born Screening</h2>
                                                 <center>
-                                                    <div id="newborn"></div>
+                                                    <div id="newborn" style="height: 300px;"></div>
                                                 </center>
                                             </div>
                                         </div>
@@ -260,8 +260,8 @@
                 //New Born Screening
                 var data = google.visualization.arrayToDataTable([
                     ['New Born Screening', 'No. of Children'],
-                    ['<%=report6.get(0).getNewborn()%>', <%=report2.get(0).getCount()%>],
-                    ['<%=report6.get(1).getNewborn()%>', <%=report2.get(1).getCount()%>]
+                    ['With', <%=report2.get(0).getCount()%>],
+                    ['Without', <%=report2.get(1).getCount()%>]
                   
                 ]);
 

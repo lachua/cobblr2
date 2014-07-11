@@ -6,6 +6,8 @@
 
 package dbentities;
 
+import java.util.Date;
+
 /**
  *
  * @author Renliw
@@ -22,6 +24,8 @@ public class ProjectCharterEntity {
     private Integer istemplate;
     private String status;
     private String type;
+    private Date date_created;
+    private Date meetingdate;
 
     public ProjectCharterEntity() {
     }
@@ -189,6 +193,34 @@ public class ProjectCharterEntity {
      */
     public void setType(String type) {
         this.type = type;
+    }
+
+    /**
+     * @return the date_created
+     */
+    public Date getDate_created() {
+        return date_created;
+    }
+
+    /**
+     * @param date_created the date_created to set
+     */
+    public void setDate_created(Date date_created) {
+        this.date_created = date_created;
+    }
+
+    /**
+     * @return the meetingdate
+     */
+    public Date getMeetingdate() {
+        return meetingdate;
+    }
+
+    /**
+     * @param meetingdate the meetingdate to set
+     */
+    public void setMeetingdate(Date meetingdate) {
+        this.meetingdate = meetingdate;
     }
     
     

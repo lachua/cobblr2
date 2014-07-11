@@ -9,10 +9,13 @@ import Utilities.Year;
 import classes.ChildSurveyResults;
 import classes.PersonalSurveyResults;
 import classes.SurveyResults;
+import dbdao.ChildAgeDAO;
 import dbdao.ProjectTypesDAO;
+import dbentities.ChildAgeEntity;
 import dbentities.ProjectTypesEntity;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -56,7 +59,18 @@ public class CommunitySurvey extends HttpServlet {
                 PersonalSurveyResults pastPerResult = new PersonalSurveyResults(Integer.parseInt(communityName[0]), Year.getPreviousYear());
                 ChildSurveyResults currentChildResult = new ChildSurveyResults(Integer.parseInt(communityName[0]), Year.getCurrentYear());
                 ChildSurveyResults pastChildResult = new ChildSurveyResults(Integer.parseInt(communityName[0]), Year.getPreviousYear());
-
+                
+                
+                ChildAgeDAO childdao;
+                childdao = new ChildAgeDAO();
+                int currentchildM = childdao.getGenderCount(Integer.parseInt(communityName[0]), Year.getCurrentYear(), "M");
+                childdao = new ChildAgeDAO();
+                int currentchildF = childdao.getGenderCount(Integer.parseInt(communityName[0]), Year.getCurrentYear(), "F");
+                childdao = new ChildAgeDAO();
+                int pastchildM = childdao.getGenderCount(Integer.parseInt(communityName[0]), Year.getPreviousYear(), "M");
+                childdao = new ChildAgeDAO();
+                int pastchildF = childdao.getGenderCount(Integer.parseInt(communityName[0]), Year.getPreviousYear(), "F");
+                
                 request.setAttribute("types", types);
                 request.setAttribute("currentResult", currentResult);
                 request.setAttribute("pastResult", pastResult);
@@ -64,6 +78,10 @@ public class CommunitySurvey extends HttpServlet {
                 request.setAttribute("pastPerResult", pastPerResult);
                 request.setAttribute("currentChildResult", currentChildResult);
                 request.setAttribute("pastChildResult", pastChildResult);
+                request.setAttribute("currentchildM", currentchildM);
+                request.setAttribute("currentchildF", currentchildF);
+                request.setAttribute("pastchildM", pastchildM);
+                request.setAttribute("pastchildF", pastchildF);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/sysCOSCA/CommunitySurvey.jsp");
 //                RequestDispatcher dispatcher = request.getRequestDispatcher("/sysCOSCA/newjsp.jsp");
                 dispatcher.forward(request, response);

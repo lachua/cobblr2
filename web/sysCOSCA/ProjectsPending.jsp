@@ -1,3 +1,5 @@
+<%@page import="dbentities.ProjectCharterEntity"%>
+<%@page import="dbdao.ProjectCharterDAO"%>
 <%@page import="dbentities.ProjectCharterDateEntity"%>
 <%@page import="dbdao.ProjectCharterDateDAO"%>
 <%@page import="Utilities.CompareDate"%>
@@ -101,7 +103,11 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <%for (int x = 0; x < unavailableProj.size(); x++) {%>
+                                                    <%
+                                                        for (int x = 0; x < unavailableProj.size(); x++) {
+                                                            ProjectCharterDAO dao = new ProjectCharterDAO();
+                                                            ProjectCharterEntity entity = dao.getClosedCharterDateAsMeetingDate(unavailableProj.get(x).getCommunity_id(), unavailableProj.get(x).getType());
+                                                    %>
                                                     <tr>
                                                         <td><%=unavailableProj.get(x).getTitle()%></td>
                                                         <td><%=unavailableProj.get(x).getType()%></td>
@@ -114,11 +120,23 @@
                                                         <%
                                                             if (CompareDate.compareDates(unavailableProj.get(x).getMeetingdate()) < 0) {
                                                         %>
-                                                        <td><span class="badge badge-info"><%=unavailableProj.get(x).getMeetingdate()%></span></td>
+                                                        <td>
+                                                            <span class="badge badge-info"><%=unavailableProj.get(x).getMeetingdate()%></span>
+                                                            <br>
+                                                            <span class="badge badge-inverse"><%=entity.getMeetingdate() %></span>
+                                                        </td>
                                                             <%} else if (CompareDate.compareDates(unavailableProj.get(x).getMeetingdate()) > 0) {%>
-                                                        <td><span class="badge badge-important"><%=unavailableProj.get(x).getMeetingdate()%></span></td>
+                                                        <td>
+                                                            <span class="badge badge-important"><%=unavailableProj.get(x).getMeetingdate()%></span>
+                                                            <br>
+                                                            <span class="badge badge-inverse"><%=entity.getMeetingdate() %></span>
+                                                        </td>
                                                             <%} else {%>
-                                                        <td><span class="badge badge-warning"><%=unavailableProj.get(x).getMeetingdate()%></span></td>
+                                                        <td>
+                                                            <span class="badge badge-warning"><%=unavailableProj.get(x).getMeetingdate()%></span>
+                                                            <br>
+                                                            <span class="badge badge-inverse"><%=entity.getMeetingdate() %></span>  
+                                                        </td>
                                                             <%}%>
                                                         <td><button name="ConfirmProject" value="<%=unavailableProj.get(x).getProject_id()%>" class="btn btn-primary">Details</button></td>
                                                     </tr>
