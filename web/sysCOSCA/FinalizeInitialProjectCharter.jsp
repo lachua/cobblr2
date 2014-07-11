@@ -1,3 +1,7 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="dbentities.ProjectCharterTargetEntity"%>
+<%@page import="dbentities.ProjectCharterAndDatesEntity"%>
+<%@page import="java.util.List"%>
 <%@page import="dbdao.OfferedAnswerDAO"%>
 <%@page import="dbentities.ProjectCharterEntity"%>
 <!DOCTYPE html>
@@ -27,6 +31,27 @@
         <!--[if lt IE 9]>
           <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
+        
+        <style>
+            tr td:first-child{
+                font-weight: bold;
+            }
+            td:nth-child(2) {  
+                font-size: 120%;
+            }
+            td:nth-child(3) {  
+                font-style: italic;
+            }
+            td:nth-child(4) {  
+                font-style: italic;
+            }
+            td:nth-child(5) {  
+                font-style: italic;
+            }
+            td:nth-child(6) {  
+                font-style: italic;
+            }
+        </style>
 
         <!-- Le fav and touch icons -->
         <link rel="shortcut icon" href="../images/ico/favicon.ico" />
@@ -64,53 +89,111 @@
                                                 ProjectCharterEntity initialCharter = (ProjectCharterEntity) request.getAttribute("initialCharter");
                                                 String[] target_sickness = (String[]) request.getAttribute("target_sickness");
                                                 String target_number = (String) request.getAttribute("target_number");
-
+                                                List<ProjectCharterTargetEntity> pastCharters = ( List<ProjectCharterTargetEntity>) request.getAttribute("pastCharters");
+                                                ArrayList<Integer> comIndex = new ArrayList();
+                                                int comID = pastCharters.get(0).getId();
+                                                comIndex.add(0);
+                                                for(int x = 0; x < pastCharters.size(); x++){
+                                                    if(comID != pastCharters.get(x).getId()){
+                                                        comIndex.add(x);
+                                                        comID = pastCharters.get(x).getId();
+                                                    }
+                                                }
                                             %>
-
-                                            <h3><%=initialCharter.getTitle()%></h3>
-                                            <blockquote>
-                                                <p>For Community: <%=communityName%></p>
-                                                <p>Prepared by: <%=initialCharter.getPreparedby()%></p>
-                                            </blockquote>
-
-                                            <h3>Brief Description</h3>
-                                            <blockquote>
-                                                <p><%=initialCharter.getDescription()%></p>
-                                            </blockquote>
-
-                                            <h3>Main Objective</h3>
-                                            <blockquote>
-                                                <p><%=initialCharter.getObjectives()%></p>
-                                            </blockquote>
                                             
-                                            <h3>Target Concern(s)</h3>
-                                            <blockquote>
-                                                <ul>
-                                                    <%
-                                                    String answertext ="";
-                                                    for(int x = 0; x < target_sickness.length; x++){
-                                                        OfferedAnswerDAO answer = new OfferedAnswerDAO();
-                                                        answertext = answer.getOfferedAnswer(Integer.parseInt(target_sickness[x])).getAnswertext();
-                                                    %>
-                                                    <li><%=answertext %></li>
-                                                    <%}%>
-                                                </ul>
-                                            </blockquote>
                                             
-                                            <h3>Number of Beneficiaries</h3>
-                                            <blockquote>
-                                                <p><%=target_number%> people</p>
-                                            </blockquote>
-
-                                            <h3>Project Scope</h3>
-                                            <blockquote>
-                                                <p><%=initialCharter.getScope()%></p>
-                                            </blockquote>
-
-                                            <h3>Additional Requirements</h3>
-                                            <blockquote>
-                                                <p><%=initialCharter.getRequirements()%></p>
-                                            </blockquote>
+                                            <h3>For Community: <%=communityName%></h3>
+                                            <table class="table table-striped table-bordered" >
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>New Project</th>
+                                                        <th colspan="3">Past Projects</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Project Title:</td>
+                                                        <td width="30%"><%=initialCharter.getTitle() %></td>
+                                                        <%for(int x = 0; x < comIndex.size(); x++){%>
+                                                        <td><%=pastCharters.get(comIndex.get(x)).getTitle() %></td>
+                                                        <%}%>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Type of Project:</td>
+                                                        <td><%=initialCharter.getType() %></td>
+                                                        <%for(int x = 0; x < comIndex.size(); x++){%>
+                                                        <td><%=pastCharters.get(comIndex.get(x)).getType()%></td>
+                                                        <%}%>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Target Concern(s):</td>
+                                                        <td>
+                                                            <ul>
+                                                                <%
+                                                                String answertext ="";
+                                                                for(int x = 0; x < target_sickness.length; x++){
+                                                                    OfferedAnswerDAO answer = new OfferedAnswerDAO();
+                                                                    answertext = answer.getOfferedAnswer(Integer.parseInt(target_sickness[x])).getAnswertext();
+                                                                %>
+                                                                <li><%=answertext %></li>
+                                                                <%}%>
+                                                            </ul>
+                                                        </td>
+                                                        <%for(int x = 0; x < comIndex.size(); x++){%>
+                                                        <td>
+                                                            <ul>
+                                                                <%
+                                                                int currentCom = pastCharters.get(x).getId();
+                                                                for(int y = comIndex.get(x); y < pastCharters.size(); y++){
+                                                                  if(pastCharters.get(y).getId() ==  currentCom){
+                                                                    OfferedAnswerDAO answer = new OfferedAnswerDAO();
+                                                                    answertext = answer.getOfferedAnswer(pastCharters.get(y).getOfferedanswer_id()).getAnswertext();
+                                                                %>
+                                                                <li><%=answertext %></li>
+                                                                <%}}%>
+                                                            </ul>
+                                                        </td>
+                                                        <%}%>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Brief Description:</td>
+                                                        <td><%=initialCharter.getDescription() %></td>
+                                                        <%for(int x = 0; x < comIndex.size(); x++){%>
+                                                        <td><%=pastCharters.get(comIndex.get(x)).getDescription()%></td>
+                                                        <%}%>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Main Objective:</td>
+                                                        <td><%=initialCharter.getObjectives() %></td>
+                                                        <%for(int x = 0; x < comIndex.size(); x++){%>
+                                                        <td><%=pastCharters.get(comIndex.get(x)).getObjectives()%></td>
+                                                        <%}%>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Number of Beneficiaries:</td>
+                                                        <td><%=target_number %></td>
+                                                        <%for(int x = 0; x < comIndex.size(); x++){%>
+                                                        <td><%=pastCharters.get(comIndex.get(x)).getTarget_participant_num()%></td>
+                                                        <%}%>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Project Scope:</td>
+                                                        <td><%=initialCharter.getScope() %></td>
+                                                        <%for(int x = 0; x < comIndex.size(); x++){%>
+                                                        <td><%=pastCharters.get(comIndex.get(x)).getScope()%></td>
+                                                        <%}%>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Additional Requirements:</td>
+                                                        <td><%=initialCharter.getRequirements() %></td>
+                                                        <%for(int x = 0; x < comIndex.size(); x++){%>
+                                                        <td><%=pastCharters.get(comIndex.get(x)).getRequirements()%></td>
+                                                        <%}%>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            
                                             <div class="form-actions">
                                                 <button name="action" value="ProjectList" type="submit" class="btn btn-primary">Finish</button>
                                                 <a href="CreateInitialProjectCharter" class="btn">Back</a>

@@ -9,10 +9,12 @@ import Utilities.Year;
 import dbdao.NotificationDAO;
 import dbdao.ProjectCharterDAO;
 import dbdao.ProjectCharterDateDAO;
+import dbdao.ProjectCharterTargetDAO;
 import dbdao.ProjectTargetDAO;
 import dbdao.StudentOrgDAO;
 import dbentities.NotificationEntity;
 import dbentities.ProjectCharterEntity;
+import dbentities.ProjectCharterTargetEntity;
 import dbentities.StudentOrgEntity;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -53,11 +55,15 @@ public class FinalizeInitialProjectCharter extends HttpServlet {
                 
                 String[] target_sickness = (String[]) session.getAttribute("target_sickness");
                 String target_number = (String) session.getAttribute("target_number");
+                
+                ProjectCharterTargetDAO dao = new ProjectCharterTargetDAO();
+                List<ProjectCharterTargetEntity> pastCharters = dao.getCharters(initialCharter.getCommunity_id(), initialCharter.getType());
 
                 request.setAttribute("communityName", communityName[1]);
                 request.setAttribute("initialCharter", initialCharter);
                 request.setAttribute("target_sickness", target_sickness);
                 request.setAttribute("target_number", target_number);
+                request.setAttribute("pastCharters", pastCharters);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/sysCOSCA/FinalizeInitialProjectCharter.jsp");
                 dispatcher.forward(request, response);
             } else if (request.getMethod().equals("POST")) {

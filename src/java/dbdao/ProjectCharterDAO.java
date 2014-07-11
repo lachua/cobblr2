@@ -35,43 +35,6 @@ public class ProjectCharterDAO extends QueryTemplate {
     public static final int CANCELED = 6;
 
     //Get default project charter of type
-    public ProjectCharterEntity getClosedCharterDateAsMeetingDate(int community_id, String typeOfProject) {
-        setQuery("SELECT \n" +
-                "	id, community_id, title, \n" +
-                "	description, preparedby, \n" +
-                "	objectives, scope, requirements, \n" +
-                "	istemplate, status, type, date_created, \n" +
-                "	date_closed AS meetingdate\n" +
-                "FROM project_charter pc\n" +
-                "JOIN project_charter_date pcd\n" +
-                "	ON pc.id = pcd.project_id\n" +
-                "WHERE status = 4 \n" +
-                "	AND type = ?\n" +
-                "	AND community_id = ?\n" +
-                "ORDER BY date_closed DESC");
-
-        KeyValuePair onePair;
-
-        onePair = new KeyValuePair();
-        onePair.setKey(KeyValuePair.STRING);
-        onePair.setValue("" + typeOfProject);
-        getParameters().add(onePair);
-        
-        onePair = new KeyValuePair();
-        onePair.setKey(KeyValuePair.INT);
-        onePair.setValue("" + community_id);
-        getParameters().add(onePair);
-
-        List<ProjectCharterEntity> results = executeQuery();
-
-        if (results != null) {
-            return results.get(0);
-        } else {
-            return null;
-        }
-    }
-    
-    //Get default project charter of type
     public ProjectCharterEntity getDefaultCharterTemplate(String typeOfProject) {
         setQuery("select * from project_charter where type = ? and istemplate = 1");
 
