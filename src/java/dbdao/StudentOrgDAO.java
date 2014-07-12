@@ -33,6 +33,41 @@ public class StudentOrgDAO extends QueryTemplate{
             return null;
         }
     }
+    
+    public int getLastId() {
+        setQuery("select * from studentorg order by id desc");
+
+        List<StudentOrgEntity> results = executeQuery();
+
+        if (results != null) {
+            return results.get(0).getId();
+        } else {
+            return -1;
+        }
+    }
+    
+    public boolean insertOrg(int newId, String orgName, String orgType) {
+        setQuery("INSERT INTO studentorg VALUE (?, ?, ?)");
+        
+        KeyValuePair onePair;
+
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.INT);
+        onePair.setValue("" + newId);
+        getParameters().add(onePair);
+
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.STRING);
+        onePair.setValue("" + orgName);
+        getParameters().add(onePair);
+
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.STRING);
+        onePair.setValue("" + orgType);
+        getParameters().add(onePair);
+
+        return executeUpdate();
+    }
 
     @Override
     protected Object storeResults(ResultSet rs) {

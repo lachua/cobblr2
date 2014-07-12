@@ -112,7 +112,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
+                                                    <tr>asdas
                                                         <td>Project Title:</td>
                                                         <td width="30%"><%=initialCharter.getTitle() %></td>
                                                         <%for(int x = 0; x < comIndex.size(); x++){%>

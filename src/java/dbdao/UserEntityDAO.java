@@ -79,11 +79,82 @@ public class UserEntityDAO extends QueryTemplate {
 
         List<UserEntity> results = executeQuery();
 
-        if (results != null) {
+        if (results != null && !results.isEmpty()) {
             return results.get(0);
         } else {
             return null;
         }
+    }
+    
+    public List<UserEntity> getCOSCAAccounts() {
+        setQuery("SELECT id, username, password, name, description  \n"
+                + "FROM users inner join studentorg on users.org_id = studentorg.id\n"
+                + "WHERE users.org_id = 1;");
+
+        List<UserEntity> results = executeQuery();
+
+        if (results != null && !results.isEmpty()) {
+            return results;
+        } else {
+            return null;
+        }
+    }
+    
+    public List<UserEntity> getSOrgAccounts() {
+        setQuery("SELECT id, username, password, name, description  \n"
+                + "FROM users inner join studentorg on users.org_id = studentorg.id\n"
+                + "WHERE users.org_id > 1;");
+
+        List<UserEntity> results = executeQuery();
+
+        if (results != null && !results.isEmpty()) {
+            return results;
+        } else {
+            return null;
+        }
+    }
+    
+    public boolean insertUser(int orgId, String user, String pass) {
+        setQuery("INSERT INTO users VALUE (?, ?, ?)");
+        
+        KeyValuePair onePair;
+
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.STRING);
+        onePair.setValue("" + user);
+        getParameters().add(onePair);
+
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.STRING);
+        onePair.setValue("" + pass);
+        getParameters().add(onePair);
+
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.INT);
+        onePair.setValue("" + orgId);
+        getParameters().add(onePair);
+
+        return executeUpdate();
+    }
+    
+    public boolean editPass(String user, String pass) {
+        setQuery("UPDATE users\n" +
+                "SET password = ?\n" +
+                "WHERE username=?;");
+        
+        KeyValuePair onePair;
+
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.STRING);
+        onePair.setValue("" + pass);
+        getParameters().add(onePair);
+
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.STRING);
+        onePair.setValue("" + user);
+        getParameters().add(onePair);
+
+        return executeUpdate();
     }
 
     @Override

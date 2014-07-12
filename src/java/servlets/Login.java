@@ -56,6 +56,12 @@ public class Login extends HttpServlet {
 
                 if (thisUser != null) {
                         if (thisUser.getId() == 0) {
+                            session.setAttribute("PERMISSION", "admin");
+                            session.setAttribute("USERNAME", thisUser.getUsername());
+                            session.setAttribute("UserEntity", thisUser);
+                            response.sendRedirect("sysAdmin/AdminHome");
+
+                        } else if (thisUser.getId() == 1) {
                             session.setAttribute("PERMISSION", "cosca");
                             session.setAttribute("USERNAME", thisUser.getUsername());
                             session.setAttribute("UserEntity", thisUser);

@@ -304,6 +304,18 @@
         <servlet-name>ReportProject</servlet-name>
         <servlet-class>servlets.cosca.ReportProject</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminHome</servlet-name>
+        <servlet-class>servlets.admin.AdminHome</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountCreateSOrg</servlet-name>
+        <servlet-class>servlets.admin.AccountCreateSOrg</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountEditSOrg</servlet-name>
+        <servlet-class>servlets.admin.AccountEditSOrg</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -612,6 +624,18 @@
     <servlet-mapping>
         <servlet-name>ReportProject</servlet-name>
         <url-pattern>/sysCOSCA/ReportProject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminHome</servlet-name>
+        <url-pattern>/sysAdmin/AdminHome</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountCreateSOrg</servlet-name>
+        <url-pattern>/sysAdmin/AccountCreateSOrg</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountEditSOrg</servlet-name>
+        <url-pattern>/sysAdmin/AccountEditSOrg</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
