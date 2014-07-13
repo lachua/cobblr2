@@ -357,7 +357,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-actions">
-                                                    <button id="comm" type="button" name="comm" class="btn btn-primary">See Exception Report- Project Cancelled</button>
+                                                    <button id="comm" type="button" name="comm" class="btn btn-primary">See Community Health Review</button>
                                                 </div>
                                             </form>
                                         </div>

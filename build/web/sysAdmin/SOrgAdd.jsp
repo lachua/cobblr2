@@ -1,6 +1,7 @@
 
-<%@page import="dbentities.UserEntity"%>
 <%@page import="java.util.List"%>
+<%@page import="dbentities.StudentOrgEntity"%>
+<%@page import="dbdao.StudentOrgDAO"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -53,75 +54,60 @@
                     <div class="row-fluid">
                         <div class="span12">
                             <div class="box">
-                                <h4 class="box-header round-top">Edit Exiting Account</h4>         
+                                <h4 class="box-header round-top">Add New Student Organization</h4>         
                                 <div class="box-container-toggle">
                                     <div class="box-content">
                                         
-                                        <form id="createForm" method="POST" action="AccountEditSOrg" class="form-horizontal">
+                                        <form id="createForm" method="POST" action="SOrgAdd" class="form-horizontal">
                                         <fieldset>
-                                            <legend>Edit Exiting Account</legend>
-                                            <div class="control-group">
-                                                <label class="control-label" for="type">Account Type:</label>
+                                            <legend>Add New Student Organization</legend>
+                                            
+                                            <%
+                                                if(request.getAttribute("isExisting") != null){ 
+                                                    String orgType = (String) request.getAttribute("orgType");
+                                                    String neworg = (String) request.getAttribute("neworg");
+                                            %>
+                                            <div class="control-group" id="StudentOrg">
+                                                <label class="control-label" for="orgType">Organization Under:</label>
                                                 <div class="controls">
-                                                    <select id="type" name="type" class="chzn-select">
-                                                        <option value="1">COSCA</option>
-                                                        <option value="2">Student Organization</option>
+                                                    <select id="orgType" name="orgType" class="chzn-select">
+                                                        <option value="USG" <%if(orgType.equals("USG")){%>selected<%}%>>USG</option>
+                                                        <option value="CSO" <%if(orgType.equals("CSO")){%>selected<%}%>>CSO</option>
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div id="coscaDiv">
-                                                <%List<UserEntity> cosca = (List<UserEntity>) request.getAttribute("cosca");%>
-                                                <div class="control-group" id="StudentOrg">
-                                                    <label class="control-label" for="coscaAccts">Account Name:</label>
-                                                    <div class="controls">
-                                                        <select id="coscaAccts" name="coscaAccts" class="chzn-select">
-                                                            <%for(int x = 0; x < cosca.size(); x++){%>
-                                                            <option value="<%=cosca.get(x).getUsername()%>"><%=cosca.get(x).getUsername()%></option>
-                                                            <%}%>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="studentDiv" hidden>
-                                                <%List<UserEntity> sorg = (List<UserEntity>) request.getAttribute("sorg");%>
-                                                <div class="control-group">
-                                                    <label class="control-label" for="studentAccts">Account Name:</label>
-                                                    <div class="controls">
-                                                        <select id="studentAccts" name="studentAccts" class="chzn-select">
-                                                            <%for(int x = 0; x < sorg.size(); x++){%>
-                                                            <option value="<%=sorg.get(x).getUsername()%>"><%=sorg.get(x).getUsername()%></option>
-                                                            <%}%>
-                                                        </select>
-                                                    </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="neworg">New Organization Name:</label>
+                                                <div class="controls">
+                                                    <input type="text" id="neworg" name="neworg" placeholder="Org Name" value="<%=neworg%>" required/>
                                                 </div>
                                             </div>
                                             <div class="control-group">
-                                                <label class="control-label" for="oldpassword">Old Password:</label>
                                                 <div class="controls">
-                                                    <input type="password" id="oldpassword" name="oldpassword" placeholder="old password" value="" required/>
+                                                    <span class=" badge badge-important">Organization Name Already Taken</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <%}else{%>
+                                            
+                                            <div class="control-group" id="StudentOrg">
+                                                <label class="control-label" for="orgType">Organization Under:</label>
+                                                <div class="controls">
+                                                    <select id="orgType" name="orgType" class="chzn-select">
+                                                        <option value="USG">USG</option>
+                                                        <option value="CSO">CSO</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="control-group">
-                                                <label class="control-label" for="newpassword">New Password:</label>
+                                                <label class="control-label" for="neworg">New Organization Name:</label>
                                                 <div class="controls">
-                                                    <input type="password" id="newpassword" name="newpassword" placeholder="new password" value="" required/>
-                                                </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label" for="confpassword">Confirm Password:</label>
-                                                <div class="controls">
-                                                    <input type="password" id="confpassword" name="confpassword" placeholder="confirm password" required/>
-                                                </div>
-                                            </div>
-                                            <%if(request.getAttribute("isExisting") != null){ %>
-                                            <div class="control-group">
-                                                <div class="controls">
-                                                    <span class=" badge badge-important">Old Password Incorrect</span>
+                                                    <input type="text" id="neworg" name="neworg" placeholder="Org Name" value="" required/>
                                                 </div>
                                             </div>
                                             <%}%>
                                             <div class="form-actions">
-                                                <button type="submit" class="btn btn-primary">Edit Account</button>
+                                                <button type="submit" class="btn btn-primary">Add New Organization</button>
                                                 <a href="AdminHome" class="btn">Cancel</a>
                                             </div>
                                         </fieldset>
@@ -179,16 +165,6 @@
         <!-- JQuery Valdation -->
         <script src="../jquery/jquery-validate/jquery.validate.js"></script>
         <script>
-            $('#type').on('change', function() {
-                    if (this.value == 1) {
-                        $('#coscaDiv').slideDown();
-                        $('#studentDiv').slideUp();
-                    } else if (this.value == 2) {
-                        $('#coscaDiv').slideUp();
-                        $('#studentDiv').slideDown();
-                    }
-            });
-            
             // validate signup form on keyup and submit
             $("#createForm").validate({
                 rules: {

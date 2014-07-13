@@ -44,11 +44,10 @@ public class AccountCreateSOrg extends HttpServlet {
             } else if (request.getMethod().equals("POST")) {
                 int type = Integer.parseInt(request.getParameter("type"));
                 String orgType = request.getParameter("orgType");
-                String orgName = request.getParameter("orgName");
+                int usgId = Integer.parseInt(request.getParameter("usgId"));
+                int csoId = Integer.parseInt(request.getParameter("csoId"));
                 String newusername = request.getParameter("newusername");
                 String newpassword = request.getParameter("newpassword");
-                StudentOrgDAO studentDAO = new StudentOrgDAO();
-                int newID = studentDAO.getLastId()+1;
                 boolean addDB = false;
                 
                 UserEntityDAO userDAO = new UserEntityDAO();
@@ -59,16 +58,19 @@ public class AccountCreateSOrg extends HttpServlet {
                         userDAO = new UserEntityDAO();
                         addDB = userDAO.insertUser(type, newusername, newpassword);
                     }else if(type == 2){
-                        studentDAO = new StudentOrgDAO();
-                        addDB = studentDAO.insertOrg(newID, orgName, orgType);
-                        if(addDB){
+                        if(orgType.equals("USG")){
                             userDAO = new UserEntityDAO();
-                            addDB = userDAO.insertUser(newID, newusername, newpassword);
+                            addDB = userDAO.insertUser(usgId, newusername, newpassword);
+                        }else{
+                            userDAO = new UserEntityDAO();
+                            addDB = userDAO.insertUser(csoId, newusername, newpassword);
                         }
                     }
                     
                     if (addDB) {
-                        RequestDispatcher dispatcher = request.getRequestDispatcher("/sysAdmin/AccountCreated.jsp");
+                        request.setAttribute("type", "Account");
+                        request.setAttribute("action", "Created");
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("/sysAdmin/AccountDone.jsp");
                         dispatcher.forward(request, response);
                     } else {
                         response.sendRedirect("ErrorInDB.jsp");
@@ -76,7 +78,8 @@ public class AccountCreateSOrg extends HttpServlet {
                 }else{
                     request.setAttribute("type", type);
                     request.setAttribute("orgType", orgType);
-                    request.setAttribute("orgName", orgName);
+                    request.setAttribute("usgId",usgId);
+                    request.setAttribute("csoId",csoId);
                     request.setAttribute("newusername", newusername);
                     request.setAttribute("newpassword", newpassword);
                     request.setAttribute("isExisting", true);

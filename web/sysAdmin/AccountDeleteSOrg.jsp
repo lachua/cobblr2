@@ -57,7 +57,7 @@
                                 <div class="box-container-toggle">
                                     <div class="box-content">
                                         
-                                        <form id="createForm" method="POST" action="AccountEditSOrg" class="form-horizontal">
+                                        <form id="createForm" method="POST" action="AccountDeleteSOrg" class="form-horizontal">
                                         <fieldset>
                                             <legend>Edit Exiting Account</legend>
                                             <div class="control-group">
@@ -95,33 +95,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="control-group">
-                                                <label class="control-label" for="oldpassword">Old Password:</label>
-                                                <div class="controls">
-                                                    <input type="password" id="oldpassword" name="oldpassword" placeholder="old password" value="" required/>
-                                                </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label" for="newpassword">New Password:</label>
-                                                <div class="controls">
-                                                    <input type="password" id="newpassword" name="newpassword" placeholder="new password" value="" required/>
-                                                </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label" for="confpassword">Confirm Password:</label>
-                                                <div class="controls">
-                                                    <input type="password" id="confpassword" name="confpassword" placeholder="confirm password" required/>
-                                                </div>
-                                            </div>
-                                            <%if(request.getAttribute("isExisting") != null){ %>
-                                            <div class="control-group">
-                                                <div class="controls">
-                                                    <span class=" badge badge-important">Old Password Incorrect</span>
-                                                </div>
-                                            </div>
-                                            <%}%>
                                             <div class="form-actions">
-                                                <button type="submit" class="btn btn-primary">Edit Account</button>
+                                                <button type="submit" class="btn btn-primary">Delete Account</button>
                                                 <a href="AdminHome" class="btn">Cancel</a>
                                             </div>
                                         </fieldset>

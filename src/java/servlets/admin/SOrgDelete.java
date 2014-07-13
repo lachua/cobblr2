@@ -7,8 +7,7 @@
 package servlets.admin;
 
 import dbdao.StudentOrgDAO;
-import dbdao.UserEntityDAO;
-import dbentities.UserEntity;
+import dbentities.StudentOrgEntity;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -22,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Renliw
  */
-public class AccountEditSOrg extends HttpServlet {
+public class SOrgDelete extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,61 +38,36 @@ public class AccountEditSOrg extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             if (request.getMethod().equals("GET")) {
-                UserEntityDAO userDAO;
-                userDAO = new UserEntityDAO();
-                List<UserEntity> cosca = userDAO.getCOSCAAccounts();
-                userDAO = new UserEntityDAO();
-                List<UserEntity> sorg = userDAO.getSOrgAccounts();
-                
-                request.setAttribute("cosca", cosca);
-                request.setAttribute("sorg", sorg);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/sysAdmin/AccountEditSOrg.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/sysAdmin/SOrgDelete.jsp");
                 dispatcher.forward(request, response);
             } else if (request.getMethod().equals("POST")) {
-                int type = Integer.parseInt(request.getParameter("type"));
-                String coscaAccts = request.getParameter("coscaAccts");
-                String studentAccts = request.getParameter("studentAccts");
-                String oldpassword = request.getParameter("oldpassword");
-                String newpassword = request.getParameter("newpassword");
-                StudentOrgDAO studentDAO = new StudentOrgDAO();
-                int newID = studentDAO.getLastId()+1;
+                String orgType = request.getParameter("orgType");
+                int usgId = Integer.parseInt(request.getParameter("usgId"));
+                int csoId = Integer.parseInt(request.getParameter("csoId"));
                 boolean addDB = false;
                 
-                UserEntityDAO userDAO = new UserEntityDAO();
-                UserEntity thisUser = userDAO.getUserDetails(studentAccts, oldpassword);
+                StudentOrgDAO studentDAO = new StudentOrgDAO();
+                String org;
                 
-                if(type == 1){
-                    userDAO = new UserEntityDAO();
-                    thisUser = userDAO.getUserDetails(coscaAccts, oldpassword);
-                }
-                
-                if(thisUser != null){
-                    userDAO = new UserEntityDAO();
-                    if(type == 1){
-                        addDB = userDAO.editPass(coscaAccts, newpassword);
-                    }else{
-                        addDB = userDAO.editPass(studentAccts, newpassword);
-                    }
-                    
-                    if (addDB) {
-                        request.setAttribute("type", "Account");
-                        request.setAttribute("action", "Edited");
-                        RequestDispatcher dispatcher = request.getRequestDispatcher("/sysAdmin/AccountDone.jsp");
-                        dispatcher.forward(request, response);
-                    } else {
-                        response.sendRedirect("ErrorInDB.jsp");
-                    }
+                if(orgType.equals("USG")){
+                    org = studentDAO.getUserDetails(usgId).getName();
+                    studentDAO = new StudentOrgDAO();
+                    addDB = studentDAO.inactivateOrg(usgId);
                 }else{
-                    userDAO = new UserEntityDAO();
-                    List<UserEntity> cosca = userDAO.getCOSCAAccounts();
-                    userDAO = new UserEntityDAO();
-                    List<UserEntity> sorg = userDAO.getSOrgAccounts();
+                    org = studentDAO.getUserDetails(csoId).getName();
+                    studentDAO = new StudentOrgDAO();
+                    addDB = studentDAO.inactivateOrg(csoId);
+                }
+
                 
-                    request.setAttribute("cosca", cosca);
-                    request.setAttribute("sorg", sorg);
-                    request.setAttribute("isExisting", true);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/sysAdmin/AccountEditSOrg.jsp");
+
+                if (addDB) {
+                    request.setAttribute("type", org);
+                    request.setAttribute("action", "Deleted");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/sysAdmin/AccountDone.jsp");
                     dispatcher.forward(request, response);
+                } else {
+                    response.sendRedirect("ErrorInDB.jsp");
                 }
                 
             }

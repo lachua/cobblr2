@@ -72,7 +72,7 @@
                                             <div id="coscaDiv">
                                                 <%List<UserEntity> cosca = (List<UserEntity>) request.getAttribute("cosca");%>
                                                 <div class="control-group" id="StudentOrg">
-                                                    <label class="control-label" for="coscaAccts">Organization Under:</label>
+                                                    <label class="control-label" for="coscaAccts">Account Name:</label>
                                                     <div class="controls">
                                                         <select id="coscaAccts" name="coscaAccts" class="chzn-select">
                                                             <%for(int x = 0; x < cosca.size(); x++){%>
@@ -85,7 +85,7 @@
                                             <div id="studentDiv" hidden>
                                                 <%List<UserEntity> sorg = (List<UserEntity>) request.getAttribute("sorg");%>
                                                 <div class="control-group">
-                                                    <label class="control-label" for="studentAccts">Organization Name:</label>
+                                                    <label class="control-label" for="studentAccts">Account Name:</label>
                                                     <div class="controls">
                                                         <select id="studentAccts" name="studentAccts" class="chzn-select">
                                                             <%for(int x = 0; x < sorg.size(); x++){%>

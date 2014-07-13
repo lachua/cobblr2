@@ -7,8 +7,7 @@
 package servlets.admin;
 
 import dbdao.StudentOrgDAO;
-import dbdao.UserEntityDAO;
-import dbentities.UserEntity;
+import dbentities.StudentOrgEntity;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -22,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Renliw
  */
-public class AccountEditSOrg extends HttpServlet {
+public class SOrgEdit extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,60 +38,43 @@ public class AccountEditSOrg extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             if (request.getMethod().equals("GET")) {
-                UserEntityDAO userDAO;
-                userDAO = new UserEntityDAO();
-                List<UserEntity> cosca = userDAO.getCOSCAAccounts();
-                userDAO = new UserEntityDAO();
-                List<UserEntity> sorg = userDAO.getSOrgAccounts();
-                
-                request.setAttribute("cosca", cosca);
-                request.setAttribute("sorg", sorg);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/sysAdmin/AccountEditSOrg.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/sysAdmin/SOrgEdit.jsp");
                 dispatcher.forward(request, response);
             } else if (request.getMethod().equals("POST")) {
-                int type = Integer.parseInt(request.getParameter("type"));
-                String coscaAccts = request.getParameter("coscaAccts");
-                String studentAccts = request.getParameter("studentAccts");
-                String oldpassword = request.getParameter("oldpassword");
-                String newpassword = request.getParameter("newpassword");
-                StudentOrgDAO studentDAO = new StudentOrgDAO();
-                int newID = studentDAO.getLastId()+1;
+                String orgType = request.getParameter("orgType");
+                int usgId = Integer.parseInt(request.getParameter("usgId"));
+                int csoId = Integer.parseInt(request.getParameter("csoId"));
+                String neworg = request.getParameter("neworg");
                 boolean addDB = false;
                 
-                UserEntityDAO userDAO = new UserEntityDAO();
-                UserEntity thisUser = userDAO.getUserDetails(studentAccts, oldpassword);
+                StudentOrgDAO studentDAO = new StudentOrgDAO();
+                List<StudentOrgEntity> org = studentDAO.getOrgName(neworg);
                 
-                if(type == 1){
-                    userDAO = new UserEntityDAO();
-                    thisUser = userDAO.getUserDetails(coscaAccts, oldpassword);
-                }
-                
-                if(thisUser != null){
-                    userDAO = new UserEntityDAO();
-                    if(type == 1){
-                        addDB = userDAO.editPass(coscaAccts, newpassword);
+                if(org == null){
+                    if(orgType.equals("USG")){
+                        studentDAO = new StudentOrgDAO();
+                        addDB = studentDAO.updateOrg(usgId, neworg);
                     }else{
-                        addDB = userDAO.editPass(studentAccts, newpassword);
+                        studentDAO = new StudentOrgDAO();
+                        addDB = studentDAO.updateOrg(csoId, neworg);
                     }
                     
+                    
                     if (addDB) {
-                        request.setAttribute("type", "Account");
-                        request.setAttribute("action", "Edited");
+                        request.setAttribute("type", "" + neworg);
+                        request.setAttribute("action", "Updated");
                         RequestDispatcher dispatcher = request.getRequestDispatcher("/sysAdmin/AccountDone.jsp");
                         dispatcher.forward(request, response);
                     } else {
                         response.sendRedirect("ErrorInDB.jsp");
                     }
                 }else{
-                    userDAO = new UserEntityDAO();
-                    List<UserEntity> cosca = userDAO.getCOSCAAccounts();
-                    userDAO = new UserEntityDAO();
-                    List<UserEntity> sorg = userDAO.getSOrgAccounts();
-                
-                    request.setAttribute("cosca", cosca);
-                    request.setAttribute("sorg", sorg);
+                    request.setAttribute("orgType", orgType);
+                    request.setAttribute("usgId",usgId);
+                    request.setAttribute("csoId",csoId);
+                    request.setAttribute("neworg", neworg);
                     request.setAttribute("isExisting", true);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/sysAdmin/AccountEditSOrg.jsp");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/sysAdmin/SOrgEdit.jsp");
                     dispatcher.forward(request, response);
                 }
                 

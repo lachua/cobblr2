@@ -22,7 +22,7 @@ public class UserEntityDAO extends QueryTemplate {
     //Get all user data
     public UserEntity getUserDetails() {
         setQuery("SELECT id, username, password, name, description  \n"
-                + "FROM users inner join studentorg on users.org_id = studentorg.id;");
+                + "FROM users inner join studentorg on users.org_id = studentorg.id AND users.isactive = 1;");
 
         List<UserEntity> results = executeQuery();
 
@@ -39,7 +39,7 @@ public class UserEntityDAO extends QueryTemplate {
     public UserEntity getUserDetails(String username, String password) {
         setQuery("SELECT id, username, password, name, description  \n"
                 + "FROM users inner join studentorg on users.org_id = studentorg.id\n"
-                + "WHERE username = ? and password = ?;");
+                + "WHERE username = ? and password = ? AND users.isactive = 1;");
 
         KeyValuePair onePair;
 
@@ -68,7 +68,7 @@ public class UserEntityDAO extends QueryTemplate {
     public UserEntity getUserDetails(String username) {
         setQuery("SELECT id, username, password, name, description  \n"
                 + "FROM users inner join studentorg on users.org_id = studentorg.id\n"
-                + "WHERE username = ?;");
+                + "WHERE username = ? AND users.isactive = 1;");
 
         KeyValuePair onePair;
 
@@ -89,7 +89,7 @@ public class UserEntityDAO extends QueryTemplate {
     public List<UserEntity> getCOSCAAccounts() {
         setQuery("SELECT id, username, password, name, description  \n"
                 + "FROM users inner join studentorg on users.org_id = studentorg.id\n"
-                + "WHERE users.org_id = 1;");
+                + "WHERE users.org_id = 1 AND users.isactive = 1;");
 
         List<UserEntity> results = executeQuery();
 
@@ -103,7 +103,7 @@ public class UserEntityDAO extends QueryTemplate {
     public List<UserEntity> getSOrgAccounts() {
         setQuery("SELECT id, username, password, name, description  \n"
                 + "FROM users inner join studentorg on users.org_id = studentorg.id\n"
-                + "WHERE users.org_id > 1;");
+                + "WHERE users.org_id > 1 AND users.isactive = 1");
 
         List<UserEntity> results = executeQuery();
 
@@ -115,7 +115,7 @@ public class UserEntityDAO extends QueryTemplate {
     }
     
     public boolean insertUser(int orgId, String user, String pass) {
-        setQuery("INSERT INTO users VALUE (?, ?, ?)");
+        setQuery("INSERT INTO users VALUE (?, ?, ?, 1)");
         
         KeyValuePair onePair;
 
@@ -156,7 +156,35 @@ public class UserEntityDAO extends QueryTemplate {
 
         return executeUpdate();
     }
+    
+    public boolean deleteUser(String user) {
+        setQuery("DELETE FROM users\n" +
+                "WHERE username=?;");
+        
+        KeyValuePair onePair;
 
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.STRING);
+        onePair.setValue("" + user);
+        getParameters().add(onePair);
+
+        return executeUpdate();
+    }
+
+     public boolean deleteOrg(int orgID) {
+        setQuery("DELETE FROM users\n" +
+                "WHERE org_id=?;");
+        
+        KeyValuePair onePair;
+
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.INT);
+        onePair.setValue("" + orgID);
+        getParameters().add(onePair);
+
+        return executeUpdate();
+    }
+     
     @Override
     protected Object storeResults(ResultSet rs) {
         UserEntity entity = new UserEntity();

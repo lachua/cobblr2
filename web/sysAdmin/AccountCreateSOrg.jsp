@@ -1,4 +1,7 @@
 
+<%@page import="java.util.List"%>
+<%@page import="dbentities.StudentOrgEntity"%>
+<%@page import="dbdao.StudentOrgDAO"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -58,12 +61,18 @@
                                         <form id="createForm" method="POST" action="AccountCreateSOrg" class="form-horizontal">
                                         <fieldset>
                                             <legend>Create New Account</legend>
-                                            
                                             <%
+                                                StudentOrgDAO dao;
+                                                dao = new StudentOrgDAO();
+                                                List<StudentOrgEntity> usg = dao.getOrgsUnder("USG");
+                                                dao = new StudentOrgDAO();
+                                                List<StudentOrgEntity> cso = dao.getOrgsUnder("CSO");
+                                                
                                                 if(request.getAttribute("isExisting") != null){ 
                                                     int type = (Integer)request.getAttribute("type");
                                                     String orgType = (String) request.getAttribute("orgType");
-                                                    String orgName = (String) request.getAttribute("orgName");
+                                                    int usgId = (Integer) request.getAttribute("usgId");
+                                                    int csoId = (Integer) request.getAttribute("csoId");
                                                     String newusername = (String) request.getAttribute("newusername");
                                             %>
                                             <div class="control-group">
@@ -85,10 +94,28 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label class="control-label" for="orgName">Organization Name:</label>
-                                                    <div class="controls">
-                                                        <input type="text" id="orgName" name="orgName" value="<%=orgName%>" placeholder="organization name" />
+                                                <div id="usgorg">
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="usgId">Organization Name:</label>
+                                                        <div class="controls">
+                                                            <select id="usgId" name="usgId" class="chzn-select">
+                                                                <%for(int x = 0; x < usg.size(); x++){%>
+                                                                    <option value="<%=usg.get(x).getId()%>" <%if(usgId == usg.get(x).getId()){%>selected<%}%>><%=usg.get(x).getName()%></option>
+                                                                <%}%>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="csoorg" hidden>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="csoId">Organization Name:</label>
+                                                        <div class="controls">
+                                                            <select id="csoId" name="csoId" class="chzn-select">
+                                                                <%for(int x = 0; x < cso.size(); x++){%>
+                                                                    <option value="<%=cso.get(x).getId()%>" <%if(csoId == cso.get(x).getId()){%>selected<%}%>><%=cso.get(x).getName()%></option>
+                                                                <%}%>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -137,10 +164,28 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label class="control-label" for="orgName">Organization Name:</label>
-                                                    <div class="controls">
-                                                        <input type="text" id="orgName" name="orgName" placeholder="organization name" />
+                                                <div id="usgorg">
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="usgId">Organization Name:</label>
+                                                        <div class="controls">
+                                                            <select id="usgId" name="usgId" class="chzn-select">
+                                                                <%for(int x = 0; x < usg.size(); x++){%>
+                                                                    <option value="<%=usg.get(x).getId() %>"><%=usg.get(x).getName()%></option>
+                                                                <%}%>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="csoorg" hidden>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="csoId">Organization Name:</label>
+                                                        <div class="controls">
+                                                            <select id="csoId" name="csoId" class="chzn-select">
+                                                                <%for(int x = 0; x < cso.size(); x++){%>
+                                                                    <option value="<%=cso.get(x).getId()%>"><%=cso.get(x).getName()%></option>
+                                                                <%}%>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -225,10 +270,18 @@
             $('#type').on('change', function() {
                     if (this.value == 1) {
                         $('#studentinfo').slideUp();
-                        $("#orgName").attr("required", "false");
                     } else if (this.value == 2) {
                         $('#studentinfo').slideDown();
-                        $("#orgName").attr("required", "true");
+                    }
+            });
+            
+            $('#orgType').on('change', function() {
+                    if (this.value == 'USG') {
+                        $('#usgorg').slideDown();
+                        $('#csoorg').slideUp();
+                    } else if (this.value == 'CSO') {
+                        $('#usgorg').slideUp();
+                        $('#csoorg').slideDown();
                     }
             });
             

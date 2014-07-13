@@ -55,19 +55,15 @@
                         <div class="row-fluid">
                             <div class="span12">
                                 <div class="box" id="box-0">
-                                    <h4 class="box-header round-top">Account Created</h4>
+                                    <%
+                                        String type = (String) request.getAttribute("type");
+                                        String action = (String) request.getAttribute("action");
+                                    %>
+                                    <h4 class="box-header round-top"><%=type%> <%=action%></h4>
                                     <div class="box-container-toggle">
                                         <div class="box-content">
-                                            <form class="form-horizontal" method="POST" action="SurveySubmitted">
-                                                <fieldset>
-                                                <legend>Account Created</legend>
-                                                <div style="padding-left: 8px;" class="control-group">
-                                                    <label>Would you like to add another Account?</label>
-                                                    <a href="AccountCreateSOrg" class="btn btn-primary">Yes</a>
-                                                    <a href="AdminHome" class="btn">No</a>
-                                                </div>
-                                            </fieldset>
-                                        </form>
+                                            <h2><%=type%> <%=action%></h2>
+                                            <a href="AdminHome" class="btn">Done</a>
                                     </div>
                                 </div>
                             </div>
