@@ -159,7 +159,7 @@
                                             %>
                                         <div class="form-actions">
                                             <button type="submit" name="action" value="ChildSurveySubmitted" class="btn btn-primary">Submit</button>
-                                            <a href="CommunitySurvey" class="btn">Cancel</a>
+                                            <a href="EncodeCommunitySurvey" class="btn">Back</a>
                                         </div>
                                     </form>
                                 </div>

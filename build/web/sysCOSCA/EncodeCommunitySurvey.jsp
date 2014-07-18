@@ -1,3 +1,5 @@
+<%@page import="java.util.Arrays"%>
+<%@page import="classes.EncodeCommunitySurveyData"%>
 <%@page import="Utilities.Year"%>
 <%@page import="java.util.GregorianCalendar"%>
 <%@page import="java.util.Date"%>
@@ -179,9 +181,416 @@
                                         <form method="POST" action="EncodeCommunitySurvey" id="surveyForm" class="form-horizontal">
                                             <fieldset>
                                             <%
-                                                String community_id = (String) request.getAttribute("community_id");
-                                                String community_name = (String) request.getAttribute("community_name");
+                                                String community_id = (String) session.getAttribute("community_id");
+                                                String community_name = (String) session.getAttribute("community_name");
+                                                if(session.getAttribute("isSurveyExisting") != null){
+                                                    EncodeCommunitySurveyData surveyData = (EncodeCommunitySurveyData) session.getAttribute("SurveyData");
                                             %>
+                                            <legend>Encode Survey for <%=community_name%></legend>
+                                            <input type="hidden" name="community_id" value="<%=community_id%>"/>
+
+                                            <div class="control-group">
+                                                <label class="control-label" for="yearOfSurvey">Year of Survey:</label>
+                                                <div class="controls">
+                                                    <select name="yearOfSurvey" id="yearOfSurvey" class="chzn-select">
+                                                        <option value="<%=Year.getCurrentYear()%>" <%if(Integer.parseInt(surveyData.getYear()) == Year.getCurrentYear()){%>selected<%}%> ><%=Year.getCurrentYear()%></option>
+                                                        <option value="<%=Year.getPreviousYear()%>"<%if(Integer.parseInt(surveyData.getYear()) == Year.getPreviousYear()){%>selected<%}%> ><%=Year.getPreviousYear()%></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <br/><h2>Family Structure</h2>
+
+                                            <div class="control-group">
+                                                <label class="control-label" for="familyName">Family Name:</label>
+                                                <div class="controls">
+                                                    <input class="input-xlarge" id="familyName" name="familyName" type="text" value="<%=surveyData.getFamilyName()%>" required/>
+                                                </div>
+                                            </div>
+
+                                            <div class="control-group">
+                                                <label class="control-label" for="address">Address:</label>
+                                                <div class="controls">
+                                                    <input class="input-xxlarge" id="address" name="address" type="text" value="<%=surveyData.getAddress()%>" required/>
+                                                </div>
+                                            </div>
+
+                                            <div class="control-group">
+                                                <label class="control-label" for="yearsInCommunity">No. of Years in Community:</label>
+                                                <div class="controls">
+                                                    <input class="input-small" id="yearsInCommunity" name="yearsInCommunity" type="number" value="<%=surveyData.getYearsInCommunity()%>" required/>
+                                                </div>
+                                            </div>
+
+                                            <!--<div class="control-group">
+                                                <label class="control-label" for="noOfFamilyMembers">No. of Family Members</label>
+                                                <div class="controls">
+                                                    <input class="input-small" id="noOfFamilyMembers" name="noOfFamilyMembers" type="number" required/>
+                                                </div>
+                                            </div>-->
+
+                                            <label><br/><strong>Religion</strong></label>
+
+                                            <div class="control-group">
+                                                <label class="control-label" for="relegionOfFather">Father:</label>
+                                                <div class="controls">
+                                                    <select id="relegionOfFather" name="relegionOfFather" class="chzn-select">
+                                                        <option value></option>
+                                                        <option value="6" <%if(surveyData.getRelegionOfFather().equals("6")){%>selected<%}%>>Catholic</option>
+                                                        <option value="7" <%if(surveyData.getRelegionOfFather().equals("7")){%>selected<%}%>>Iglesia Ni Kristo</option>
+                                                        <option value="8" <%if(surveyData.getRelegionOfFather().equals("8")){%>selected<%}%>>Muslim</option>
+                                                        <option value="9" <%if(surveyData.getRelegionOfFather().equals("9")){%>selected<%}%>>Protestant</option>
+                                                        <option value="10" <%if(surveyData.getRelegionOfFather().equals("10")){%>selected<%}%>>Buddhist</option>
+                                                        <option value="11" <%if(surveyData.getRelegionOfFather().equals("11")){%>selected<%}%>>Born Again</option>
+                                                        <option value="12" <%if(surveyData.getRelegionOfFather().equals("12")){%>selected<%}%>>Baptist</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="control-group">
+                                                <label class="control-label" for="relegionOfMother" >Mother: </label>
+                                                <div class="controls">
+                                                    <select id="relegionOfMother" name="relegionOfMother" class="chzn-select">
+                                                        <option value></option>
+                                                        <option value="6" <%if(surveyData.getRelegionOfMother().equals("6")){%>selected<%}%>>Catholic</option>
+                                                        <option value="7" <%if(surveyData.getRelegionOfMother().equals("7")){%>selected<%}%>>Iglesia Ni Kristo</option>
+                                                        <option value="8" <%if(surveyData.getRelegionOfMother().equals("8")){%>selected<%}%>>Muslim</option>
+                                                        <option value="9" <%if(surveyData.getRelegionOfMother().equals("9")){%>selected<%}%>>Protestant</option>
+                                                        <option value="10" <%if(surveyData.getRelegionOfMother().equals("10")){%>selected<%}%>>Buddhist</option>
+                                                        <option value="11" <%if(surveyData.getRelegionOfMother().equals("11")){%>selected<%}%>>Born Again</option>
+                                                        <option value="12" <%if(surveyData.getRelegionOfMother().equals("12")){%>selected<%}%>>Baptist</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <!--<label><br/><strong>Place of Origin</strong></label>
+                                            <div class="control-group">
+                                                <label class="control-label" for="fatherOrigin">Father:</label>
+                                                <div class="controls">
+                                                    <input class="input-xlarge" id="fatherOrigin" name="fatherOrigin" type="text"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="control-group">
+                                                <label class="control-label" for="motherOrigin">Mother:</label>
+                                                <div class="controls">
+                                                    <input class="input-xlarge" id="motherOrigin" name="motherOrigin" type="text"/>
+                                                </div>
+                                            </div>-->
+
+                                            <br/>
+                                            <div class="control-group">
+                                                <label class="control-label" for="typeOfFamily"><strong>Type of Family</strong></label>
+                                                <div class="controls">
+                                                    <select id="typeOfFamily" name="typeOfFamily" class="chzn-select">
+                                                        <option value="Nuclear"  <%if(surveyData.getTypeOfFamily().equals("Nuclear")){%>selected<%}%>>Nuclear</option>
+                                                        <option value="Single Parent" <%if(surveyData.getTypeOfFamily().equals("Single Parent")){%>selected<%}%>>Single Parent</option>
+                                                        <option value="Extended" <%if(surveyData.getTypeOfFamily().equals("Extended")){%>selected<%}%>>Extended</option>
+                                                        <option value="Childless" <%if(surveyData.getTypeOfFamily().equals("Childless")){%>selected<%}%>>Childless</option>
+                                                        <option value="Step Family" <%if(surveyData.getTypeOfFamily().equals("Step Family")){%>selected<%}%>>Step Family</option>
+                                                        <option value="Grand Family" <%if(surveyData.getTypeOfFamily().equals("Grand Family")){%>selected<%}%>>Grand Family</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <br/>
+                                            <h2>Members of the Family</h2>
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Age</th>
+                                                        <th>Gender</th>
+                                                        <th>Civil Status</th>
+                                                        <th>Position in the Family</th>
+                                                        <th>Educational Attainment</th>
+                                                        <th>Work</th>
+                                                        <th>Health History</th>
+                                                        <th>Illnesses</th>
+                                                        <th>Immunization</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="familyMember">
+                                                        
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td colspan="11"><button class="btn btn-small" id="addFamilyMember" type="button"><i class="icon-plus"></i>Add New Family Member</button></td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+
+                                            <br/><h2>Family Status</h2>
+                                            <label><strong>Misunderstanding in the Family</strong></label>
+                                            <div class="control-group">
+                                                <label class="control-label" for="battered">a. Battered husband/wife</label>
+                                                <div class="controls">
+                                                    <label><input type="radio" id="battered" name="battered" value="49" <%if(surveyData.getBattered().equals("49")){%>checked<%}%> required/>Yes</label>
+                                                    <label><input type="radio" id="battered" name="battered" value="50" <%if(surveyData.getBattered().equals("50")){%>checked<%}%>/>No</label>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="fights">b. Frequent fights</label>
+                                                <div class="controls">
+                                                    <label><input type="radio" id="fights" name="fights" value="49" <%if(surveyData.getFights().equals("49")){%>checked<%}%> required/>Yes</label>
+                                                    <label><input type="radio" id="fights" name="fights" value="50" <%if(surveyData.getFights().equals("50")){%>checked<%}%>/>No</label>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="childabuse">c. Child abuse</label>
+                                                <div class="controls">
+                                                    <label><input type="radio" id="childabuse" name="childabuse" value="49" <%if(surveyData.getChildabuse().equals("49")){%>checked<%}%> required/>Yes</label>
+                                                    <label><input type="radio" id="childabuse" name="childabuse" value="50" <%if(surveyData.getChildabuse().equals("50")){%>checked<%}%> />No</label>
+                                                </div>
+                                            </div>
+
+                                            <label><strong>Characteristics of Communication</strong></label>
+                                            <div class="control-group">
+                                                <label class="control-label" for="puttingoff">a. Putting-off conversations</label>
+                                                <div class="controls">
+                                                    <label><input type="radio" id="puttingoff" name="puttingoff" value="49" <%if(surveyData.getPuttingoff().equals("49")){%>checked<%}%> required/>Yes</label>
+                                                    <label><input type="radio" id="puttingoff" name="puttingoff" value="50" <%if(surveyData.getPuttingoff().equals("50")){%>checked<%}%>/>No</label>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="2b">b. Use of inappropriate words(such as insults, bad words)</label>
+                                                <div class="controls">
+                                                    <label><input type="radio" id="inappropriateword" name="inappropriateword" value="49" <%if(surveyData.getInappropriateword().equals("49")){%>checked<%}%> required/>Yes</label>
+                                                    <label><input type="radio" id="inappropriateword" name="inappropriateword" value="50" <%if(surveyData.getInappropriateword().equals("50")){%>checked<%}%>/>No</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="control-group">
+                                                <label class="control-label" for="income"><strong>Monthly Family Income</strong></label>
+                                                <div class="controls">
+                                                    <select class="input-xlarge" id="income" name="income" required>
+                                                        <option value="146" <%if(surveyData.getIncome().equals("146")){%>selected<%}%>>Below 5,000 pesos</option>
+                                                        <option value="147" <%if(surveyData.getIncome().equals("147")){%>selected<%}%>>5,000 - 10,000 pesos</option>
+                                                        <option value="148" <%if(surveyData.getIncome().equals("148")){%>selected<%}%>>10,000 - 15,000 pesos</option>
+                                                        <option value="149" <%if(surveyData.getIncome().equals("149")){%>selected<%}%>>15,000 - 20,000 pesos</option>
+                                                        <option value="150" <%if(surveyData.getIncome().equals("150")){%>selected<%}%>>20,000 - 30,000 pesos</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="control-group">
+                                                <label class="control-label" for="sourceincome"><strong>Source of Monthly Family Income</strong></label>
+                                                <div class="controls">
+                                                    <select class="input-xlarge" id="sourceincome" name="sourceincome" required>
+                                                        <option value="51" <%if(surveyData.getSourceincome().equals("51")){%>selected<%}%>>Father</option>
+                                                        <option value="52" <%if(surveyData.getSourceincome().equals("52")){%>selected<%}%>>Mother</option>
+                                                        <option value="53" <%if(surveyData.getSourceincome().equals("53")){%>selected<%}%>>Both</option>
+                                                        <option value="82" <%if(surveyData.getSourceincome().equals("82")){%>selected<%}%>>Others</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="control-group">
+                                                <label class="control-label" for="needs"><strong>Felt Family Needs</strong></label>
+                                                <div class="controls">
+                                                    <div id="familyNeeds"></div>
+                                                    <button class="btn btn-small" id="addFamilyNeeds" type="button"><i class="icon-plus"></i>Add Family Needs</button>
+                                                </div>
+                                            </div>
+
+                                            <br/><h2>Home and Environmental Factors</h2>
+                                            <div class="control-group">
+                                                <label class="control-label" for="hasLot">Lot Owned</label>
+                                                <div class="controls">
+                                                    <label><input type="radio" id="hasLot" name="hasLot"  value="49" <%if(surveyData.getHasLot().equals("49")){%>checked<%}%> required/>Yes</label>
+                                                    <label><input type="radio" id="hasLot" name="hasLot" value="50" <%if(surveyData.getHasLot().equals("50")){%>checked<%}%>/>No</label>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="hasHouse">House Owned</label>
+                                                <div class="controls">
+                                                    <label><input type="radio" id="hasHouse" name="hasHouse" value="49" <%if(surveyData.getHasHouse().equals("49")){%>checked<%}%> required/>Yes</label>
+                                                    <label><input type="radio" id="hasHouse" name="hasHouse" value="50" <%if(surveyData.getHasHouse().equals("50")){%>checked<%}%> />No</label>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="typeOfHouse">Type of House</label>
+                                                <div class="controls">
+                                                    <label><input type="radio" id="typeOfHouse" name="typeOfHouse" value="65" <%if(surveyData.getTypeOfHouse().equals("65")){%>checked<%}%> required/>Wood</label>
+                                                    <label><input type="radio" id="typeOfHouse" name="typeOfHouse" value="66" <%if(surveyData.getTypeOfHouse().equals("66")){%>checked<%}%>/>Concrete</label>
+                                                    <label><input type="radio" id="typeOfHouse" name="typeOfHouse" value="67" <%if(surveyData.getTypeOfHouse().equals("67")){%>checked<%}%>/>Mixed</label>
+                                                    <label><input type="radio" id="typeOfHouse" name="typeOfHouse" value="82" <%if(surveyData.getTypeOfHouse().equals("82")){%>checked<%}%>/>Others</label>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="typeOfGarbageDisposal">Type of Garbage Disposal</label>
+                                                <div class="controls">
+                                                    <label><input type="radio" id="typeOfGarbageDisposal" name="typeOfGarbageDisposal" value="68" <%if(surveyData.getTypeOfGarbageDisposal().equals("68")){%>checked<%}%> required/>Collected</label>
+                                                    <label><input type="radio" id="typeOfGarbageDisposal" name="typeOfGarbageDisposal" value="69" <%if(surveyData.getTypeOfGarbageDisposal().equals("69")){%>checked<%}%>/>Thrown in the river</label>
+                                                    <label><input type="radio" id="typeOfGarbageDisposal" name="typeOfGarbageDisposal" value="82" <%if(surveyData.getTypeOfGarbageDisposal().equals("82")){%>checked<%}%>/>Others</label>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="typeOfToilet">Type of Toilet</label>
+                                                <div class="controls">
+                                                    <label><input type="radio" id="typeOfToilet" name="typeOfToilet" value="72" <%if(surveyData.getTypeOfToilet().equals("72")){%>checked<%}%> required/>Water Sealed</label>
+                                                    <label><input type="radio" id="typeOfToilet" name="typeOfToilet" value="73" <%if(surveyData.getTypeOfToilet().equals("73")){%>checked<%}%>/>No Toilet</label>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="typeOfDrainage">Type of Drainage System</label>
+                                                <div class="controls">
+                                                    <label><input type="radio" id="typeOfDrainage" name="typeOfDrainage" value="70" <%if(surveyData.getTypeOfDrainage().equals("70")){%>checked<%}%> required/>Open</label>
+                                                    <label><input type="radio" id="typeOfDrainage" name="typeOfDrainage" value="71" <%if(surveyData.getTypeOfDrainage().equals("71")){%>checked<%}%>/>Closed</label>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="sourceOfWater">Source of Water</label>
+                                                <div class="controls">
+                                                    <label><input type="radio" id="sourceOfWater" name="sourceOfWater" value="74" <%if(surveyData.getSourceOfWater().equals("74")){%>checked<%}%> required/>Owned</label>
+                                                    <label><input type="radio" id="sourceOfWater" name="sourceOfWater" value="75" <%if(surveyData.getSourceOfWater().equals("75")){%>checked<%}%>/>Bought</label>
+                                                    <label><input type="radio" id="sourceOfWater" name="sourceOfWater" value="76" <%if(surveyData.getSourceOfWater().equals("76")){%>checked<%}%>/>Shared</label>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="sourceOfDrinkingWater">Source of Drinking Water</label>
+                                                <div class="controls">
+                                                    <label><input type="radio" id="sourceOfDrinkingWater" name="sourceOfDrinkingWater" value="77" <%if(surveyData.getSourceOfDrinkingWater().equals("77")){%>checked<%}%> required/>Refrigerated</label>
+                                                    <label><input type="radio" id="sourceOfDrinkingWater" name="sourceOfDrinkingWater" value="78" <%if(surveyData.getSourceOfDrinkingWater().equals("78")){%>checked<%}%>/>Covered</label>
+                                                    <label><input type="radio" id="sourceOfDrinkingWater" name="sourceOfDrinkingWater" value="82" <%if(surveyData.getSourceOfDrinkingWater().equals("79")){%>checked<%}%>/>Others</label>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="drinkingWaterStorage">Drinking Water Storage</label>
+                                                <div class="controls">
+                                                    <label><input type="radio" id="drinkingWaterStorage" name="drinkingWaterStorage" value="79" <%if(surveyData.getDrinkingWaterStorage().equals("79")){%>checked<%}%> required/>Plastic Pitchers</label>
+                                                    <label><input type="radio" id="drinkingWaterStorage" name="drinkingWaterStorage" value="80" <%if(surveyData.getDrinkingWaterStorage().equals("80")){%>checked<%}%>/>Bottles</label>
+                                                    <label><input type="radio" id="drinkingWaterStorage" name="drinkingWaterStorage" value="81" <%if(surveyData.getDrinkingWaterStorage().equals("81")){%>checked<%}%>/>Jars or Clay Pots</label>
+                                                    <label><input type="radio" id="drinkingWaterStorage" name="drinkingWaterStorage" value="82" <%if(surveyData.getDrinkingWaterStorage().equals("82")){%>checked<%}%>/>Others</label>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="foodStorage">Food Storage</label>
+                                                <div class="controls">
+                                                    <label><input type="radio" id="foodStorage" name="foodStorage" value="83" required <%if(surveyData.getFoodStorage().equals("83")){%>checked<%}%>/>Covered</label>
+                                                    <label><input type="radio" id="foodStorage" name="foodStorage" value="84" <%if(surveyData.getFoodStorage().equals("84")){%>checked<%}%>/>Refrigerated</label>
+                                                     <label><input type="radio" id="foodStorage" name="foodStorage" value="85" <%if(surveyData.getFoodStorage().equals("85")){%>checked<%}%>/>Cabinet</label>
+                                                    <label><input type="radio" id="foodStorage" name="foodStorage" value="82" <%if(surveyData.getFoodStorage().equals("82")){%>checked<%}%>/>Others</label>
+                                                </div>
+                                            </div>
+                                            <!--<div class="control-group">
+                                                <label class="control-label" for="pestsPresence">Presence of Pests</label>
+                                                <div class="controls">
+                                                    <label><input type="radio" id="pestsPresence" name="pestsPresence" value="49" required/>Yes</label>
+                                                    <label><input type="radio" id="pestsPresence" name="pestsPresence" value="50"/>No</label>
+                                                </div>
+                                            </div>-->
+                                            <div class="control-group">
+                                                <label class="control-label" for="breedingSite">Presence of Pests' Breeding Sites</label>
+                                                <div class="controls">
+                                                    <label><input type="radio" id="breedingSite" name="breedingSite" value="49" <%if(surveyData.getBreedingSite().equals("49")){%>checked<%}%> required/>Yes</label>
+                                                    <label><input type="radio" id="breedingSite" name="breedingSite" value="50" <%if(surveyData.getBreedingSite().equals("50")){%>checked<%}%>/>No</label>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="typeOfPests">Type of Pests</label>
+                                                <div class="controls">
+                                                    <select id="typeOfPests" name="typeOfPests" multiple class="chzn-select">
+                                                        <option value="86" <%if(Arrays.asList(surveyData.getTypeOfPests()).contains("86")){%>selected<%}%>>Rat</option>
+                                                        <option value="87" <%if(Arrays.asList(surveyData.getTypeOfPests()).contains("87")){%>selected<%}%>>Cockroach</option>
+                                                        <option value="88" <%if(Arrays.asList(surveyData.getTypeOfPests()).contains("88")){%>selected<%}%>>Bed Bug</option>
+                                                        <option value="89" <%if(Arrays.asList(surveyData.getTypeOfPests()).contains("89")){%>selected<%}%>>Termite</option>
+                                                        <option value="82" <%if(Arrays.asList(surveyData.getTypeOfPests()).contains("82")){%>selected<%}%>>Others</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="typeOfPets">Pets/Animals Kept</label>
+                                                <div class="controls">
+                                                    <select id="typeOfPets" name="typeOfPets" multiple class="chzn-select">
+                                                        <option value="90" <%if(Arrays.asList(surveyData.getTypeOfPets()).contains("90")){%>selected<%}%>>Dog</option>
+                                                        <option value="91" <%if(Arrays.asList(surveyData.getTypeOfPets()).contains("91")){%>selected<%}%>>Cat</option>
+                                                        <option value="92" <%if(Arrays.asList(surveyData.getTypeOfPets()).contains("92")){%>selected<%}%>>Chicken/Rooster</option>
+                                                        <option value="93" <%if(Arrays.asList(surveyData.getTypeOfPets()).contains("93")){%>selected<%}%>>Pig</option>
+                                                        <option value="94" <%if(Arrays.asList(surveyData.getTypeOfPets()).contains("94")){%>selected<%}%>>Dove</option>
+                                                        <option value="95" <%if(Arrays.asList(surveyData.getTypeOfPets()).contains("95")){%>selected<%}%>>Duck</option>
+                                                        <option value="96" <%if(Arrays.asList(surveyData.getTypeOfPets()).contains("96")){%>selected<%}%>>Monkey</option>
+                                                        <option value="97" <%if(Arrays.asList(surveyData.getTypeOfPets()).contains("97")){%>selected<%}%>>Snake</option>
+                                                        <option value="82" <%if(Arrays.asList(surveyData.getTypeOfPets()).contains("82")){%>selected<%}%>>Others</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="typeofhazards">Presence of Accident Hazards</label>
+                                                <div class="controls">
+                                                    <label><input type="radio" id="typeofhazards" name="typeofhazards" value="49" <%if(surveyData.getTypeofhazards().equals("49")){%>checked<%}%> required/>Yes</label>
+                                                    <label><input type="radio" id="typeofhazards" name="typeofhazards" value="50" <%if(surveyData.getTypeofhazards().equals("50")){%>checked<%}%>/>No</label>
+                                                </div>
+                                            </div>
+
+                                            <br/><h2>Health Assessments</h2>
+                                            <div class="control-group">
+                                                <label class="control-label" for="mealsPerDay">Meals per Day</label>
+                                                <div class="controls">
+                                                    <input type="number" id="mealsPerDay" name="mealsPerDay" class="input-medium" value="<%=surveyData.getMealsPerDay() %>"required/>
+                                                </div>
+                                            </div>
+
+                                            <br/>
+                                            <div class="control-group">
+                                                <label class="control-label" for="healthPerson">Consulted Person on Health Concerns</label>
+                                                <div class="controls">
+                                                    <select id="healthPerson" multiple name="healthPerson" class="chzn-select" required>
+                                                        <option value="117" <%if(Arrays.asList(surveyData.getHealthPerson()).contains("117")){%>selected<%}%>>Massage Therapist</option>
+                                                        <option value="118" <%if(Arrays.asList(surveyData.getHealthPerson()).contains("118")){%>selected<%}%>>Nurse</option>
+                                                        <option value="119" <%if(Arrays.asList(surveyData.getHealthPerson()).contains("119")){%>selected<%}%>>Doctor</option>
+                                                        <option value="120" <%if(Arrays.asList(surveyData.getHealthPerson()).contains("120")){%>selected<%}%>>Barangay Health Worker</option>
+                                                        <option value="121" <%if(Arrays.asList(surveyData.getHealthPerson()).contains("121")){%>selected<%}%>>Priest</option>
+                                                        <option value="122" <%if(Arrays.asList(surveyData.getHealthPerson()).contains("122")){%>selected<%}%>>Barangay</option>
+                                                        <option value="82" <%if(Arrays.asList(surveyData.getHealthPerson()).contains("82")){%>selected<%}%>>Others</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="control-group">
+                                                <label class="control-label" for="nonHealthPerson">Consulted Person on Non-Health Concerns</label>
+                                                <div class="controls">
+                                                    <select id="nonHealthPerson" name="nonHealthPerson" multiple class="chzn-select" required>
+                                                        <option value="123" <%if(Arrays.asList(surveyData.getNonHealthPerson()).contains("123")){%>selected<%}%>>Family</option>
+                                                        <option value="124" <%if(Arrays.asList(surveyData.getNonHealthPerson()).contains("124")){%>selected<%}%>>Relatives</option>
+                                                        <option value="125" <%if(Arrays.asList(surveyData.getNonHealthPerson()).contains("125")){%>selected<%}%>>Friends</option>
+                                                        <option value="126" <%if(Arrays.asList(surveyData.getNonHealthPerson()).contains("126")){%>selected<%}%>>Bombay</option>
+                                                        <option value="82" <%if(Arrays.asList(surveyData.getNonHealthPerson()).contains("82")){%>selected<%}%>>Others</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="control-group">
+                                                <label class="control-label" for="adequateRest">Adequate Rest & Sleep</label>
+                                                <div class="controls">
+                                                    <label><input type="radio" id="adequateRest" name="adequateRest" value="49" <%if(surveyData.getAdequateRest().equals("49")){%>checked<%}%> required/>Yes</label>
+                                                    <label><input type="radio" id="adequateRest" name="adequateRest" value="50" <%if(surveyData.getAdequateRest().equals("50")){%>checked<%}%>/>No</label>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="exercise">Adequate Exercise</label>
+                                                <div class="controls">
+                                                    <label><input type="radio" id="exercise" name="exercise" value="49" <%if(surveyData.getExercise().equals("49")){%>checked<%}%> required/>Yes</label>
+                                                    <label><input type="radio" id="exercise" name="exercise" value="50" <%if(surveyData.getExercise().equals("50")){%>checked<%}%>/>No</label>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="relaxation">Adequate Relaxation Exercise</label>
+                                                <div class="controls">
+                                                    <label><input type="radio" id="relaxation" name="relaxation" value="49" <%if(surveyData.getRelaxation().equals("49")){%>checked<%}%> required/>Yes</label>
+                                                    <label><input type="radio" id="relaxation" name="relaxation" value="50" <%if(surveyData.getRelaxation().equals("50")){%>checked<%}%>/>No</label>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="stressManagement">Adequate Stress Management</label>
+                                                <div class="controls">
+                                                    <label><input type="radio" id="stressManagement" name="stressManagement" value="49" <%if(surveyData.getStressManagement().equals("49")){%>checked<%}%> required/>Yes</label>
+                                                    <label><input type="radio" id="stressManagement" name="stressManagement" value="50" <%if(surveyData.getStressManagement().equals("50")){%>checked<%}%>/>No</label>
+                                                </div>
+                                            </div>
+                                            
+                                            <%}else{%>
+                                            
                                             <legend>Encode Survey for <%=community_name%></legend>
                                             <input type="hidden" name="community_id" value="<%=community_id%>"/>
 
@@ -584,6 +993,7 @@
                                                     <label><input type="radio" id="stressManagement" name="stressManagement" value="50"/>No</label>
                                                 </div>
                                             </div>
+                                            <%}%>
 
                                             <div class="form-actions">
                                                 <button id="submitbtn" name="action" value="SurveySubmitted" type="submit" class="btn btn-primary">Submit</button>

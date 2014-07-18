@@ -565,6 +565,7 @@ public class ChildSurvey extends HttpServlet {
 
                         if (upDB) {
                             session.setAttribute("Year", surveyYear);
+                            session.removeAttribute("isSurveyExisting");
                             response.sendRedirect("SurveySubmitted");
                         } else {
                             response.sendRedirect("ErrorInDB.jsp");

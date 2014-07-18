@@ -98,7 +98,8 @@ public class CommunitySurvey extends HttpServlet {
 
                         session.setAttribute("community_id", communityName[0]);
                         session.setAttribute("community_name", communityName[1]);
-
+                        
+                        session.removeAttribute("isSurveyExisting");
                         response.sendRedirect("EncodeCommunitySurvey");
                         break;
                     case "CreateInitialProjectCharter":

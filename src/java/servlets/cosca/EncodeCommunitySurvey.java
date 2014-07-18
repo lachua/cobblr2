@@ -42,8 +42,8 @@ public class EncodeCommunitySurvey extends HttpServlet {
                 String community_id = (String) session.getAttribute("community_id");
                 String community_name = (String) session.getAttribute("community_name");
 
-                request.setAttribute("community_id", community_id);
-                request.setAttribute("community_name", community_name);
+                session.setAttribute("community_id", community_id);
+                session.setAttribute("community_name", community_name);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/sysCOSCA/EncodeCommunitySurvey.jsp");
                 dispatcher.forward(request, response);
             } else if (request.getMethod().equals("POST")) {
@@ -131,6 +131,7 @@ public class EncodeCommunitySurvey extends HttpServlet {
                         surveyData.setFamilyImmunization(familyImmunizationAl);
                                
                         session.setAttribute("SurveyData", surveyData);
+                        session.setAttribute("isSurveyExisting", true);
                         response.sendRedirect("ChildSurvey");
                         break;
                     case "CommunitySurvey":

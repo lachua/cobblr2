@@ -68,15 +68,7 @@
             <url>web/sysCOSCA/EncodeCommunitySurvey.jsp</url>
             <bookmark id="16">
                 <name/>
-                <line>49</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
-            <url>src/java/servlets/sorg/SurveyOrg.java</url>
-            <bookmark id="15">
-                <name/>
-                <line>77</line>
+                <line>51</line>
                 <key/>
             </bookmark>
         </file>
@@ -103,21 +95,24 @@
                 <key/>
             </bookmark>
         </file>
+        <file>
+            <url>src/java/servlets/sorg/SurveyOrg.java</url>
+            <bookmark id="15">
+                <name/>
+                <line>77</line>
+                <key/>
+            </bookmark>
+        </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/servlets/admin/SOrgEdit.java</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysAdmin/SOrgDelete.jsp</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysAdmin/AccountDeleteSOrg.jsp</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysAdmin/SOrgEdit.jsp</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/servlets/admin/SOrgDelete.java</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysAdmin/Navsidebar.jsp</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/dbdao/StudentOrgDAO.java</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/servlets/admin/AccountEditSOrg.java</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/dbdao/UserEntityDAO.java</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysAdmin/AccountEditSOrg.jsp</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/servlets/admin/AccountDeleteSOrg.java</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/servlets/admin/AccountCreateSOrg.java</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/EncodeCommunitySurvey.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/Utilities/Year.java</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/dbdao/CommunityMembersDAO.java</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/servlets/cosca/CommunitySurvey.java</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ChildSurvey.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/servlets/cosca/EncodeCommunitySurvey.java</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/servlets/cosca/ChildSurvey.java</file>
         </group>
     </open-files>
 </project-private>
