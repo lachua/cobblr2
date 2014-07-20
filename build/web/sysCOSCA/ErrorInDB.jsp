@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Prohealth - Error in DB</title>
     </head>
     <body>
         <h1>Error in DB</h1>
