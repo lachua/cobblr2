@@ -147,9 +147,6 @@
                                                     OfferedAnswerDAO answerDAO = new OfferedAnswerDAO();
                                                     OfferedAnswerEntity answerEntity = answerDAO.getOfferedAnswer(offeredanswer_id);
                                                 %>
-                                                <div id="printDiv">
-                                                    
-                                <a class="btn btn-primary" style="float: right;" href="javascript:printDiv('printDiv')">Print</a>
                                                 <table class="table table-condensed bootstrap-datatable" id="datatable">
                                                     <thead>
                                                         <tr>
@@ -206,7 +203,6 @@
                                                         <%}%>
                                                     </tbody>
                                                 </table>
-                                    </div>
                                                 <%  }%>
                                                 
                                             </div>
@@ -316,14 +312,5 @@
 
                 google.maps.event.addDomListener(window, 'load', initialize);
         </script>
-        <script>
-        printDivCSS = new String ('<link href="myprintstyle.css" rel="stylesheet" type="text/css">');
-        function printDiv(divId) {
-            window.frames["print_frame"].document.body.innerHTML=printDivCSS + document.getElementById(divId).innerHTML;
-            window.frames["print_frame"].window.focus();
-            window.frames["print_frame"].window.print();
-        }
-        </script>
-        <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
     </body>
 </html>
