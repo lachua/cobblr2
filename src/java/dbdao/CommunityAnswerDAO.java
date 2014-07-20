@@ -221,7 +221,7 @@ public class CommunityAnswerDAO extends QueryTemplate {
 
         List<AnswerEntity> results = executeQuery();
 
-        if (results != null) {
+        if (results != null && !results.isEmpty()) {
             return results.get(0);
         } else {
             return null;
@@ -233,7 +233,7 @@ public class CommunityAnswerDAO extends QueryTemplate {
 
         List<AnswerEntity> results = executeQuery();
 
-        if (results != null) {
+        if (results != null && !results.isEmpty()) {
             return results;
         } else {
             return null;

@@ -60,6 +60,7 @@ public class ReportMagnitude extends HttpServlet {
                 session.setAttribute("report", report);
                 session.setAttribute("datestart", datestart);
                 session.setAttribute("dateend", dateend);
+                session.setAttribute("answer", questionAnswer[1]);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/sysCOSCA/ReportMagnitude.jsp");
                 dispatcher.forward(request, response);
             } else if (request.getMethod().equals("POST")) {

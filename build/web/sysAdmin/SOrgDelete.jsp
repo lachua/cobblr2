@@ -6,7 +6,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Admin Simplenso - Member List</title>
+        <title>Prohealth - Delete Student Organization</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="HTML5 Admin Simplenso Template" />
         <meta name="author" content="ahoekie" />
@@ -54,13 +54,13 @@
                     <div class="row-fluid">
                         <div class="span12">
                             <div class="box">
-                                <h4 class="box-header round-top">Edit Student Organization</h4>         
+                                <h4 class="box-header round-top">Delete Student Organization</h4>         
                                 <div class="box-container-toggle">
                                     <div class="box-content">
                                         
                                         <form id="createForm" method="POST" action="SOrgDelete" class="form-horizontal">
                                         <fieldset>
-                                            <legend>Edit Student Organization</legend>
+                                            <legend>Delete Student Organization</legend>
                                             <%
                                                 StudentOrgDAO dao;
                                                 dao = new StudentOrgDAO();

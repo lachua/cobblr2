@@ -103,12 +103,12 @@
                                         <br>
                                         
                                         <h2 align="center">Community: <%=com.getName() %></h2>
-                                        <h3 align="center">As of <%=Converter.toString(ans.getDate_answered()) %></h3>
+                                        <h3 align="center">As of <%if(ans != null){%><%=Converter.toString(ans.getDate_answered()) %><%}else{%>N/A<%}%></h3>
                                         <br><br>
 
                                         <div class="row">
                                             <div class="col-md-8 col-md-offset-2">
-                                                <h2>Population of Children Ages 0-5: <%=report1.get(0).getTotal()%></h2>
+                                                <h2>Population of Children Ages 0-5: <%if(!report1.isEmpty()){%><%=report1.get(0).getTotal()%><%}else{%>0<%}%></h2>
                                                 <center>
                                                     <div id="age" style="height: 300px;"></div>
                                                 </center>
@@ -199,7 +199,7 @@
                 ]);
 
                 string = '';
-                if (<%=report1.get(0).getTotal() %> == 0) {
+                if (<%if(!report1.isEmpty()){%><%=report1.get(0).getTotal()%><%}else{%>0<%}%> == 0) {
                     string = empty;
                 }
 
@@ -260,13 +260,13 @@
                 //New Born Screening
                 var data = google.visualization.arrayToDataTable([
                     ['New Born Screening', 'No. of Children'],
-                    ['With', <%=report2.get(0).getCount()%>],
-                    ['Without', <%=report2.get(1).getCount()%>]
+                    ['With', <%if(!report2.isEmpty()){%><%=report2.get(0).getCount()%><%}else{%>0<%}%>],
+                    ['Without', <%if(!report2.isEmpty()){%><%=report2.get(1).getCount()%><%}else{%>0<%}%>]
                   
                 ]);
 
                 string = '';
-                if (<%=report1.get(0).getTotal() %> == 0) {
+                if (<%if(!report1.isEmpty()){%><%=report1.get(0).getTotal()%><%}else{%>0<%}%> == 0) {
                     string = empty;
                 }
 

@@ -116,7 +116,7 @@
                                                         
                                         <div class="row">
                                             <div class="col-md-6 col-md-offset-3">
-                                                <p>A. Top 10 Diseases in the Community</p>
+                                                <p>B. Top 3 Felt Family Needs</p>
                                                 <center>
                                                     <table cellpadding="0" cellspacing="0" class="table table-striped table-bordered" border="0" width="400"  id="tables">
                                                         <tbody>
@@ -134,7 +134,7 @@
                                                         
                                         <div class="row">
                                             <div class="col-md-8 col-md-offset-2">
-                                                <p>A. Top 10 Diseases in the Community</p>
+                                                <p>C. Health Projects Participated In</p>
                                                 <center>
                                                     <table cellpadding="0" cellspacing="0" class="table table-striped table-bordered" border="0" width="400"  id="tables">
                                                         <thead>

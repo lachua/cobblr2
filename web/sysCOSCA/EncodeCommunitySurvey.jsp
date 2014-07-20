@@ -8,7 +8,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Admin Simplenso - Member List</title>
+        <title>Prohealth - Encode Survey</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="HTML5 Admin Simplenso Template" />
         <meta name="author" content="ahoekie" />
@@ -53,7 +53,7 @@
         <textarea style="display:none" id="familyMemberTemplate">
             <tr id="familyMember-{0}">
                 <input name="numOfFamilyMem" type="hidden">
-                <td><input class="input-small" id="name" name="name" type="text" placeholder="person {0}" required></input></td>
+                <td><input class="input-small" id="name" name="name" type="text" placeholder="person {0}" required></input><br/><h6>Leave <b>immunizations blank</b> for children aged 0-5</h6></td>
                 <td><input class="input-mini" id="age" name="age" step="any" type="number" required></input><br><center><button class="btn sbtn-warning btn-mini btn-link" type="button" onClick="childAge();">child age?</button></center></td>
                 <td>
                     <select class="input-mini" id="gender" name="gender" required>
@@ -128,16 +128,16 @@
                     <label class="checkbox"><input type="checkbox" id="illnesses-{0}" name="illnesses-{0}" value="110" />Fever</label>
                 </td>
                 <td>
-                    <label class="checkbox"><input type="checkbox" id="familyImmunization-immunization-{0}" name="familyImmunization-immunization-{0}" value="130" checked/>BCG</label>
-                    <label class="checkbox"><input type="checkbox" id="familyImmunization-immunization-{0}" name="familyImmunization-immunization-{0}" value="131" checked/>DTP1</label>
-                    <label class="checkbox"><input type="checkbox" id="familyImmunization-immunization-{0}" name="familyImmunization-immunization-{0}" value="132" checked/>DTP2</label>
-                    <label class="checkbox"><input type="checkbox" id="familyImmunization-immunization-{0}" name="familyImmunization-immunization-{0}" value="133" checked/>DTP3</label>
-                    <label class="checkbox"><input type="checkbox" id="familyImmunization-immunization-{0}" name="familyImmunization-immunization-{0}" value="134" checked/>OVP1</label>
-                    <label class="checkbox"><input type="checkbox" id="familyImmunization-immunization-{0}" name="familyImmunization-immunization-{0}" value="135" checked/>OVP2</label>
-                    <label class="checkbox"><input type="checkbox" id="familyImmunization-immunization-{0}" name="familyImmunization-immunization-{0}" value="136" checked/>OVP3</label>
-                    <label class="checkbox"><input type="checkbox" id="familyImmunization-immunization-{0}" name="familyImmunization-immunization-{0}" value="137" checked/>Measles</label>
-                    <label class="checkbox"><input type="checkbox" id="familyImmunization-immunization-{0}" name="familyImmunization-immunization-{0}" value="138" checked/>Flu</label>
-                    <label class="checkbox"><input type="checkbox" id="familyImmunization-immunization-{0}" name="familyImmunization-immunization-{0}" value="139" checked/>Hepatitis</label>
+                    <label class="checkbox"><input type="checkbox" id="familyImmunization-immunization-{0}" name="familyImmunization-immunization-{0}" value="130"/>BCG</label>
+                    <label class="checkbox"><input type="checkbox" id="familyImmunization-immunization-{0}" name="familyImmunization-immunization-{0}" value="131"/>DTP1</label>
+                    <label class="checkbox"><input type="checkbox" id="familyImmunization-immunization-{0}" name="familyImmunization-immunization-{0}" value="132"/>DTP2</label>
+                    <label class="checkbox"><input type="checkbox" id="familyImmunization-immunization-{0}" name="familyImmunization-immunization-{0}" value="133"/>DTP3</label>
+                    <label class="checkbox"><input type="checkbox" id="familyImmunization-immunization-{0}" name="familyImmunization-immunization-{0}" value="134"/>OVP1</label>
+                    <label class="checkbox"><input type="checkbox" id="familyImmunization-immunization-{0}" name="familyImmunization-immunization-{0}" value="135"/>OVP2</label>
+                    <label class="checkbox"><input type="checkbox" id="familyImmunization-immunization-{0}" name="familyImmunization-immunization-{0}" value="136"/>OVP3</label>
+                    <label class="checkbox"><input type="checkbox" id="familyImmunization-immunization-{0}" name="familyImmunization-immunization-{0}" value="137"/>Measles</label>
+                    <label class="checkbox"><input type="checkbox" id="familyImmunization-immunization-{0}" name="familyImmunization-immunization-{0}" value="138"/>Flu</label>
+                    <label class="checkbox"><input type="checkbox" id="familyImmunization-immunization-{0}" name="familyImmunization-immunization-{0}" value="139"/>Hepatitis</label>
                 </td>
             </tr>
     </textarea>
@@ -1099,7 +1099,7 @@
             addFamilyIllnessesRow();
             $("#addFamilyIllnesses").click(addFamilyIllnessesRow);
 
-            //dynamic family illnessses fields
+            //dynamic family imunization fields
             var familyImmunizationTemplate = jQuery.validator.format($.trim($("#familyImmunizationTemplate").val()));
             function addFamilyImmunizationRow() {
                 $(familyImmunizationTemplate(familyImmunizationCount++)).appendTo("#familyImmunization");

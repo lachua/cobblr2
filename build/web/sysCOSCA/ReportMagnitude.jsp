@@ -60,8 +60,9 @@
                                             List<ReportMagnitudeEntity> report = (List<ReportMagnitudeEntity>) session.getAttribute("report");
                                             String datestart = (String) session.getAttribute("datestart");
                                             String dateend = (String) session.getAttribute("dateend");
+                                            String answerid = (String) session.getAttribute("answer");
                                             OfferedAnswerDAO dao = new OfferedAnswerDAO();
-                                            OfferedAnswerEntity answer = dao.getOfferedAnswer(report.get(0).getOfferedanswer_id());
+                                            OfferedAnswerEntity answer = dao.getOfferedAnswer(Integer.parseInt(answerid));
                                             int count = 1;
                                         %>
                                         <h1 align="center">Center for Social Concern and Action </h1>
