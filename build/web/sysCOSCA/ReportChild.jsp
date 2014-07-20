@@ -65,6 +65,7 @@
                         <div class="row">
                             <div class="col-md-10 col-md-offset-1">
                                 <div class="box" id="box-3">
+                                    <div id="printDiv">
                                     <h4 class="box-header round-top">Health Review of Children Ages 0-5</h4>         
                                     <div class="box-container-toggle">
                                         <div class="box-content">
@@ -110,7 +111,7 @@
                                             <div class="col-md-8 col-md-offset-2">
                                                 <h2>Population of Children Ages 0-5: <%if(!report1.isEmpty()){%><%=report1.get(0).getTotal()%><%}else{%>0<%}%></h2>
                                                 <center>
-                                                    <div id="age" style="height: 300px;"></div>
+                                                    <div id="age" style="min-height: 300px;"></div>
                                                 </center>
                                             </div>
                                         </div>
@@ -118,7 +119,7 @@
                                             <div class="col-md-8 col-md-offset-2">
                                                 <h2>Vitamin Deficiency</h2>
                                                 <center>
-                                                    <div id="vitamin" style="height: 300px;"></div>
+                                                    <div id="vitamin" style="min-height: 300px;"></div>
                                                 </center>
                                             </div>
                                         </div>
@@ -126,7 +127,7 @@
                                             <div class="col-md-8 col-md-offset-2">
                                                 <h2>Malnutrition</h2>
                                                 <center>
-                                                    <div id="malnutrition"></div>
+                                                    <div id="malnutrition" style="min-height: 300px;"></div>
                                                 </center>
                                             </div>
                                         </div>
@@ -134,7 +135,7 @@
                                             <div class="col-md-8 col-md-offset-2">
                                                 <h2>New Born Screening</h2>
                                                 <center>
-                                                    <div id="newborn" style="height: 300px;"></div>
+                                                    <div id="newborn" style="min-height: 300px;"></div>
                                                 </center>
                                             </div>
                                         </div>
@@ -142,7 +143,7 @@
                                             <div class="col-md-8 col-md-offset-2">
                                                 <h2>Immunization</h2>
                                                 <center>
-                                                    <div id="immunization"></div>
+                                                    <div id="immunization" style="min-height: 300px;"></div>
                                                 </center>
                                             </div>
                                         </div>   
@@ -151,14 +152,13 @@
                                         <div class="container">
                                             <p align="center">Date Printed: <%=Year.getCurrentDate()%></p>
                                         </div>
-                                        <form method="POST" action="ReportMagnitude">
-                                            <button class="btn btn-primary">View as PDF</button>
-                                            <a href="ReportYear" class="btn">Back</a>
-                                        </form>
+                                    </div>
                                     </div>
 
 
                                 </div><!--/span-->
+                                <a class="btn btn-primary" href="javascript:printDiv('printDiv')">Print</a>
+                                <a href="ReportYear" class="btn">Back</a>
                             </div>
                     </div>
                 </div>
@@ -292,5 +292,14 @@
                 table.draw(data);
             }
         </script>
+        <script>
+        printDivCSS = new String ('<link href="myprintstyle.css" rel="stylesheet" type="text/css">');
+        function printDiv(divId) {
+            window.frames["print_frame"].document.body.innerHTML=printDivCSS + document.getElementById(divId).innerHTML;
+            window.frames["print_frame"].window.focus();
+            window.frames["print_frame"].window.print();
+        }
+        </script>
+        <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
     </body>
 </html>

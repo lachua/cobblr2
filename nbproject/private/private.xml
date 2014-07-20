@@ -106,13 +106,15 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/EncodeCommunitySurvey.jsp</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/Utilities/Year.java</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/dbdao/CommunityMembersDAO.java</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/servlets/cosca/CommunitySurvey.java</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ChildSurvey.jsp</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/servlets/cosca/EncodeCommunitySurvey.java</file>
-            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/src/java/servlets/cosca/ChildSurvey.java</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ReportEnd.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ReportCanceled.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/MapCommunity.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ReportChild.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ReportProject.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ReportCommunity.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ReportMagnitude.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ReportDiseases.jsp</file>
+            <file>file:/C:/Users/Renliw/Dropbox/THESIS/Cobblr2.0G/web/sysCOSCA/ReportAnnual.jsp</file>
         </group>
     </open-files>
 </project-private>

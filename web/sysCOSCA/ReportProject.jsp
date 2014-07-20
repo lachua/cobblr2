@@ -56,6 +56,7 @@
                     <div class="row">
                         <div class="col-md-10 col-md-offset-1">
                             <div class="box" id="box-3">
+                                    <div id="printDiv">
                                 <h4 class="box-header round-top">Project Summary Report</h4>         
                                 <div class="box-container-toggle">
                                     <div class="box-content">
@@ -178,12 +179,11 @@
                                             <div class="container">
                                                 <p align="center">Date Printed: <%=Year.getCurrentDate() %> </p>
                                             </div>
-                                            <form method="POST" action="ReportProjectEvaluation">
-                                                <button class="btn btn-primary">View as PDF</button>
-                                                <a href="ReportYear" class="btn">Back</a>
-                                            </form>
                                         </div>
+                                    </div>
                                     </div><!--/span-->
+                                <a class="btn btn-primary" href="javascript:printDiv('printDiv')">Print</a>
+                                <a href="ReportYear" class="btn">Back</a>
                                 </div>
                             </div> 
                         </div>
@@ -202,5 +202,14 @@
 
                 <!-- Simplenso Scripts -->
                 <script src="../scripts/simplenso/simplenso.js"></script>
+        <script>
+        printDivCSS = new String ('<link href="myprintstyle.css" rel="stylesheet" type="text/css">');
+        function printDiv(divId) {
+            window.frames["print_frame"].document.body.innerHTML=printDivCSS + document.getElementById(divId).innerHTML;
+            window.frames["print_frame"].window.focus();
+            window.frames["print_frame"].window.print();
+        }
+        </script>
+        <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
                 </body>
                 </html>
