@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 public class ReportHealth1DAO extends QueryTemplate{
 
     // projects per status
-    public List<ReportHealth1Entity> getReport(Date start, Date end){
+    public List<ReportHealth1Entity> getReport(int community_id, Date start){
         setQuery("SELECT \n" +
                 "    YEAR(pa.date_answered) AS 'year',\n" +
                 "    COUNT(DISTINCT pa.person_id) AS 'num_respondents'\n" +
@@ -34,22 +34,21 @@ public class ReportHealth1DAO extends QueryTemplate{
                 "        INNER JOIN\n" +
                 "    community_family cf ON cm.family_id = cf.id\n" +
                 "WHERE\n" +
-                "    cf.community_id = 1\n" +
+                "    cf.community_id = ?\n" +
                 "        AND (YEAR(pa.date_answered) = ?\n" +
-                "        OR YEAR(pa.date_answered) = ?)\n" +
                 "GROUP BY YEAR(pa.date_answered)\n" +
                 "ORDER BY YEAR(pa.date_answered) ASC;");
         
         KeyValuePair onePair;
 
         onePair = new KeyValuePair();
-        onePair.setKey(KeyValuePair.DATE);
-        onePair.setValue(""+start);
+        onePair.setKey(KeyValuePair.INT);
+        onePair.setValue(""+community_id);
         getParameters().add(onePair);
 
         onePair = new KeyValuePair();
         onePair.setKey(KeyValuePair.DATE);
-        onePair.setValue(""+end);
+        onePair.setValue(""+start);
         getParameters().add(onePair);
 
         List<ReportHealth1Entity> results = executeQuery();

@@ -44,7 +44,7 @@ public class ReportHealth4DAO  extends QueryTemplate{
                 "WHERE\n" +
                 "    c.id = ?\n" +
                 "        AND (? <= pcd.date_implemented\n" +
-                "        && ? >= pcd.date_implemented)\n" +
+                "        && ? > pcd.date_implemented)\n" +
                 "GROUP BY c.id , pc.id\n" +
                 "ORDER BY pcd.date_implemented ASC;");
         

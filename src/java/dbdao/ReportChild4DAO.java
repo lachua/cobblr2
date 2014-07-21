@@ -62,7 +62,7 @@ public class ReportChild4DAO extends QueryTemplate{
                 "        pa.survey_id = 5 AND cf.community_id = ?\n" +
                 "            AND pa.question_id = 71\n" +
                 "            AND (? <= pa.date_answered\n" +
-                "            AND ? >= pa.date_answered)) pop\n" +
+                "            AND ? > pa.date_answered)) pop\n" +
                 "GROUP BY oa.offeredanswer_id\n" +
                 "ORDER BY oa.answertext asc;");
 

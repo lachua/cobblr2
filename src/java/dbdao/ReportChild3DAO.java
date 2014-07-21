@@ -42,7 +42,7 @@ public class ReportChild3DAO extends QueryTemplate{
                 "    (cm.age >= 0 AND cm.age <= 5)\n" +
                 "        AND cf.community_id = ?\n" +
                 "        AND (? <= pa.date_answered\n" +
-                "        AND ? >= pa.date_answered);");
+                "        AND ? > pa.date_answered);");
 
         KeyValuePair onePair;
 

@@ -285,7 +285,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label" for="date">Select Date Range</label>
                                                     <div class="controls">
-                                                        <div style="width: 50px">For:</div>
+                                                        <div style="width: 50px">From:</div>
                                                         <select id="canceldatestart" name="canceldatestart" class="chzn-select input input-xlarge " >
                                                             <%
                                                                 for (int x = 0; x < 10; x++) {
@@ -295,7 +295,7 @@
                                                                 }
                                                             %>
                                                         </select>
-                                                        <div style="width: 50px">And:</div>   
+                                                        <div style="width: 50px">To:</div>   
                                                         <select id="canceldateend" name="canceldateend" class="chzn-select input input-xlarge " >
                                                             <%
                                                                 for (int x = 0; x < 10; x++) {
@@ -334,7 +334,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label" for="commdate">Select Date Range</label>
                                                     <div class="controls">
-                                                        <div style="width: 50px">For:</div>
+                                                        <div style="width: 50px">From:</div>
                                                         <select id="commdatestart" name="commdatestart" class="chzn-select input input-xlarge " >
                                                             <%
                                                                 for (int x = 0; x < 10; x++) {
@@ -344,7 +344,7 @@
                                                                 }
                                                             %>
                                                         </select>
-                                                        <div style="width: 50px">And:</div>   
+                                                        <div style="width: 50px">To</div>   
                                                         <select id="commdateend" name="commdateend" class="chzn-select input input-xlarge " >
                                                             <%
                                                                 for (int x = 0; x < 10; x++) {
@@ -382,7 +382,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label" for="childdate">Select Date Range</label>
                                                     <div class="controls">
-                                                        <div style="width: 50px">For:</div>
+                                                        <div style="width: 50px">From:</div>
                                                         <select id="childdatestart" name="childdatestart" class="chzn-select input input-xlarge " >
                                                             <%
                                                                 for (int x = 0; x < 10; x++) {
@@ -392,7 +392,7 @@
                                                                 }
                                                             %>
                                                         </select>
-                                                        <div style="width: 50px">And:</div>   
+                                                        <div style="width: 50px">For:</div>   
                                                         <select id="childdateend" name="childdateend" class="chzn-select input input-xlarge " >
                                                             <%
                                                                 for (int x = 0; x < 10; x++) {

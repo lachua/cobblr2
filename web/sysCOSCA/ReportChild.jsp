@@ -260,8 +260,8 @@
                 //New Born Screening
                 var data = google.visualization.arrayToDataTable([
                     ['New Born Screening', 'No. of Children'],
-                    ['With', <%if(!report2.isEmpty()){%><%=report2.get(0).getCount()%><%}else{%>0<%}%>],
-                    ['Without', <%if(!report2.isEmpty()){%><%=report2.get(1).getCount()%><%}else{%>0<%}%>]
+                    ['With', <%if(!report6.isEmpty()){%><%=report6.get(0).getCount()%><%}else{%>0<%}%>],
+                    ['Without', <%if(!report6.isEmpty()){%><%=report6.get(1).getCount()%><%}else{%>0<%}%>]
                   
                 ]);
 

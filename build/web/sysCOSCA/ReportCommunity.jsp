@@ -73,7 +73,7 @@
                                             ReportHealth23DAO report3dao = new ReportHealth23DAO();
                                             ReportHealth4DAO report4dao = new ReportHealth4DAO();
                                             
-                                            List<ReportHealth1Entity> report1 = report1dao.getReport(Converter.toDate(calstart), Converter.toDate(calend));
+                                            List<ReportHealth1Entity> report1 = report1dao.getReport(com.getId(), Converter.toDate(calstart));
                                             List<ReportHealth23Entity> report2 = report2dao.getReport2(com.getId(), Converter.toDate(calstart));
                                             List<ReportHealth23Entity> report3 = report3dao.getReport3(com.getId(), Converter.toDate(calstart));
                                             List<ReportHealth4Entity> report4 = report4dao.getReport(com.getId(), Converter.toDate(calstart), Converter.toDate(calend));

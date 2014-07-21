@@ -36,7 +36,7 @@ public class ReportChild1DAO  extends QueryTemplate{
                 "    pa.survey_id = 5 AND cf.community_id = ?\n" +
                 "        AND pa.question_id = 71\n" +
                 "        AND (? <= pa.date_answered\n" +
-                "        AND ? >= pa.date_answered);");
+                "        AND ? > pa.date_answered);");
 
         KeyValuePair onePair;
 
