@@ -293,7 +293,7 @@
             
         </script>
         <script>
-        printDivCSS = new String ('<link href="myprintstyle.css" rel="stylesheet" type="text/css">');
+        printDivCSS = new String ('<link href="../css/printcss.css" rel="stylesheet" type="text/css" media="print">');
         function printDiv(divId) {
             window.frames["print_frame"].document.body.innerHTML=printDivCSS + document.getElementById(divId).innerHTML;
             window.frames["print_frame"].window.focus();

@@ -317,7 +317,7 @@
                                         <div id="report6" style="display: none; ">
                                             <form id="commForm" class="form-horizontal" method="GET" action="ReportCommunity" >
                                                 <div class="control-group">
-                                                    <label class="control-label" for="commId">Select Project</label>
+                                                    <label class="control-label" for="commId">Select Community</label>
                                                     <div class="controls">
                                                         <select id="commId" name="commId" class="chzn-select input input-xlarge " >
                                                             <%
@@ -366,7 +366,7 @@
                                         <div id="report7" style="display: none; ">
                                             <form id="childForm" class="form-horizontal" method="GET" action="ReportChild" >
                                                 <div class="control-group">
-                                                    <label class="control-label" for="childId">Select Project</label>
+                                                    <label class="control-label" for="childId">Select Community</label>
                                                     <div class="controls">
                                                         <select id="childId" name="childId" class="chzn-select input input-xlarge " >
                                                             <%
