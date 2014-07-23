@@ -62,6 +62,7 @@
 
                                     <div class="row">
                                         <div class="col-md-6 col-md-offset-3">
+                                            <center>
                                             <table cellpadding="0" cellspacing="0" class="table table-striped table-bordered" border="0" width="400"  id="tables">
                                                 <thead>
                                                 <th></th>
@@ -82,6 +83,7 @@
                                                     %>
                                                 </tbody>
                                             </table>
+                                                </center>
                                         </div>
                                     </div>
                                     <br><br>
@@ -112,7 +114,7 @@
         <!-- Simplenso Scripts -->
         <script src="../scripts/simplenso/simplenso.js"></script>
         <script>
-        printDivCSS = new String ('<link href="../css/printcss.css" rel="stylesheet" type="text/css" media="print">');
+        printDivCSS = new String ('<link href="../css/print/print-disease.css" rel="stylesheet" type="text/css" media="print">');
         function printDiv(divId) {
             window.frames["print_frame"].document.body.innerHTML=printDivCSS + document.getElementById(divId).innerHTML;
             window.frames["print_frame"].window.focus();

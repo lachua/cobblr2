@@ -35,7 +35,7 @@ public class ReportHealth1DAO extends QueryTemplate{
                 "    community_family cf ON cm.family_id = cf.id\n" +
                 "WHERE\n" +
                 "    cf.community_id = ?\n" +
-                "        AND (YEAR(pa.date_answered) = ?\n" +
+                "        AND YEAR(pa.date_answered) = ?\n" +
                 "GROUP BY YEAR(pa.date_answered)\n" +
                 "ORDER BY YEAR(pa.date_answered) ASC;");
         
