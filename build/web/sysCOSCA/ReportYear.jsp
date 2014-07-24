@@ -104,7 +104,7 @@
                                                             <%
                                                                 for (int x = 0; x < 10; x++) {
                                                             %>
-                                                            <option value="<%=Year.getCurrentYear() - x-1%>"><%=Year.getCurrentYear() - x-1%> </option> 
+                                                            <option value="<%=Year.getCurrentYear() - x %>"><%=Year.getCurrentYear() - x%> </option> 
                                                             <%
                                                                 }
                                                             %>
@@ -114,7 +114,7 @@
                                                                 <%
                                                                     for (int x = 0; x < 10; x++) {
                                                                 %>
-                                                                <option value="<%=Year.getCurrentYear() - x%>"><%=Year.getCurrentYear() - x%> </option> 
+                                                                <option value="<%=Year.getCurrentYear() - x+1%>"><%=Year.getCurrentYear() - x+1%> </option> 
                                                                 <%
                                                                     }
                                                                 %>
@@ -217,8 +217,8 @@
                                                 <div class="control-group">
                                                     <label class="control-label" for="date">Select Date Range</label>
                                                     <div class="controls">
-                                                        <div style="width: 50px">From:</div>
-                                                        <select id="magdatestart" name="magdatestart" class="chzn-select input input-xlarge " >
+                                                        <div style="width: 50px">Compare:</div>
+                                                        <select id="magdateend" name="magdateend" class="chzn-select input input-xlarge " >
                                                             <%
                                                                 for (int x = 0; x < 10; x++) {
                                                             %>
@@ -228,11 +228,11 @@
                                                             %>
                                                         </select>
                                                         <div style="width: 50px">To:</div>   
-                                                        <select id="magdateend" name="magdateend" class="chzn-select input input-xlarge " >
+                                                        <select id="magdatestart" name="magdatestart" class="chzn-select input input-xlarge " >
                                                             <%
                                                                 for (int x = 0; x < 10; x++) {
                                                             %>
-                                                            <option value="<%=Year.getCurrentYear() - x + 1%>"><%=Year.getCurrentYear() - x +1%> </option> 
+                                                            <option value="<%=Year.getCurrentYear() - x - 1%>"><%=Year.getCurrentYear() - x -1%> </option> 
                                                             <%
                                                                 }
                                                             %>

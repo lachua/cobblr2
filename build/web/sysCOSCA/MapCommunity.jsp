@@ -25,6 +25,8 @@
         <link href="../bootstrap/css/bootstrap.css" rel="stylesheet" id="main-theme-script" />
         <link href="../css/themes/default.css" rel="stylesheet" id="theme-specific-script" />
         <link href="../bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+        
+        <link href="../css/print/print-filter.css" rel="stylesheet" type="text/css" media="print">
 
         <!-- Simplenso -->
         <link href="../css/simplenso.css" rel="stylesheet" />
@@ -147,6 +149,8 @@
                                                     OfferedAnswerDAO answerDAO = new OfferedAnswerDAO();
                                                     OfferedAnswerEntity answerEntity = answerDAO.getOfferedAnswer(offeredanswer_id);
                                                 %>
+                                                <a style="float: right;" class="btn btn-primary" href="javascript:printDiv('printDiv')">Print</a>
+                                                <div id="printDiv">
                                                 <table class="table table-condensed bootstrap-datatable" id="datatable">
                                                     <thead>
                                                         <tr>
@@ -189,7 +193,7 @@
                                                                 <td><button style="text-align: left;" id="com-<%=x%>" class="btn btn-link"><%=comList.get(x).getName() %></button></td>
                                                                 <td><%=filterList.get(x).getTotal_community_members() %></td>
                                                                 <td>
-                                                                    <%=filterList.get(x).getTotal_affected() %>
+                                                                    Total: <%=filterList.get(x).getTotal_affected() %>
                                                                     <ul class="child">
                                                                         <li>Total Children: <%=currentchildM+currentchildF %></li>
                                                                         <li>Male Children: <%=currentchildM%></li>
@@ -203,6 +207,7 @@
                                                         <%}%>
                                                     </tbody>
                                                 </table>
+                                                </div>
                                                 <%  }%>
                                                 
                                             </div>
@@ -312,5 +317,16 @@
 
                 google.maps.event.addDomListener(window, 'load', initialize);
         </script>
+        
+        
+        <script>
+        printDivCSS = new String ('<link href="../css/print/print-filter.css" rel="stylesheet" type="text/css" media="print">');
+        function printDiv(divId) {
+            window.frames["print_frame"].document.body.innerHTML=printDivCSS + document.getElementById(divId).innerHTML;
+            window.frames["print_frame"].window.focus();
+            window.frames["print_frame"].window.print();
+        }
+        </script>
+        <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
     </body>
 </html>

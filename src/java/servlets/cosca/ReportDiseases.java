@@ -44,8 +44,8 @@ public class ReportDiseases extends HttpServlet {
                 Calendar calfrom = new GregorianCalendar();
                 Calendar calto = new GregorianCalendar();
 
-                calfrom.set(Calendar.YEAR, Integer.parseInt(datefrom));
-                calto.set(Calendar.YEAR, Integer.parseInt(dateto));
+                calfrom.set(Integer.parseInt(datefrom), 1,1);
+                calto.set(Integer.parseInt(dateto),12,31);
                 
                 MorbidityReport morbidity = new MorbidityReport(calfrom, calto);
 

@@ -35,6 +35,8 @@
         <link href="../css/themes/default.css" rel="stylesheet" id="theme-specific-script" />
         <link href="../bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+        
+        <link href="../css/print/print-child.css" rel="stylesheet" type="text/css" media="print">
 
         <!-- Simplenso -->
         <link href="../css/simplenso.css" rel="stylesheet" />
