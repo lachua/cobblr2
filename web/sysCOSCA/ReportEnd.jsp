@@ -104,7 +104,7 @@
                                                 </div>
                                                 <div class="col-md-8 col-md-offset-2">
                                                     <center>
-                                                        <div id="barGraph" style="height: 500px;"></div>
+                                                        <div id="barGraph" style="height: 200px;"></div>
                                                     </center>
                                                 </div>
                                                 <div class="col-md-6 col-md-offset-3">
@@ -134,7 +134,7 @@
                                             </div>
                                         </div>
                                                             
-                                        <div class="row">
+                                        <div class="row" id="page-break">
                                             <div class="col-md-6 col-md-offset-3">
                                                 <p>C. Projects Implemented per Partner Community</p>
                                                 <center>

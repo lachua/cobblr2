@@ -183,9 +183,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <%for (int x = 0; x < confirmedProj.size(); x++) {
-                                                     ProjectCharterAndDatesDAO dao = new ProjectCharterAndDatesDAO();
-                                                            ProjectCharterAndDatesEntity entity = dao.getCharterClosed(unavailableProj.get(x).getCommunity_id(), unavailableProj.get(x).getType());%>
+                                                    <%for (int x = 0; x < confirmedProj.size(); x++) {%>
                                                     <tr>
                                                         <td><%=confirmedProj.get(x).getTitle()%></td>
                                                         <td><%=confirmedProj.get(x).getType()%></td>
@@ -201,16 +199,10 @@
                                                             if (CompareDate.compareDates(projdate.getDate_confirmed()) < 0) {
                                                         %>
                                                         <td><span class="badge badge-info"><%=projdate.getDate_confirmed()%></span>
-                                                            <br>
-                                                            <span class="badge badge-inverse"><%=entity.getDate_closed()%></span></td>
                                                             <%} else if (CompareDate.compareDates(projdate.getDate_confirmed()) > 0) {%>
                                                         <td><span class="badge badge-important"><%=projdate.getDate_confirmed()%></span>
-                                                            <br>
-                                                            <span class="badge badge-inverse"><%=entity.getDate_closed()%></span></td>
                                                             <%} else {%>
                                                         <td><span class="badge badge-warning"><%=projdate.getDate_confirmed()%></span>
-                                                            <br>
-                                                            <span class="badge badge-inverse"><%=entity.getDate_closed()%></span></td>
                                                             <%}%>
                                                         <td><button name="ConfirmedDetails" value="<%=confirmedProj.get(x).getProject_id()%>" class="btn btn-inverse">Details</button></td>
                                                     </tr>

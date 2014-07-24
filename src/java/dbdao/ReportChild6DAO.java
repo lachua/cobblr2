@@ -47,8 +47,8 @@ public class ReportChild6DAO extends QueryTemplate{
                 "    WHERE\n" +
                 "        pa.survey_id = 5 AND cf.community_id = ?\n" +
                 "            AND pa.question_id = 75\n" +
-                "            AND (? <= pa.date_answered\n" +
-                "            AND ? > pa.date_answered)) ans ON oa.offeredanswer_id = ans.offeredanswer_id\n" +
+                "            AND (? <= YEAR(pa.date_answered)\n" +
+                "            AND ? > YEAR(pa.date_answered))) ans ON oa.offeredanswer_id = ans.offeredanswer_id\n" +
                 "GROUP BY oa.offeredanswer_id\n" +
                 "ORDER BY oa.offeredanswer_id asc;");
 

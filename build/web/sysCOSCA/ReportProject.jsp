@@ -85,6 +85,7 @@
 
                                     <div class="row">
                                         <div class="col-md-8 col-md-offset-2">
+                                            <center>
                                             <table cellpadding="0" cellspacing="0" class="table table-striped table-bordered" border="0" width="400"  id="tables">
                                                 <tbody>
                                                     <tr>
@@ -131,11 +132,13 @@
                                                     </tr> 
                                                 </tbody>
                                             </table>
+                                                    </center>
                                         </div>
                                     </div>
                                                     
-                                    <div class="row">
+                                    <div class="row" id="page-break">
                                         <div class="col-md-6 col-md-offset-3">
+                                            <center>
                                             <h4>Number of Participants</h4>
                                             <table cellpadding="0" cellspacing="0" class="table table-striped table-bordered" border="0" width="400"  id="tables">
                                                 <tbody>
@@ -149,12 +152,13 @@
                                                     </tr> 
                                                     
                                                 </tbody>
-                                            </table>
+                                            </table></center>
                                         </div>
                                     </div>
                                                     
                                     <div class="row">
                                         <div class="col-md-10 col-md-offset-1">
+                                            <center>
                                             <h4>Project Evaluation</h4>
                                             <table cellpadding="0" cellspacing="0" class="table table-striped table-bordered" border="0" width="400"  id="tables">
                                                 <thead>
@@ -171,7 +175,7 @@
                                                         </tr>
                                                     <%}%>
                                                 </tbody>
-                                            </table>
+                                            </table></center>
                                         </div>
                                     </div>
 

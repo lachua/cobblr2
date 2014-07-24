@@ -32,7 +32,7 @@ public class DiseaseTallyDAO extends QueryTemplate {
                 + "WHERE\n"
                 + "    question_id = 35\n"
                 + "        AND date_answered >= ?\n"
-                + "        AND date_answered <= ?\n"
+                + "        AND date_answered < ?\n"
                 + "GROUP BY pa.offeredanswer_id\n"
                 + "ORDER BY count DESC\n"
                 + "LIMIT 10";
