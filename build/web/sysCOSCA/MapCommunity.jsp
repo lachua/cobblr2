@@ -190,7 +190,7 @@
                                                             int currentchildF = childdao.getGenderCount(comList.get(x).getId(), Year.getCurrentYear(), "F");
                                                         %>
                                                             <tr>
-                                                                <td><button style="text-align: left;" id="com-<%=x%>" class="btn btn-link"><%=comList.get(x).getName() %></button></td>
+                                                                <td><a style="text-align: left;" id="com-<%=x%>" class="btn btn-link"><%=comList.get(x).getName() %></a></td>
                                                                 <td><%=filterList.get(x).getTotal_community_members() %></td>
                                                                 <td>
                                                                     Total: <%=filterList.get(x).getTotal_affected() %>

@@ -40,7 +40,7 @@ public class ReportMagnitudeDAO extends QueryTemplate{
                 "    WHERE\n" +
                 "        pa.question_id = ?\n" +
                 "            AND pa.offeredanswer_id = ?\n" +
-                "            AND Year(pa.date_answered) >= ?\n" +
+                "            AND Year(pa.date_answered) = ?\n" +
                 "    GROUP BY c.name) prevyear\n" +
                 "        LEFT JOIN\n" +
                 "    (SELECT \n" +
@@ -55,7 +55,7 @@ public class ReportMagnitudeDAO extends QueryTemplate{
                 "    WHERE\n" +
                 "        pa.question_id = ?\n" +
                 "            AND pa.offeredanswer_id = ?\n" +
-                "            AND Year(pa.date_answered) < ?\n" +
+                "            AND Year(pa.date_answered) = ?\n" +
                 "    GROUP BY c.name) curryear ON prevyear.community_name = curryear.community_name\n" +
                 "ORDER BY ROUND(((curryear.count - prevyear.count) / prevyear.count) * 100,\n" +
                 "            2) DESC;");

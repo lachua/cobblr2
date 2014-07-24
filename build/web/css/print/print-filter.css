@@ -9,7 +9,7 @@ and open the template in the editor.
 */
             
 @media print{      
-        tbody > tr:nth-child(4n+1) {
+        tbody > tr:nth-child(3n+1) {page-break-inside:avoid; 
             page-break-before: always;
         } 
         
