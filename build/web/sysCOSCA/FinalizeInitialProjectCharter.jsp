@@ -90,7 +90,9 @@
                                                 String[] target_sickness = (String[]) request.getAttribute("target_sickness");
                                                 String target_number = (String) request.getAttribute("target_number");
                                                 List<ProjectCharterTargetEntity> pastCharters = ( List<ProjectCharterTargetEntity>) request.getAttribute("pastCharters");
+                                                
                                                 ArrayList<Integer> comIndex = new ArrayList();
+                                                if(!pastCharters.isEmpty()){
                                                 int comID = pastCharters.get(0).getId();
                                                 comIndex.add(0);
                                                 for(int x = 0; x < pastCharters.size(); x++){
@@ -98,7 +100,7 @@
                                                         comIndex.add(x);
                                                         comID = pastCharters.get(x).getId();
                                                     }
-                                                }
+                                                }}
                                             %>
                                             
                                             
@@ -108,11 +110,13 @@
                                                     <tr>
                                                         <th></th>
                                                         <th>New Project</th>
+                                                        <%if(!pastCharters.isEmpty()){%>
                                                         <th colspan="3">Past Projects</th>
+                                                        <%}%>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>asdas
+                                                    <tr>
                                                         <td>Project Title:</td>
                                                         <td width="30%"><%=initialCharter.getTitle() %></td>
                                                         <%for(int x = 0; x < comIndex.size(); x++){%>

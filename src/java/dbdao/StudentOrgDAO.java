@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 public class StudentOrgDAO extends QueryTemplate{
     //Get User from username
     public List<StudentOrgEntity> getUserDetails() {
-        setQuery("select * from studentorg AND isactive = 1;");
+        setQuery("select * from studentorg WHERE isactive = 1;");
 
         List<StudentOrgEntity> results = executeQuery();
 
