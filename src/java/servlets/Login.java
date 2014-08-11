@@ -67,6 +67,12 @@ public class Login extends HttpServlet {
                             session.setAttribute("UserEntity", thisUser);
                             response.sendRedirect("sysCOSCA/COSCAHome");
 
+                        } else if (thisUser.getId() == 74) {
+                            session.setAttribute("PERMISSION", "slife");
+                            session.setAttribute("USERNAME", thisUser.getUsername());
+                            session.setAttribute("UserEntity", thisUser);
+                            response.sendRedirect("sysSLife/SLifeHome");
+
                         } else {
                             session.setAttribute("PERMISSION", "studentorg");
                             session.setAttribute("USERNAME", thisUser.getUsername());

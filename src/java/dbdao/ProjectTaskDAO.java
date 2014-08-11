@@ -276,6 +276,29 @@ public class ProjectTaskDAO extends QueryTemplate {
             return null;
         }
     }
+    
+    public ProjectTaskEntity getPreactsTaskForProject(int proj_id) {
+        setQuery("select * from project_tasks where proj_id = ? and resource_type = ?");
+        KeyValuePair onePair;
+
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.INT);
+        onePair.setValue("" + proj_id);
+        getParameters().add(onePair);
+
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.STRING);
+        onePair.setValue("pre-acts");
+        getParameters().add(onePair);
+
+        List<ProjectTaskEntity> results = executeQuery();
+
+        if (results != null) {
+            return results.get(0);
+        } else {
+            return null;
+        }
+    }
 
     @Override
     protected Object storeResults(ResultSet rs) {

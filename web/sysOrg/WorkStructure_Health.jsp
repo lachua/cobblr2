@@ -121,7 +121,7 @@
                         </div>
                     </div>
 
-                    <%
+                     <%
                         ProjectTaskEntity preActs = (ProjectTaskEntity) request.getAttribute("preActs");
                         String status, button, btncolor;
                         if (preActs.getCompleted() == 0) {
@@ -132,28 +132,18 @@
                         } else {
                             badgeColor = "badge-success";
                             status = "Accomplished";
-                            button = "Re-Accomplish";
+                            button = "Un-Accomplish";
                             btncolor = "btn-mini btn-warning";
                         }
                     %>
-                    <form id="preactsForm" name="preactsForm" method="POST" action="ChangePreActs" enctype="multipart/form-data">
-                        <table style="background-color: floralwhite;" class="table table-striped table-bordered" id="datatable1">
-                            <tbody>
+                    <form method="GET" action="ChangePreActs">
+                        <table cellpadding="0" cellspacing="0" border="0" style="background-color: floralwhite;" class="table table-striped table-bordered" id="datatable1">
+                            <thead>
                                 <tr>
-                                    <%
-                                    if(preActs.getCompleted() == 0){
-                                    %>
                                     <th><%=preActs.getTitle()%></th>
-                                    <%}else{%>
-                                    <th><a href="ChangePreActs"><%=preActs.getTitle()%></a></th>
-                                    <%}%>
                                     <th><span style="margin-bottom: 5px" class="badge <%=badgeColor%>"> <%=status%></span></th>
-                                    <th class="<%=hidden%>">
-                                        <input name="pdfFile" id="pdfFile" type="file" />
-                                        <button type="submit" class="btn <%=btncolor%> "><%=button%></button>
-                                    </th>
                                 </tr>
-                            </tbody>
+                            </thead>
                         </table>
                     </form>
 

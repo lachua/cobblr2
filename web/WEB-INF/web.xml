@@ -332,6 +332,18 @@
         <servlet-name>SOrgDelete</servlet-name>
         <servlet-class>servlets.admin.SOrgDelete</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SLifeHome</servlet-name>
+        <servlet-class>servlets.slife.SLifeHome</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProjectsUnapproved</servlet-name>
+        <servlet-class>servlets.slife.ProjectsUnapproved</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProjectsApproved</servlet-name>
+        <servlet-class>servlets.slife.ProjectsApproved</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -668,6 +680,18 @@
     <servlet-mapping>
         <servlet-name>SOrgDelete</servlet-name>
         <url-pattern>/sysAdmin/SOrgDelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SLifeHome</servlet-name>
+        <url-pattern>/sysSLife/SLifeHome</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProjectsUnapproved</servlet-name>
+        <url-pattern>/sysSLife/ProjectsUnapproved</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProjectsApproved</servlet-name>
+        <url-pattern>/sysSLife/ProjectsApproved</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

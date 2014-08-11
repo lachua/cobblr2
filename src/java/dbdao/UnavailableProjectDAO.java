@@ -19,6 +19,9 @@ import java.util.logging.Logger;
  * @author Renliw
  */
 public class UnavailableProjectDAO extends QueryTemplate {
+    
+    public static final int UNAPPROVED = 0;
+    public static final int APPROVED = 1;
 
     //Get pending project and all other detail
     public List<UnavailableProjectEntity> getAllPendingProjects() {
@@ -292,6 +295,79 @@ public class UnavailableProjectDAO extends QueryTemplate {
 
         if (results != null) {
             return results.get(0);
+        } else {
+            return null;
+        }
+    }
+    
+       public List<UnavailableProjectEntity>  getPreactsProjects(int approved) {
+        setQuery("select A.id, community_id, A.title, description, preparedby, objectives, scope, requirements, status,\n" +
+"	type, meetingdate, org_id, A.name as org_name, org_description, idno, firstname, lastname, org_position, \n" +
+"	A.email as org_email, homeno as org_homeno, mobileno as org_mobileno, community.name as \n" +
+"	community_name, address as community_address, phone as community_phone, mobile as \n" +
+"	community_mobile, community.email as community_email\n" +
+"from (select proj.id, proj.community_id, proj.title, proj.description, proj.preparedby, proj.objectives, proj.scope, proj.requirements, proj.status, proj.type, proj.meetingdate, org.org_id, org.name, org.description as org_description, org.idno, org.firstname, org.lastname, org.org_position, org.email, org.homeno, org.mobileno\n" +
+"		from\n" +
+"		(select * from project_charter pc left join org_projects op on pc.id = op.project_id) proj\n" +
+"		left join \n" +
+"		(select * from students s inner join studentorg so on s.org_id = so.id) org\n" +
+"		on proj.org_id = org.org_id and proj.student_idno = org.idno\n" +
+"		where status  = 2) A\n" +
+"join community ON A.community_id = community.id \n" +
+"				join (\n" +
+"					select * from project_tasks where resource_type = \"pre-acts\"\n" +
+"				) pt \n" +
+"				ON A.id = pt.proj_id\n" +
+"				where pt.completed = ?");
+
+        KeyValuePair onePair;
+        
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.INT);
+        onePair.setValue("" + approved);
+        getParameters().add(onePair);
+
+        List<UnavailableProjectEntity> results = executeQuery();
+
+        if (results != null) {
+            return results;
+        } else {
+            return null;
+        }
+    }
+       
+       public List<UnavailableProjectEntity>  getPreactsProjectsCommunity(int approved) {
+        setQuery("select A.id, community_id, A.title, description, preparedby, objectives, scope, requirements, status,\n" +
+                "	type, meetingdate, org_id, A.name as org_name, org_description, idno, firstname, lastname, org_position, \n" +
+                "	A.email as org_email, homeno as org_homeno, mobileno as org_mobileno, community.name as \n" +
+                "	community_name, address as community_address, phone as community_phone, mobile as \n" +
+                "	community_mobile, community.email as community_email\n" +
+                "from (select proj.id, proj.community_id, proj.title, proj.description, proj.preparedby, proj.objectives, proj.scope, proj.requirements, proj.status, proj.type, proj.meetingdate, org.org_id, org.name, org.description as org_description, org.idno, org.firstname, org.lastname, org.org_position, org.email, org.homeno, org.mobileno\n" +
+                "		from\n" +
+                "		(select * from project_charter pc left join org_projects op on pc.id = op.project_id) proj\n" +
+                "		left join \n" +
+                "		(select * from students s inner join studentorg so on s.org_id = so.id) org\n" +
+                "		on proj.org_id = org.org_id and proj.student_idno = org.idno\n" +
+                "		where status  = 2) A\n" +
+                "join community ON A.community_id = community.id \n" +
+                "				join (\n" +
+                "					select * from project_tasks where resource_type = \"pre-acts\"\n" +
+                "				) pt \n" +
+                "ON A.id = pt.proj_id\n" +
+                "where pt.completed = ?\n"+
+                "group by A.community_id");
+
+        KeyValuePair onePair;
+        
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.INT);
+        onePair.setValue("" + approved);
+        getParameters().add(onePair);
+
+        List<UnavailableProjectEntity> results = executeQuery();
+
+        if (results != null) {
+            return results;
         } else {
             return null;
         }
