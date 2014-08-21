@@ -1,3 +1,5 @@
+<%@page import="dbentities.OrgProjectEntity"%>
+<%@page import="dbdao.OrgProjectDAO"%>
 <%@page import="dbentities.ProjectCharterDateEntity"%>
 <%@page import="dbdao.ProjectCharterDateDAO"%>
 <%@page import="java.util.concurrent.TimeUnit"%>
@@ -100,7 +102,10 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <%for (int x = 0; x < currentProj.size(); x++) {%>
+                                                    <%for (int x = 0; x < currentProj.size(); x++) {
+                                                      OrgProjectDAO partnerdao = new OrgProjectDAO();
+                                                            List<OrgProjectEntity> partners = partnerdao.getpartners(currentProj.get(x).getProject_id() , currentProj.get(x).getOrg_id());
+                                                    %>
                                                     <%ProjectCharterDateDAO dateDAO = new ProjectCharterDateDAO();%>
                                                     <tr>
                                                         <td><%=currentProj.get(x).getTitle()%></td>
@@ -108,9 +113,28 @@
                                                         <td><%=currentProj.get(x).getCommunity_name()%></td>
                                                         <td><%=currentProj.get(x).getDescription()%></td>
                                                         <td><%=dateDAO.getProjectDate(currentProj.get(x).getProject_id()).getCancel_reason()%></td>
-                                                        <td><%=currentProj.get(x).getOrg_name()%></td>
-                                                        <td><%=currentProj.get(x).getStudent_firstname()%> <%=currentProj.get(x).getStudent_lastname()%></td>
-                                                        <td><%=currentProj.get(x).getStudent_mobileno()%></td>
+                                                        <td><%=currentProj.get(x).getOrg_name()%>
+                                                        <br>
+                                                            <ul>
+                                                            <%for (OrgProjectEntity partner : partners){ %>
+                                                            <li style="font-size: smaller"><%=partner.getOrgName() %></li>
+                                                            <%}%>
+                                                            </ul></td>
+                                                        <td><%=currentProj.get(x).getStudent_firstname()%> <%=currentProj.get(x).getStudent_lastname()%>
+                                                            <br>
+                                                            <ul>
+                                                            <%for (OrgProjectEntity partner : partners){ %>
+                                                            <li style="font-size: smaller"><%=partner.getFirstname() %> <%=partner.getLastname() %></li>
+                                                            <%}%>
+                                                            </ul></td>
+                                                        <td><%=currentProj.get(x).getStudent_mobileno()%>
+                                                         <br>
+                                                            <ul>
+                                                            <%for (OrgProjectEntity partner : partners){ %>
+                                                            <li style="font-size: smaller"><%=partner.getMobileno()%></li>
+                                                            <%}%>
+                                                            </ul>
+                                                        </td>
                                                         <%
                                                             ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
                                                             ProjectCharterDateEntity projdate = project_date.getProjectDate(currentProj.get(x).getProject_id());
@@ -123,8 +147,8 @@
                                                         <td><span class="badge badge-important"><%=projdate.getDate_cancelled()%></span></td>
                                                             <%}%>
                                                         <td>
-                                                            <button name="ViewFullProjectCharter" value="<%=currentProj.get(x).getProject_id()%>" class="btn btn-success">Details</button>
-                                                            <button name="WorkStructure" value="<%=currentProj.get(x).getProject_id()%>-<%=currentProj.get(x).getType()%>" class="btn btn-primary">Tasks</button>
+                                                            <button name="ViewFullProjectCharter" value="<%=currentProj.get(x).getProject_id()%>" class="btn btn-default">Details</button>
+                                                            <button name="WorkStructure" value="<%=currentProj.get(x).getProject_id()%>-<%=currentProj.get(x).getType()%>" class="btn btn-default">Tasks</button>
                                                         </td>
                                                     </tr>
                                                     <%}%>

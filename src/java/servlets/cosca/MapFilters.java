@@ -47,6 +47,7 @@ public class MapFilters extends HttpServlet {
                 dispatcher.forward(request, response);
             } else if (request.getMethod().equals("POST")) {
                 String filterValue = request.getParameter("filter");
+                int year = Integer.parseInt(request.getParameter("year"));
                 if(filterValue.equals("0-0")){
                     CommunityListDAO clDAO = new CommunityListDAO();
                     List<CommunityListEntity> comlist = clDAO.getAllRealCommunity();
@@ -59,7 +60,7 @@ public class MapFilters extends HttpServlet {
                     int offeredanswer_id = Integer.parseInt(filterValue.split("-")[1]);
                     
                     FilterDAO filterDAO = new FilterDAO();
-                    List<FilterEntity> filterList = filterDAO.getFilterData(question_id, offeredanswer_id, Year.getCurrentYear());
+                    List<FilterEntity> filterList = filterDAO.getFilterData(question_id, offeredanswer_id, year);
                                         
                     CommunityListDAO clDAO;
                     CommunityListEntity clEntity;

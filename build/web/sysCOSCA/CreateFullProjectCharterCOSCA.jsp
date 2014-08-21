@@ -64,7 +64,7 @@
                                     <h4 class="box-header round-top">Finalize Project Charter</h4>
                                     <div class="box-container-toggle">
                                         <div class="box-content">
-                                            <form method="POST" action="CreateFullProjectCharter">
+                                            <form method="POST" action="CreateFullProjectCharterCOSCA">
                                             <%
                                                  UnavailableProjectEntity fullCharter = (UnavailableProjectEntity) request.getAttribute("fullCharter");
                                                  UnavailableProjectEntity unavailableProj;
@@ -246,7 +246,7 @@
                                             <br>
                                             <div class="form-actions">
                                                 <button name="action" value="FinalizeFullProjectCharter" type="submit" class="btn btn-primary">Finalize Project Requirements</button>
-                                                <a href="SOrgHome" class="btn">Cancel</a>
+                                                <a href="COSCAHome" class="btn">Cancel</a>
                                             </div>
                                         </form>
                                     </div>

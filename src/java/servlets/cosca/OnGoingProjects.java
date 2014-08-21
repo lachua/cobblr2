@@ -57,6 +57,7 @@ public class OnGoingProjects extends HttpServlet {
                     String project_id = request.getParameter("ViewFullProjectCharter");
                     HttpSession session = request.getSession();
                     session.setAttribute("project_id", project_id);
+                    session.setAttribute("notimplemented", true);
                     response.sendRedirect("ViewFullProjectCharterCOSCA");
                 } else if (request.getParameter("WorkStructure") != null) {
                     String project_id = request.getParameter("WorkStructure");

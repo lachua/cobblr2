@@ -60,19 +60,46 @@ public class ContactDetails extends HttpServlet {
                 UserEntityDAO userDAO = new UserEntityDAO();
                 UserEntity thisUser = userDAO.getUserDetails(username);
                 int project_id = Integer.parseInt((String) session.getAttribute("project_id"));
+                
+                String[] ids = request.getParameterValues("idno");
+                String[] fnames = request.getParameterValues("first_name");
+                String[] lnames = request.getParameterValues("last_name");
+                String[] positions = request.getParameterValues("position");
+                String[] emails = request.getParameterValues("email");
+                String[] mobile = request.getParameterValues("mobileno");
+                
 
                 StudentEntity student = new StudentEntity();
-                student.setIdno(Integer.parseInt(request.getParameter("idno")));
+                student.setIdno(Integer.parseInt(ids[0]));
                 student.setOrg_id(thisUser.getId());
-                student.setFirstname(request.getParameter("first_name"));
-                student.setLastname(request.getParameter("last_name"));
-                student.setOrg_position(request.getParameter("position"));
-                student.setEmail(request.getParameter("email"));
-                student.setMobileno(request.getParameter("mobileno"));
+                student.setFirstname(fnames[0]);
+                student.setLastname(lnames[0]);
+                student.setOrg_position(positions[0]);
+                student.setEmail(emails[0]);
+                student.setMobileno(mobile[0]);
 
                 ProjectCharterDAO charterDAO = new ProjectCharterDAO();
                 StudentDAO studentDAO = new StudentDAO();
                 boolean result = charterDAO.reserveAvailableProject(project_id, student, studentDAO.isExisting(student.getIdno(), student.getOrg_id()));
+                
+                if(result){
+                    String[] partnerOrgs = request.getParameterValues("partnerOrgs");
+                    for (int x = 0; x < partnerOrgs.length; x++){
+                        int detailIndex  = x + 1;
+                        student = new StudentEntity();
+                        student.setIdno(Integer.parseInt(ids[detailIndex]));
+                        student.setOrg_id(Integer.parseInt(partnerOrgs[x]));
+                        student.setFirstname(fnames[detailIndex]);
+                        student.setLastname(lnames[detailIndex]);
+                        student.setOrg_position(positions[detailIndex]);
+                        student.setEmail(emails[detailIndex]);
+                        student.setMobileno(mobile[detailIndex]);
+                        
+                        charterDAO = new ProjectCharterDAO(); 
+                        studentDAO = new StudentDAO();
+                        result  =  charterDAO.orgPartnerships(project_id, student, studentDAO.isExisting(student.getIdno(), student.getOrg_id()));
+                    }
+                }
                 
                 if(result){
                     NotificationEntity notif = new NotificationEntity();

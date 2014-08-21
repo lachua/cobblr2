@@ -1,3 +1,6 @@
+<%@page import="dbentities.UserEntity"%>
+<%@page import="dbdao.OrgProjectDAO"%>
+<%@page import="dbentities.OrgProjectEntity"%>
 <%@page import="dbentities.ProjectCharterDateEntity"%>
 <%@page import="dbdao.ProjectCharterDateDAO"%>
 <%@page import="java.util.concurrent.TimeUnit"%>
@@ -97,14 +100,34 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <%for (int x = 0; x < currentProj.size(); x++) {%>
+                                                    <%
+                                                    UserEntity user = (UserEntity) request.getSession().getAttribute("UserEntity");
+                                                    for (int x = 0; x < currentProj.size(); x++) {
+                                                        OrgProjectDAO partnerdao = new OrgProjectDAO();
+                                                        List<OrgProjectEntity> partners = partnerdao.getpartners(currentProj.get(x).getProject_id() , user.getId());
+                                                    %>
                                                     <tr>
                                                         <td><%=currentProj.get(x).getTitle()%></td>
                                                         <td><%=currentProj.get(x).getType()%></td>
                                                         <td><%=currentProj.get(x).getCommunity_name()%></td>
                                                         <td><%=currentProj.get(x).getCommunity_address()%></td>
                                                         <td><%=currentProj.get(x).getDescription()%></td>
-                                                        <td><%=currentProj.get(x).getStudent_firstname()%> <%=currentProj.get(x).getStudent_lastname()%></td>
+                                                        <td>
+                                                            <%=currentProj.get(x).getStudent_firstname()%> <%=currentProj.get(x).getStudent_lastname()%><br>
+                                                            
+                                                            <%
+                                                            if(partners.size() > 0){
+                                                                %>
+                                                                <ul>
+                                                                <li style="margin-left: -25%;font-weight: normal; list-style: none;font-style: italic;">Partner(s):</li>
+                                                                <%
+                                                            for (OrgProjectEntity partner : partners){ 
+                                                            %>
+                                                            <li style="font-size: smaller"><%=partner.getOrgName() %></li>
+                                                            <%}%>                                                            
+                                                            </ul>
+                                                            <%}%>
+                                                        </td>
                                                         <%
                                                             ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
                                                             ProjectCharterDateEntity projdate = project_date.getProjectDate(currentProj.get(x).getProject_id());

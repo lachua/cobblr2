@@ -1,3 +1,6 @@
+<%@page import="dbentities.UserEntity"%>
+<%@page import="dbentities.OrgProjectEntity"%>
+<%@page import="dbdao.OrgProjectDAO"%>
 <%@page import="dbentities.ProjectTargetEntity"%>
 <%@page import="dbdao.ProjectTargetDAO"%>
 <%@page import="dbdao.ProjectCharterDateDAO"%>
@@ -107,6 +110,16 @@
                                         %> <%=dateEntity.getTarget_participant_num() %> people <br/>       
                                         
                                         <strong>Project Deadline: </strong> <span id="dateChange" class="badge <%=badgeColor%>"> <%=projdate.getDate_target_implement()%> </span><br/><br/>
+                                        <%
+                                            UserEntity user = (UserEntity) request.getSession().getAttribute("UserEntity");
+                                            OrgProjectDAO partnerdao = new OrgProjectDAO();
+                                            List<OrgProjectEntity> partners = partnerdao.getpartners(unavailableProj.getProject_id() , user.getId());
+                                            if(partners.size() > 0){
+                                        %>                                        
+                                        <strong>Project Partnership with: </strong><i><%for(OrgProjectEntity partner: partners){%> <%=partner.getOrgName() %> <%}%></i> <br/><br/>
+                                        <%
+                                            }
+                                        %>
                                     </li>
                                 </ul>
                                 <div class="row-fluid span6 alert alert-danger <%=hiddenImp%>">

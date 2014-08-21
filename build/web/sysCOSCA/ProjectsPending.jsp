@@ -1,3 +1,5 @@
+<%@page import="dbentities.OrgProjectEntity"%>
+<%@page import="dbdao.OrgProjectDAO"%>
 <%@page import="dbentities.ProjectCharterAndDatesEntity"%>
 <%@page import="dbdao.ProjectCharterAndDatesDAO"%>
 <%@page import="dbentities.ProjectCharterEntity"%>
@@ -76,6 +78,7 @@
                                             <form method="POST" action="ProjectsPending">
                                             <%
                                                 List<UnavailableProjectEntity> unavailableProj = (List<UnavailableProjectEntity>) request.getAttribute("unavailableProj");
+                                                    
                                             %>
                                             <table class="table table-striped table-bordered table-condensed" id="dtable">
                                                 <thead>
@@ -107,7 +110,8 @@
                                                 <tbody>
                                                     <%
                                                         for (int x = 0; x < unavailableProj.size(); x++) {
-                                                           
+                                                           OrgProjectDAO partnerdao = new OrgProjectDAO();
+                                                            List<OrgProjectEntity> partners = partnerdao.getpartners(unavailableProj.get(x).getProject_id() , unavailableProj.get(x).getOrg_id());
                                                     %>
                                                     <tr>
                                                         <td><%=unavailableProj.get(x).getTitle()%></td>
@@ -115,9 +119,33 @@
                                                         <td><%=unavailableProj.get(x).getCommunity_name()%></td>
                                                         <td><%=unavailableProj.get(x).getCommunity_address()%></td>
                                                         <td><%=unavailableProj.get(x).getDescription()%></td>
-                                                        <td><%=unavailableProj.get(x).getOrg_name()%></td>
-                                                        <td><%=unavailableProj.get(x).getStudent_firstname()%> <%=unavailableProj.get(x).getStudent_lastname()%></td>
-                                                        <td><%=unavailableProj.get(x).getStudent_mobileno()%></td>
+                                                        <td>
+                                                            <%=unavailableProj.get(x).getOrg_name()%>  
+                                                            <br>
+                                                            <ul>
+                                                            <%for (OrgProjectEntity partner : partners){ %>
+                                                            <li style="font-size: smaller"><%=partner.getOrgName() %></li>
+                                                            <%}%>
+                                                            </ul>
+                                                        </td>
+                                                        <td>
+                                                            <%=unavailableProj.get(x).getStudent_firstname()%> <%=unavailableProj.get(x).getStudent_lastname()%>
+                                                            <br>
+                                                            <ul>
+                                                            <%for (OrgProjectEntity partner : partners){ %>
+                                                            <li style="font-size: smaller"><%=partner.getFirstname() %> <%=partner.getLastname() %></li>
+                                                            <%}%>
+                                                            </ul>
+                                                        </td>
+                                                        <td>
+                                                            <%=unavailableProj.get(x).getStudent_mobileno()%>
+                                                             <br>
+                                                            <ul>
+                                                            <%for (OrgProjectEntity partner : partners){ %>
+                                                            <li style="font-size: smaller"><%=partner.getMobileno()%></li>
+                                                            <%}%>
+                                                            </ul>
+                                                        </td>
                                                         <%
                                                             if (CompareDate.compareDates(unavailableProj.get(x).getMeetingdate()) < 0) {
                                                         %>
@@ -183,16 +211,35 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <%for (int x = 0; x < confirmedProj.size(); x++) {%>
+                                                    <%for (int x = 0; x < confirmedProj.size(); x++) {
+                                                           OrgProjectDAO partnerdao = new OrgProjectDAO();
+                                                            List<OrgProjectEntity> partners = partnerdao.getpartners(confirmedProj.get(x).getProject_id() , confirmedProj.get(x).getOrg_id());%>
                                                     <tr>
                                                         <td><%=confirmedProj.get(x).getTitle()%></td>
                                                         <td><%=confirmedProj.get(x).getType()%></td>
                                                         <td><%=confirmedProj.get(x).getCommunity_name()%></td>
                                                         <td><%=confirmedProj.get(x).getCommunity_address()%></td>
                                                         <td><%=confirmedProj.get(x).getDescription()%></td>
-                                                        <td><%=confirmedProj.get(x).getOrg_name()%></td>
-                                                        <td><%=confirmedProj.get(x).getStudent_firstname()%> <%=confirmedProj.get(x).getStudent_lastname()%></td>
-                                                        <td><%=confirmedProj.get(x).getStudent_mobileno()%></td>
+                                                        <td><%=confirmedProj.get(x).getOrg_name()%>
+                                                            <br>
+                                                            <ul>
+                                                            <%for (OrgProjectEntity partner : partners){ %>
+                                                            <li style="font-size: smaller"><%=partner.getOrgName() %></li>
+                                                            <%}%>
+                                                            </ul></td>
+                                                        <td><%=confirmedProj.get(x).getStudent_firstname()%> <%=confirmedProj.get(x).getStudent_lastname()%>
+                                                            <ul>
+                                                            <%for (OrgProjectEntity partner : partners){ %>
+                                                            <li style="font-size: smaller"><%=partner.getFirstname() %> <%=partner.getLastname() %></li>
+                                                            <%}%>
+                                                            </ul></td>
+                                                        <td><%=confirmedProj.get(x).getStudent_mobileno()%>
+                                                             <br>
+                                                            <ul>
+                                                            <%for (OrgProjectEntity partner : partners){ %>
+                                                            <li style="font-size: smaller"><%=partner.getMobileno()%></li>
+                                                            <%}%>
+                                                            </ul></td>
                                                         <%
                                                             ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
                                                             ProjectCharterDateEntity projdate = project_date.getProjectDate(confirmedProj.get(x).getProject_id());

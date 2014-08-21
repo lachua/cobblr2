@@ -105,6 +105,35 @@ public class StudentOrgDAO extends QueryTemplate{
         }
     }
     
+    public List<StudentOrgEntity> getOrgsUnderExcept(String org, String org2, int id) {
+        setQuery("SELECT * FROM studentorg WHERE (description = ? OR description = ?) AND isactive = 1 AND id <> ?;");
+        
+        KeyValuePair onePair;
+
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.STRING);
+        onePair.setValue("" + org);
+        getParameters().add(onePair);
+        
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.STRING);
+        onePair.setValue("" + org2);
+        getParameters().add(onePair);
+        
+        onePair = new KeyValuePair();
+        onePair.setKey(KeyValuePair.INT);
+        onePair.setValue("" + id);
+        getParameters().add(onePair);
+
+        List<StudentOrgEntity> results = executeQuery();
+
+        if (results != null) {
+            return results;
+        } else {
+            return null;
+        }
+    }
+    
     public boolean insertOrg(int newId, String orgName, String orgType) {
         setQuery("INSERT INTO studentorg VALUE (?, ?, ?, 1)");
         

@@ -1,4 +1,8 @@
 
+<%@page import="dbentities.UserEntity"%>
+<%@page import="java.util.List"%>
+<%@page import="dbentities.StudentOrgEntity"%>
+<%@page import="dbdao.StudentOrgDAO"%>
 <%@page import="dbentities.AvailableProjectEntity"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -15,6 +19,9 @@
         <link href="../bootstrap/css/bootstrap.css" rel="stylesheet" id="main-theme-script" />
         <link href="../css/themes/default.css" rel="stylesheet" id="theme-specific-script" />
         <link href="../bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+        
+        <!-- Chosen multiselect -->
+        <link type="text/css" href="../scripts/chosen/chosen/chosen.intenso.css" rel="stylesheet" />   
 
         <!-- Uniform -->
         <link rel="stylesheet" type="text/css" media="screen,projection" href="../scripts/uniform/css/uniform.default.css" />
@@ -38,6 +45,61 @@
         <link rel="apple-touch-icon-precomposed" href="../images/ico/apple-touch-icon-57-precomposed.png" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
     <body id="forms">
+        <%
+            UserEntity user = (UserEntity) request.getSession().getAttribute("UserEntity");          
+            StudentOrgDAO dao = new StudentOrgDAO();
+            List<StudentOrgEntity> entities = dao.getOrgsUnderExcept("CSO", "USG", user.getId());
+        %>
+        <textarea style="display:none" id="partnerOrgTemplate">
+            <h4>Partner Organization no.{0}</h4>
+            <div class="control-group">                                     
+                <label class="control-label" for="mobileno">In Partnership with:</label>
+                <div class="controls">
+                    <select id="partnerOrgs" name="partnerOrgs" class="chzn-select partners">
+                        <%for(int x = 0; x < entities.size(); x++){%>
+                        <option value="<%=entities.get(x).getId()%>"><%=entities.get(x).getName() %></option>
+                        <%}%>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="idno">ID No:</label>
+                <div class="controls">
+                    <input class="input-xlarge" id="idno" name="idno" type="number" placeholder="ID No." required/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="first_name">First Name:</label>
+                <div class="controls">
+                    <input class="input-xlarge" id="first_name" name="first_name" type="text" placeholder="Frist Name" required/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="last_name">Last Name:</label>
+                <div class="controls">
+                    <input class="input-xlarge" id="last_name" name="last_name" type="text" placeholder="Last Name" required/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="position">Organization Position:</label>
+                <div class="controls">
+                    <input class="input-xlarge" id="position" name="position" type="text" placeholder="Position" required/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="email">E-mail Address:</label>
+                <div class="controls">
+                    <input class="input-xlarge" id="email" name="email" type="email" placeholder="E-mail" required/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="mobileno">Mobile Number:</label>
+                <div class="controls">
+                    <input class="input-xlarge" id="mobileno" name="mobileno" type="text" placeholder="Contact No." required/>
+                </div>
+            </div>
+        </textarea>
+        
         <!-- Top navigation bar -->
         <jsp:include page="Navtopbar.jsp"></jsp:include>
             <!-- Main Content Area | Side Nav | Content -->
@@ -80,7 +142,7 @@
                                                 <h3>Reserve Project</h3>
                                                 <div class="span8 alert alert-info">
                                                 <%
-                                                    AvailableProjectEntity availableProj = (AvailableProjectEntity) request.getAttribute("availableProject");
+                                                    AvailableProjectEntity availableProj = (AvailableProjectEntity) request.getAttribute("availableProject");                                          
                                                 %>
                                                 <ul class="dashboard-member-activity">
                                                     <li>
@@ -94,9 +156,10 @@
                                             </div>
                                         </div>
 
-                                        <form class="form-horizontal" method="POST" action="ContactDetails"/>
+                                        <form class="form-horizontal" method="POST" action="ContactDetails">
                                         <fieldset>
                                             <legend>Please Input Contact Details</legend>
+                                            <h3>Head Organization: <%=user.getName() %></h3>
                                             <div class="control-group">
                                                 <label class="control-label" for="idno">ID No:</label>
                                                 <div class="controls">
@@ -133,6 +196,11 @@
                                                     <input class="input-xlarge" id="mobileno" name="mobileno" type="text" placeholder="Contact No." required/>
                                                 </div>
                                             </div>
+                                            <div id="partnerOrg"></div>
+                                            <div class="controls">
+                                                <button class="btn btn-small" id="addPartnerOrg" type="button"><i class="icon-plus"></i>Add Partner Organization</button>
+                                            </div>
+                                            <br />
                                             <div class="control-group">
                                                 <div class="controls">
                                                     <div class="controls span6 alert alert-info">
@@ -142,8 +210,9 @@
                                             </div>
                                         </fieldset>
                                         <div class="form-actions">
-                                            <button name="action" value="reserve" type="submit" class="btn btn-primary">Submit Project Request</button>
-                                            <a href="ViewInitialProjectCharterOrg" type="button" class="btn">Cancel</a>
+                                            <button id="reserve" type="button" class="btn btn-primary">Submit Project Request</button>
+                                            <button name="action" value="reserve" id="submitBtn" type="submit" class="hidden"></button>
+                                            <a href="ViewInitialProjectCharterOrg" class="btn">Cancel</a>
                                         </div>
                                         </form> 
                                     </div>
@@ -193,5 +262,48 @@
 
         <!-- Simplenso Scripts -->
         <script src="../scripts/simplenso/simplenso.js"></script>
+        
+        <!-- JQuery Valdation -->
+        <script src="../jquery/jquery-validate/jquery.validate.js"></script>
+        <script> 
+        $().ready(function() {
+            //dynamic partnership fields
+            var partnerOrgTemplate = jQuery.validator.format($.trim($("#partnerOrgTemplate").val()));
+            function addPartnerOrgRow() {
+                $(partnerOrgTemplate(partnerOrgCount++)).appendTo("#partnerOrg");
+            }
+            var partnerOrgCount = 1;
+            $("#addPartnerOrg").click(addPartnerOrgRow);
+            
+            
+            //check duplicates
+            $("#reserve").click(function(){
+                var partners = [];
+                var elements = document.getElementsByClassName("partners");
+                for(var i=0; i<elements.length; i++) {
+                    partners.push(elements[i].value);
+                };
+                
+                if(find_duplicates(partners)){
+                    alert("You have duplicate partner organizations.");
+                }else{
+                    $("#submitBtn").click();
+                }
+            });
+            
+            function find_duplicates(arr) {
+                var len=arr.length,counts={};
+
+                for (var i=0;i<len;i++) {
+                  var item = arr[i];
+                  counts[item] = counts[item] >= 1 ? counts[item] + 1 : 1;
+                }
+
+                for (var item in counts) {
+                  if(counts[item] > 1) return true;
+                }
+            }
+        });
+        </script>
     </body>
 </html>

@@ -62,7 +62,8 @@
                                 <h4 class="box-header round-top">Final Project Charter</h4>
                                 <div class="box-container-toggle">
                                     <div class="box-content">
-                                        <form method="POST" action="ViewFullProjectCharter">
+                                        
+                                            <form method="POST" action="ViewFullProjectCharterCOSCA">
                                             <%
                                                 UnavailableProjectEntity unavailableProj = (UnavailableProjectEntity) request.getAttribute("unavailableProj");
                                             %>
@@ -145,8 +146,13 @@
                                                 %>
                                                 
                                                 <a href="<%=href %>" class="btn">Back</a>
+                                                <%
+                                                if(session.getAttribute("notimplemented") != null){
+                                                %>
+                                                <button type="submit" class="btn btn-warning " > Edit Date of Implementation </button>
+                                                <%session.removeAttribute("notimplemented"); }%>
+                                            </form>
                                             </div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>

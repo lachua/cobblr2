@@ -1,3 +1,5 @@
+<%@page import="dbentities.OrgProjectEntity"%>
+<%@page import="dbdao.OrgProjectDAO"%>
 <%@page import="dbentities.ProjectCharterDateEntity"%>
 <%@page import="dbdao.ProjectCharterDateDAO"%>
 <%@page import="java.util.List"%>
@@ -78,13 +80,15 @@
                                                 <h2>Are you sure you have met and agreed upon:</h2>
                                             <%
                                                 UnavailableProjectEntity unavailableProj = (UnavailableProjectEntity) request.getAttribute("unavailableProj");
+                                                OrgProjectDAO partnerdao = new OrgProjectDAO();
+                                                List<OrgProjectEntity> partners = partnerdao.getpartners(unavailableProj.getProject_id() , unavailableProj.getOrg_id());
                                             %>
                                             <ul class="dashboard-member-activity">
                                                 <li>
                                                     <strong>Project Title: <%=unavailableProj.getTitle()%> </strong><br />
-                                                    <strong>Partner Organization: <%=unavailableProj.getOrg_name()%> </strong><br/>
-                                                    <strong>Contact Person: </strong> <%=unavailableProj.getStudent_firstname()%> <%=unavailableProj.getStudent_lastname()%> <br/>  
-                                                    <strong>Contact Number: </strong> <%=unavailableProj.getStudent_mobileno()%> <br/>  
+                                                    <strong>Partner Organization: <%=unavailableProj.getOrg_name()%> <%for (OrgProjectEntity partner : partners){ %>, <%=partner.getOrgName() %><%}%> </strong> <br/>
+                                                    <strong>Contact Person: </strong> <%=unavailableProj.getStudent_firstname()%> <%=unavailableProj.getStudent_lastname()%> <%for (OrgProjectEntity partner : partners){ %>, <%=partner.getFirstname()%> <%=partner.getLastname() %><%}%><br/>  
+                                                    <strong>Contact Number: </strong> <%=unavailableProj.getStudent_mobileno()%> <%for (OrgProjectEntity partner : partners){ %>, <%=partner.getMobileno()%><%}%><br/>  
                                                     <strong>Type: </strong> <%=unavailableProj.getType()%><br />
                                                     <strong>Partner Community: </strong> <%=unavailableProj.getCommunity_name()%><br />
                                                     <strong>Location: </strong> <%=unavailableProj.getCommunity_address()%><br/>

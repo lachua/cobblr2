@@ -4,6 +4,7 @@
     Author     : Renliw
 --%>
 
+<%@page import="Utilities.Year"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -68,6 +69,14 @@
                                                 <legend>Select Filter</legend>
                                                 <div class="alert alert-info">
                                                     <strong>Select a filter to plot community health status</strong>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label" for="year">Year of Survey:</label>
+                                                    <div class="controls">
+                                                        <select name="year" id="year" class="chzn-select">
+                                                            <option value="<%=Year.getCurrentYear()%>"><%=Year.getCurrentYear()%></option>
+                                                            <option value="<%=Year.getPreviousYear()%>"><%=Year.getPreviousYear()%></option>                                                      </select>
+                                                    </div>
                                                 </div>
                                                 
                                                 <div class="control-group">

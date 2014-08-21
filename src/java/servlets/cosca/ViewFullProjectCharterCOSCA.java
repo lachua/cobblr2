@@ -48,6 +48,13 @@ public class ViewFullProjectCharterCOSCA extends HttpServlet {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/sysCOSCA/ViewFullProjectCharter.jsp");
                 dispatcher.forward(request, response);
             } else if (request.getMethod().equals("POST")) {
+                
+                HttpSession session = request.getSession();
+                
+                session.setAttribute("isChangeCharter", true);
+                response.sendRedirect("CreateFullProjectCharterCOSCA");
+                
+                
             }
         } finally {
             out.close();

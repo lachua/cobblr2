@@ -37,7 +37,8 @@ public class UnavailableProjectDAO extends QueryTemplate {
                 + "		(select * from students s inner join studentorg so on s.org_id = so.id) org\n"
                 + "		on proj.org_id = org.org_id and proj.student_idno = org.idno\n"
                 + "		where status  = ?) A\n"
-                + "join community ON A.community_id = community.id");
+                + "join community ON A.community_id = community.id\n"
+                + "group by id");
 
         KeyValuePair onePair;
 
@@ -146,7 +147,8 @@ public class UnavailableProjectDAO extends QueryTemplate {
                 + "		(select * from students s inner join studentorg so on s.org_id = so.id) org\n"
                 + "		on proj.org_id = org.org_id and proj.student_idno = org.idno\n"
                 + "		where status  = ?) A\n"
-                + "join community ON A.community_id = community.id");
+                + "join community ON A.community_id = community.id\n"
+                + "group by A.id");
 
         KeyValuePair onePair;
 
@@ -318,7 +320,8 @@ public class UnavailableProjectDAO extends QueryTemplate {
 "					select * from project_tasks where resource_type = \"pre-acts\"\n" +
 "				) pt \n" +
 "				ON A.id = pt.proj_id\n" +
-"				where pt.completed = ?");
+"				where pt.completed = ?\n"
+                + "group by A.id");
 
         KeyValuePair onePair;
         

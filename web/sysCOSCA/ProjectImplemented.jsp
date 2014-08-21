@@ -1,3 +1,5 @@
+<%@page import="dbdao.OrgProjectDAO"%>
+<%@page import="dbentities.OrgProjectEntity"%>
 <%@page import="dbentities.ProjectCharterDateEntity"%>
 <%@page import="dbdao.ProjectCharterDateDAO"%>
 <%@page import="java.util.concurrent.TimeUnit"%>
@@ -91,22 +93,39 @@
                                                         <th>Partner Community</th>
                                                         <th>Location</th>
                                                         <th>Description</th>
-                                                        <th>Student Name</th>
+                                                        <th>Student Organization</th>
                                                         <th>Student Contact No.</th>
                                                         <th>Implementation Date</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <%for (int x = 0; x < closedProj.size(); x++) {%>
+                                                    <%for (int x = 0; x < closedProj.size(); x++) {
+                                                         OrgProjectDAO partnerdao = new OrgProjectDAO();
+                                                            List<OrgProjectEntity> partners = partnerdao.getpartners(closedProj.get(x).getProject_id() , closedProj.get(x).getOrg_id());
+                                                    %>
                                                     <tr>
                                                         <td><%=closedProj.get(x).getTitle()%></td>
                                                         <td><%=closedProj.get(x).getType()%></td>
                                                         <td><%=closedProj.get(x).getCommunity_name()%></td>
                                                         <td><%=closedProj.get(x).getCommunity_address()%></td>
                                                         <td><%=closedProj.get(x).getDescription()%></td>
-                                                        <td><%=closedProj.get(x).getStudent_firstname()%> <%=closedProj.get(x).getStudent_lastname()%></td>
-                                                        <td><%=closedProj.get(x).getStudent_mobileno()%></td>
+                                                        <td>
+                                                            <%=closedProj.get(x).getOrg_name()%>  
+                                                            <br>
+                                                            <ul>
+                                                            <%for (OrgProjectEntity partner : partners){ %>
+                                                            <li style="font-size: smaller"><%=partner.getOrgName() %></li>
+                                                            <%}%>
+                                                            </ul>
+                                                        </td>
+                                                        <td><%=closedProj.get(x).getStudent_mobileno()%>
+                                                             <br>
+                                                            <ul>
+                                                            <%for (OrgProjectEntity partner : partners){ %>
+                                                            <li style="font-size: smaller"><%=partner.getMobileno()%></li>
+                                                            <%}%>
+                                                            </ul></td>
                                                         <%
                                                             ProjectCharterDateDAO project_date = new ProjectCharterDateDAO();
                                                             ProjectCharterDateEntity projdate = project_date.getProjectDate(closedProj.get(x).getProject_id());

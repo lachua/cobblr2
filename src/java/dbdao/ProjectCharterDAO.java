@@ -175,14 +175,9 @@ public class ProjectCharterDAO extends QueryTemplate {
 
         executeUpdate();
 
-        setQuery("DELETE FROM org_projects WHERE org_id= ? and project_id= ?;");
+        setQuery("DELETE FROM org_projects WHERE project_id= ?;");
 
         getParameters().clear();
-        onePair = new KeyValuePair();
-        onePair.setKey(KeyValuePair.INT);
-        onePair.setValue("" + org_id);
-        getParameters().add(onePair);
-
         onePair = new KeyValuePair();
         onePair.setKey(KeyValuePair.INT);
         onePair.setValue("" + project_id);
@@ -341,6 +336,137 @@ public class ProjectCharterDAO extends QueryTemplate {
                 }
             }
         }
+        return false;
+    }
+    
+    //OrgPartnerships
+    public boolean orgPartnerships(int project_id, StudentEntity student, boolean isExisting){
+        boolean result = false;
+        if (!isExisting) {
+            setQuery("INSERT INTO students (idno, org_id, firstname, lastname, org_position, email, mobileno) VALUES (?, ?, ?, ?, ?, ?, ?);");
+
+            KeyValuePair onePair;
+
+            onePair = new KeyValuePair();
+            onePair.setKey(KeyValuePair.INT);
+            onePair.setValue("" + student.getIdno());
+            getParameters().add(onePair);
+
+            onePair = new KeyValuePair();
+            onePair.setKey(KeyValuePair.INT);
+            onePair.setValue("" + student.getOrg_id());
+            getParameters().add(onePair);
+
+            onePair = new KeyValuePair();
+            onePair.setKey(KeyValuePair.STRING);
+            onePair.setValue("" + student.getFirstname());
+            getParameters().add(onePair);
+
+            onePair = new KeyValuePair();
+            onePair.setKey(KeyValuePair.STRING);
+            onePair.setValue("" + student.getLastname());
+            getParameters().add(onePair);
+
+            onePair = new KeyValuePair();
+            onePair.setKey(KeyValuePair.STRING);
+            onePair.setValue("" + student.getOrg_position());
+            getParameters().add(onePair);
+
+            onePair = new KeyValuePair();
+            onePair.setKey(KeyValuePair.STRING);
+            onePair.setValue("" + student.getEmail());
+            getParameters().add(onePair);
+
+            onePair = new KeyValuePair();
+            onePair.setKey(KeyValuePair.STRING);
+            onePair.setValue("" + student.getMobileno());
+            getParameters().add(onePair);
+
+            result = executeUpdate();
+        } else {
+            setQuery("UPDATE students SET firstname = ?, lastname = ?, org_position = ?, email = ?, mobileno = ? WHERE idno= ? and org_id = ?;");
+
+            KeyValuePair onePair;
+
+            onePair = new KeyValuePair();
+            onePair.setKey(KeyValuePair.STRING);
+            onePair.setValue("" + student.getFirstname());
+            getParameters().add(onePair);
+
+            onePair = new KeyValuePair();
+            onePair.setKey(KeyValuePair.STRING);
+            onePair.setValue("" + student.getLastname());
+            getParameters().add(onePair);
+
+            onePair = new KeyValuePair();
+            onePair.setKey(KeyValuePair.STRING);
+            onePair.setValue("" + student.getOrg_position());
+            getParameters().add(onePair);
+
+            onePair = new KeyValuePair();
+            onePair.setKey(KeyValuePair.STRING);
+            onePair.setValue("" + student.getEmail());
+            getParameters().add(onePair);
+
+            onePair = new KeyValuePair();
+            onePair.setKey(KeyValuePair.STRING);
+            onePair.setValue("" + student.getMobileno());
+            getParameters().add(onePair);
+
+            onePair = new KeyValuePair();
+            onePair.setKey(KeyValuePair.INT);
+            onePair.setValue("" + student.getIdno());
+            getParameters().add(onePair);
+
+            onePair = new KeyValuePair();
+            onePair.setKey(KeyValuePair.INT);
+            onePair.setValue("" + student.getOrg_id());
+            getParameters().add(onePair);
+
+            result = executeUpdate();
+        }
+        
+        if (result) {
+            setQuery("INSERT INTO org_projects (project_id, org_id, student_idno) VALUES (?,?,?);");
+
+            KeyValuePair onePair;
+            
+            getParameters().clear();
+            onePair = new KeyValuePair();
+            onePair.setKey(KeyValuePair.INT);
+            onePair.setValue("" + project_id);
+            getParameters().add(onePair);
+
+            onePair = new KeyValuePair();
+            onePair.setKey(KeyValuePair.INT);
+            onePair.setValue("" + student.getOrg_id());
+            getParameters().add(onePair);
+
+            onePair = new KeyValuePair();
+            onePair.setKey(KeyValuePair.INT);
+            onePair.setValue("" + student.getIdno());
+            getParameters().add(onePair);
+
+            result = executeUpdate();
+
+            if (result) {
+                setQuery("INSERT INTO project_members (project_id, stud_idno, role) VALUES (?,?,'Project Partner');");
+
+                getParameters().clear();
+                onePair = new KeyValuePair();
+                onePair.setKey(KeyValuePair.INT);
+                onePair.setValue("" + project_id);
+                getParameters().add(onePair);
+
+                onePair = new KeyValuePair();
+                onePair.setKey(KeyValuePair.INT);
+                onePair.setValue("" + student.getIdno());
+                getParameters().add(onePair);
+
+                return executeUpdate();
+            }
+        }
+        
         return false;
     }
 

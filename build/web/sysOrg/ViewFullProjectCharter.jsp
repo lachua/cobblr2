@@ -134,7 +134,7 @@
                                             </blockquote>
                                             <div class="form-actions">
                                                 <a href="CurrentProjects"  class="btn">Finish</a>
-                                                <button type="submit" class="btn btn-warning">Edit Charter</button>
+                                                <!--<button type="submit" class="btn btn-warning">Edit Charter</button>-->
                                             </div>
                                         </form>
                                     </div>
