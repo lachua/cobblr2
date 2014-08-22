@@ -85,6 +85,7 @@
                                                             <option value="6">Community Health Review</option>
                                                             <option value="5">Exception Report- Project Cancelled</option>
                                                             <option value="7">Health Review of Children Ages 0-5</option>
+                                                            <option value="9">High Disease Influence Report </option>
                                                             <option value="8">Project Summary Report</option>
                                                             <option value="1">Top Diseases Reports</option>
                                                             <option value="4">Year End Report</option>
@@ -433,6 +434,79 @@
                                                 </div>
                                             </form>
                                         </div>
+                                                        
+                                        <!--Comparative Analysis of Magnitude of Disease Report-->
+                                        <div id="report9" style="display: none; ">
+                                            <form id="magnitudeForm" class="form-horizontal" method="GET" action="ReportInfection" >
+                                                <div class="control-group">
+                                                    <label class="control-label" for="infdisease">For Disease:</label>
+                                                    <div class="controls">
+                                                    <select id="infdisease" name="infdisease" class="chzn-select input input-xlarge " >
+                                                        <optgroup label="Sicknesses:">
+                                                            <option value="35-98">Allergy</option>
+                                                            <option value="35-99">Altherosclerosis</option>
+                                                            <option value="35-100">Asthma</option>
+                                                            <option value="35-101">Coughs & Colds</option>
+                                                            <option value="35-102">Dengue</option>
+                                                            <option value="35-103">Diabetes</option>
+                                                            <option value="35-104">Gl Obstruction</option>
+                                                            <option value="35-105">Hemmorhage</option>
+                                                            <option value="35-106">KidneyStones</option>
+                                                            <option value="35-107">Overfatigue</option>
+                                                            <option value="35-108">Pneumonia</option>
+                                                            <option value="35-109">Renal Failure</option>
+                                                            <option value="35-110">Fever</option>
+                                                        </optgroup>
+                                                        <optgroup label="Child Vaccinations:">
+                                                            <option value="76-223">Flu</option>
+                                                            <option value="76-224">Hepatitis B</option>
+                                                            <option value="76-225">MVC1</option>
+                                                            <option value="76-226">MVC2</option>
+                                                            <option value="76-227">TT 2+</option>
+                                                            <option value="76-228">BGC</option>
+                                                            <option value="76-229">DTP</option>
+                                                            <option value="76-230">Rotavirus</option>
+                                                            <option value="76-231">Pneumococcal</option>
+                                                            <option value="76-232">OPV1</option>
+                                                            <option value="76-233">OPV3</option>
+                                                        </optgroup>
+                                                        <optgroup label="Child Vitamin Deficiency:">
+                                                            <option value="74-216">Vitamin A</option>
+                                                            <option value="74-217">Vitamin B12</option>
+                                                            <option value="74-218">Vitamin C</option>
+                                                            <option value="74-219">Vitamin D</option>
+                                                            <option value="74-220">Iron</option>
+                                                            <option value="74-221">Zinc</option>
+                                                            <option value="74-222">Multi-Vitamins</option>
+                                                        </optgroup>
+                                                        <optgroup label="Child Malnutrition:">
+                                                            <option value="77-234">Under weight</option>
+                                                            <option value="77-236">Over weight</option>
+                                                            <option value="77-237">Obese</option>
+                                                        </optgroup>
+                                                    </select>
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label" for="infdatestart">Select Year</label>
+                                                    <div class="controls">
+                                                        <select id="infdatestart" name="infdatestart" class="chzn-select input input-xlarge " >
+                                                            <%
+                                                                for (int x = 0; x < 10; x++) {
+                                                            %>
+                                                            <option value="<%=Year.getCurrentYear() - x%>"><%=Year.getCurrentYear() - x%> </option> 
+                                                            <%
+                                                                }
+                                                            %>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-actions">
+                                                    <button id="infection" type="submit" name="infection" class="btn btn-primary">See High Disease Influence Report</button>
+                                                </div>
+                                            </form>
+                                        </div>   
+                                                        
 
                                         
                                     </div>
@@ -568,6 +642,7 @@
                         $('#report6').slideUp();
                         $('#report7').slideUp();
                         $('#report8').slideUp();
+                        $('#report9').slideUp();
                     } else if (this.value == 1) {
                         $('#report1').slideDown();
                         $('#report2').slideUp();
@@ -577,6 +652,7 @@
                         $('#report6').slideUp();
                         $('#report7').slideUp();
                         $('#report8').slideUp();
+                        $('#report9').slideUp();
                     } else if (this.value == 2) {
                         $('#report1').slideUp();
                         $('#report2').slideDown();
@@ -586,6 +662,7 @@
                         $('#report6').slideUp();
                         $('#report7').slideUp();
                         $('#report8').slideUp();
+                        $('#report9').slideUp();
                     } else if (this.value == 3) {
                         $('#report1').slideUp();
                         $('#report2').slideUp();
@@ -595,6 +672,7 @@
                         $('#report6').slideUp();
                         $('#report7').slideUp();
                         $('#report8').slideUp();
+                        $('#report9').slideUp();
                     } else if (this.value == 4) {
                         $('#report1').slideUp();
                         $('#report2').slideUp();
@@ -604,6 +682,7 @@
                         $('#report6').slideUp();
                         $('#report7').slideUp();
                         $('#report8').slideUp();
+                        $('#report9').slideUp();
                     } else if (this.value == 5) {
                         $('#report1').slideUp();
                         $('#report2').slideUp();
@@ -613,6 +692,7 @@
                         $('#report6').slideUp();
                         $('#report7').slideUp();
                         $('#report8').slideUp();
+                        $('#report9').slideUp();
                     } else if (this.value == 6) {
                         $('#report1').slideUp();
                         $('#report2').slideUp();
@@ -622,6 +702,7 @@
                         $('#report6').slideDown();
                         $('#report7').slideUp();
                         $('#report8').slideUp();
+                        $('#report9').slideUp();
                     } else if (this.value == 7) {
                         $('#report1').slideUp();
                         $('#report2').slideUp();
@@ -631,6 +712,7 @@
                         $('#report6').slideUp();
                         $('#report7').slideDown();
                         $('#report8').slideUp();
+                        $('#report9').slideUp();
                     } else if (this.value == 8) {
                         $('#report1').slideUp();
                         $('#report2').slideUp();
@@ -640,6 +722,17 @@
                         $('#report6').slideUp();
                         $('#report7').slideUp();
                         $('#report8').slideDown();
+                        $('#report9').slideUp();
+                    } else if (this.value == 9) {
+                        $('#report1').slideUp();
+                        $('#report2').slideUp();
+                        $('#report3').slideUp();
+                        $('#report4').slideUp();
+                        $('#report5').slideUp();
+                        $('#report6').slideUp();
+                        $('#report7').slideUp();
+                        $('#report8').slideUp();
+                        $('#report9').slideDown();
                     }
                 });
             });

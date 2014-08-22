@@ -104,9 +104,9 @@
                                                 <div class="col-md-6 col-md-offset-3">
                                                 <p>B. Project per Target Health Problem</p>
                                                 </div>
-                                                <div class="col-md-8 col-md-offset-2">
+                                                <div class="col-md-12 ">
                                                     <center>
-                                                        <div id="barGraph" style="height: 200px;"></div>
+                                                        <div id="barGraph" style="height: 600px;"></div>
                                                     </center>
                                                 </div>
                                                 <div class="col-md-6 col-md-offset-3">

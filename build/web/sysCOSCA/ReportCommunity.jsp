@@ -72,6 +72,7 @@
                                             
                                             ReportHealth1DAO report1dao = new ReportHealth1DAO();
                                             ReportHealth23DAO report2dao = new ReportHealth23DAO();
+                                            ReportHealth23DAO report21dao = new ReportHealth23DAO();
                                             ReportHealth23DAO report3dao = new ReportHealth23DAO();
                                             ReportHealth4DAO report4dao = new ReportHealth4DAO();
                                             
@@ -79,6 +80,10 @@
                                             List<ReportHealth23Entity> report2 = report2dao.getReport2(com.getId(), Converter.toDate(calstart));
                                             List<ReportHealth23Entity> report3 = report3dao.getReport3(com.getId(), Converter.toDate(calstart));
                                             List<ReportHealth4Entity> report4 = report4dao.getReport(com.getId(), Converter.toDate(calstart), Converter.toDate(calend));
+                                            
+                                            calstart.add(Calendar.YEAR, -1);
+                                            List<ReportHealth23Entity> report21 = report21dao.getReport2(com.getId(), Converter.toDate(calstart));
+                                            calstart.add(Calendar.YEAR, 1);
                                             
                                         %>
                                         <h1 align="center">Center for Social Concern and Action </h1>
@@ -100,15 +105,27 @@
                                         <br><br>
 
                                         <div class="row">
+                                            <div class="col-md-12">
+                                                
+                                                <p>A. Disease Magnitude Change</p>
+                                                <div class="col-md-8 col-md-offset-2">
+                                                    <center>
+                                                        <div id="barGraph" style="height: 600px;"></div>
+                                                    </center>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-md-6 col-md-offset-3">
-                                                <p>A. Top 10 Diseases in the Community</p>
+                                                <p>B. Top 10 Diseases in the Community</p>
                                                 <center>
                                                     <table cellpadding="0" cellspacing="0" class="table table-striped table-bordered" border="0" width="400"  id="tables">
                                                         <tbody>
-                                                            <%for (int x = 0; x < report2.size(); x++) {%>
+                                                            <%for (int u = 0; u < report2.size(); u++) {%>
                                                             <tr>
-                                                                <td><%=x+1 %></td>
-                                                                <td><%=report2.get(x).getIllness()%></td>
+                                                                <td><%=u+1 %></td>
+                                                                <td><%=report2.get(u).getIllness()%></td>
                                                             </tr>
                                                             <%}%>
                                                         </tbody>
@@ -119,7 +136,8 @@
                                                         
                                         <div class="row">
                                             <div class="col-md-6 col-md-offset-3">
-                                                <p>B. Top 3 Felt Family Needs</p>
+                                                <p>C. Top 3 Felt Family Needs</p>
+                                                
                                                 <center>
                                                     <table cellpadding="0" cellspacing="0" class="table table-striped table-bordered" border="0" width="400"  id="tables">
                                                         <tbody>
@@ -137,7 +155,7 @@
                                                         
                                         <div id="page-break" class="row">
                                             <div class="col-md-8 col-md-offset-2">
-                                                <p>C. Health Projects Participated In</p>
+                                                <p>D. Health Projects Participated In</p>
                                                 <center>
                                                     <table cellpadding="0" cellspacing="0" class="table table-striped table-bordered" border="0" width="400"  id="tables">
                                                         <thead>
@@ -150,12 +168,12 @@
                                                         </thead>
                                                         
                                                         <tbody>
-                                                            <%for (int x = 0; x < report4.size(); x++) {%>
+                                                            <%for (int y = 0; y < report4.size(); y++) {%>
                                                             <tr>
-                                                                <td><%=report4.get(x).getDate_implemented() %></td>
-                                                                <td><%=report4.get(x).getTitle()%></td>
-                                                                <td><%=report4.get(x).getAnswertext()%></td>
-                                                                <td><%=report4.get(x).getNum_participants()%></td>
+                                                                <td><%=report4.get(y).getDate_implemented() %></td>
+                                                                <td><%=report4.get(y).getTitle()%></td>
+                                                                <td><%=report4.get(y).getAnswertext()%></td>
+                                                                <td><%=report4.get(y).getNum_participants()%></td>
                                                             </tr>
                                                             <%}%>
                                                         </tbody>
@@ -193,6 +211,57 @@
 
         <!-- Simplenso Scripts -->
         <script src="../scripts/simplenso/simplenso.js"></script>
+        
+        <!--Google API-->
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <!--Charts-->
+        <script type="text/javascript">
+            var empty = 'none';
+            var startYear = <%=Converter.toYear(calstart) %>;
+            var endYear = <%=Converter.toYear(calend)%>;
+            var string = '';
+            google.load("visualization", "1", {packages: ["corechart", "table"]});
+            google.setOnLoadCallback(drawReportChart);
+            function drawReportChart() {
+                //Monthly Income Bar
+                var data = google.visualization.arrayToDataTable([
+                    ['Project per Target Health Problem', ''+(startYear-1), ''+startYear ],
+                    <%for(int z = 0; z < report2.size(); z++){%>
+                        <%
+                            int pastnum = 0;
+                            for(int w = 0; w < report21.size(); w++){
+                                if(report2.get(z).getIllness().equalsIgnoreCase(report21.get(w).getIllness())){
+                                    pastnum = report21.get(w).getIncidence();
+                                    break;
+                                }
+                            }
+                        %>
+                    ['<%=report2.get(z).getIllness()%>', <%=pastnum%> , <%=report2.get(z).getIncidence()%>]<%if(z != report2.size()-1){%>,<%}%>
+                    <%}%>
+                ]);
+                
+                var view = new google.visualization.DataView(data);
+                view.setColumns([0, 1,
+                                 { calc: "stringify",
+                                   sourceColumn: 1,
+                                   type: "string",
+                                   role: "annotation" },
+                                 2,{ calc: "stringify",
+                                   sourceColumn: 2,
+                                   type: "string",
+                                   role: "annotation" }]);
+
+                var options = {
+                    title: 'Disease Magnitude Change',
+                    vAxis: {title: 'No. of Projects', titleTextStyle: {color: 'black'}}
+                };
+
+                var chart = new google.visualization.BarChart(document.getElementById('barGraph'));
+                chart.draw(view, options);
+            }
+            
+        </script>
+        
         <script>
         printDivCSS = new String ('<link href="../css/print/print-community.css" rel="stylesheet" type="text/css" media="print">');
         function printDiv(divId) {
